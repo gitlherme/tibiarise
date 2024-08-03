@@ -34,7 +34,7 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center gap-12">
+    <div className="w-full h-[80vh] flex flex-col justify-center items-center gap-12">
       <h1 className="text-5xl font-black">Track your Tibia Character</h1>
       <Form {...form}>
         <form
