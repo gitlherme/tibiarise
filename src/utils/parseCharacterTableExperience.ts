@@ -1,9 +1,11 @@
+import { ExperienceTableValue } from "@/models/character-data.model";
+
 export function parseCharacterTableExperience(rawData: string) {
   const year = new Date().getFullYear();
   // Dividir os dados em blocos por data (cada bloco começa com `${year}-`)
   const dataBlocks = rawData.split(`${year}-`).slice(1);
 
-  const data = [];
+  const data: ExperienceTableValue[] = [];
   for (const block of dataBlocks) {
     // Extrair informações de cada bloco
     const lines = block.split("\n").filter((line) => line.trim() !== "");
@@ -23,7 +25,7 @@ export function parseCharacterTableExperience(rawData: string) {
     const totalExperienceValue = parseInt(totalExperienceString, 10);
 
     data.push({
-      data: dataValue,
+      date: dataValue,
       expChange: expChangeValue,
       vocationRank: vocationRankValue,
       level: levelValue,

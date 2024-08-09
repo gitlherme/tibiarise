@@ -1,36 +1,19 @@
-import { headers } from "next/headers";
-import { parseCharacterTableExperience } from "@/utils/parseCharacterTableExperience";
-import sanitize from "sanitize-html";
-import { ExperienceTable } from "@/components/characters/character-table-experience";
-import { CharacterInformation } from "@/components/characters/character-profile";
-import { ProgressMetrics } from "@/components/progress/progress-metrics";
-import { HowManyTimeTo } from "@/components/how-many-time-to/how-many-time-to";
+'use client';
 
-export default async function CharacterProfile() {
-  const name = headers().get("referer")?.split("/").pop();
-  const { experienceTable, characterInfo } = await fetch(
-    `http://localhost:3000/api/get-character-data?name=${name}`,
-    { next: { revalidate: 24 * 60 * 60 } }
-  ).then((res) => res.json());
+import { useGetCharacterData } from "@/queries/character-data.query";
+import { HydrationBoundary, dehydrate, useQueryClient } from "@tanstack/react-query";
+import { Suspense } from "react";
 
-  const characterTable = parseCharacterTableExperience(
-    sanitize(await experienceTable)
-  );
 
+export default function CharacterProfile() {
+  const queryClient = useQueryClient();
   return (
-    <div className="my-12">
-      <div className="grid grid-cols-3 gap-8">
-        <CharacterInformation
-          level={characterInfo.level}
-          name={characterInfo.name}
-          totalOnline={123}
-          totalXP={characterTable[characterTable.length - 1].totalExperience}
-          vocation={characterInfo.vocation}
-        />
-        <ProgressMetrics />
-        <HowManyTimeTo />
-      </div>
-      <ExperienceTable characterTable={characterTable} />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Suspense>
+        <div className="container mx-auto">
+          <CharacterProfile />
+        </div>
+      </Suspense>
+    </HydrationBoundary>
   );
 }

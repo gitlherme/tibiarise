@@ -1,22 +1,28 @@
 import { cheerio } from "@/lib/cheerio";
+import { CharacterData } from "@/models/character-data.model";
+import { parseCharacterTableExperience } from "@/utils/parseCharacterTableExperience";
 import { NextRequest, NextResponse } from "next/server";
+import sanitize from "sanitize-html";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get("name");
-  const response = await fetch(
+  const data = await fetch(
     `https://guildstats.eu/character?nick=${name}&tab=7`
   );
 
-  const page = cheerio((await response.text()).trim());
+  const page = cheerio((await data.text()).trim());
+  const table = await page(".newTable").eq(1).text();
+  const sanitizedTable = sanitize(table);
+  const experienceTable = parseCharacterTableExperience(sanitizedTable)
 
-  const experienceTable = await page(".newTable").eq(1).text();
-
-  const getCharacterInfo = await fetch(
+  const { character: getCharacterInfo } = await fetch(
     `https://api.tibiadata.com/v4/character/${name}`
   ).then((res) => res.json());
 
-  const characterInfo = getCharacterInfo.character.character;
+  const characterInfo = getCharacterInfo.character;
 
-  return NextResponse.json({ experienceTable, characterInfo }, { status: 200 });
+  const response: CharacterData = { experienceTable, characterInfo }
+
+  return NextResponse.json(response, { status: 200 });
 }
