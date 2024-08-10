@@ -12,24 +12,23 @@ import {
 
 
 export const CharacterInformation = () => {
-  const data = useGetCharacterData();
-  console.log(data);
+  const { data } = useGetCharacterData();
   
   return (
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="grid gap-1">
           <div className="flex gap-8">
-            <CardTitle>Oi</CardTitle>
+            <CardTitle>{data?.characterInfo.name}</CardTitle>
             <Badge>Top 10 MS de Yubra</Badge>
           </div>
-          <CardDescription>oi</CardDescription>
+          <CardDescription>{data?.characterInfo.vocation}</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
         <div className="grid gap-2">
           <div className="text-sm font-medium">Level</div>
-          <div className="text-4xl font-bold">oi</div>
+          <div className="text-4xl font-bold">{data?.characterInfo.level}</div>
         </div>
         <div className="grid gap-2">
           <div className="text-sm font-medium">XP</div>

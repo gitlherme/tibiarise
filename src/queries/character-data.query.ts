@@ -1,25 +1,24 @@
 'use client';
 
 import { getQueryClient } from "@/components/utils/providers";
+import { CharacterData } from "@/models/character-data.model";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 
-const getCharacterData = (name: string) => {
-  const response = fetch(
-    `http://localhost:3000/api/get-character-data?name=${name}`
-  ).then((res) => res.json())
-
-  return response;
+const getCharacterData = async (name: string) => {
+  const response = await fetch(`http://localhost:3000/api/get-character-data?name=${name}`);
+  const data = await response.json()
+  return data;
 }
 
 export const useGetCharacterData = () => {
   const pathname = usePathname();
   const name = pathname.split('/').pop()
 
-  return useQuery({
+  return useQuery<CharacterData>({
     queryKey: ["character", name?.toLowerCase()],
     queryFn: () => getCharacterData(String(name).toLowerCase()),
-    initialData: getQueryClient().getQueryData(["pokemon", name]),
+    initialData: getQueryClient().getQueryData(["character", name]),
     staleTime: 60 * 1000, // 1 minute
     enabled: !!name,
     retry: false,
