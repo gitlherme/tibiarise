@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { getQueryClient } from "@/components/utils/providers";
 import { CharacterData } from "@/models/character-data.model";
@@ -6,14 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 
 const getCharacterData = async (name: string) => {
-  const response = await fetch(`http://localhost:3000/api/get-character-data?name=${name}`);
-  const data = await response.json()
+  const response = await fetch(`/api/get-character-data?name=${name}`);
+  const data = await response.json();
   return data;
-}
+};
 
 export const useGetCharacterData = () => {
   const pathname = usePathname();
-  const name = pathname.split('/').pop()
+  const name = pathname.split("/").pop();
 
   return useQuery<CharacterData>({
     queryKey: ["character", name?.toLowerCase()],
