@@ -54,7 +54,7 @@ export const ProgressLog = () => {
           <Separator />
           <div className="flex items-center justify-between">
             <div className="text-sm font-medium">Levels Gained</div>
-            <div className="text-sm text-muted-foreground">{totalLevels}</div>
+            <div className={clsx("text-sm")}>{totalLevels}</div>
           </div>
           <Separator />
           <div className="flex items-center justify-between">
