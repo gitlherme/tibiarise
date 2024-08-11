@@ -40,7 +40,7 @@ export const CharacterInformation = () => {
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row md:justify-between">
           <div className="grid gap-2">
             <div className="text-sm font-medium">Level</div>
             <div className="text-4xl font-bold">

@@ -14,8 +14,8 @@ export default function CharacterProfile() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense>
-        <div className="container mx-auto mt-14">
-          <div className="grid grid-cols-2 gap-4">
+        <div className="mt-14 px-4 md:px-0">
+          <div className="grid md:grid-cols-2 gap-4">
             <CharacterInformation />
             <ProgressLog />
           </div>
