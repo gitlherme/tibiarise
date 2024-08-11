@@ -6,18 +6,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetCharacterData } from "@/queries/character-data.query";
+import { Skeleton } from "../ui/skeleton";
+import { formatNumberToLocale } from "@/utils/formatNumber";
 
-type ExperienceTableProps = {
-  characterTable: {
-    data: string;
-    expChange: number;
-    vocationRank: number;
-    level: number;
-    totalExperience: number;
-  }[];
-};
+export const ExperienceTable = () => {
+  const { data, isLoading } = useGetCharacterData();
+  const characterTable = data?.experienceTable;
 
-export const ExperienceTable = ({ characterTable }: ExperienceTableProps) => {
+  if (isLoading) {
+    return <Skeleton className="w-[100%] h-[300px] mt-12" />;
+  }
+
   return (
     <Table className="mt-12">
       <TableHeader>
@@ -30,18 +30,18 @@ export const ExperienceTable = ({ characterTable }: ExperienceTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {characterTable.map((day) => (
-          <TableRow key={day.data}>
-            <TableCell>{day.data}</TableCell>
+        {characterTable?.map((day) => (
+          <TableRow key={day.date}>
+            <TableCell>{new Date(day.date).toLocaleDateString()}</TableCell>
             <TableCell>
               {Math.sign(day.expChange) === 1
-                ? `+${day.expChange}`
+                ? `+${formatNumberToLocale(day.expChange)}`
                 : Math.sign(day.expChange) === 0
-                ? day.expChange
-                : `-${day.expChange}`}
+                ? formatNumberToLocale(day.expChange)
+                : `-${formatNumberToLocale(day.expChange)}`}
             </TableCell>
             <TableCell>{day.level}</TableCell>
-            <TableCell>{day.totalExperience}</TableCell>
+            <TableCell>{formatNumberToLocale(day.totalExperience)}</TableCell>
             <TableCell>{day.vocationRank}</TableCell>
           </TableRow>
         ))}

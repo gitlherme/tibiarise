@@ -9,7 +9,7 @@ export function parseCharacterTableExperience(rawData: string) {
   for (const block of dataBlocks) {
     // Extrair informações de cada bloco
     const lines = block.split("\n").filter((line) => line.trim() !== "");
-    const dataValue = `${year}-` + lines[0].trim();
+    const dateValue = `${year}-` + lines[0].trim();
     const expChangeString = lines[1]
       .replace(/\+/g, "")
       .replace(/,/g, "")
@@ -25,7 +25,7 @@ export function parseCharacterTableExperience(rawData: string) {
     const totalExperienceValue = parseInt(totalExperienceString, 10);
 
     data.push({
-      date: dataValue,
+      date: dateValue,
       expChange: expChangeValue,
       vocationRank: vocationRankValue,
       level: levelValue,

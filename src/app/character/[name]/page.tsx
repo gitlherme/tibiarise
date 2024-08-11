@@ -1,5 +1,6 @@
 "use client";
 import { CharacterInformation } from "@/components/characters/character-information";
+import { ExperienceTable } from "@/components/characters/character-table-experience";
 import { ProgressLog } from "@/components/progress/progress-log";
 import {
   HydrationBoundary,
@@ -18,6 +19,7 @@ export default function CharacterProfile() {
             <CharacterInformation />
             <ProgressLog />
           </div>
+          <ExperienceTable />
         </div>
       </Suspense>
     </HydrationBoundary>
