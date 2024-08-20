@@ -24,7 +24,7 @@ export const ExperienceTable = () => {
     <Table className="mt-12">
       <TableHeader>
         <TableRow>
-          <TableHead>Data</TableHead>
+          <TableHead>Date</TableHead>
           <TableHead>XP Gain</TableHead>
           <TableHead>Level</TableHead>
           <TableHead>Total Experience</TableHead>
@@ -35,12 +35,20 @@ export const ExperienceTable = () => {
         {characterTable?.map((day) => (
           <TableRow key={day.date}>
             <TableCell>{new Date(day.date).toLocaleDateString()}</TableCell>
-            <TableCell>
+            <TableCell
+              className={
+                Math.sign(day.expChange) === 1
+                  ? "text-green-500"
+                  : Math.sign(day.expChange) === -1
+                  ? "text-red-500"
+                  : ""
+              }
+            >
               {Math.sign(day.expChange) === 1
                 ? `+${formatNumberToLocale(day.expChange)}`
                 : Math.sign(day.expChange) === 0
                 ? formatNumberToLocale(day.expChange)
-                : `-${formatNumberToLocale(day.expChange)}`}
+                : `${formatNumberToLocale(day.expChange)}`}
             </TableCell>
             <TableCell>{day.level}</TableCell>
             <TableCell>{formatNumberToLocale(day.totalExperience)}</TableCell>

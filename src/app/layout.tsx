@@ -3,6 +3,8 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
+import { Footer } from "@/components/footer/footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -15,10 +17,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={DMSans.className}>
         <Providers>
-          <Header />
-          <main className="md:container mx-auto">{children}</main>
+          <div className="flex flex-col justify-between min-h-screen">
+            <Header />
+            <main className="md:container mx-auto">{children}</main>
+            <Footer />
+          </div>
         </Providers>
       </body>
+      <GoogleAnalytics
+        gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
+      />
     </html>
   );
 }

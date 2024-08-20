@@ -7,6 +7,7 @@ import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/formatNumber";
 import clsx from "clsx";
+import { ArrowDown, ArrowUp, Equal, Minus } from "lucide-react";
 
 export const ProgressLog = () => {
   const { data, isLoading } = useGetCharacterData();
@@ -56,19 +57,46 @@ export const ProgressLog = () => {
           <Separator />
           <div className="flex items-center justify-between">
             <div className="text-sm font-medium">Levels Gained</div>
-            <div className={clsx("text-sm")}>{totalLevels}</div>
+            <div
+              className={clsx(
+                "text-sm flex items-center gap-1",
+                Math.sign(totalLevels) === 1
+                  ? "text-green-500"
+                  : Math.sign(totalLevels) === 0
+                  ? ""
+                  : "text-red-500"
+              )}
+            >
+              {Math.sign(totalLevels) === 1 ? (
+                <ArrowUp width={16} />
+              ) : Math.sign(totalLevels) === 0 ? (
+                <Minus width={16} />
+              ) : (
+                <ArrowDown width={16} />
+              )}
+              {totalLevels}
+            </div>
           </div>
           <Separator />
           <div className="flex items-center justify-between">
             <div className="text-sm font-medium">Vocation Rank</div>
             <div
               className={clsx([
-                "text-sm",
+                "text-sm flex gap-1 items-center",
                 Math.sign(totalVocationRank) === 1
                   ? "text-green-500"
-                  : "text-red-500",
+                  : Math.sign(totalVocationRank) === -1
+                  ? "text-red-500"
+                  : "",
               ])}
             >
+              {Math.sign(totalVocationRank) === 1 ? (
+                <ArrowUp width={16} />
+              ) : Math.sign(totalVocationRank) === 0 ? (
+                <Equal width={16} />
+              ) : (
+                <ArrowDown width={16} />
+              )}
               {totalVocationRank}
             </div>
           </div>

@@ -54,10 +54,6 @@ export const CharacterInformation = () => {
             </div>
           </div>
         </div>
-        <div className="grid gap-2">
-          <div className="text-sm font-medium">Online Time</div>
-          <div className="text-4xl font-bold"></div>
-        </div>
       </CardContent>
     </Card>
   );

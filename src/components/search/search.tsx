@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,15 +10,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { searchBarSchema } from "@/app/schemas/search-bar";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { searchBarSchema } from "./schemas/search-bar";
+import { useForm } from "react-hook-form";
+import { SearchIcon } from "lucide-react";
 
 const formSchema = searchBarSchema;
 
-export default function Home() {
+export const Search = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,31 +31,31 @@ export default function Home() {
   const onSubmit = (data: any) => {
     router.push(`/character/${data.name}`);
   };
-
   return (
-    <div className="w-full h-[80vh] flex flex-col justify-center items-center gap-12">
-      <h1 className="text-5xl font-black">Track your Tibia Character</h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-3/6 flex flex-col gap-4"
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex items-end gap-4 pb-12"
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <div className="w-full">
               <FormItem>
-                <FormLabel>Character name</FormLabel>
+                <FormLabel>Search for another character</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your character name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
-            )}
-          />
-          <Button type="submit">Search</Button>
-        </form>
-      </Form>
-    </div>
+            </div>
+          )}
+        />
+        <Button type="submit" aria-label="Search">
+          <SearchIcon />
+        </Button>
+      </form>
+    </Form>
   );
-}
+};
