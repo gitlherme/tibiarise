@@ -1,12 +1,16 @@
-"use client";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Metadata } from "next";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Tibia Rise",
+};
 
 export default function RootLayout({
   children,

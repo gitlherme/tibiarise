@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { searchBarSchema } from "./schemas/search-bar";
+import Head from "next/head";
 
 const formSchema = searchBarSchema;
 
@@ -32,6 +33,9 @@ export default function Home() {
 
   return (
     <div className="w-full h-[80vh] flex flex-col justify-center items-center gap-12">
+      <Head>
+        <title>Tibia Rise</title>
+      </Head>
       <h1 className="text-5xl font-black">Track your Tibia Character</h1>
       <Form {...form}>
         <form
