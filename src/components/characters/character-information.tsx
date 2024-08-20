@@ -33,7 +33,7 @@ export const CharacterInformation = () => {
             <Badge className="w-fit">
               {`Top ${vocationRank} ${vocationInitials(
                 data!.characterInfo.vocation
-              )} de ${data?.characterInfo.world}`}
+              )} of ${data?.characterInfo.world}`}
             </Badge>
           </div>
           <CardDescription>{data?.characterInfo.vocation}</CardDescription>
