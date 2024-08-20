@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function CharacterProfile() {
   return (
     <HydrationBoundaryCustom>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <div className="px-4 md:px-0">
           <Search />
           <div className="grid md:grid-cols-2 gap-4">

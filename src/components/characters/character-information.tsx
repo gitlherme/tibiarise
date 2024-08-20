@@ -40,16 +40,16 @@ export const CharacterInformation = () => {
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <div className="flex flex-col md:flex-row md:justify-between">
+        <div className="flex flex-col md:flex-row md:justify-between gap-4">
           <div className="grid gap-2">
             <div className="text-sm font-medium">Level</div>
-            <div className="text-4xl font-bold">
+            <div className="text-2xl md:text-4xl font-bold">
               {data?.characterInfo.level}
             </div>
           </div>
           <div className="grid gap-2">
             <div className="text-sm font-medium">XP</div>
-            <div className="text-4xl font-bold">
+            <div className="text-2xl md:text-4xl font-bold">
               {formatNumberToLocale(totalExperience!)}
             </div>
           </div>

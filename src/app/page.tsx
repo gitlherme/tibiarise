@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { searchBarSchema } from "./schemas/search-bar";
-import Head from "next/head";
 
 const formSchema = searchBarSchema;
 
