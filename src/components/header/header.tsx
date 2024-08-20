@@ -6,7 +6,7 @@ export const Header = () => (
     <Link
       className="md:hidden text-center bg-blue-300 text-blue-900 py-2 w-full block"
       data-canny-link
-      href="https://tibia-rise.canny.io/feature-requests"
+      href="https://tibiarise.canny.io/feature-requests"
       target="_blank"
     >
       Suggest a feature! ✨
@@ -32,7 +32,7 @@ export const Header = () => (
         <Button className="hidden md:block" variant="secondary">
           <Link
             data-canny-link
-            href="https://tibia-rise.canny.io/feature-requests"
+            href="https://tibiarise.canny.io/feature-requests"
             target="_blank"
           >
             Suggest a feature! ✨

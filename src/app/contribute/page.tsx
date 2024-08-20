@@ -28,7 +28,7 @@ export default function About() {
           Do you want to request a new feature? Just{" "}
           <Link
             data-canny-link
-            href="https://tibia-rise.canny.io/feature-requests"
+            href="https://tibiarise.canny.io/feature-requests"
             target="_blank"
             className="font-bold text-blue-500 hover:text-blue-700"
           >
