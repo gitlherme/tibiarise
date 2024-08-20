@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const page = cheerio((await data.text()).trim());
   const table = await page(".newTable").eq(1).text();
   const sanitizedTable = sanitize(table);
-  const experienceTable = parseCharacterTableExperience(sanitizedTable)
+  const experienceTable = parseCharacterTableExperience(sanitizedTable);
 
   const { character: getCharacterInfo } = await fetch(
     `https://api.tibiadata.com/v4/character/${name}`
@@ -22,7 +22,11 @@ export async function GET(request: NextRequest) {
 
   const characterInfo = getCharacterInfo.character;
 
-  const response: CharacterData = { experienceTable, characterInfo }
+  const response: CharacterData = { experienceTable, characterInfo };
 
-  return NextResponse.json(response, { status: 200 });
+  if (response.experienceTable.length > 0) {
+    return NextResponse.json(response, { status: 200 });
+  }
+
+  return NextResponse.json({ error: "Character not found" }, { status: 404 });
 }
