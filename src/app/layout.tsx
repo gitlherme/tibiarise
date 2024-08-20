@@ -19,6 +19,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="title" content="Tibia Rise" />
+        <meta
+          name="description"
+          content="Discover a new level of immersion in Tibia with TibiaRise."
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tibiarise.app/" />
+        <meta property="og:title" content="Tibia Rise" />
+        <meta
+          property="og:description"
+          content="Discover a new level of immersion in Tibia with TibiaRise."
+        />
+        <meta property="og:image" content="https://i.imgur.com/MT1S4xX.png" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://tibiarise.app/" />
+        <meta property="twitter:title" content="Tibia Rise" />
+        <meta
+          property="twitter:description"
+          content="Discover a new level of immersion in Tibia with TibiaRise."
+        />
+        <meta
+          property="twitter:image"
+          content="https://i.imgur.com/MT1S4xX.png"
+        />
+      </head>
       <body className={DMSans.className}>
         <Providers>
           <div className="flex flex-col justify-between min-h-screen">
