@@ -16,8 +16,8 @@ export const Header = () => (
             </Link>
           </li>
           <li>
-            <Link href="/about" className="hover:text-blue-300">
-              About
+            <Link href="/contribute" className="hover:text-blue-300">
+              Contribute
             </Link>
           </li>
         </ul>
