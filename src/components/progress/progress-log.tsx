@@ -41,9 +41,9 @@ export const ProgressLog = () => {
   return (
     <Card>
       <CardHeader>
-        <div className="flex justify-between">
+        <div className="flex flex-col-reverse md:flex-row gap-2 justify-between">
           <CardTitle>Progress Log</CardTitle>
-          <Badge>Last month</Badge>
+          <Badge className="w-fit">Last month</Badge>
         </div>
       </CardHeader>
       <CardContent>

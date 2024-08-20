@@ -28,9 +28,9 @@ export const CharacterInformation = () => {
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="w-full">
-          <div className="flex justify-between w-full">
+          <div className="flex gap-2 flex-col-reverse md:flex-row justify-between w-full">
             <CardTitle>{data?.characterInfo.name}</CardTitle>
-            <Badge>
+            <Badge className="w-fit">
               {`Top ${vocationRank} ${vocationInitials(
                 data!.characterInfo.vocation
               )} de ${data?.characterInfo.world}`}

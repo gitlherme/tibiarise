@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <div className="flex flex-col justify-between min-h-screen">
             <Header />
-            <main className="md:container mx-auto">{children}</main>
+            <main className="container mx-auto">{children}</main>
             <Footer />
           </div>
         </Providers>

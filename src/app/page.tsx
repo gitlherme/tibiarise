@@ -33,14 +33,13 @@ export default function Home() {
 
   return (
     <div className="w-full h-[80vh] flex flex-col justify-center items-center gap-12">
-      <Head>
-        <title>Tibia Rise</title>
-      </Head>
-      <h1 className="text-5xl font-black">Track your Tibia Character</h1>
+      <h2 className="text-3xl md:text-5xl font-black text-center">
+        Track your Tibia Character
+      </h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-3/6 flex flex-col gap-4"
+          className="w-full md:w-3/6 flex flex-col gap-4"
         >
           <FormField
             control={form.control}
