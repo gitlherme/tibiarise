@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Badge } from "../ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
