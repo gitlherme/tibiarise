@@ -10,13 +10,13 @@ import { useGetCharacterData } from "@/queries/character-data.query";
 import { Suspense } from "react";
 
 export default function CharacterProfileView() {
-  const { data } = useGetCharacterData();
+  const { data, isLoading } = useGetCharacterData();
   return (
     <HydrationBoundaryCustom>
       <Suspense fallback={<div>Loading...</div>}>
         <div className="px-4 md:px-0">
           <Search />
-          {!data?.characterInfo ? (
+          {!data?.characterInfo && !isLoading ? (
             <div className="text-center">Character not found</div>
           ) : (
             <>

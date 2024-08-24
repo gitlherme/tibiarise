@@ -1,4 +1,4 @@
-import CharacterProfileView from "@/views/character";
+import CharacterProfileView from "@/views/character-profile";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function CharacterProfile() {
-  return (
-    <CharacterProfileView />
-  );
+  return <CharacterProfileView />;
 }
