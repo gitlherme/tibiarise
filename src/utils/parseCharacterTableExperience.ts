@@ -33,5 +33,5 @@ export function parseCharacterTableExperience(rawData: string) {
     });
   }
 
-  return data.reverse();
+  return data;
 }
