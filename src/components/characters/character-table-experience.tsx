@@ -11,10 +11,21 @@ import {
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/formatNumber";
+import { useEffect, useState } from "react";
+import { ExperienceTableValue } from "@/models/character-data.model";
 
 export const ExperienceTable = () => {
+  const [reversedTable, setReversedTable] = useState<ExperienceTableValue[]>(
+    []
+  );
   const { data, isLoading } = useGetCharacterData();
   const characterTable = data?.experienceTable;
+
+  useEffect(() => {
+    if (characterTable) {
+      setReversedTable(characterTable.reverse());
+    }
+  }, [data, characterTable]);
 
   if (isLoading) {
     return <Skeleton className="w-[100%] h-[300px] mt-12" />;
@@ -32,7 +43,7 @@ export const ExperienceTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {characterTable?.map((day) => (
+        {reversedTable?.map((day) => (
           <TableRow key={day.date}>
             <TableCell>{new Date(day.date).toLocaleDateString()}</TableCell>
             <TableCell
