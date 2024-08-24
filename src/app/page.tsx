@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { searchBarSchema } from "./schemas/search-bar";
+import { SearchIcon } from "lucide-react";
 
 const formSchema = searchBarSchema;
 
@@ -31,20 +32,20 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full h-[80vh] flex flex-col justify-center items-center gap-12">
+    <div className="w-full h-[60vh] flex flex-col justify-center items-center gap-12">
       <h2 className="text-3xl md:text-5xl font-black text-center">
         Track your Tibia Character
       </h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full md:w-3/6 flex flex-col gap-4"
+          className="w-full md:w-3/6 flex items-end gap-4"
         >
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel>Character name</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your character name" {...field} />
@@ -53,7 +54,9 @@ export default function Home() {
               </FormItem>
             )}
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit">
+            <SearchIcon aria-label="Search" />
+          </Button>
         </form>
       </Form>
     </div>

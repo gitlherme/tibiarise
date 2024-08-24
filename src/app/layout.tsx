@@ -46,6 +46,12 @@ export default function RootLayout({
           property="twitter:image"
           content="https://i.imgur.com/MT1S4xX.png"
         />
+
+        <link
+          rel="shortcut icon"
+          href="/tibiarise-favicon.svg"
+          type="image/x-icon"
+        />
       </head>
       <body className={DMSans.className}>
         <Providers>
