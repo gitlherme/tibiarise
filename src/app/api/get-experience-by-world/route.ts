@@ -1,4 +1,5 @@
 import { cheerio } from "@/lib/cheerio";
+import { parseExperienceByWorld } from "@/utils/parseExperienceByWorld";
 import { NextRequest, NextResponse } from "next/server";
 import sanitize from "sanitize-html";
 
@@ -15,5 +16,7 @@ export async function GET(request: NextRequest) {
   const table = await page(".newTable").eq(0).text();
   const sanitizedTable = sanitize(table);
 
-  return NextResponse.json(sanitizedTable, { status: 200 });
+  const experienceTable = parseExperienceByWorld(sanitizedTable);
+
+  return NextResponse.json({ experienceTable }, { status: 200 });
 }
