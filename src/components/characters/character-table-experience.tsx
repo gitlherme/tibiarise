@@ -1,4 +1,5 @@
 "use client";
+import moment from "moment";
 
 import {
   Table,
@@ -45,7 +46,7 @@ export const ExperienceTable = () => {
       <TableBody>
         {reversedTable?.map((day) => (
           <TableRow key={day.date}>
-            <TableCell>{new Date(day.date).toLocaleDateString()}</TableCell>
+            <TableCell>{moment(day.date).format("DD/MM/YYYY")}</TableCell>
             <TableCell
               className={
                 Math.sign(day.expChange) === 1

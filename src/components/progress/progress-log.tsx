@@ -11,6 +11,7 @@ import { ArrowDown, ArrowUp, Equal, Minus } from "lucide-react";
 
 export const ProgressLog = () => {
   const { data, isLoading } = useGetCharacterData();
+
   const experienceTable = data?.experienceTable ?? [
     {
       date: new Date(),
