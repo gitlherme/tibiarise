@@ -8,9 +8,13 @@ export async function GET(request: NextRequest) {
   const world = searchParams.get("world");
   const filter = searchParams.get("filter");
 
+  console.log(world, filter);
+
   const data = await fetch(
     `https://guildstats.eu/mostexp?world=${world}&time=${filter}`
   );
+
+  console.log(data);
 
   const page = cheerio((await data.text()).trim());
   const table = await page(".newTable").eq(0).text();
