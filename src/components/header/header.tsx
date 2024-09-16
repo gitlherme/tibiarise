@@ -1,16 +1,15 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
 
 export const Header = () => (
   <div className="bg-secondary-foreground mb-12">
-    <Link
+    {/* <Link
       className="md:hidden text-center bg-blue-300 text-blue-900 py-2 w-full block"
       data-canny-link
       href="https://tibiarise.canny.io/feature-requests"
       target="_blank"
     >
       Suggest a feature! ✨
-    </Link>
+    </Link> */}
     <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
       <Link href="/" className="block text-secondary">
         <span className="block text-3xl font-black">Tibia Rise</span>
@@ -29,7 +28,7 @@ export const Header = () => (
             </Link>
           </li>
         </ul>
-        <Button className="hidden md:block" variant="secondary">
+        {/* <Button className="hidden md:block" variant="secondary">
           <Link
             data-canny-link
             href="https://tibiarise.canny.io/feature-requests"
@@ -37,7 +36,7 @@ export const Header = () => (
           >
             Suggest a feature! ✨
           </Link>
-        </Button>
+        </Button> */}
       </div>
     </div>
   </div>
