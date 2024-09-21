@@ -3,7 +3,6 @@ import Script from "next/script";
 export const HotjarSnippet = () => {
   return (
     <Script
-      strategy="afterInteractive"
       id="hotjar"
       dangerouslySetInnerHTML={{
         __html: `
