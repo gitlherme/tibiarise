@@ -5,6 +5,7 @@ import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
+import { HotjarSnippet } from "@/components/utils/hotjar";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -55,9 +56,9 @@ export default function RootLayout({
       </head>
       <body className={DMSans.className}>
         <Providers>
-          <div className="flex flex-col justify-between min-h-screen">
+          <div className="flex flex-col">
             <Header />
-            <main className="container mx-auto">{children}</main>
+            <main className="container mx-auto min-h-[68vh]">{children}</main>
             <Footer />
           </div>
         </Providers>
@@ -65,6 +66,7 @@ export default function RootLayout({
       <GoogleAnalytics
         gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
       />
+      <HotjarSnippet />
     </html>
   );
 }

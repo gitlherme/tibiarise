@@ -18,7 +18,7 @@ export const useGetExperienceByWorld = () => {
   const filter = searchParams.get("filter");
 
   return useQuery<ExperienceByWorld>({
-    queryKey: ["world", world?.toLowerCase()],
+    queryKey: ["world", world?.toLowerCase(), filter?.toLowerCase()],
     queryFn: () =>
       getExperienceByWorld(
         String(world).toLowerCase(),
@@ -26,7 +26,7 @@ export const useGetExperienceByWorld = () => {
       ),
     initialData: getQueryClient().getQueryData(["world", world]),
     staleTime: 60 * 1000, // 1 minute
-    enabled: !!world,
+    enabled: !!world && !!filter,
     retry: false,
   });
 };

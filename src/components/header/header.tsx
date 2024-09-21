@@ -23,6 +23,11 @@ export const Header = () => (
             </Link>
           </li>
           <li>
+            <Link href="/world" className="hover:text-blue-300">
+              Experience by World
+            </Link>
+          </li>
+          <li>
             <Link href="/contribute" className="hover:text-blue-300">
               Contribute
             </Link>
