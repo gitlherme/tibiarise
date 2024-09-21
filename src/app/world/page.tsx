@@ -1,7 +1,6 @@
 "use client";
-
-import { ExperienceByWorldTable } from "@/components/experience-by-world/experience-by-world-table";
+import ExperienceByWorld from "@/views/experience-by-world";
 
 export default function World() {
-  return <ExperienceByWorldTable />;
+  return <ExperienceByWorld />;
 }

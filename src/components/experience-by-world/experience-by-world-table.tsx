@@ -8,8 +8,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
+import { formatNumberToLocale } from "@/utils/formatNumber";
 
 export const ExperienceByWorldTable = () => {
   const { data, isLoading } = useGetExperienceByWorld();
