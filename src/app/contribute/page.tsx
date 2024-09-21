@@ -12,10 +12,10 @@ export default function About() {
           some Tibia Coins to{" "}
           <Link
             className="font-bold text-blue-500 hover:text-blue-700"
-            href="/character/Vieirito Hardmode"
+            href="/character/Gui"
             target="_blank"
           >
-            Vieirito Hardmode
+            Gui
           </Link>
           .
         </p>
@@ -23,18 +23,6 @@ export default function About() {
           Please also send me a letter in game, I really appreciate all support
           and will be happy to read about your feedbacks and thougts about the
           product.
-        </p>
-        <p>
-          Do you want to request a new feature? Just{" "}
-          <Link
-            data-canny-link
-            href="https://tibiarise.canny.io/feature-requests"
-            target="_blank"
-            className="font-bold text-blue-500 hover:text-blue-700"
-          >
-            click here
-          </Link>
-          .
         </p>
       </div>
     </div>

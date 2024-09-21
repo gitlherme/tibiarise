@@ -1,29 +1,39 @@
-export function parseExperienceByWorld(input: string) {
-  // Dividir o input em linhas e filtrar as que não são relevantes
-  const lines = input
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
-  const data: any = [];
+interface PlayerData {
+  rank: number;
+  name: string;
+  level: number;
+  expChange: string;
+  timeOnline: string;
+  vocation: string;
+  world: string;
+}
 
-  console.log(lines.length);
+export function parseExperienceByWorld(input: string): PlayerData[] {
+  const lines = input.split("\n").filter((line) => line.trim().length > 0);
+  const players: PlayerData[] = [];
 
-  lines.forEach((line) => {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
     const match = line.match(
-      /^(\d+)([A-Za-z\s]+?)\s{2}(\d+)\+([\d,]+)\s*(\w{2})(\w+)$/
+      /^(\d{1,3})(.+?)\s+(\d+)([-+][\d,]+)\s*(\d{1,2}:\d{2})??\s*([A-Z]{2})\s*(\w+)$/
     );
 
     if (match) {
-      const [, rank, name, level, expChange, vocation, world] = match;
+      const [, rank, name, level, experience, timeOnline, vocation, world] =
+        match;
 
-      data.push({
+      players.push({
+        rank: parseInt(rank),
         name: name.trim(),
-        level: parseInt(level.trim()),
-        expChange: parseInt(expChange.replace(/,/g, "").trim()),
-        vocation: vocation.trim(),
+        level: parseInt(level),
+        expChange: experience.trim(),
+        timeOnline: timeOnline || "N/A",
+        vocation: vocation,
+        world: world,
       });
     }
-  });
+  }
 
-  return data;
+  return players;
 }

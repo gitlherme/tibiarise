@@ -10,7 +10,7 @@ app.get("/", async (c) => {
   const { searchParams } = new URL(c.req.url);
   const name = searchParams.get("name");
   const data = await fetch(
-    `https://guildstats.eu/character?nick=${name}&tab=7`
+    `${process.env.NEXT_PUBLIC_STATS_API}/character?nick=${name}&tab=7`
   );
 
   const page = cheerio((await data.text()).trim());
@@ -19,7 +19,7 @@ app.get("/", async (c) => {
   const experienceTable = parseCharacterTableExperience(sanitizedTable);
 
   const { character: getCharacterInfo } = await fetch(
-    `https://api.tibiadata.com/v4/character/${name}`
+    `${process.env.NEXT_PUBLIC_DATA_API}/v4/character/${name}`
   ).then((res) => res.json());
 
   const characterInfo = getCharacterInfo.character;
