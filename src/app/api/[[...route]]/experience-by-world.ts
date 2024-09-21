@@ -12,7 +12,7 @@ app.get("/", async (c) => {
   const filter = searchParams.get("filter");
 
   const { data } = await axios.get(
-    `https://guildstats.eu/mostexp?world=${world}&time=${filter}`
+    `${process.env.NEXT_PUBLIC_STATS_API}/mostexp?world=${world}&time=${filter}`
   );
 
   const page = cheerio(await data);

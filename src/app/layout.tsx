@@ -55,9 +55,9 @@ export default function RootLayout({
       </head>
       <body className={DMSans.className}>
         <Providers>
-          <div className="flex flex-col justify-between min-h-screen">
+          <div className="flex flex-col">
             <Header />
-            <main className="container mx-auto">{children}</main>
+            <main className="container mx-auto min-h-[68vh]">{children}</main>
             <Footer />
           </div>
         </Providers>
