@@ -24,6 +24,11 @@ export const CharacterInformation = () => {
     return <Skeleton className="w-[100%] h-[100%]" />;
   }
 
+  const share = {
+    lower: Math.ceil(data!.characterInfo.level / 1.5),
+    upper: Math.floor(data!.characterInfo.level * 1.5),
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
@@ -54,6 +59,10 @@ export const CharacterInformation = () => {
             </div>
           </div>
         </div>
+        <span className="text-sm mt-2">
+          This character can share with another characters between level{" "}
+          <b>{share.lower}</b> and <b>{share.upper}</b>.
+        </span>
       </CardContent>
     </Card>
   );
