@@ -5,16 +5,13 @@ import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
-import Hotjar from "@hotjar/browser";
+import { HotjarSnippet } from "@/components/utils/hotjar";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tibia Rise",
 };
-
-const siteId = process.env.NEXT_PUBLIC_HOTJAR_SITE_ID;
-const hotjarVersion = 6;
 
 export default function RootLayout({
   children,
@@ -69,7 +66,7 @@ export default function RootLayout({
       <GoogleAnalytics
         gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
       />
-      {Hotjar.init(Number(siteId), hotjarVersion)}
+      <HotjarSnippet />
     </html>
   );
 }
