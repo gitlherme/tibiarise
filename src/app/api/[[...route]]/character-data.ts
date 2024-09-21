@@ -19,7 +19,7 @@ app.get("/", async (c) => {
   const experienceTable = parseCharacterTableExperience(sanitizedTable);
 
   const { character: getCharacterInfo } = await fetch(
-    `${process.env.NEXT_PUBLIC_DATA_API}/v4/character/${name}`
+    `${process.env.NEXT_PUBLIC_DATA_API}/character/${name}`
   ).then((res) => res.json());
 
   const characterInfo = getCharacterInfo.character;
