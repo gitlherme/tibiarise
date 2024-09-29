@@ -7,6 +7,11 @@ interface CharacterCardProps {
 }
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
+  const characterInfo = character?.characterInfo ?? {
+    name: "",
+    level: 0,
+    deaths: [],
+  };
   const experienceTable = character?.experienceTable ?? [
     {
       date: new Date(),
@@ -30,12 +35,10 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>{character.characterInfo.name}</CardTitle>
+        <CardTitle>{characterInfo.name}</CardTitle>
         <div className="grid">
           <div className="text-sm font-medium">Level</div>
-          <div className="text-2xl font-bold">
-            {character.characterInfo.level}
-          </div>
+          <div className="text-2xl font-bold">{characterInfo.level}</div>
         </div>
         <div className="grid">
           <div className="text-sm font-medium">XP</div>
@@ -84,7 +87,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
           <div className="gap-2 flex justify-between">
             <div className="text-sm font-medium">Deaths</div>
             <div className="text-sm text-muted-foreground">
-              {formatNumberToLocale(character.characterInfo.deaths.length)}
+              {formatNumberToLocale(characterInfo.deaths.length)}
             </div>
           </div>
         </div>
