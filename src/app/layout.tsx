@@ -6,6 +6,8 @@ import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { HotjarSnippet } from "@/components/utils/hotjar";
+import { Ribbon } from "@/components/ribbon/ribbon";
+import Link from "next/link";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -57,6 +59,15 @@ export default function RootLayout({
       <body className={DMSans.className}>
         <Providers>
           <div className="flex flex-col">
+            <Ribbon>
+              <p>
+                <span className="font-bold">✨ NEW FEATURE! ✨</span> - Use{" "}
+                <Link href="/compare-characters" className="underline">
+                  Compare characters
+                </Link>{" "}
+                to see who was better between two characters.
+              </p>
+            </Ribbon>
             <Header />
             <main className="container mx-auto min-h-[68vh]">{children}</main>
             <Footer />
