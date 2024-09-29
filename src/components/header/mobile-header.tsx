@@ -1,6 +1,5 @@
 "use client";
 import { MenuIcon, XIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,11 +9,12 @@ export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
-      <div className="flex items-center bg-black p-4 gap-14">
-        <DrawerTrigger onClick={() => setIsOpen(true)}>
-          <Button>
-            <MenuIcon />
-          </Button>
+      <div className="flex items-center bg-black p-4 justify-center relative">
+        <DrawerTrigger
+          onClick={() => setIsOpen(true)}
+          className="left-0 fixed px-4"
+        >
+          <MenuIcon className="text-white" />
         </DrawerTrigger>
         <Link href="/" className="block text-secondary text-white">
           <span className="block text-3xl font-black">Tibia Rise</span>

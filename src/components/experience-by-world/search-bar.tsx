@@ -53,7 +53,9 @@ export const SearchBarExperienceByWorld = () => {
     <div>Loading...</div>
   ) : (
     <div className={`flex flex-col justify-center items-center`}>
-      <h1 className="text-4xl bold mb-4">Experience By World</h1>
+      <h2 className="text-4xl md:text-5xl font-black text-center my-4">
+        Experience by World
+      </h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

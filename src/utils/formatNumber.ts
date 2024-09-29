@@ -7,5 +7,7 @@ export function numberToK(number: number) {
 }
 
 export function formatNumberToLocale(number: number) {
-  return number.toLocaleString();
+  return Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(
+    number
+  );
 }
