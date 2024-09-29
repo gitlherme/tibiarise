@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { HotjarSnippet } from "@/components/utils/hotjar";
 import { Ribbon } from "@/components/ribbon/ribbon";
 import Link from "next/link";
+import { MobileHeader } from "@/components/header/mobile-header";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -68,7 +69,12 @@ export default function RootLayout({
                 to see who was better between two characters.
               </p>
             </Ribbon>
-            <Header />
+            <div className="hidden lg:block">
+              <Header />
+            </div>
+            <div className="block lg:hidden">
+              <MobileHeader />
+            </div>
             <main className="container mx-auto min-h-[68vh]">{children}</main>
             <Footer />
           </div>
