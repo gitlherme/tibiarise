@@ -19,12 +19,17 @@ export const Header = () => (
         <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-secondary">
           <li>
             <Link href="/" className="hover:text-blue-300">
-              Home
+              Search Character
             </Link>
           </li>
           <li>
             <Link href="/world" className="hover:text-blue-300">
               Experience by World
+            </Link>
+          </li>
+          <li>
+            <Link href="/compare-characters" className="hover:text-blue-300">
+              Compare Characters
             </Link>
           </li>
           <li>
