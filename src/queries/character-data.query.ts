@@ -5,9 +5,14 @@ import { CharacterData } from "@/models/character-data.model";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 
-const getCharacterData = async (name: string) => {
+export const getCharacterData = async (name: string) => {
   const response = await fetch(`/api/get-character-data?name=${name}`);
   const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error);
+  }
+
   return data;
 };
 
