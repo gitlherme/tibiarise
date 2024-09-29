@@ -21,4 +21,5 @@ export type CharacterInfo = {
   sex: string;
   vocation: string;
   world: string;
+  deaths: [];
 };

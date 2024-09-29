@@ -22,7 +22,10 @@ app.get("/", async (c) => {
     `${process.env.NEXT_PUBLIC_DATA_API}/character/${name}`
   ).then((res) => res.json());
 
-  const characterInfo = getCharacterInfo.character;
+  const characterInfo = {
+    ...getCharacterInfo.character,
+    deaths: getCharacterInfo.deaths || [],
+  };
 
   const response: CharacterData = { experienceTable, characterInfo };
 
