@@ -54,7 +54,7 @@ export default function CompareCharactersView() {
         <h2 className="text-3xl md:text-5xl font-black text-center">
           Compare Characters
         </h2>
-        <h4>
+        <h4 className="text-center">
           Fill the inputs below to compare two characters and see their stats
           side. 🔥
         </h4>
@@ -63,7 +63,7 @@ export default function CompareCharactersView() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full md:w-3/5 flex flex-col gap-y-4"
           >
-            <div className="w-full flex items-end gap-4">
+            <div className="w-full flex flex-col lg:flex-row items-center lg:items-end gap-4">
               <FormField
                 control={form.control}
                 name="firstCharacter"
@@ -108,7 +108,7 @@ export default function CompareCharactersView() {
           </div>
         ) : (
           characters && (
-            <div className="flex gap-8 w-3/5 justify-between">
+            <div className="flex flex-col lg:flex-row gap-8 w-full lg:w-3/5 justify-between">
               <CharacterCard character={characters?.firstCharacter} />
               <CharacterCard character={characters?.secondCharacter} />
             </div>

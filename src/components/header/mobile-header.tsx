@@ -34,6 +34,7 @@ export const MobileHeader = () => {
               <Link
                 href={link.href}
                 className="hover:text-blue-300 block w-full py-2"
+                onClick={() => setIsOpen(false)}
               >
                 {link.label}
               </Link>
