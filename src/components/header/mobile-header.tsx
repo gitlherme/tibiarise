@@ -1,5 +1,5 @@
 "use client";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon, XCircleIcon } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import Link from "next/link";
 import { useState } from "react";
@@ -20,8 +20,12 @@ export const MobileHeader = () => {
           <span className="block text-3xl font-black">Tibia Rise</span>
         </Link>
       </div>
-      <DrawerContent className="h-screen rounded-none flex items-center text-center px-4">
-        <XIcon className="self-end my-12" onClick={() => setIsOpen(false)} />
+      <DrawerContent className="h-full rounded-none flex items-center text-center px-4 py-20">
+        <XCircleIcon
+          size={32}
+          className="self-end"
+          onClick={() => setIsOpen(false)}
+        />
 
         <div className="flex justify-center items-center w-full my-8">
           <Link href="/" className="block text-secondary text-black">
