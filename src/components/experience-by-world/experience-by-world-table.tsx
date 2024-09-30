@@ -5,12 +5,11 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
-
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocaleString } from "@/utils/formatNumber";
 import Link from "next/link";
 
 export const ExperienceByWorldTable = () => {
@@ -58,10 +57,10 @@ export const ExperienceByWorldTable = () => {
                 }
               >
                 {Math.sign(player.expChange) === 1
-                  ? `+${formatNumberToLocale(player.expChange)}`
+                  ? `+${formatNumberToLocaleString(player.expChange)}`
                   : Math.sign(player.expChange) === 0
-                  ? formatNumberToLocale(player.expChange)
-                  : `${formatNumberToLocale(player.expChange)}`}
+                  ? formatNumberToLocaleString(player.expChange)
+                  : `${formatNumberToLocaleString(player.expChange)}`}
               </TableCell>
             </TableRow>
           ))}
