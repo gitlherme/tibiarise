@@ -21,11 +21,13 @@ export const MobileHeader = () => {
         </Link>
       </div>
       <DrawerContent className="h-screen rounded-none flex items-center text-center px-4">
-        <XIcon className="self-end my-4" onClick={() => setIsOpen(false)} />
+        <XIcon className="self-end my-12" onClick={() => setIsOpen(false)} />
 
         <div className="flex justify-center items-center w-full my-8">
           <Link href="/" className="block text-secondary text-black">
-            <span className="block text-3xl font-black">Tibia Rise</span>
+            <span className="block text-3xl font-black text-black">
+              Tibia Rise
+            </span>
           </Link>
         </div>
         <ul className="flex flex-col my-4 gap-4 w-full">
