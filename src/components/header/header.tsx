@@ -48,7 +48,7 @@ export const Header = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/contribute`}
+                  href={`/${locale}/support`}
                   className="hover:text-blue-300"
                 >
                   {t("nav.contribute")}

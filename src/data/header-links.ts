@@ -12,7 +12,7 @@ export const headerLinks = [
     label: "Compare Characters",
   },
   {
-    href: "/contribute",
+    href: "/support",
     label: "Contribute",
   },
 ];
