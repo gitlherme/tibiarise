@@ -3,9 +3,12 @@ import { MenuIcon, XCircleIcon } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import Link from "next/link";
 import { useState } from "react";
-import { headerLinks } from "@/data/header-links";
+import { getCookie } from "cookies-next";
+import { useTranslations } from "next-intl";
 
 export const MobileHeader = () => {
+  const locale = getCookie("NEXT_LOCALE") || "en";
+  const t = useTranslations("Header");
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
@@ -35,17 +38,44 @@ export const MobileHeader = () => {
           </Link>
         </div>
         <ul className="flex flex-col my-4 gap-4 w-full">
-          {headerLinks.map((link, index) => (
-            <li key={index}>
+          <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-secondary">
+            <li>
               <Link
-                href={link.href}
-                className="hover:text-blue-300 block w-full py-2"
+                href={`/${locale}`}
+                className="hover:text-blue-300"
                 onClick={() => setIsOpen(false)}
               >
-                {link.label}
+                {t("nav.search")}
               </Link>
             </li>
-          ))}
+            <li>
+              <Link
+                href={`/${locale}/world`}
+                className="hover:text-blue-300"
+                onClick={() => setIsOpen(false)}
+              >
+                {t("nav.experienceByWorld")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/compare-characters`}
+                className="hover:text-blue-300"
+                onClick={() => setIsOpen(false)}
+              >
+                {t("nav.compareCharacters")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/contribute`}
+                className="hover:text-blue-300"
+                onClick={() => setIsOpen(false)}
+              >
+                {t("nav.contribute")}
+              </Link>
+            </li>
+          </ul>
         </ul>
       </DrawerContent>
     </Drawer>

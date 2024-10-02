@@ -1,14 +1,14 @@
 import { DM_Sans } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { HotjarSnippet } from "@/components/utils/hotjar";
-import { Ribbon } from "@/components/ribbon/ribbon";
-import Link from "next/link";
 import { MobileHeader } from "@/components/header/mobile-header";
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -16,13 +16,17 @@ export const metadata: Metadata = {
   title: "Tibia Rise",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <meta name="title" content="Tibia Rise" />
         <meta
@@ -58,27 +62,20 @@ export default function RootLayout({
         />
       </head>
       <body className={DMSans.className}>
-        <Providers>
-          <div className="flex flex-col">
-            <Ribbon>
-              <p>
-                <span className="font-bold">✨ NEW FEATURE! ✨</span> - Use{" "}
-                <Link href="/compare-characters" className="underline">
-                  Compare characters
-                </Link>{" "}
-                to see who was better between two characters.
-              </p>
-            </Ribbon>
-            <div className="hidden lg:block">
-              <Header />
+        <NextIntlClientProvider messages={messages}>
+          <Providers>
+            <div className="flex flex-col">
+              <div className="hidden lg:block">
+                <Header />
+              </div>
+              <div className="block lg:hidden">
+                <MobileHeader />
+              </div>
+              <main className="container mx-auto min-h-[68vh]">{children}</main>
+              <Footer />
             </div>
-            <div className="block lg:hidden">
-              <MobileHeader />
-            </div>
-            <main className="container mx-auto min-h-[68vh]">{children}</main>
-            <Footer />
-          </div>
-        </Providers>
+          </Providers>
+        </NextIntlClientProvider>
       </body>
       <GoogleAnalytics
         gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
