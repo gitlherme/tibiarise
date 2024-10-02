@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { Ribbon } from "../ribbon/ribbon";
+import { LanguageSelector } from "../language-selector/language-selector";
 
 export const Header = () => {
   const locale = cookies().get("NEXT_LOCALE")?.value || "en";
@@ -54,6 +55,10 @@ export const Header = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <LanguageSelector />
           </div>
         </div>
       </div>
