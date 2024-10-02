@@ -38,8 +38,8 @@ export const MobileHeader = () => {
             </span>
           </Link>
         </div>
-        <ul className="flex flex-col my-4 gap-4 w-full">
-          <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-secondary">
+        <ul className="flex my-4 gap-4 justify-center w-full">
+          <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-black">
             <li>
               <Link
                 href={`/${locale}`}
