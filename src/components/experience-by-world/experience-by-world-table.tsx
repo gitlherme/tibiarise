@@ -5,14 +5,16 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
 import { formatNumberToLocaleString } from "@/utils/formatNumber";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const ExperienceByWorldTable = () => {
+  const t = useTranslations("ExperienceByWorldPage");
   const { data, isLoading } = useGetExperienceByWorld();
   const table = data?.experienceTable;
 
@@ -26,10 +28,10 @@ export const ExperienceByWorldTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Rank</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Vocation</TableHead>
-            <TableHead>Level at Beginning</TableHead>
-            <TableHead>XP Gain</TableHead>
+            <TableHead>{t("table.headers.name")}</TableHead>
+            <TableHead>{t("table.headers.vocation")}</TableHead>
+            <TableHead>{t("table.headers.levelAtBeggining")}</TableHead>
+            <TableHead>{t("table.headers.xpGain")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
