@@ -17,6 +17,7 @@ import { useState } from "react";
 import { CharacterCard } from "@/components/compare-characters/character-card";
 import { XIcon } from "lucide-react";
 import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   firstCharacter: z.string(),
@@ -48,30 +49,32 @@ export default function CompareCharactersView() {
     setSecondCharacter(data.secondCharacter);
   };
 
+  const t = useTranslations("CompareCharactersPage");
+
   return (
     <HydrationBoundaryCustom>
       <div className="w-full min-h-[60vh] flex flex-col justify-center items-center gap-12 container py-12">
         <h2 className="text-3xl md:text-5xl font-black text-center">
-          Compare Characters
+          {t("title")}
         </h2>
-        <h4>
-          Fill the inputs below to compare two characters and see their stats
-          side. 🔥
-        </h4>
+        <h4 className="text-center">{t("description")}</h4>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full md:w-3/5 flex flex-col gap-y-4"
           >
-            <div className="w-full flex items-end gap-4">
+            <div className="w-full flex flex-col lg:flex-row items-center lg:items-end gap-4">
               <FormField
                 control={form.control}
                 name="firstCharacter"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Character name</FormLabel>
+                    <FormLabel>{t("form.name.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter character name" {...field} />
+                      <Input
+                        placeholder={t("form.name.placeholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -83,9 +86,12 @@ export default function CompareCharactersView() {
                 name="secondCharacter"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Character name</FormLabel>
+                    <FormLabel>{t("form.name.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter character name" {...field} />
+                      <Input
+                        placeholder={t("form.name.placeholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -93,22 +99,18 @@ export default function CompareCharactersView() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Compare
+              {t("form.submit.label")}
             </Button>
           </form>
         </Form>
 
         {isLoading ? (
-          <div>Comparing characters...</div>
+          <div>{t("loading")}</div>
         ) : isError ? (
-          <div>
-            There was an error comparing characters, please check if the names
-            are correct. If you&apos;ve changed your name recently, please try
-            again using the old one.
-          </div>
+          <div>{t("error")}</div>
         ) : (
           characters && (
-            <div className="flex gap-8 w-3/5 justify-between">
+            <div className="flex flex-col lg:flex-row gap-8 w-full lg:w-3/5 justify-between">
               <CharacterCard character={characters?.firstCharacter} />
               <CharacterCard character={characters?.secondCharacter} />
             </div>

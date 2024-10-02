@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const DynamicCompareCharactersView = dynamic(
-  () => import("../../views/compare-characters"),
+  () => import("../../../views/compare-characters"),
   { ssr: false }
 );
 

@@ -13,12 +13,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { searchBarSchema } from "./schemas/search-bar";
+import { searchBarSchema } from "../schemas/search-bar";
 import { SearchIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getCookie } from "cookies-next";
 
 const formSchema = searchBarSchema;
 
 export default function Home() {
+  const locale = getCookie("NEXT_LOCALE") || "en";
+  const t = useTranslations("Homepage");
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,13 +32,13 @@ export default function Home() {
   });
 
   const onSubmit = (data: any) => {
-    router.push(`/character/${data.name}`);
+    router.push(`/${locale}/character/${data.name}`);
   };
 
   return (
     <div className="w-full h-[60vh] flex flex-col justify-center items-center gap-12">
       <h2 className="text-3xl md:text-5xl font-black text-center">
-        Track your Tibia Character
+        {t("title")}
       </h2>
       <Form {...form}>
         <form
@@ -46,9 +50,9 @@ export default function Home() {
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Character name</FormLabel>
+                <FormLabel>{t("form.name.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your character name" {...field} />
+                  <Input placeholder={t("form.name.placeholder")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

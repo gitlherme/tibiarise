@@ -8,12 +8,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
-
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocaleString } from "@/utils/formatNumber";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const ExperienceByWorldTable = () => {
+  const t = useTranslations("ExperienceByWorldPage");
   const { data, isLoading } = useGetExperienceByWorld();
   const table = data?.experienceTable;
 
@@ -27,10 +28,10 @@ export const ExperienceByWorldTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead>Rank</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Vocation</TableHead>
-            <TableHead>Level at Beginning</TableHead>
-            <TableHead>XP Gain</TableHead>
+            <TableHead>{t("table.headers.name")}</TableHead>
+            <TableHead>{t("table.headers.vocation")}</TableHead>
+            <TableHead>{t("table.headers.levelAtBeggining")}</TableHead>
+            <TableHead>{t("table.headers.xpGain")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -58,10 +59,10 @@ export const ExperienceByWorldTable = () => {
                 }
               >
                 {Math.sign(player.expChange) === 1
-                  ? `+${formatNumberToLocale(player.expChange)}`
+                  ? `+${formatNumberToLocaleString(player.expChange)}`
                   : Math.sign(player.expChange) === 0
-                  ? formatNumberToLocale(player.expChange)
-                  : `${formatNumberToLocale(player.expChange)}`}
+                  ? formatNumberToLocaleString(player.expChange)
+                  : `${formatNumberToLocaleString(player.expChange)}`}
               </TableCell>
             </TableRow>
           ))}

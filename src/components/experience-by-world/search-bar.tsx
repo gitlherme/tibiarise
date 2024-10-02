@@ -22,6 +22,8 @@ import {
 import { useGetWorlds } from "@/queries/worlds.query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ByWorldFilter } from "@/models/experience-by-world.model";
+import { getCookie } from "cookies-next";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -31,6 +33,9 @@ const formSchema = z.object({
 });
 
 export const SearchBarExperienceByWorld = () => {
+  const locale = getCookie("NEXT_LOCALE") || "en";
+  const tg = useTranslations("General");
+  const t = useTranslations("ExperienceByWorldPage");
   const router = useRouter();
   const searchParams = useSearchParams();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,17 +48,19 @@ export const SearchBarExperienceByWorld = () => {
 
   const onSubmit = (data: any) => {
     router.push(
-      `/world?world=${data.name}&filter=${ByWorldFilter[data.filter]}`
+      `/${locale}/world?world=${data.name}&filter=${ByWorldFilter[data.filter]}`
     );
   };
 
   const { data, isLoading: worldsIsLoading } = useGetWorlds();
 
   return worldsIsLoading ? (
-    <div>Loading...</div>
+    <div>{tg("loading")}</div>
   ) : (
     <div className={`flex flex-col justify-center items-center`}>
-      <h1 className="text-4xl bold mb-4">Experience By World</h1>
+      <h2 className="text-4xl md:text-5xl font-black text-center my-4">
+        {t("title")}
+      </h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -65,7 +72,7 @@ export const SearchBarExperienceByWorld = () => {
               name="name"
               render={({ field }) => (
                 <FormItem className="w-3/4">
-                  <FormLabel>World</FormLabel>
+                  <FormLabel>{t("form.world.label")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -93,7 +100,7 @@ export const SearchBarExperienceByWorld = () => {
               name="filter"
               render={({ field }) => (
                 <FormItem className="w-1/4">
-                  <FormLabel>Filter</FormLabel>
+                  <FormLabel>{t("form.filter.label")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -104,9 +111,15 @@ export const SearchBarExperienceByWorld = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="DAY">Yesterday</SelectItem>
-                      <SelectItem value="WEEK">Last week</SelectItem>
-                      <SelectItem value="MONTH">Last month</SelectItem>
+                      <SelectItem value="DAY">
+                        {t("form.filter.options.yesterday")}
+                      </SelectItem>
+                      <SelectItem value="WEEK">
+                        {t("form.filter.options.week")}
+                      </SelectItem>
+                      <SelectItem value="MONTH">
+                        {t("form.filter.options.month")}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

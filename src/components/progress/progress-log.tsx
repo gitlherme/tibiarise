@@ -8,8 +8,10 @@ import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/formatNumber";
 import clsx from "clsx";
 import { ArrowDown, ArrowUp, Equal, Minus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export const ProgressLog = () => {
+  const t = useTranslations("CharacterPage.progressLog");
   const { data, isLoading } = useGetCharacterData();
 
   const experienceTable = data?.experienceTable ?? [
@@ -43,21 +45,21 @@ export const ProgressLog = () => {
     <Card>
       <CardHeader>
         <div className="flex flex-col-reverse md:flex-row gap-2 justify-between">
-          <CardTitle>Progress Log</CardTitle>
-          <Badge className="w-fit">Last month</Badge>
+          <CardTitle>{t("title")}</CardTitle>
+          <Badge className="w-fit">{t("lastMonthLabel")}</Badge>
         </div>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">XP Gained</div>
+            <div className="text-sm font-medium">{t("xpGained")}</div>
             <div className="text-sm text-muted-foreground">
               {formatNumberToLocale(totalExperienceMonth)}
             </div>
           </div>
           <Separator />
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">Levels Gained</div>
+            <div className="text-sm font-medium">{t("levelsGained")}</div>
             <div
               className={clsx(
                 "text-sm flex items-center gap-1",
@@ -80,7 +82,7 @@ export const ProgressLog = () => {
           </div>
           <Separator />
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">Vocation Rank</div>
+            <div className="text-sm font-medium">{t("vocationRank")}</div>
             <div
               className={clsx([
                 "text-sm flex gap-1 items-center",

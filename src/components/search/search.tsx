@@ -16,10 +16,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { SearchIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const formSchema = searchBarSchema;
 
 export const Search = () => {
+  const t = useTranslations("CharacterPage");
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,7 +31,7 @@ export const Search = () => {
   });
 
   const onSubmit = (data: any) => {
-    router.push(`/character/${data.name}`);
+    router.push(`/[locale]/character/${data.name}`);
   };
   return (
     <Form {...form}>
@@ -43,9 +45,12 @@ export const Search = () => {
           render={({ field }) => (
             <div className="w-full">
               <FormItem>
-                <FormLabel>Search for another character</FormLabel>
+                <FormLabel>{t("searchAnother.label")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your character name" {...field} />
+                  <Input
+                    placeholder={t("searchAnother.placeholder")}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

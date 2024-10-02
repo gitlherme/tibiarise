@@ -1,0 +1,115 @@
+{
+  "General": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noData": "No data found"
+  },
+  "Ribbon": {
+    "message": "<highlight>✨ NEW FEATURE! ✨</highlight> - Use <compare>Compare characters</compare> to see who was better between two characters."
+  },
+  "Header": {
+    "nav": {
+      "search": "Search character",
+      "experienceByWorld": "Experience By World",
+      "compareCharacters": "Compare Characters",
+      "contribute": "Support"
+    }
+  },
+  "Homepage": {
+    "title": "Track your Tibia Character",
+    "form": {
+      "name": {
+        "label": "Character Name",
+        "placeholder": "Enter your character name"
+      },
+      "submit": {
+        "label": "Track"
+      }
+    }
+  },
+  "CharacterPage": {
+    "notFound": "Character not found",
+    "vocationRankLabel": "Top {rank} {vocation} of {world}",
+    "shareInfo":  "This character can share XP with another characters between level <lower>{min}</lower> and <upper>{max}</upper>.",
+    "searchAnother": {
+      "label": "Search another character",
+      "placeholder": "Enter your character name"
+    },
+    "experienceTable": {
+      "headers": {
+        "date": "Date",
+        "xpGain": "XP Gain",
+        "level": "Level",
+        "totalExperience": "Total Experience",
+        "vocationRank": "Vocation Rank"
+      }
+    },
+    "progressLog": {
+      "title": "Progress Log",
+      "lastMonthLabel": "Last Month",
+      "xpGained": "XP Gained",
+      "levelsGained": "Levels Gained",
+      "vocationRank":"Vocation Rank"
+    }
+  },
+  "ExperienceByWorldPage": {
+    "title": "Experience by World",
+    "form": {
+      "world": {
+        "label": "World"
+      },
+      "filter": {
+        "label": "Filter by",
+        "options": {
+          "yesterday": "Yesterday",
+          "week": "Last Week",
+          "month": "Last Month"
+        }
+      },
+      "submit": {
+        "label": "Search"
+      }
+    },
+    "table": {
+      "headers": {
+        "name": "Name",
+        "vocation": "Vocation",
+        "levelAtBeggining": "Level at Beggining",
+        "xpGain": "XP Gain"
+      }
+    }
+  },
+  "SupportPage": {
+    "title": "Support TibiaRise",
+    "message1": "Want to support the continued development of TibiaRise? Donate some Tibia Coins to <character>Gui</character>.",
+    "message2": "Please also send me a letter in game, I really appreciate all support and will be happy to read about your feedbacks and thougts about the project."
+  },
+  "CompareCharactersPage": {
+    "title": "Compare Characters",
+    "description": "Fill the inputs below to compare two characters and see their stats side. 🔥",
+    "form": {
+      "name": {
+        "label": "Character Name",
+        "placeholder": "Enter character name"
+      },
+      "submit": {
+        "label": "Compare"
+      }
+    },
+    "loading": "Comparing characters...",
+    "error": "There was an error comparing characters, please check if the names are correct. If you&apos;ve changed your name recently, please try again using the old one.",
+    "card": {
+        "level": "Level",
+        "experience": "XP",
+        "vocationRank": "Vocation Rank",
+        "lastMonthLabel": "Last Month Status",
+        "xpGained": "XP Gained",
+        "levelsGained": "Levels Gained",
+        "medianXPByDay": "Median XP by Day",
+        "medianXPByWeek": "Median XP by Week",
+        "medianXPByHour": "Median XP by Hour",
+        "deaths": "Deaths"
+    }
+  }
+
+}
