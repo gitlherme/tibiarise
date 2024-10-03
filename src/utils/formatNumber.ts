@@ -6,6 +6,12 @@ export function numberToK(number: number) {
   });
 }
 
-export function formatNumberToLocale(number: number) {
+export function formatNumberToLocaleString(number: number) {
   return number.toLocaleString();
+}
+
+export function formatNumberToLocale(number: number) {
+  return Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(
+    number
+  );
 }

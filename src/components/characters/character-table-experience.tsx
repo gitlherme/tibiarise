@@ -14,8 +14,10 @@ import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/formatNumber";
 import { useEffect, useState } from "react";
 import { ExperienceTableValue } from "@/models/character-data.model";
+import { useTranslations } from "next-intl";
 
 export const ExperienceTable = () => {
+  const t = useTranslations("CharacterPage");
   const [reversedTable, setReversedTable] = useState<ExperienceTableValue[]>(
     []
   );
@@ -36,11 +38,11 @@ export const ExperienceTable = () => {
     <Table className="mt-12">
       <TableHeader>
         <TableRow>
-          <TableHead>Date</TableHead>
-          <TableHead>XP Gain</TableHead>
-          <TableHead>Level</TableHead>
-          <TableHead>Total Experience</TableHead>
-          <TableHead>Vocation Rank</TableHead>
+          <TableHead>{t("experienceTable.headers.date")}</TableHead>
+          <TableHead>{t("experienceTable.headers.xpGain")}</TableHead>
+          <TableHead>{t("experienceTable.headers.level")}</TableHead>
+          <TableHead>{t("experienceTable.headers.totalExperience")}</TableHead>
+          <TableHead>{t("experienceTable.headers.vocationRank")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

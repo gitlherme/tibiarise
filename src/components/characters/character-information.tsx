@@ -1,5 +1,4 @@
 "use client";
-
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Badge } from "../ui/badge";
 import {
@@ -16,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { Goal } from "./goal";
 
 export const CharacterInformation = () => {
+  const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
   const vocationRank =
     data?.experienceTable[data.experienceTable.length - 1].vocationRank;
@@ -38,9 +38,11 @@ export const CharacterInformation = () => {
           <div className="flex gap-2 flex-col-reverse md:flex-row justify-between w-full">
             <CardTitle>{data?.characterInfo.name}</CardTitle>
             <Badge className="w-fit">
-              {`Top ${vocationRank} ${vocationInitials(
-                data!.characterInfo.vocation
-              )} of ${data?.characterInfo.world}`}
+              {t("vocationRankLabel", {
+                rank: vocationRank,
+                vocation: vocationInitials(data!.characterInfo.vocation),
+                world: data?.characterInfo.world,
+              })}
             </Badge>
           </div>
           <CardDescription>{data?.characterInfo.vocation}</CardDescription>
@@ -62,8 +64,12 @@ export const CharacterInformation = () => {
           </div>
         </div>
         <span className="text-sm mt-2">
-          This character can share with another characters between level{" "}
-          <b>{share.lower}</b> and <b>{share.upper}</b>.
+          {t.rich("shareInfo", {
+            lower: (chunks) => <b>{chunks}</b>,
+            upper: (chunks) => <b>{chunks}</b>,
+            min: share.lower,
+            max: share.upper,
+          })}
         </span>
 
         <div className="flex justify-between">
