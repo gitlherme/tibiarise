@@ -12,6 +12,8 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { vocationInitials } from "@/utils/vocations";
 import { formatNumberToLocale } from "@/utils/formatNumber";
+import { useTranslations } from "next-intl";
+import { Goal } from "./goal";
 
 export const CharacterInformation = () => {
   const { data, isLoading } = useGetCharacterData();
@@ -63,6 +65,11 @@ export const CharacterInformation = () => {
           This character can share with another characters between level{" "}
           <b>{share.lower}</b> and <b>{share.upper}</b>.
         </span>
+
+        <div className="flex justify-between">
+          <span>Check how many time to achieve a goal </span>
+          <Goal character={data} />
+        </div>
       </CardContent>
     </Card>
   );
