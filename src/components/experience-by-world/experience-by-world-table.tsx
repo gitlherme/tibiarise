@@ -12,9 +12,11 @@ import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
 import { formatNumberToLocaleString } from "@/utils/formatNumber";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { getCookie } from "cookies-next";
 
 export const ExperienceByWorldTable = () => {
   const t = useTranslations("ExperienceByWorldPage");
+  const locale = getCookie("NEXT_LOCALE") || "en";
   const { data, isLoading } = useGetExperienceByWorld();
   const table = data?.experienceTable;
 
@@ -42,7 +44,7 @@ export const ExperienceByWorldTable = () => {
                 <Link
                   className="underline"
                   target="_blank"
-                  href={`/character/${player.name}`}
+                  href={`/${locale}/character/${player.name}`}
                 >
                   {player.name}
                 </Link>
