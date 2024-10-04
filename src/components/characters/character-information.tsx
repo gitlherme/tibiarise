@@ -12,6 +12,7 @@ import { Skeleton } from "../ui/skeleton";
 import { vocationInitials } from "@/utils/vocations";
 import { formatNumberToLocale } from "@/utils/formatNumber";
 import { useTranslations } from "next-intl";
+import { Goal } from "./goal";
 
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
@@ -70,6 +71,11 @@ export const CharacterInformation = () => {
             max: share.upper,
           })}
         </span>
+
+        <div className="flex justify-between items-center">
+          <span>{t("goal.cta.description")}</span>
+          <Goal experienceTable={data!.experienceTable} />
+        </div>
       </CardContent>
     </Card>
   );

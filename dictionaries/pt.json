@@ -35,6 +35,28 @@
       "label": "Buscar outro personagem",
       "placeholder": "Digite o nome do personagem"
     },
+    "goal": {
+      "cta": {
+        "description": "Defina uma meta e veja em quantos dias irá alcançá-la.",
+        "label": "Definir uma Meta"
+      },
+      "title": "Definir uma Meta",
+      "description": "Qual é o nível que você deseja alcançar?",
+      "form": {
+        "level": {
+          "label": "Nível",
+          "placeholder": "Digite o nível que deseja atingir",
+          "error": "O nível deve ser maior que o nível atual."
+        },
+        "submit": {
+          "label": "Verificar" 
+        }
+      },
+      "result": {
+        "message": "No último mês, você fez uma média de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP por dia e precisa de mais <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> para atingir sua meta. Fazendo esse XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+        "estimatedDate": "Data estimada"
+      }
+    },
     "experienceTable": {
       "headers": {
         "date": "Data",
