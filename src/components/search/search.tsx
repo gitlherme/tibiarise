@@ -17,10 +17,12 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { getCookie } from "cookies-next";
 
 const formSchema = searchBarSchema;
 
 export const Search = () => {
+  const locale = getCookie("NEXT_LOCALE") || "en";
   const t = useTranslations("CharacterPage");
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -31,7 +33,7 @@ export const Search = () => {
   });
 
   const onSubmit = (data: any) => {
-    router.push(`/[locale]/character/${data.name}`);
+    router.push(`/${locale}/character/${data.name}`);
   };
   return (
     <Form {...form}>

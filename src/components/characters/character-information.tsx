@@ -72,9 +72,9 @@ export const CharacterInformation = () => {
           })}
         </span>
 
-        <div className="flex justify-between">
-          <span>Check how many time to achieve a goal </span>
-          <Goal character={data} />
+        <div className="flex justify-between items-center">
+          <span>{t("goal.cta.description")}</span>
+          <Goal experienceTable={data!.experienceTable} />
         </div>
       </CardContent>
     </Card>

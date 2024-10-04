@@ -35,6 +35,28 @@
       "label": "Search another character",
       "placeholder": "Enter your character name"
     },
+    "goal": {
+      "cta": {
+        "description": "Check how many days you need to reach your goal level.",
+        "label": "Set a Goal"
+      },
+      "title": "Set a Goal",
+      "description": "What is the level that you want to achieve?",
+      "form": {
+        "level": {
+          "label": "Level",
+          "placeholder": "Enter the level you want to reach",
+          "error": "The level must be greater than the current level"
+        },
+        "submit": {
+          "label": "Check"
+        }
+      },
+      "result": {
+        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> median XP by day and you need more <remainingExperienceHighlight>{remainingExperience}<remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+        "estimatedDate": "Estimated date"
+      }
+    },
     "experienceTable": {
       "headers": {
         "date": "Date",

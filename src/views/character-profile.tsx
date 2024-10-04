@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 
 export default function CharacterProfileView() {
+
   const t = useTranslations();
   const { data, isLoading } = useGetCharacterData();
   return (
