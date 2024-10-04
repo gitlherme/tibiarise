@@ -147,7 +147,8 @@
       },
       "goalLevel": {
         "label": "Goal Level",
-        "placeholder": "Enter the level you want to reach"
+        "placeholder": "Enter the level you want to reach",
+        "error": "The goal level must be greater than the current level"
       },
       "dailyExperience": {
         "label": "Daily Experience",

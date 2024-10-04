@@ -147,7 +147,8 @@
     },
     "goalLevel": {
       "label": "Nível Desejado",
-      "placeholder": "Digite o nível que você quer alcançar"
+      "placeholder": "Digite o nível que você quer alcançar",
+      "error": "O nível desejado deve ser maior que o nível atual."
     },
     "dailyExperience": {
       "label": "Experiência Diária",

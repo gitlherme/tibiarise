@@ -24,10 +24,15 @@ export default function ExperienceSimulatorView() {
   const [goalLevel, setGoalLevel] = useState("");
   const [dailyExperience, setDailyExperience] = useState("");
   const [remainingDays, setRemainingDays] = useState(0);
+  const t = useTranslations("ExperienceSimulatorPage");
 
   const formSchema = z.object({
     currentLevel: z.string(),
-    goalLevel: z.string(),
+    goalLevel: z
+      .string()
+      .refine((value) => parseInt(value) > parseInt(currentLevel), {
+        message: t("form.goalLevel.error"),
+      }),
     dailyExperience: z.string(),
   });
 
@@ -46,21 +51,15 @@ export default function ExperienceSimulatorView() {
   };
 
   useEffect(() => {
-    console.log(currentLevel, goalLevel, dailyExperience);
     const goalLevelExperience = levelExperience(parseInt(goalLevel));
-    console.log("goalLevelExperience", goalLevelExperience);
     const currentLevelExperience = levelExperience(parseInt(currentLevel));
-    console.log("currentLevelExperience", currentLevelExperience);
     const remainingExperience = goalLevelExperience - currentLevelExperience;
-    console.log("remainingExperience", remainingExperience);
     const remainingDays = Math.ceil(
       remainingExperience / parseInt(dailyExperience)
     );
 
     setRemainingDays(remainingDays);
   }, [currentLevel, goalLevel, dailyExperience]);
-
-  const t = useTranslations("ExperienceSimulatorPage");
 
   return (
     <HydrationBoundaryCustom>
