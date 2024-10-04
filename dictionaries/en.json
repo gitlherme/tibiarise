@@ -5,14 +5,15 @@
     "noData": "No data found"
   },
   "Ribbon": {
-    "message": "<highlight>✨ NEW FEATURE! ✨</highlight> - Use <compare>Compare characters</compare> to see who was better between two characters."
+    "message": "<highlight>✨ NEW FEATURE! ✨</highlight> - Use the <compare>Experience Simulator</compare> to see when you will achieve your goal level."
   },
   "Header": {
     "nav": {
       "search": "Search character",
       "experienceByWorld": "Experience By World",
       "compareCharacters": "Compare Characters",
-      "contribute": "Support"
+      "contribute": "Support",
+      "experienceSimulator": "Experience Simulator"
     }
   },
   "Homepage": {
@@ -53,8 +54,11 @@
         }
       },
       "result": {
-        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> median XP by day and you need more <remainingExperienceHighlight>{remainingExperience}<remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> median XP by day and you need more <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
         "estimatedDate": "Estimated date"
+      },
+      "disclaimer": {
+        "message": "Want to know how many days you need to reach your goal level with a custom experience? Use the <simulator>Experience Simulator</simulator>."
       }
     },
     "experienceTable": {
@@ -131,6 +135,31 @@
         "medianXPByWeek": "Median XP by Week",
         "medianXPByHour": "Median XP by Hour",
         "deaths": "Deaths"
+    }
+  },
+  "ExperienceSimulatorPage": {
+    "title": "Experience Simulator",
+    "description": "Simulate how many days you need to reach your goal level.",
+    "form": {
+      "currentLevel": {
+        "label": "Current Level",
+        "placeholder": "Enter your current level"
+      },
+      "goalLevel": {
+        "label": "Goal Level",
+        "placeholder": "Enter the level you want to reach"
+      },
+      "dailyExperience": {
+        "label": "Daily Experience",
+        "placeholder": "Enter the amount of XP you do daily"
+      },
+      "submit": {
+        "label": "Simulate"
+      }
+    },
+    "result": {
+      "message": "Doing <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP daily, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+      "estimatedDate": "Estimated date"
     }
   }
 

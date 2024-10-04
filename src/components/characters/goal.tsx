@@ -26,12 +26,15 @@ import { levelExperience } from "@/utils/level-formulae";
 import { formatNumberToLocale } from "@/utils/formatNumber";
 import moment from "moment";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { getCookie } from "cookies-next";
 
 interface GoalProps {
   experienceTable: ExperienceTableValue[];
 }
 
 export const Goal = ({ experienceTable }: GoalProps) => {
+  const locale = getCookie("NEXT_LOCALE") || "en";
   const t = useTranslations("CharacterPage");
   const [showMessage, setShowMessage] = useState(false);
   const [goalLevel, setGoalLevel] = useState(0);
@@ -130,6 +133,21 @@ export const Goal = ({ experienceTable }: GoalProps) => {
               <span>
                 {t("goal.result.estimatedDate")}:{" "}
                 {moment().add(days, "d").format("DD/MM/YYYY")}
+              </span>
+
+              <hr />
+
+              <span className="text-center text-sm">
+                {t.rich("goal.disclaimer.message", {
+                  simulator: (chunks) => (
+                    <Link
+                      href={`/${locale}/experience-simulator`}
+                      className="font-bold underline"
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                })}
               </span>
             </div>
           )}

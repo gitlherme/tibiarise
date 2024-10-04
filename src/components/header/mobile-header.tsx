@@ -41,27 +41,18 @@ export const MobileHeader = () => {
         <ul className="flex my-4 gap-4 justify-center w-full">
           <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-black">
             <li>
-              <Link
-                href={`/${locale}`}
-                className="hover:text-blue-300"
-                onClick={() => setIsOpen(false)}
-              >
+              <Link href={`/${locale}`} onClick={() => setIsOpen(false)}>
                 {t("nav.search")}
               </Link>
             </li>
             <li>
-              <Link
-                href={`/${locale}/world`}
-                className="hover:text-blue-300"
-                onClick={() => setIsOpen(false)}
-              >
+              <Link href={`/${locale}/world`} onClick={() => setIsOpen(false)}>
                 {t("nav.experienceByWorld")}
               </Link>
             </li>
             <li>
               <Link
                 href={`/${locale}/compare-characters`}
-                className="hover:text-blue-300"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.compareCharacters")}
@@ -70,10 +61,14 @@ export const MobileHeader = () => {
             <li>
               <Link
                 href={`/${locale}/support`}
-                className="hover:text-blue-300"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.contribute")}
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${locale}/experience-simulator`}>
+                {t("nav.experienceSimulator")}
               </Link>
             </li>
           </ul>

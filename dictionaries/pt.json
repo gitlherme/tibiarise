@@ -5,13 +5,14 @@
     "noData": "Nenhum dado encontrado"
   },
   "Ribbon": {
-    "message": "<highlight>✨ NOVA FUNCIONALIDADE! ✨</highlight> - Use <compare>Comparar personagens</compare> para ver quem foi melhor entre dois personagens."
+    "message": "<highlight>✨ NOVA FUNCIONALIDADE! ✨</highlight> - Use o <compare>Simulador de XP</compare> para verificar quando você alcançará determinado level."
   },
   "Header": {
     "nav": {
       "search": "Buscar personagem",
       "experienceByWorld": "Experiência por Mundo",
       "compareCharacters": "Comparar Personagens",
+      "experienceSimulator": "Simulador de XP",
       "contribute": "Apoiar"
     }
   },
@@ -55,6 +56,9 @@
       "result": {
         "message": "No último mês, você fez uma média de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP por dia e precisa de mais <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> para atingir sua meta. Fazendo esse XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
         "estimatedDate": "Data estimada"
+      },
+      "disclaimer": {
+        "message": "Gostaria de saber quando você alcançará determinado nível com uma experiência personalizada? Use o <simulator>Simulador de XP</simulator> para descobrir!"
       }
     },
     "experienceTable": {
@@ -132,5 +136,30 @@
         "medianXPByHour": "XP Médio por Hora",
         "deaths": "Mortes"
     }
+  },
+  "ExperienceSimulatorPage": {
+  "title": "Simulador de Experiência",
+  "description": "Simule quantos dias você precisa para alcançar seu nível desejado.",
+  "form": {
+    "currentLevel": {
+      "label": "Nível Atual",
+      "placeholder": "Digite seu nível atual"
+    },
+    "goalLevel": {
+      "label": "Nível Desejado",
+      "placeholder": "Digite o nível que você quer alcançar"
+    },
+    "dailyExperience": {
+      "label": "Experiência Diária",
+      "placeholder": "Digite a quantidade de XP que você faz diariamente"
+    },
+    "submit": {
+      "label": "Simular"
+    }
+  },
+  "result": {
+    "message": "Fazendo <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+    "estimatedDate": "Data estimada"
   }
+}
 }

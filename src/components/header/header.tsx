@@ -14,7 +14,10 @@ export const Header = () => {
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (
-            <Link href={`/${locale}/compare-characters`} className="underline">
+            <Link
+              href={`/${locale}/experience-simulator`}
+              className="underline"
+            >
               {chunks}
             </Link>
           ),
@@ -44,6 +47,14 @@ export const Header = () => {
                   className="hover:text-blue-300"
                 >
                   {t("nav.compareCharacters")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/experience-simulator`}
+                  className="hover:text-blue-300"
+                >
+                  {t("nav.experienceSimulator")}
                 </Link>
               </li>
               <li>
