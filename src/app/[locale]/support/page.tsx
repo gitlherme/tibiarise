@@ -22,6 +22,18 @@ export default function About() {
           })}
         </p>
         <p>{t("message2")}</p>
+        <p>
+          {t.rich("message3", {
+            discord: (chunks) => (
+              <Link
+                className="text-blue-500 font-bold"
+                href={`https://discord.gg/BAZDE29Eyf`}
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
       </div>
     </div>
   );

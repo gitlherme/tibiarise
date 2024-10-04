@@ -6,6 +6,7 @@ import { useState } from "react";
 import { getCookie } from "cookies-next";
 import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../language-selector/language-selector";
+import { DiscordLogo } from "@phosphor-icons/react";
 
 export const MobileHeader = () => {
   const locale = getCookie("NEXT_LOCALE") || "en";
@@ -38,7 +39,7 @@ export const MobileHeader = () => {
             </span>
           </Link>
         </div>
-        <ul className="flex my-4 gap-4 justify-center w-full">
+        <div className="flex flex-col items-center my-4 gap-4 w-full">
           <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-black">
             <li>
               <Link href={`/${locale}`} onClick={() => setIsOpen(false)}>
@@ -72,7 +73,15 @@ export const MobileHeader = () => {
               </Link>
             </li>
           </ul>
-        </ul>
+          <span className="block mt-10">
+            <Link
+              className="text-black hover:text-blue-600"
+              href="https://discord.gg/BAZDE29Eyf"
+            >
+              <DiscordLogo size={32} />
+            </Link>
+          </span>
+        </div>
       </DrawerContent>
     </Drawer>
   );

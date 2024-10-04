@@ -108,7 +108,8 @@
   "SupportPage": {
     "title": "Apoie o TibiaRise",
     "message1": "Quer contribuir para o desenvolvimento contínuo do TibiaRise? Doe algumas Tibia Coins para <character>Gui</character>.",
-    "message2": "Por favor, também me envie uma carta no jogo. Eu realmente aprecio todo o apoio e ficarei feliz em ler sobre seus feedbacks e pensamentos sobre o projeto."
+    "message2": "Por favor, também me envie uma carta no jogo. Eu realmente aprecio todo o apoio e ficarei feliz em ler sobre seus feedbacks e pensamentos sobre o projeto.",
+    "message3": "Além disso, sinta-se a vontade para entrar no nosso servidor do <discord>Discord</discord> para compartilhar suas ideias, reportar bugs e o que mais achar interessante! "
   },
   "CompareCharactersPage": {
     "title": "Comparar Personagens",

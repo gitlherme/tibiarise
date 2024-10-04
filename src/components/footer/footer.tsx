@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DiscordLogo } from "@phosphor-icons/react/dist/ssr";
 
 export const Footer = () => (
   <footer className="py-8 flex gap-4 flex-col items-center justify-center bg-foreground text-white mt-12">
@@ -19,6 +20,15 @@ export const Footer = () => (
         href="mailto:contact@tibiarise.app"
       >
         contact@tibiarise.app
+      </Link>
+    </span>
+
+    <span className="block">
+      <Link
+        className="text-blue-200 hover:text-blue-600"
+        href="https://discord.gg/BAZDE29Eyf"
+      >
+        <DiscordLogo size={32} />
       </Link>
     </span>
   </footer>
