@@ -59,16 +59,16 @@ export const MobileHeader = () => {
               </Link>
             </li>
             <li>
+              <Link href={`/${locale}/experience-simulator`}>
+                {t("nav.experienceSimulator")}
+              </Link>
+            </li>
+            <li>
               <Link
                 href={`/${locale}/support`}
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.contribute")}
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${locale}/experience-simulator`}>
-                {t("nav.experienceSimulator")}
               </Link>
             </li>
           </ul>
