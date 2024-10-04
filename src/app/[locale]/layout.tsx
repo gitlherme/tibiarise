@@ -9,6 +9,7 @@ import { HotjarSnippet } from "@/components/utils/hotjar";
 import { MobileHeader } from "@/components/header/mobile-header";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { getCookie, setCookie } from "cookies-next";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
 
@@ -24,6 +25,10 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const messages = await getMessages();
+  const localeCookieExists = getCookie("NEXT_LOCALE");
+  if (!localeCookieExists) {
+    setCookie("NEXT_LOCALE", locale);
+  }
 
   return (
     <html lang={locale}>
