@@ -72,8 +72,8 @@ export const CharacterInformation = () => {
           })}
         </span>
 
-        <div className="flex justify-between items-center">
-          <span>{t("goal.cta.description")}</span>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+          <span className="text-sm">{t("goal.cta.description")}</span>
           <Goal experienceTable={data!.experienceTable} />
         </div>
       </CardContent>
