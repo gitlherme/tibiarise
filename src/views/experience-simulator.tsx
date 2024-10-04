@@ -28,11 +28,7 @@ export default function ExperienceSimulatorView() {
 
   const formSchema = z.object({
     currentLevel: z.string(),
-    goalLevel: z
-      .string()
-      .refine((value) => parseInt(value) > parseInt(currentLevel), {
-        message: t("form.goalLevel.error"),
-      }),
+    goalLevel: z.string(),
     dailyExperience: z.string(),
   });
 
