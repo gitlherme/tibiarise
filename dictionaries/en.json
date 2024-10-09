@@ -54,7 +54,7 @@
         }
       },
       "result": {
-        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> median XP by day and you need more <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> average XP by day and you need more <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
         "estimatedDate": "Estimated date"
       },
       "disclaimer": {
