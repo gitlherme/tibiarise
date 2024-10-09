@@ -1,91 +1,95 @@
 {
   "General": {
-    "loading": "Carregando...",
-    "error": "Ocorreu um erro",
-    "noData": "Nenhum dado encontrado"
+    "loading": "Carregando seus dados...",
+    "error": "Oops! Ocorreu um erro ao processar sua solicitação.",
+    "noData": "Nenhum dado encontrado para o personagem informado."
   },
   "Ribbon": {
-    "message": "<highlight>✨ NOVA FUNCIONALIDADE! ✨</highlight> - Use o <compare>Simulador de XP</compare> para verificar quando você alcançará determinado level."
+    "message": "<highlight>✨ NOVO RECURSO! ✨</highlight> - Confira o <compare>Simulador de Experiência</compare> para saber quando você pode alcançar seu nível desejado!"
   },
   "Header": {
     "nav": {
-      "search": "Buscar personagem",
+      "search": "Buscar um personagem",
       "experienceByWorld": "Experiência por Mundo",
       "compareCharacters": "Comparar Personagens",
-      "experienceSimulator": "Simulador de XP",
-      "contribute": "Apoiar"
+      "contribute": "Apoie-nos",
+      "experienceSimulator": "Simulador de Experiência"
     }
   },
   "Homepage": {
-    "title": "Acompanhe seu Personagem do Tibia",
+    "title": "Acompanhe o Progresso do Seu Personagem no Tibia",
     "form": {
       "name": {
         "label": "Nome do Personagem",
-        "placeholder": "Digite o nome do seu personagem"
+        "placeholder": "Digite o nome do seu personagem aqui"
       },
       "submit": {
-        "label": "Acompanhar"
+        "label": "Rastrear Progresso"
       }
-    }
+    },
+    "examples": "Descubra os melhores jogadores do seu mundo e veja suas conquistas.",
+    "tips": "Saiba como acompanhar efetivamente seu progresso diário de XP e planejar seu próximo nível."
   },
   "CharacterPage": {
-    "notFound": "Personagem não encontrado",
-    "vocationRankLabel": "Top {rank} {vocation} de {world}",
-    "shareInfo": "Este personagem pode compartilhar XP com outros personagens entre o nível <lower>{min}</lower> e <upper>{max}</upper>.",
+    "notFound": "Personagem não encontrado. Verifique o nome e tente novamente.",
+    "vocationRankLabel": "Top {rank} {vocation} em {world}",
+    "shareInfo":  "Este personagem pode compartilhar XP com outros entre os níveis <lower>{min}</lower> e <upper>{max}</upper>.",
     "searchAnother": {
       "label": "Buscar outro personagem",
-      "placeholder": "Digite o nome do personagem"
+      "placeholder": "Digite o nome de outro personagem"
     },
     "goal": {
       "cta": {
-        "description": "Defina uma meta e veja em quantos dias irá alcançá-la.",
-        "label": "Definir uma Meta"
+        "description": "Descubra quantos dias você precisa para alcançar seu nível desejado.",
+        "label": "Defina Seu Objetivo"
       },
-      "title": "Definir uma Meta",
-      "description": "Qual é o nível que você deseja alcançar?",
+      "title": "Defina um Objetivo de Nível",
+      "description": "Qual nível você gostaria de alcançar?",
       "form": {
         "level": {
           "label": "Nível",
-          "placeholder": "Digite o nível que deseja atingir",
-          "error": "O nível deve ser maior que o nível atual."
+          "placeholder": "Digite seu nível desejado",
+          "error": "O nível desejado deve ser maior que seu nível atual."
         },
         "submit": {
-          "label": "Verificar" 
+          "label": "Calcular"
         }
       },
       "result": {
-        "message": "No último mês, você fez uma média de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP por dia e precisa de mais <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> para atingir sua meta. Fazendo esse XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
-        "estimatedDate": "Data estimada"
+        "message": "No último mês, você ganhou em média <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP por dia, e precisa de mais <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> para alcançar seu objetivo. Mantendo essa média, você atingirá o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+        "estimatedDate": "Data estimada para alcançar seu objetivo"
       },
       "disclaimer": {
-        "message": "Gostaria de saber quando você alcançará determinado nível com uma experiência personalizada? Use o <simulator>Simulador de XP</simulator> para descobrir!"
-      }
+        "message": "Quer saber quantos dias você precisa para alcançar seu objetivo com taxas de experiência personalizadas? Use o <simulator>Simulador de Experiência</simulator>."
+      },
+      "additionalStats": "Veja a distribuição de vocações, as melhores caçadas e dicas personalizadas para o nível do seu personagem.",
+      "customGoals": "Receba sugestões personalizadas para seus objetivos com base no seu histórico de jogo, como alcançar o nível Y em Z dias."
     },
     "experienceTable": {
       "headers": {
         "date": "Data",
-        "xpGain": "Ganho de XP",
-        "level": "Nível",
+        "xpGain": "XP Ganha",
+        "level": "Nível Alcançado",
         "totalExperience": "Experiência Total",
-        "vocationRank": "Rank na Vocação"
+        "vocationRank": "Rank de Vocação"
       }
     },
     "progressLog": {
-      "title": "Registro de Progresso",
-      "lastMonthLabel": "Último Mês",
-      "xpGained": "XP Ganho",
-      "levelsGained": "Níveis Ganhos",
-      "vocationRank": "Rank na Vocação"
+      "title": "Seu Registro de Progresso",
+      "lastMonthLabel": "Progresso do Último Mês",
+      "xpGained": "Total de XP Ganha",
+      "levelsGained": "Níveis Alcançados",
+      "vocationRank":"Rank de Vocação"
     }
   },
   "ExperienceByWorldPage": {
-    "title": "Experiência por Mundo",
+    "title": "Visão Geral da Experiência por Mundo",
     "form": {
       "world": {
-        "label": "Mundo"
+        "label": "Selecionar Mundo"
       },
       "filter": {
-        "label": "Filtrar por",
+        "label": "Filtrar por Período",
         "options": {
           "yesterday": "Ontem",
           "week": "Última Semana",
@@ -98,70 +102,78 @@
     },
     "table": {
       "headers": {
-        "name": "Nome",
-        "vocation": "Vocação",
-        "levelAtBeggining": "Nível no Início",
-        "xpGain": "Ganho de XP"
-      }
+        "name": "Nome do Jogador",
+        "vocation": "Vocação do Jogador",
+        "levelAtBeggining": "Nível Inicial",
+        "xpGain": "XP Ganha"
+      },
+      "trends": "Veja gráficos mostrando as tendências de crescimento de XP por mundo.",
+      "xpAverage": "Compare a média de XP de cada mundo com as médias globais."
     }
   },
   "SupportPage": {
-    "title": "Apoie o TibiaRise",
-    "message1": "Quer contribuir para o desenvolvimento contínuo do TibiaRise? Doe algumas Tibia Coins para <character>Gui</character>.",
-    "message2": "Por favor, também me envie uma carta no jogo. Eu realmente aprecio todo o apoio e ficarei feliz em ler sobre seus feedbacks e pensamentos sobre o projeto.",
-    "message3": "Além disso, sinta-se a vontade para entrar no nosso servidor do <discord>Discord</discord> para compartilhar suas ideias, reportar bugs e o que mais achar interessante! "
+    "title": "Apoie o Desenvolvimento do TibiaRise",
+    "message1": "Se você deseja apoiar o desenvolvimento contínuo do TibiaRise, considere doar algumas Tibia Coins para <character>Gui</character>.",
+    "message2": "Por favor, envie-me também uma carta no jogo; realmente aprecio todo o apoio e adoraria ouvir seu feedback e opiniões sobre o projeto.",
+    "message3": "Sinta-se à vontade para se juntar ao nosso servidor <discord>Discord</discord> e compartilhar suas ideias e feedbacks com a comunidade, relatar bugs ou qualquer outra coisa. 🚀",
+    "recognition": "Considere adicionar uma lista de colaboradores ou distintivos de apoiadores.",
+    "successStories": "Inclua depoimentos de jogadores que alcançaram seus objetivos usando o TibiaRise."
   },
   "CompareCharactersPage": {
-    "title": "Comparar Personagens",
-    "description": "Preencha os campos abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
+    "title": "Comparação de Personagens",
+    "description": "Preencha os detalhes abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
     "form": {
       "name": {
         "label": "Nome do Personagem",
         "placeholder": "Digite o nome do personagem"
       },
       "submit": {
-        "label": "Comparar"
+        "label": "Comparar Agora"
       }
     },
     "loading": "Comparando personagens...",
-    "error": "Houve um erro ao comparar os personagens. Por favor, verifique se os nomes estão corretos. Se você mudou seu nome recentemente, tente novamente usando o antigo.",
+    "error": "Ocorreu um erro ao comparar personagens. Verifique se os nomes estão corretos. Se você mudou de nome recentemente, tente usar seu nome antigo.",
     "card": {
-        "level": "Nível",
-        "experience": "XP",
-        "vocationRank": "Rank na Vocação",
-        "lastMonthLabel": "Status do Último Mês",
-        "xpGained": "XP Ganho",
-        "levelsGained": "Níveis Ganhos",
-        "medianXPByDay": "XP Médio por Dia",
-        "medianXPByWeek": "XP Médio por Semana",
-        "medianXPByHour": "XP Médio por Hora",
-        "deaths": "Mortes"
-    }
+      "level": "Nível",
+      "experience": "XP Total",
+      "vocationRank": "Classificação Atual de Vocação",
+      "lastMonthLabel": "Status do Último Mês",
+      "xpGained": "XP Ganha",
+      "levelsGained": "Níveis Alcançados",
+      "medianXPByDay": "XP Média por Dia",
+      "medianXPByWeek": "XP Média por Semana",
+      "medianXPByHour": "XP Média por Hora",
+      "deaths": "Total de Mortes"
+    },
+    "achievementHistory": "Destaque os 'Melhores Momentos' de cada personagem, como os maiores ganhos de XP.",
+    "characterSuggestions": "Sugira personagens adicionais para comparação com base em vocação ou nível."
   },
   "ExperienceSimulatorPage": {
-  "title": "Simulador de Experiência",
-  "description": "Simule quantos dias você precisa para alcançar seu nível desejado.",
-  "form": {
-    "currentLevel": {
-      "label": "Nível Atual",
-      "placeholder": "Digite seu nível atual"
+    "title": "Simulador de Nível de Experiência",
+    "description": "Simule quantos dias você precisa para alcançar seu nível desejado.",
+    "form": {
+      "currentLevel": {
+        "label": "Seu Nível Atual",
+        "placeholder": "Digite seu nível atual"
+      },
+      "goalLevel": {
+        "label": "Nível Desejado",
+        "placeholder": "Digite seu nível desejado",
+        "error": "O nível desejado deve ser maior que seu nível atual."
+      },
+      "dailyExperience": {
+        "label": "Experiência Diária Ganha",
+        "placeholder": "Digite sua média de XP diária"
+      },
+      "submit": {
+        "label": "Simular Progresso"
+      }
     },
-    "goalLevel": {
-      "label": "Nível Desejado",
-      "placeholder": "Digite o nível que você quer alcançar",
-      "error": "O nível desejado deve ser maior que o nível atual."
+    "result": {
+      "message": "Ao ganhar <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+      "estimatedDate": "Data estimada para alcançar o nível"
     },
-    "dailyExperience": {
-      "label": "Experiência Diária",
-      "placeholder": "Digite a quantidade de XP que você faz diariamente"
-    },
-    "submit": {
-      "label": "Simular"
-    }
-  },
-  "result": {
-    "message": "Fazendo <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
-    "estimatedDate": "Data estimada"
+    "visualGraphs": "Incorpore gráficos visuais para ilustrar seu progresso diário em direção aos seus objetivos.",
+    "xpTips": "Forneça sugestões de áreas de caça ou eventos que podem maximizar seus ganhos de XP."
   }
-}
 }

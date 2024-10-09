@@ -79,7 +79,7 @@
       "lastMonthLabel": "Last Month's Progress",
       "xpGained": "Total XP Gained",
       "levelsGained": "Levels Achieved",
-      "vocationRank":"Current Vocation Rank"
+      "vocationRank":"Vocation Rank"
     }
   },
   "ExperienceByWorldPage": {
@@ -140,9 +140,9 @@
       "lastMonthLabel": "Last Month's Status",
       "xpGained": "XP Gained",
       "levelsGained": "Levels Achieved",
-      "medianXPByDay": "Median XP per Day",
-      "medianXPByWeek": "Median XP per Week",
-      "medianXPByHour": "Median XP per Hour",
+      "medianXPByDay": "Average XP per Day",
+      "medianXPByWeek": "Average XP per Week",
+      "medianXPByHour": "Average XP per Hour",
       "deaths": "Total Deaths"
     },
     "achievementHistory": "Highlight 'Best Moments' for each character, such as largest XP gains.",
