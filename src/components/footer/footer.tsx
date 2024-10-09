@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DiscordLogo } from "@phosphor-icons/react/dist/ssr";
 
 export const Footer = () => (
-  <footer className="py-8 flex gap-4 flex-col items-center justify-center bg-foreground text-white mt-12">
+  <footer className="py-8 flex gap-4 flex-col items-center justify-center text-center bg-foreground text-white mt-12">
     <span className="block">
       Made with 💙 by{" "}
       <Link
@@ -30,6 +30,21 @@ export const Footer = () => (
       >
         <DiscordLogo size={32} />
       </Link>
+    </span>
+
+    <span className="text-xs">
+      <Link href="https://tibia.com" target="_blank" className="text-blue-300">
+        Tibia
+      </Link>{" "}
+      is a registered trademark of{" "}
+      <Link
+        href="https://www.cipsoft.com/en/"
+        target="_blank"
+        className="text-blue-300"
+      >
+        CipSoft GmbH
+      </Link>
+      . Tibia and all related content are copyrighted.
     </span>
   </footer>
 );

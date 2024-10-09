@@ -64,14 +64,14 @@ export const SearchBarExperienceByWorld = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full md:w-3/6 flex items-end gap-4"
+          className="w-full xl:w-3/6 flex flex-col md:flex-row md:items-end gap-4"
         >
-          <div className="flex gap-4 w-full">
+          <div className="flex flex-col md:flex-row gap-4 w-full">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="w-3/4">
+                <FormItem className="w-full md:w-3/4">
                   <FormLabel>{t("form.world.label")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -99,7 +99,7 @@ export const SearchBarExperienceByWorld = () => {
               control={form.control}
               name="filter"
               render={({ field }) => (
-                <FormItem className="w-1/4">
+                <FormItem className="w-full md:w-1/4">
                   <FormLabel>{t("form.filter.label")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}

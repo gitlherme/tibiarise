@@ -1,91 +1,95 @@
 {
   "General": {
-    "loading": "Loading...",
-    "error": "An error occurred",
-    "noData": "No data found"
+    "loading": "Loading your data...",
+    "error": "Oops! An error occurred while processing your request.",
+    "noData": "No data found for the provided character."
   },
   "Ribbon": {
-    "message": "<highlight>✨ NEW FEATURE! ✨</highlight> - Use the <compare>Experience Simulator</compare> to see when you will achieve your goal level."
+    "message": "<highlight>✨ NEW FEATURE! ✨</highlight> - Check out the <compare>Experience Simulator</compare> to see when you can achieve your goal level!"
   },
   "Header": {
     "nav": {
-      "search": "Search character",
-      "experienceByWorld": "Experience By World",
+      "search": "Search for a character",
+      "experienceByWorld": "Experience by World",
       "compareCharacters": "Compare Characters",
-      "contribute": "Support",
+      "contribute": "Support Us",
       "experienceSimulator": "Experience Simulator"
     }
   },
   "Homepage": {
-    "title": "Track your Tibia Character",
+    "title": "Track Your Tibia Character Progress",
     "form": {
       "name": {
         "label": "Character Name",
-        "placeholder": "Enter your character name"
+        "placeholder": "Type your character name here"
       },
       "submit": {
-        "label": "Track"
+        "label": "Track Progress"
       }
-    }
+    },
+    "examples": "Discover top players from your world and see their achievements.",
+    "tips": "Learn how to effectively track your daily XP progress and plan for your next level."
   },
   "CharacterPage": {
-    "notFound": "Character not found",
-    "vocationRankLabel": "Top {rank} {vocation} of {world}",
-    "shareInfo":  "This character can share XP with another characters between level <lower>{min}</lower> and <upper>{max}</upper>.",
+    "notFound": "Character not found. Please check the name and try again.",
+    "vocationRankLabel": "Top {rank} {vocation} in {world}",
+    "shareInfo":  "This character can share XP with others between level <lower>{min}</lower> and <upper>{max}</upper>.",
     "searchAnother": {
-      "label": "Search another character",
-      "placeholder": "Enter your character name"
+      "label": "Search for another character",
+      "placeholder": "Type another character name"
     },
     "goal": {
       "cta": {
-        "description": "Check how many days you need to reach your goal level.",
-        "label": "Set a Goal"
+        "description": "Find out how many days you need to reach your desired level.",
+        "label": "Set Your Goal"
       },
-      "title": "Set a Goal",
-      "description": "What is the level that you want to achieve?",
+      "title": "Set a Level Goal",
+      "description": "What level would you like to achieve?",
       "form": {
         "level": {
           "label": "Level",
-          "placeholder": "Enter the level you want to reach",
-          "error": "The level must be greater than the current level"
+          "placeholder": "Enter your target level",
+          "error": "The target level must be greater than your current level."
         },
         "submit": {
-          "label": "Check"
+          "label": "Calculate"
         }
       },
       "result": {
-        "message": "In the last month you did <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> average XP by day and you need more <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to achieve your goal. Doing this XP, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
-        "estimatedDate": "Estimated date"
+        "message": "In the past month, you averaged <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP per day, and you need an additional <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to reach your goal. If you maintain this XP rate, you'll achieve level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+        "estimatedDate": "Estimated date to reach your goal"
       },
       "disclaimer": {
-        "message": "Want to know how many days you need to reach your goal level with a custom experience? Use the <simulator>Experience Simulator</simulator>."
-      }
+        "message": "Want to know how many days you need to achieve your goal with custom experience rates? Use the <simulator>Experience Simulator</simulator>."
+      },
+      "additionalStats": "View vocation distribution, best hunts, and tips tailored to your character's level.",
+      "customGoals": "Receive personalized suggestions for your goals based on your play history, like reaching level Y in Z days."
     },
     "experienceTable": {
       "headers": {
         "date": "Date",
-        "xpGain": "XP Gain",
-        "level": "Level",
+        "xpGain": "XP Gained",
+        "level": "Level Achieved",
         "totalExperience": "Total Experience",
         "vocationRank": "Vocation Rank"
       }
     },
     "progressLog": {
-      "title": "Progress Log",
-      "lastMonthLabel": "Last Month",
-      "xpGained": "XP Gained",
-      "levelsGained": "Levels Gained",
-      "vocationRank":"Vocation Rank"
+      "title": "Your Progress Log",
+      "lastMonthLabel": "Last Month's Progress",
+      "xpGained": "Total XP Gained",
+      "levelsGained": "Levels Achieved",
+      "vocationRank":"Current Vocation Rank"
     }
   },
   "ExperienceByWorldPage": {
-    "title": "Experience by World",
+    "title": "Experience by World Overview",
     "form": {
       "world": {
-        "label": "World"
+        "label": "Select World"
       },
       "filter": {
-        "label": "Filter by",
+        "label": "Filter by Time Period",
         "options": {
           "yesterday": "Yesterday",
           "week": "Last Week",
@@ -98,71 +102,78 @@
     },
     "table": {
       "headers": {
-        "name": "Name",
-        "vocation": "Vocation",
-        "levelAtBeggining": "Level at Beggining",
-        "xpGain": "XP Gain"
-      }
+        "name": "Player Name",
+        "vocation": "Player Vocation",
+        "levelAtBeggining": "Starting Level",
+        "xpGain": "XP Gained"
+      },
+      "trends": "View graphs showing XP growth trends by world.",
+      "xpAverage": "Compare average XP for each world against global averages."
     }
   },
   "SupportPage": {
-    "title": "Support TibiaRise",
-    "message1": "Want to support the continued development of TibiaRise? Donate some Tibia Coins to <character>Gui</character>.",
-    "message2": "Please also send me a letter in game, I really appreciate all support and will be happy to read about your feedbacks and thougts about the project.",
-    "message3": "Also, feel free to join our <discord>Discord</discord> server and share your ideas and feedbacks with the community, report bugs or anything else. 🚀"
+    "title": "Support TibiaRise Development",
+    "message1": "If you'd like to support TibiaRise's ongoing development, consider donating some Tibia Coins to <character>Gui</character>.",
+    "message2": "Please also send me an in-game letter; I truly appreciate all support and would love to hear your feedback and thoughts on the project.",
+    "message3": "Feel free to join our <discord>Discord</discord> server to share your ideas and feedback with the community, report bugs, or anything else. 🚀",
+    "recognition": "Consider adding a list of contributors or supporter badges.",
+    "successStories": "Include testimonials from players who achieved their goals using TibiaRise."
   },
   "CompareCharactersPage": {
-    "title": "Compare Characters",
-    "description": "Fill the inputs below to compare two characters and see their stats side. 🔥",
+    "title": "Character Comparison",
+    "description": "Fill in the details below to compare two characters and view their stats side by side. 🔥",
     "form": {
       "name": {
         "label": "Character Name",
         "placeholder": "Enter character name"
       },
       "submit": {
-        "label": "Compare"
+        "label": "Compare Now"
       }
     },
     "loading": "Comparing characters...",
-    "error": "There was an error comparing characters, please check if the names are correct. If you&apos;ve changed your name recently, please try again using the old one.",
+    "error": "There was an error comparing characters. Please ensure the names are correct. If you've changed your name recently, try using your old name.",
     "card": {
-        "level": "Level",
-        "experience": "XP",
-        "vocationRank": "Vocation Rank",
-        "lastMonthLabel": "Last Month Status",
-        "xpGained": "XP Gained",
-        "levelsGained": "Levels Gained",
-        "medianXPByDay": "Median XP by Day",
-        "medianXPByWeek": "Median XP by Week",
-        "medianXPByHour": "Median XP by Hour",
-        "deaths": "Deaths"
-    }
+      "level": "Level",
+      "experience": "Total XP",
+      "vocationRank": "Current Vocation Rank",
+      "lastMonthLabel": "Last Month's Status",
+      "xpGained": "XP Gained",
+      "levelsGained": "Levels Achieved",
+      "medianXPByDay": "Median XP per Day",
+      "medianXPByWeek": "Median XP per Week",
+      "medianXPByHour": "Median XP per Hour",
+      "deaths": "Total Deaths"
+    },
+    "achievementHistory": "Highlight 'Best Moments' for each character, such as largest XP gains.",
+    "characterSuggestions": "Suggest additional characters for comparison based on vocation or level."
   },
   "ExperienceSimulatorPage": {
-    "title": "Experience Simulator",
+    "title": "Experience Level Simulator",
     "description": "Simulate how many days you need to reach your goal level.",
     "form": {
       "currentLevel": {
-        "label": "Current Level",
+        "label": "Your Current Level",
         "placeholder": "Enter your current level"
       },
       "goalLevel": {
-        "label": "Goal Level",
-        "placeholder": "Enter the level you want to reach",
-        "error": "The goal level must be greater than the current level"
+        "label": "Desired Goal Level",
+        "placeholder": "Enter your target level",
+        "error": "The goal level must be higher than your current level."
       },
       "dailyExperience": {
-        "label": "Daily Experience",
-        "placeholder": "Enter the amount of XP you do daily"
+        "label": "Daily Experience Earned",
+        "placeholder": "Enter your average daily XP"
       },
       "submit": {
-        "label": "Simulate"
+        "label": "Simulate Progress"
       }
     },
     "result": {
-      "message": "Doing <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP daily, you will achieve the level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
-      "estimatedDate": "Estimated date"
-    }
+      "message": "By earning <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP daily, you will reach level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+      "estimatedDate": "Estimated date for level achievement"
+    },
+    "visualGraphs": "Incorporate visual graphs to illustrate your daily progress towards your goals.",
+    "xpTips": "Provide suggestions for hunting areas or events that can maximize your XP gains."
   }
-
 }

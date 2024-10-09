@@ -1,4 +1,4 @@
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Bricolage_Grotesque } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
@@ -12,6 +12,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getCookie, setCookie } from "cookies-next";
 
 const DMSans = DM_Sans({ subsets: ["latin"] });
+const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tibia Rise",
@@ -66,7 +67,7 @@ export default async function RootLayout({
           type="image/x-icon"
         />
       </head>
-      <body className={DMSans.className}>
+      <body className={BricolageGrotesque.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div className="flex flex-col">
