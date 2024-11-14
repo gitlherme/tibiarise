@@ -16,13 +16,12 @@ app.get("/", async (c) => {
   const TOTAL_PAGES = 20;
   let CURRENT_PAGE = 1;
 
-  const { data } = await axios.get(`http://localhost:3000/api/get-worlds`);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/get-worlds`
+  );
   const worlds = data.worlds;
 
   worlds.forEach(async (world: string) => {
-    if (world !== "Descubra") {
-      return;
-    }
     while (CURRENT_PAGE <= TOTAL_PAGES) {
       const highscorePage = await fetchHighscorePage(CURRENT_PAGE, world);
       highscorePage.highscores.highscore_list.forEach(async (character) => {
@@ -100,7 +99,7 @@ app.get("/", async (c) => {
     CURRENT_PAGE = 1;
   }
 
-  return c.json({ message: "Xama" });
+  return c.json({ message: "Cron job finished" });
 });
 
 export default app;
