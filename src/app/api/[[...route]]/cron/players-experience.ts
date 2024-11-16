@@ -26,7 +26,6 @@ app.get("/", async (c) => {
   const worlds = data.worlds;
 
   worlds.forEach(async (world: string) => {
-    if (world !== "Descubra") return;
     while (CURRENT_PAGE <= TOTAL_PAGES) {
       const highscorePage = await fetchHighscorePage(CURRENT_PAGE, world);
       highscorePage.highscores.highscore_list.forEach(async (character) => {
@@ -73,6 +72,7 @@ app.get("/", async (c) => {
                   character_id: createdCharacter[0].id,
                   value: character.value,
                   date: new Date().toISOString().split("T")[0],
+                  level: character.level,
                 },
               ]);
 
@@ -99,6 +99,7 @@ app.get("/", async (c) => {
                   character_id: characterExists[0].id,
                   value: character.value,
                   date: new Date().toISOString().split("T")[0],
+                  level: character.level,
                 },
               ]);
 
