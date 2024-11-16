@@ -40,9 +40,9 @@ export const ExperienceTable = () => {
         <TableRow>
           <TableHead>{t("experienceTable.headers.date")}</TableHead>
           <TableHead>{t("experienceTable.headers.xpGain")}</TableHead>
-          <TableHead>{t("experienceTable.headers.level")}</TableHead>
+          {/* <TableHead>{t("experienceTable.headers.level")}</TableHead> */}
           <TableHead>{t("experienceTable.headers.totalExperience")}</TableHead>
-          <TableHead>{t("experienceTable.headers.vocationRank")}</TableHead>
+          {/* <TableHead>{t("experienceTable.headers.vocationRank")}</TableHead> */}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -51,22 +51,22 @@ export const ExperienceTable = () => {
             <TableCell>{moment(day.date).format("DD/MM/YYYY")}</TableCell>
             <TableCell
               className={
-                Math.sign(day.expChange) === 1
+                Math.sign(day.experience) === 1
                   ? "text-green-500"
-                  : Math.sign(day.expChange) === -1
+                  : Math.sign(day.experience) === -1
                   ? "text-red-500"
                   : ""
               }
             >
-              {Math.sign(day.expChange) === 1
-                ? `+${formatNumberToLocale(day.expChange)}`
-                : Math.sign(day.expChange) === 0
-                ? formatNumberToLocale(day.expChange)
-                : `${formatNumberToLocale(day.expChange)}`}
+              {Math.sign(day.experience) === 1
+                ? `+${formatNumberToLocale(day.experience)}`
+                : Math.sign(day.experience) === 0
+                ? formatNumberToLocale(day.experience)
+                : `${formatNumberToLocale(day.experience)}`}
             </TableCell>
-            <TableCell>{day.level}</TableCell>
+            {/* <TableCell>{day.level}</TableCell> */}
             <TableCell>{formatNumberToLocale(day.totalExperience)}</TableCell>
-            <TableCell>{day.vocationRank}</TableCell>
+            {/* <TableCell>{day.vocationRank}</TableCell> */}
           </TableRow>
         ))}
       </TableBody>

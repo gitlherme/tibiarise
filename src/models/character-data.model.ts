@@ -1,25 +1,23 @@
 export type ExperienceTableValue = {
   date: string;
-  expChange: number;
-  vocationRank: number;
-  level: number;
+  experience: number;
   totalExperience: number;
+  level: number;
 };
 
 export type CharacterData = {
-  characterInfo: CharacterInfo;
+  character: CharacterInfo;
   experienceTable: ExperienceTableValue[];
 };
 
-export type CharacterInfo = {
-  comment: string;
-  deletion_date: string;
-  former_names: string[];
-  former_worlds: string[];
-  level: number;
+type CharacterInfo = {
   name: string;
-  sex: string;
-  vocation: string;
+  level: string;
   world: string;
-  deaths: [];
+  vocation: string;
+  sex: string;
+  guild: {
+    name: string;
+    rank: string;
+  };
 };

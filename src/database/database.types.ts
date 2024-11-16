@@ -51,18 +51,21 @@ export type Database = {
           date: string | null;
           id: number;
           value: number | null;
+          level: number | null;
         };
         Insert: {
           character_id?: number | null;
           date?: string | null;
           id?: number;
           value?: number | null;
+          level?: number | null;
         };
         Update: {
           character_id?: number | null;
           date?: string | null;
           id?: number;
           value?: number | null;
+          level?: number | null;
         };
         Relationships: [
           {

@@ -1,39 +1,66 @@
-import { cheerio } from "@/lib/cheerio";
-import { CharacterData } from "@/models/character-data.model";
-import { parseCharacterTableExperience } from "@/utils/parseCharacterTableExperience";
+import { supabase } from "@/lib/supabase/supabase";
+import { CharacterModel } from "@/models/character.model";
+import axios from "axios";
 import { Hono } from "hono";
-import sanitize from "sanitize-html";
+import moment from "moment";
 
 const app = new Hono();
 
 app.get("/", async (c) => {
   const { searchParams } = new URL(c.req.url);
   const name = searchParams.get("name");
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_STATS_API}/character?nick=${name}&tab=7`
+
+  console.log(name);
+
+  const { data: character } = await supabase
+    .from("character")
+    .select("*")
+    .ilike("name", `%${name}`);
+
+  const { data: experiences } = await supabase
+    .from("daily_experience")
+    .select("*")
+    .eq("character_id", character![0].id);
+
+  const experienceTable = experiences
+    ?.map((experience, index) => {
+      if (index !== 0) {
+        return {
+          date: moment(experience.date)
+            .subtract(1, "days")
+            .format("YYYY-MM-DD"),
+          experience:
+            experience.value! - experiences[index - 1].value! ||
+            experience.value!,
+          totalExperience: experience.value,
+          level: experience.level,
+        };
+      }
+      return;
+    })
+    .filter((experience) => experience);
+
+  const { data: characterInfo } = await axios.get<CharacterModel>(
+    `${process.env.NEXT_PUBLIC_DATA_API}/character/${name}`
   );
 
-  const page = cheerio((await data.text()).trim());
-  const table = await page(".newTable").eq(1).text();
-  const sanitizedTable = sanitize(table);
-  const experienceTable = parseCharacterTableExperience(sanitizedTable);
+  const { level, world, vocation, sex, guild } =
+    characterInfo.character.character;
 
-  const { character: getCharacterInfo } = await fetch(
-    `${process.env.NEXT_PUBLIC_DATA_API}/character/${name}`
-  ).then((res) => res.json());
-
-  const characterInfo = {
-    ...getCharacterInfo.character,
-    deaths: getCharacterInfo.deaths || [],
-  };
-
-  const response: CharacterData = { experienceTable, characterInfo };
-
-  if (response.experienceTable.length > 0) {
-    return c.json(response, { status: 200 });
-  }
-
-  return c.json({ error: "Character not found" }, { status: 404 });
+  return c.json(
+    {
+      character: {
+        name: character![0].name,
+        level,
+        world,
+        vocation,
+        sex,
+        guild,
+      },
+      experienceTable: experienceTable,
+    },
+    200
+  );
 });
 
 export default app;
