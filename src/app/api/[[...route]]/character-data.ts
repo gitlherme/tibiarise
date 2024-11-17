@@ -10,8 +10,6 @@ app.get("/", async (c) => {
   const { searchParams } = new URL(c.req.url);
   const name = searchParams.get("name");
 
-  console.log(name);
-
   const { data: character } = await supabase
     .from("character")
     .select("*")
@@ -22,9 +20,11 @@ app.get("/", async (c) => {
     .select("*")
     .eq("character_id", character![0].id);
 
+  console.log("experiences", experiences);
+
   const experienceTable = experiences
     ?.map((experience, index) => {
-      if (index !== 0) {
+      if (index !== 0 && experience.value! !== experiences[index - 1].value!) {
         return {
           date: moment(experience.date)
             .subtract(1, "days")

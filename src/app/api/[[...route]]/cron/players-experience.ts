@@ -20,14 +20,11 @@ app.get("/", async (c) => {
   const TOTAL_PAGES = 20;
   let CURRENT_PAGE = 1;
 
-  await setTimeout(async () => {
-    while (CURRENT_PAGE <= TOTAL_PAGES) {
-      const highscorePage = await fetchHighscorePage(
-        CURRENT_PAGE,
-        String(world)
-      );
-      highscorePage.highscores.highscore_list.forEach(async (character) => {
-        setTimeout(async () => {
+  while (CURRENT_PAGE <= TOTAL_PAGES) {
+    const highscorePage = await fetchHighscorePage(CURRENT_PAGE, String(world));
+    highscorePage.highscores.highscore_list.forEach(
+      async (character, index) => {
+        await setTimeout(async () => {
           let nameToFind = character.name;
           let characterHasSpace = nameToFind.includes(" ");
           if (characterHasSpace) {
@@ -95,11 +92,11 @@ app.get("/", async (c) => {
               ]);
             }
           }
-        });
-      });
-      CURRENT_PAGE++;
-    }
-  });
+        }, index * 10000);
+      }
+    );
+    CURRENT_PAGE++;
+  }
 
   return await c.json({ message: `Cron job for ${world} finished` });
 });
