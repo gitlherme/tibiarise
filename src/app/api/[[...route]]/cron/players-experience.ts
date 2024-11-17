@@ -3,6 +3,7 @@ import axios from "axios";
 import { supabase } from "@/lib/supabase/supabase";
 import { HighscoreModel } from "@/models/highscores.model";
 import { CharacterModel } from "@/models/character.model";
+import moment from "moment";
 
 const app = new Hono();
 
@@ -12,44 +13,42 @@ const fetchHighscorePage = async (page: number, world: string) => {
   return data;
 };
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 app.get("/", async (c) => {
+  const { searchParams } = new URL(c.req.url);
+  const world = searchParams.get("world");
+
   const TOTAL_PAGES = 20;
   let CURRENT_PAGE = 1;
 
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/get-worlds`
-  );
-  const worlds = data.worlds;
-
-  worlds.forEach(async (world: string) => {
+  await setTimeout(async () => {
     while (CURRENT_PAGE <= TOTAL_PAGES) {
-      const highscorePage = await fetchHighscorePage(CURRENT_PAGE, world);
+      const highscorePage = await fetchHighscorePage(
+        CURRENT_PAGE,
+        String(world)
+      );
       highscorePage.highscores.highscore_list.forEach(async (character) => {
-        let nameToFind = character.name;
-        let characterHasSpace = nameToFind.includes(" ");
-        if (characterHasSpace) {
-          nameToFind = nameToFind.replaceAll(" ", "+");
-        }
+        setTimeout(async () => {
+          let nameToFind = character.name;
+          let characterHasSpace = nameToFind.includes(" ");
+          if (characterHasSpace) {
+            nameToFind = nameToFind.replaceAll(" ", "+");
+          }
 
-        const { data: characterExists } = await supabase
-          .from("character")
-          .select("*")
-          .ilike("name", `%${character.name}`);
+          const { data: characterExists } = await supabase
+            .from("character")
+            .select("*")
+            .ilike("name", `%${character.name}`);
 
-        try {
           if (characterExists?.length === 0) {
             console.warn(
-              `Character ${nameToFind} not found in database, trying to add...`
+              `Character ${character.name} not found in database, trying to add...`
             );
             const characterURL = `${process.env.NEXT_PUBLIC_DATA_API}/character/${nameToFind}`;
             const { data: characterData } = await axios.get<CharacterModel>(
               characterURL
             );
-            const { data: createdCharacter, status: createdUserStatus } =
+
+            const { data: createdCharacter, status: createdCharacterStatus } =
               await supabase
                 .from("character")
                 .insert([
@@ -59,11 +58,8 @@ app.get("/", async (c) => {
                 ])
                 .select();
 
-            console.log("STATUS", createdUserStatus);
-            if (createdUserStatus === 200) {
-              console.warn(`Character ${nameToFind} added to database`);
-            } else {
-              console.error(`Error adding character ${nameToFind} to database`);
+            if (createdCharacterStatus === 201 && createdCharacter) {
+              console.warn(`Character ${character.name} added to database`);
             }
 
             if (createdCharacter) {
@@ -71,59 +67,41 @@ app.get("/", async (c) => {
                 {
                   character_id: createdCharacter[0].id,
                   value: character.value,
-                  date: new Date().toISOString().split("T")[0],
+                  date: moment().format("YYYY-MM-DD"),
                   level: character.level,
                 },
               ]);
-
-              console.warn(
-                `Daily experience added for character ${nameToFind}`
-              );
             }
-            await delay(5000);
+
             return;
           }
 
           if (characterExists && characterExists.length > 0) {
-            console.warn(`Character ${nameToFind} already exists in database`);
-
+            console.warn(`Character ${character.name} already in database`);
             const { data: dailyExperienceExists } = await supabase
               .from("daily_experience")
               .select("*")
               .eq("character_id", characterExists[0].id)
-              .eq("date", new Date().toISOString().split("T")[0]);
+              .eq("date", moment().format("YYYY-MM-DD"));
 
             if (dailyExperienceExists && dailyExperienceExists.length === 0) {
               await supabase.from("daily_experience").insert([
                 {
                   character_id: characterExists[0].id,
                   value: character.value,
-                  date: new Date().toISOString().split("T")[0],
+                  date: moment().format("YYYY-MM-DD"),
                   level: character.level,
                 },
               ]);
-
-              console.warn(
-                `Daily experience added for character ${nameToFind}`
-              );
             }
-
-            await delay(5000);
           }
-        } catch (error) {
-          console.error("Error inserting character", error);
-        }
+        });
       });
-      await delay(5000);
       CURRENT_PAGE++;
     }
   });
 
-  if (CURRENT_PAGE === TOTAL_PAGES) {
-    CURRENT_PAGE = 1;
-  }
-
-  return c.json({ message: "Cron job finished" });
+  return await c.json({ message: `Cron job for ${world} finished` });
 });
 
 export default app;
