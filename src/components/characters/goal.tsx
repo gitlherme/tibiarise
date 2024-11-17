@@ -58,9 +58,9 @@ export const Goal = ({ experienceTable }: GoalProps) => {
   const totalExperience = experienceTable[0].totalExperience;
 
   const monthlyExperience = experienceTable.reduce(
-    (acc, curr) => ({ expChange: acc.expChange + curr.expChange }),
-    { expChange: 0 }
-  ).expChange;
+    (acc, curr) => ({ experience: acc.experience + curr.experience }),
+    { experience: 0 }
+  ).experience;
 
   const dailyExperience = monthlyExperience / 30;
 
