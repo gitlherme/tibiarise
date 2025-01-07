@@ -7,7 +7,9 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 
 export const getCharacterData = async (name: string) => {
-  const { data } = await axios.get(`/api/get-character-data?name=${name}`);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/character/${name}`
+  );
   return data;
 };
 
