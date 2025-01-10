@@ -48,7 +48,9 @@ export const ExperienceTable = () => {
       <TableBody>
         {reversedTable?.map((day) => (
           <TableRow key={day.date}>
-            <TableCell>{moment(day.date).format("DD/MM/YYYY")}</TableCell>
+            <TableCell>
+              {moment(day.date).subtract(1, "day").format("DD/MM/YYYY")}
+            </TableCell>
             <TableCell
               className={
                 Math.sign(day.experience) === 1
