@@ -52,7 +52,7 @@ export const Footer = () => (
       <Link
         href="https://tibiadata.com/"
         target="_blank"
-        className="text-blue-300"
+        className="text-blue-300 px-1"
       >
         TibiaData
       </Link>
