@@ -37,7 +37,7 @@ export const useCompareCharacters = ({
         String(secondCharacter).toLowerCase()
       ),
     initialData: getQueryClient().getQueryData(["character", name]),
-    staleTime: 60 * 1000 * 60 * 12, // 12h
+    staleTime: 60 * 1000, // 1 minute
     enabled: !!firstCharacter && !!secondCharacter,
     retry: false,
   });

@@ -14,7 +14,7 @@ export const useGetWorlds = () => {
     queryKey: ["worlds"],
     queryFn: () => getWorlds(),
     initialData: getQueryClient().getQueryData(["character"]),
-    staleTime: 60 * 1000 * 60 * 12, // 12h
+    staleTime: 60 * 1000, // 1 minute
     retry: false,
   });
 };
