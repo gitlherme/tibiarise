@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TibiaRise
 
-## Getting Started
+TibiaRise is a comprehensive tool designed for Tibia players who want to track and optimize their in-game progress. Whether you’re working towards specific level goals, comparing progress with friends, or just monitoring daily experience, TibiaRise provides a clear and intuitive way to stay on top of your journey.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. **Character Progression Tracking**
+- Monitor your character’s experience gain on a daily basis.
+- Estimate the time required to achieve specific level goals.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. **Player Comparison**
+- Compare experience progression with other players.
+- Identify top experience gainers in specific worlds.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. **Goal Setting**
+- Set custom level goals and track your progress over time.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Used
+- **Frontend**: React, Next.js 14, TypeScript, Tailwind CSS, React Query.
+- **Backend**: NestJS, Docker.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Roadmap
+Future updates may include:
+- Additional analytics for hunts and quests.
+- Integration with TibiaJobs for service provider features.
+- Enhanced visualizations and leaderboard systems.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributions
+Contributions are welcome! Feel free to open issues or submit pull requests to improve TibiaRise.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+TibiaRise is proudly built by Tibia enthusiasts, for Tibia enthusiasts. Join us on the journey to rise through the ranks of Tibia!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
