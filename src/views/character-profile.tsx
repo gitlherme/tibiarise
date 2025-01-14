@@ -14,7 +14,6 @@ export default function CharacterProfileView() {
   const t = useTranslations();
   const { data, isLoading } = useGetCharacterData();
 
-  console.log(data);
   return (
     <HydrationBoundaryCustom>
       <Suspense fallback={<div>{t("General.loading")}</div>}>
