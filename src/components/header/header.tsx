@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 import Link from "next/link";
 import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
 
 export const Header = () => {
-  const locale = cookies().get("NEXT_LOCALE")?.value || "en";
+  const locale = (cookies() as unknown as UnsafeUnwrappedCookies).get("NEXT_LOCALE")?.value || "en";
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
   return (

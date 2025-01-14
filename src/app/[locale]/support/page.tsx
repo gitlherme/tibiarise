@@ -1,10 +1,11 @@
+import { use } from "react";
 import { useTranslations } from "next-intl";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
 export default function About() {
   const t = useTranslations("SupportPage");
-  const locale = cookies().get("NEXT_LOCALE")?.value || "en";
+  const locale = use(cookies()).get("NEXT_LOCALE")?.value || "en";
   return (
     <div className="text-center flex flex-col gap-8">
       <h1 className="font-black text-3xl text-blue-500">{t("title")}</h1>

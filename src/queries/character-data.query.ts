@@ -24,7 +24,7 @@ export const useGetCharacterData = () => {
     queryKey: ["character", name?.toLowerCase()],
     queryFn: () => getCharacterData(String(name).toLowerCase()),
     initialData: getQueryClient().getQueryData(["character", name]),
-    staleTime: 60 * 1000, // 1 minute
+    gcTime: 1000 * 60 * 60 * 12, // 1 minute
     enabled: !!name,
     retry: false,
   });
