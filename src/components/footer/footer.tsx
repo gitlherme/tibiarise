@@ -46,5 +46,17 @@ export const Footer = () => (
       </Link>
       . Tibia and all related content are copyrighted.
     </span>
+
+    <span className="text-xs">
+      Thanks for
+      <Link
+        href="https://tibiadata.com/"
+        target="_blank"
+        className="text-blue-300 px-1"
+      >
+        TibiaData
+      </Link>
+      for providing the data used in this website.
+    </span>
   </footer>
 );

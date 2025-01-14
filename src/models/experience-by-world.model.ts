@@ -7,7 +7,7 @@ export enum ByWorldFilter {
 type PlayerExperienceByWorld = {
   name: string;
   level: number;
-  expChange: number;
+  experience: number;
   vocation: string;
 };
 

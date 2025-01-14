@@ -2,7 +2,7 @@ interface PlayerData {
   rank: number;
   name: string;
   level: number;
-  expChange: string;
+  experience: string;
   timeOnline: string;
   vocation: string;
   world: string;
@@ -27,7 +27,7 @@ export function parseExperienceByWorld(input: string): PlayerData[] {
         rank: parseInt(rank),
         name: name.trim(),
         level: parseInt(level),
-        expChange: experience.trim(),
+        experience: experience.trim(),
         timeOnline: timeOnline || "N/A",
         vocation: vocation,
         world: world,

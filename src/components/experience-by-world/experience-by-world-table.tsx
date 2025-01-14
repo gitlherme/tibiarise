@@ -53,18 +53,18 @@ export const ExperienceByWorldTable = () => {
               <TableCell>{player.level}</TableCell>
               <TableCell
                 className={
-                  Math.sign(player.expChange) === 1
+                  Math.sign(player.experience) === 1
                     ? "text-green-500"
-                    : Math.sign(player.expChange) === -1
+                    : Math.sign(player.experience) === -1
                     ? "text-red-500"
                     : ""
                 }
               >
-                {Math.sign(player.expChange) === 1
-                  ? `+${formatNumberToLocaleString(player.expChange)}`
-                  : Math.sign(player.expChange) === 0
-                  ? formatNumberToLocaleString(player.expChange)
-                  : `${formatNumberToLocaleString(player.expChange)}`}
+                {Math.sign(player.experience) === 1
+                  ? `+${formatNumberToLocaleString(player.experience)}`
+                  : Math.sign(player.experience) === 0
+                  ? formatNumberToLocaleString(player.experience)
+                  : `${formatNumberToLocaleString(player.experience)}`}
               </TableCell>
             </TableRow>
           ))}

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shadcn:add": "npx shadcn@latest add"
+    "shadcn:add": "pnpm dlx shadcn@latest add",
+    "sb": "pnpm dlx supabase"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -19,6 +20,8 @@
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.46.1",
     "@tanstack/react-query": "^5.51.15",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0-rc.12",

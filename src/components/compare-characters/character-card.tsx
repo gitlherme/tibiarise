@@ -9,7 +9,7 @@ interface CharacterCardProps {
 
 export const CharacterCard = ({ character }: CharacterCardProps) => {
   const t = useTranslations("CompareCharactersPage");
-  const characterInfo = character?.characterInfo ?? {
+  const characterInfo = character?.character ?? {
     name: "",
     level: 0,
     deaths: [],
@@ -17,7 +17,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
   const experienceTable = character?.experienceTable ?? [
     {
       date: new Date(),
-      expChange: 0,
+      experience: 0,
       level: 0,
       totalExperience: 0,
       vocationRank: "",
@@ -26,9 +26,9 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
   ];
 
   const totalExperienceMonth = experienceTable.reduce(
-    (acc, curr) => ({ expChange: acc.expChange + curr.expChange }),
-    { expChange: 0 }
-  ).expChange;
+    (acc, curr) => ({ experience: acc.experience + curr.experience }),
+    { experience: 0 }
+  ).experience;
 
   const totalLevels: number | undefined =
     experienceTable[experienceTable.length - 1].level -
@@ -88,12 +88,12 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
             </div>
           </div>
 
-          <div className="gap-2 flex justify-between">
+          {/* <div className="gap-2 flex justify-between">
             <div className="text-sm font-medium">{t("card.deaths")}</div>
             <div className="text-sm text-muted-foreground">
               {formatNumberToLocale(characterInfo.deaths.length)}
             </div>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>

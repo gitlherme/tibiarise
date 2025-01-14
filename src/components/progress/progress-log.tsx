@@ -17,7 +17,7 @@ export const ProgressLog = () => {
   const experienceTable = data?.experienceTable ?? [
     {
       date: new Date(),
-      expChange: 0,
+      experience: 0,
       level: 0,
       totalExperience: 0,
       vocationRank: "",
@@ -25,17 +25,17 @@ export const ProgressLog = () => {
   ];
 
   const totalExperienceMonth = experienceTable.reduce(
-    (acc, curr) => ({ expChange: acc.expChange + curr.expChange }),
-    { expChange: 0 }
-  ).expChange;
+    (acc, curr) => ({ experience: acc.experience + curr.experience }),
+    { experience: 0 }
+  ).experience;
 
-  const totalLevels: number | undefined =
-    experienceTable[experienceTable.length - 1].level -
-    experienceTable[0].level;
+  // const totalLevels: number | undefined =
+  //   experienceTable[experienceTable.length - 1].level -
+  //   experienceTable[0].level;
 
-  const totalVocationRank =
-    Number(experienceTable[0].vocationRank) -
-    Number(experienceTable[experienceTable.length - 1].vocationRank);
+  // const totalVocationRank =
+  //   Number(experienceTable[0].vocationRank) -
+  //   Number(experienceTable[experienceTable.length - 1].vocationRank);
 
   if (isLoading) {
     return <Skeleton className="w-full h-[200px]" />;
@@ -58,7 +58,7 @@ export const ProgressLog = () => {
             </div>
           </div>
           <Separator />
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="text-sm font-medium">{t("levelsGained")}</div>
             <div
               className={clsx(
@@ -79,9 +79,9 @@ export const ProgressLog = () => {
               )}
               {totalLevels}
             </div>
-          </div>
+          </div> */}
           <Separator />
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="text-sm font-medium">{t("vocationRank")}</div>
             <div
               className={clsx([
@@ -102,7 +102,7 @@ export const ProgressLog = () => {
               )}
               {totalVocationRank}
             </div>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>

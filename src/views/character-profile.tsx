@@ -13,12 +13,14 @@ import { Suspense } from "react";
 export default function CharacterProfileView() {
   const t = useTranslations();
   const { data, isLoading } = useGetCharacterData();
+
+  console.log(data);
   return (
     <HydrationBoundaryCustom>
       <Suspense fallback={<div>{t("General.loading")}</div>}>
         <div className="px-4 md:px-0">
           <Search />
-          {!data?.characterInfo && !isLoading ? (
+          {!data?.character && !isLoading ? (
             <div className="text-center">{t("CharacterPage.notFound")}</div>
           ) : (
             <>

@@ -17,8 +17,8 @@ import { Goal } from "./goal";
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
-  const vocationRank =
-    data?.experienceTable[data.experienceTable.length - 1].vocationRank;
+  // const vocationRank =
+  //   data?.experienceTable[data.experienceTable.length - 1].vocationRank;
   const totalExperience =
     data?.experienceTable[data.experienceTable.length - 1].totalExperience;
 
@@ -27,8 +27,8 @@ export const CharacterInformation = () => {
   }
 
   const share = {
-    lower: Math.ceil(data!.characterInfo.level / 1.5),
-    upper: Math.floor(data!.characterInfo.level * 1.5),
+    lower: Math.ceil(Number(data!.character.level) / 1.5),
+    upper: Math.floor(Number(data!.character.level) * 1.5),
   };
 
   return (
@@ -36,16 +36,16 @@ export const CharacterInformation = () => {
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="w-full">
           <div className="flex gap-2 flex-col-reverse md:flex-row justify-between w-full">
-            <CardTitle>{data?.characterInfo.name}</CardTitle>
-            <Badge className="w-fit">
+            <CardTitle>{data?.character.name}</CardTitle>
+            {/* <Badge className="w-fit">
               {t("vocationRankLabel", {
-                rank: vocationRank,
-                vocation: vocationInitials(data!.characterInfo.vocation),
-                world: data?.characterInfo.world,
+                // rank: vocationRank,
+                vocation: vocationInitials(data!.character.vocation),
+                world: data?.character.world,
               })}
-            </Badge>
+            </Badge> */}
           </div>
-          <CardDescription>{data?.characterInfo.vocation}</CardDescription>
+          <CardDescription>{data?.character.vocation}</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
@@ -53,7 +53,7 @@ export const CharacterInformation = () => {
           <div className="grid gap-2">
             <div className="text-sm font-medium">Level</div>
             <div className="text-2xl md:text-4xl font-bold">
-              {data?.characterInfo.level}
+              {data?.character.level}
             </div>
           </div>
           <div className="grid gap-2">
