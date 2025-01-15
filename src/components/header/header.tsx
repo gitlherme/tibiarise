@@ -5,7 +5,9 @@ import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
 
 export const Header = () => {
-  const locale = (cookies() as unknown as UnsafeUnwrappedCookies).get("NEXT_LOCALE")?.value || "en";
+  const locale =
+    (cookies() as unknown as UnsafeUnwrappedCookies).get("NEXT_LOCALE")
+      ?.value || "en";
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
   return (

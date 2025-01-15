@@ -40,7 +40,7 @@ export const ExperienceTable = () => {
         <TableRow>
           <TableHead>{t("experienceTable.headers.date")}</TableHead>
           <TableHead>{t("experienceTable.headers.xpGain")}</TableHead>
-          {/* <TableHead>{t("experienceTable.headers.level")}</TableHead> */}
+          <TableHead>{t("experienceTable.headers.level")}</TableHead>
           <TableHead>{t("experienceTable.headers.totalExperience")}</TableHead>
           {/* <TableHead>{t("experienceTable.headers.vocationRank")}</TableHead> */}
         </TableRow>
@@ -66,7 +66,7 @@ export const ExperienceTable = () => {
                 ? formatNumberToLocale(day.experience)
                 : `${formatNumberToLocale(day.experience)}`}
             </TableCell>
-            {/* <TableCell>{day.level}</TableCell> */}
+            <TableCell>{day.level}</TableCell>
             <TableCell>{formatNumberToLocale(day.totalExperience)}</TableCell>
             {/* <TableCell>{day.vocationRank}</TableCell> */}
           </TableRow>

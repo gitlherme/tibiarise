@@ -1,14 +1,13 @@
 "use client";
-
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Badge } from "../ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/formatNumber";
-import clsx from "clsx";
-import { ArrowDown, ArrowUp, Equal, Minus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
+import { ArrowDown, ArrowUp, Minus } from "@phosphor-icons/react";
 
 export const ProgressLog = () => {
   const t = useTranslations("CharacterPage.progressLog");
@@ -29,13 +28,9 @@ export const ProgressLog = () => {
     { experience: 0 }
   ).experience;
 
-  // const totalLevels: number | undefined =
-  //   experienceTable[experienceTable.length - 1].level -
-  //   experienceTable[0].level;
-
-  // const totalVocationRank =
-  //   Number(experienceTable[0].vocationRank) -
-  //   Number(experienceTable[experienceTable.length - 1].vocationRank);
+  const totalLevels: number | undefined =
+    experienceTable[experienceTable.length - 1].level -
+    experienceTable[0].level;
 
   if (isLoading) {
     return <Skeleton className="w-full h-[200px]" />;
@@ -58,7 +53,7 @@ export const ProgressLog = () => {
             </div>
           </div>
           <Separator />
-          {/* <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <div className="text-sm font-medium">{t("levelsGained")}</div>
             <div
               className={clsx(
@@ -79,30 +74,7 @@ export const ProgressLog = () => {
               )}
               {totalLevels}
             </div>
-          </div> */}
-          <Separator />
-          {/* <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("vocationRank")}</div>
-            <div
-              className={clsx([
-                "text-sm flex gap-1 items-center",
-                Math.sign(totalVocationRank) === 1
-                  ? "text-green-500"
-                  : Math.sign(totalVocationRank) === -1
-                  ? "text-red-500"
-                  : "",
-              ])}
-            >
-              {Math.sign(totalVocationRank) === 1 ? (
-                <ArrowUp width={16} />
-              ) : Math.sign(totalVocationRank) === 0 ? (
-                <Equal width={16} />
-              ) : (
-                <ArrowDown width={16} />
-              )}
-              {totalVocationRank}
-            </div>
-          </div> */}
+          </div>
         </div>
       </CardContent>
     </Card>

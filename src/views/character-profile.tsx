@@ -7,7 +7,6 @@ import { Search } from "@/components/search/search";
 import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { useTranslations } from "next-intl";
-
 import { Suspense } from "react";
 
 export default function CharacterProfileView() {
