@@ -23,7 +23,6 @@ TibiaRise is a comprehensive tool designed for Tibia players who want to track a
 ## Roadmap
 Future updates may include:
 - Additional analytics for hunts and quests.
-- Integration with TibiaJobs for service provider features.
 - Enhanced visualizations and leaderboard systems.
 
 ## Contributions
