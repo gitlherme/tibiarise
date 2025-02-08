@@ -17,7 +17,7 @@ import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
 import { useTranslations } from "next-intl";
 import { levelExperience } from "@/utils/level-formulae";
 import moment from "moment";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 
 export default function ExperienceSimulatorView() {
   const [currentLevel, setCurrentLevel] = useState("");

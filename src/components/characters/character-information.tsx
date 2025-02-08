@@ -10,7 +10,7 @@ import {
 } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { vocationInitials } from "@/utils/vocations";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 import { Goal } from "./goal";
 

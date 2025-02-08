@@ -2,7 +2,7 @@ import { cheerio } from "@/lib/cheerio";
 import { Hono } from "hono";
 import axios from "axios";
 import sanitize from "sanitize-html";
-import { parseExperienceByWorld } from "@/utils/parseExperienceByWorld";
+import { parseExperienceByWorld } from "@/utils/parse-experience-by-world";
 
 const app = new Hono();
 
