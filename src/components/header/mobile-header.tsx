@@ -3,7 +3,7 @@ import { MenuIcon, XCircleIcon } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import Link from "next/link";
 import { useState } from "react";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../language-selector/language-selector";
 import { DiscordLogo } from "@phosphor-icons/react";

@@ -22,7 +22,7 @@ import {
 import { useGetWorlds } from "@/queries/worlds.query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ByWorldFilter } from "@/models/experience-by-world.model";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 import { useTranslations } from "next-intl";
 
 const formSchema = z.object({

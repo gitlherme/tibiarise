@@ -4,7 +4,7 @@ import { Badge } from "../ui/badge";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import { ArrowDown, ArrowUp, Minus } from "@phosphor-icons/react";

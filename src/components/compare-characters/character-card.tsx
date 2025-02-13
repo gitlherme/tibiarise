@@ -1,6 +1,6 @@
 import { CharacterData } from "@/models/character-data.model";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 
 interface CharacterCardProps {

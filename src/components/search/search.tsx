@@ -17,7 +17,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 
 const formSchema = searchBarSchema;
 

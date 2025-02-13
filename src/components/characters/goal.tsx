@@ -23,11 +23,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ExperienceTableValue } from "@/models/character-data.model";
 import { useState } from "react";
 import { levelExperience } from "@/utils/level-formulae";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 import moment from "moment";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 
 interface GoalProps {
   experienceTable: ExperienceTableValue[];

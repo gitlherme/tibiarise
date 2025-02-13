@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Skeleton } from "../ui/skeleton";
-import { formatNumberToLocale } from "@/utils/formatNumber";
+import { formatNumberToLocale } from "@/utils/format-number";
 import { useEffect, useState } from "react";
 import { ExperienceTableValue } from "@/models/character-data.model";
 import { useTranslations } from "next-intl";
