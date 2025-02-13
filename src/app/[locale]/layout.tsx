@@ -1,4 +1,4 @@
-import { DM_Sans, Bricolage_Grotesque } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
@@ -9,9 +9,8 @@ import { HotjarSnippet } from "@/components/utils/hotjar";
 import { MobileHeader } from "@/components/header/mobile-header";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next/server";
 
-const DMSans = DM_Sans({ subsets: ["latin"] });
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,9 +24,7 @@ export default async function RootLayout(
   }>
 ) {
   const params = await props.params;
-
   const { locale } = params;
-
   const { children } = props;
 
   const messages = await getMessages();

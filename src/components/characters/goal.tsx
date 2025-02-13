@@ -27,7 +27,7 @@ import { formatNumberToLocale } from "@/utils/format-number";
 import moment from "moment";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 
 interface GoalProps {
   experienceTable: ExperienceTableValue[];

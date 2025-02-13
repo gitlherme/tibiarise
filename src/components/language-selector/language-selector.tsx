@@ -7,7 +7,7 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next/client";
 import { US, BR } from "country-flag-icons/react/3x2";
 import { GlobeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";

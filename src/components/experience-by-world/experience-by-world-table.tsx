@@ -12,7 +12,7 @@ import { useGetExperienceByWorld } from "@/queries/experience-by-world.query";
 import { formatNumberToLocaleString } from "@/utils/format-number";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next/client";
 
 export const ExperienceByWorldTable = () => {
   const t = useTranslations("ExperienceByWorldPage");

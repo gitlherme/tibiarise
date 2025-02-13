@@ -27,7 +27,7 @@
     "cheerio": "^1.0.0-rc.12",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cookies-next": "^4.2.1",
+    "cookies-next": "^5.1.0",
     "country-flag-icons": "^1.5.13",
     "framer-motion": "^11.3.30",
     "hono": "^4.5.11",
