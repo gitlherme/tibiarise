@@ -31,7 +31,7 @@
     "tips": "Saiba como acompanhar efetivamente seu progresso diário de XP e planejar seu próximo nível."
   },
   "CharacterPage": {
-    "notFound": "Personagem não encontrado. Verifique o nome e tente novamente.",
+    "notFound": "Personagem não encontrado. Verifique o nome e tente novamente. O TibiaRise acompanha apenas os jogadores que estão no top 1000 do ranking do seu mundo. Se o seu personagem estiver abaixo dessa posição, ele não aparecerá no nosso banco de dados. Continue evoluindo e volte para conferir depois!",
     "vocationRankLabel": "Top {rank} {vocation} em {world}",
     "shareInfo":  "Este personagem pode compartilhar XP com outros entre os níveis <lower>{min}</lower> e <upper>{max}</upper>.",
     "searchAnother": {
