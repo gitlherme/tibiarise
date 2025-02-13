@@ -1,6 +1,8 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { getCookie } from "cookies-next/server";
+import { getCookie } from "cookies-next/client";
 
 export default function About() {
   const t = useTranslations("SupportPage");

@@ -9,7 +9,7 @@ import { HotjarSnippet } from "@/components/utils/hotjar";
 import { MobileHeader } from "@/components/header/mobile-header";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { getCookie, setCookie } from "cookies-next/server";
+import { getCookie, setCookie } from "cookies-next/client";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
