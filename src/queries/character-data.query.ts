@@ -3,14 +3,22 @@
 import { getQueryClient } from "@/components/utils/providers";
 import { CharacterData } from "@/models/character-data.model";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { usePathname } from "next/navigation";
 
 export const getCharacterData = async (name: string) => {
-  const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/character/${name}`
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/character/${name}`,
+    {
+      cache: "force-cache",
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    }
   );
-  return data;
+
+  const characterData = await data.json();
+
+  return characterData;
 };
 
 export const useGetCharacterData = () => {

@@ -35,11 +35,11 @@ export const Header = () => {
                   {t("nav.search")}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href={`/${locale}/world`} className="hover:text-blue-300">
                   {t("nav.experienceByWorld")}
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href={`/${locale}/compare-characters`}

@@ -1,5 +1,5 @@
 {
-  "name": "tibia-xp",
+  "name": "tibiarise",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shadcn:add": "pnpm dlx shadcn@latest add",
-    "sb": "pnpm dlx supabase"
+    "shadcn:add": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
