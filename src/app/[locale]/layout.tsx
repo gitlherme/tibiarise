@@ -12,6 +12,7 @@ import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { Mixpanel } from "@/components/utils/mixpanel";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -97,6 +98,7 @@ export default async function RootLayout(
         gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
       />
       <HotjarSnippet />
+      <Mixpanel />
     </html>
   );
 }
