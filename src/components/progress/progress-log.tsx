@@ -29,8 +29,8 @@ export const ProgressLog = () => {
   ).experience;
 
   const totalLevels: number | undefined =
-    experienceTable[experienceTable.length - 1].level -
-    experienceTable[0].level;
+    experienceTable[0].level -
+    experienceTable[experienceTable.length - 1].level;
 
   if (isLoading) {
     return <Skeleton className="w-full h-[200px]" />;

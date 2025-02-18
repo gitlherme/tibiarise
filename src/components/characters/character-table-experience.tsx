@@ -12,23 +12,12 @@ import {
 import { useGetCharacterData } from "@/queries/character-data.query";
 import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/format-number";
-import { useEffect, useState } from "react";
-import { ExperienceTableValue } from "@/models/character-data.model";
 import { useTranslations } from "next-intl";
 
 export const ExperienceTable = () => {
   const t = useTranslations("CharacterPage");
-  const [reversedTable, setReversedTable] = useState<ExperienceTableValue[]>(
-    []
-  );
   const { data, isLoading } = useGetCharacterData();
   const characterTable = data?.experienceTable;
-
-  useEffect(() => {
-    if (characterTable) {
-      setReversedTable(characterTable.reverse());
-    }
-  }, [data, characterTable]);
 
   if (isLoading) {
     return <Skeleton className="w-[100%] h-[300px] mt-12" />;
@@ -46,7 +35,7 @@ export const ExperienceTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {reversedTable?.map((day) => (
+        {characterTable?.map((day) => (
           <TableRow key={day.date}>
             <TableCell>
               {moment(day.date).subtract(1, "day").format("DD/MM/YYYY")}

@@ -7,9 +7,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { HotjarSnippet } from "@/components/utils/hotjar";
 import { MobileHeader } from "@/components/header/mobile-header";
-import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { getCookie, setCookie } from "cookies-next/client";
+import { cookies } from "next/headers";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -27,10 +29,16 @@ export default async function RootLayout(
   const { locale } = params;
   const { children } = props;
 
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
   const messages = await getMessages();
-  const localeCookieExists = getCookie("NEXT_LOCALE");
+  const cookiesStore = await cookies();
+
+  const localeCookieExists = cookiesStore.get("NEXT_LOCALE");
   if (!localeCookieExists) {
-    setCookie("NEXT_LOCALE", locale);
+    cookiesStore.set("NEXT_LOCALE", locale);
   }
 
   return (
