@@ -19,8 +19,7 @@ export const CharacterInformation = () => {
   const { data, isLoading } = useGetCharacterData();
   // const vocationRank =
   //   data?.experienceTable[data.experienceTable.length - 1].vocationRank;
-  const totalExperience =
-    data?.experienceTable[data.experienceTable.length - 1].totalExperience;
+  const totalExperience = data?.experienceTable[0].totalExperience;
 
   if (isLoading) {
     return <Skeleton className="w-[100%] h-[100%]" />;
