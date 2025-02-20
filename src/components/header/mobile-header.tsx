@@ -46,11 +46,11 @@ export const MobileHeader = () => {
                 {t("nav.search")}
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href={`/${locale}/world`} onClick={() => setIsOpen(false)}>
                 {t("nav.experienceByWorld")}
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href={`/${locale}/compare-characters`}
