@@ -23,10 +23,22 @@ export const ProgressLog = () => {
     },
   ];
 
+  const weeklyExperience = experienceTable.slice(-7);
+
   const totalExperienceMonth = experienceTable.reduce(
     (acc, curr) => ({ experience: acc.experience + curr.experience }),
     { experience: 0 }
   ).experience;
+
+  const lastWeekXP = weeklyExperience.reduce(
+    (acc, curr) => ({ experience: acc.experience + curr.experience }),
+    { experience: 0 }
+  ).experience;
+
+  const averageXPByDay = totalExperienceMonth / 30;
+  const averageXPByWeek = totalExperienceMonth / 4;
+
+  const bestXPMonth = Math.max(...experienceTable.map((x) => x.experience));
 
   const totalLevels: number | undefined =
     experienceTable[0].level -
@@ -50,6 +62,34 @@ export const ProgressLog = () => {
             <div className="text-sm font-medium">{t("xpGained")}</div>
             <div className="text-sm text-muted-foreground">
               {formatNumberToLocale(totalExperienceMonth)}
+            </div>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium">{t("lastWeekXP")}</div>
+            <div className="text-sm text-muted-foreground">
+              {formatNumberToLocale(lastWeekXP)}
+            </div>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium">{t("averageXPByDay")}</div>
+            <div className="text-sm text-muted-foreground">
+              {formatNumberToLocale(averageXPByDay)}
+            </div>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium">{t("averageXPByWeek")}</div>
+            <div className="text-sm text-muted-foreground">
+              {formatNumberToLocale(averageXPByWeek)}
+            </div>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium">{t("bestXPMonth")}</div>
+            <div className="text-sm text-muted-foreground">
+              {formatNumberToLocale(bestXPMonth)}
             </div>
           </div>
           <Separator />

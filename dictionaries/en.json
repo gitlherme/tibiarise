@@ -78,6 +78,10 @@
       "title": "Your Progress Log",
       "lastMonthLabel": "Last Month's Progress",
       "xpGained": "Total XP Gained",
+      "lastWeekXP": "Last Weekly XP Gained",
+      "averageXPByDay": "Average XP per Day",
+      "averageXPByWeek": "Average XP per Week",
+      "bestXPMonth": "Best XP on Month",
       "levelsGained": "Levels Achieved",
       "vocationRank":"Vocation Rank"
     }
