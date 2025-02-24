@@ -31,8 +31,8 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
   ).experience;
 
   const totalLevels: number | undefined =
-    experienceTable[experienceTable.length - 1].level -
-    experienceTable[0].level;
+    experienceTable[0].level -
+    experienceTable[experienceTable.length - 1].level;
 
   return (
     <Card className="w-full">
