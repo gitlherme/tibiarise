@@ -5,11 +5,19 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 const getExperienceByWorld = async (world: string, filter: string) => {
-  const response = await fetch(
-    `/api/get-experience-by-world?world=${world}&filter=${filter}`
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/experience-by-world/${world}/${filter}`,
+    {
+      cache: "force-cache",
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    }
   );
-  const data = await response.json();
-  return data;
+
+  const characterData = await data.json();
+
+  return characterData;
 };
 
 export const useGetExperienceByWorld = () => {

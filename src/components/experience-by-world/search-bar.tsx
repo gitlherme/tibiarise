@@ -46,7 +46,7 @@ export const SearchBarExperienceByWorld = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     router.push(
       `/${locale}/world?world=${data.name}&filter=${ByWorldFilter[data.filter]}`
     );

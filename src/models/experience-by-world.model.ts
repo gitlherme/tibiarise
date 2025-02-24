@@ -1,16 +1,25 @@
 export enum ByWorldFilter {
-  "DAY" = 0,
-  "WEEK" = 7,
-  "MONTH" = 30,
+  "DAY" = "daily",
+  "WEEK" = "weekly",
+  "MONTH" = "monthly",
 }
 
 type PlayerExperienceByWorld = {
-  name: string;
+  characterId: string;
+  characterName: string;
   level: number;
-  experience: number;
-  vocation: string;
+  world: string;
+  experienceGained: number;
+  experiencePerHour: number;
+  percentageGain: number;
 };
 
 export type ExperienceByWorld = {
-  experienceTable: PlayerExperienceByWorld[];
+  world: string;
+  period: {
+    type: ByWorldFilter;
+    startDate: Date;
+    endDate: Date;
+  };
+  topGainers: PlayerExperienceByWorld[];
 };
