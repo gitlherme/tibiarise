@@ -8,6 +8,7 @@ import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import { ArrowDown, ArrowUp, Minus } from "@phosphor-icons/react";
+import moment from "moment";
 
 export const ProgressLog = () => {
   const t = useTranslations("CharacterPage.progressLog");
@@ -23,6 +24,7 @@ export const ProgressLog = () => {
     },
   ];
 
+  const experienceTableCopy = [...experienceTable];
   const weeklyExperience = experienceTable.slice(-7);
 
   const totalExperienceMonth = experienceTable.reduce(
@@ -38,7 +40,9 @@ export const ProgressLog = () => {
   const averageXPByDay = totalExperienceMonth / 30;
   const averageXPByWeek = totalExperienceMonth / 4;
 
-  const bestXPMonth = Math.max(...experienceTable.map((x) => x.experience));
+  const sortedExperience = experienceTableCopy.sort(
+    (a, b) => b.experience - a.experience
+  );
 
   const totalLevels: number | undefined =
     experienceTable[0].level -
@@ -89,7 +93,8 @@ export const ProgressLog = () => {
           <div className="flex items-center justify-between">
             <div className="text-sm font-medium">{t("bestXPMonth")}</div>
             <div className="text-sm text-muted-foreground">
-              {formatNumberToLocale(bestXPMonth)}
+              {formatNumberToLocale(sortedExperience[0].experience)} (
+              {moment(sortedExperience[0].date).format("DD/MM/YYYY")})
             </div>
           </div>
           <Separator />

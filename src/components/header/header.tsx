@@ -9,7 +9,7 @@ export const Header = () => {
   const tRibbon = useTranslations("Ribbon");
   return (
     <>
-      <Ribbon>
+      <Ribbon enabled>
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (

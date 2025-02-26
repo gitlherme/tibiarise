@@ -9,17 +9,22 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
-import { vocationInitials } from "@/utils/vocations";
 import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 import { Goal } from "./goal";
+import { ExperienceTableValue } from "@/models/character-data.model";
+import Link from "next/link";
 
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
   // const vocationRank =
   //   data?.experienceTable[data.experienceTable.length - 1].vocationRank;
-  const totalExperience = data?.experienceTable[0].totalExperience;
+  const totalExperience = data?.experienceTable[0].totalExperience ?? 0;
+
+  // Get the streak of days making XP
+  const valueIsZero = (el: ExperienceTableValue) => el.experience === 0;
+  const streak = data?.experienceTable.findIndex(valueIsZero);
 
   if (isLoading) {
     return <Skeleton className="w-[100%] h-[100%]" />;
@@ -34,17 +39,20 @@ export const CharacterInformation = () => {
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="w-full">
-          <div className="flex gap-2 flex-col-reverse md:flex-row justify-between w-full">
+          <div className="flex gap-2 flex-col-reverse md:flex-row w-full justify-between">
             <CardTitle>{data?.character.name}</CardTitle>
-            {/* <Badge className="w-fit">
-              {t("vocationRankLabel", {
-                // rank: vocationRank,
-                vocation: vocationInitials(data!.character.vocation),
-                world: data?.character.world,
-              })}
-            </Badge> */}
+            <Badge className="w-fit text-sm text-orange-400 bg-orange-200">
+              {streak} days streak 🔥
+            </Badge>
           </div>
           <CardDescription>{data?.character.vocation}</CardDescription>
+          <Link
+            className="text-sm font-bold hover:text-orange-300"
+            target="_blank"
+            href={`https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=${data?.character.guild.name}`}
+          >
+            {`${data?.character.guild.name} ${data?.character.guild.rank}`}
+          </Link>
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
