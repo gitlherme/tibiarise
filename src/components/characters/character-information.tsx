@@ -14,6 +14,12 @@ import { useTranslations } from "next-intl";
 import { Goal } from "./goal";
 import { ExperienceTableValue } from "@/models/character-data.model";
 import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
@@ -41,9 +47,20 @@ export const CharacterInformation = () => {
         <div className="w-full">
           <div className="flex gap-2 flex-col-reverse md:flex-row w-full justify-between">
             <CardTitle>{data?.character.name}</CardTitle>
-            <Badge className="w-fit text-sm text-orange-400 bg-orange-200">
-              {streak} days streak 🔥
-            </Badge>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Badge className="w-fit text-sm text-zinc-900 bg-orange-300 cursor-default hover:bg-orange-300 hover:text-zinc-900">
+                    {streak} {t("streak.label")}
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t.rich("streak.description", {
+                    days: streak,
+                  })}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <CardDescription>{data?.character.vocation}</CardDescription>
           {data?.character.guild.name && (

@@ -38,6 +38,10 @@
       "label": "Search for another character",
       "placeholder": "Type another character name"
     },
+    "streak": {
+      "label": "days streak 🔥",
+      "description": "This character has been making XP for {days} days in a row."
+    },
     "goal": {
       "cta": {
         "description": "Find out how many days you need to reach your desired level.",

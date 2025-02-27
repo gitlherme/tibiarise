@@ -38,6 +38,10 @@
       "label": "Pesquisar outro personagem",
       "placeholder": "Digite o nome de outro personagem"
     },
+    "streak": {
+      "label": "dias seguidos 🔥",
+      "description": "Esse personagem está fazendo XP por {days} dias em sequência."
+    },
     "goal": {
       "cta": {
         "description": "Descubra quantos dias você precisa para alcançar seu nível desejado.",
