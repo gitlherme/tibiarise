@@ -46,7 +46,7 @@ export const CharacterInformation = () => {
             </Badge>
           </div>
           <CardDescription>{data?.character.vocation}</CardDescription>
-          {data?.character.guildName && (
+          {data?.character.guild.name && (
             <Link
               className="text-sm font-bold hover:text-orange-300"
               target="_blank"
