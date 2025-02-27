@@ -46,13 +46,15 @@ export const CharacterInformation = () => {
             </Badge>
           </div>
           <CardDescription>{data?.character.vocation}</CardDescription>
-          <Link
-            className="text-sm font-bold hover:text-orange-300"
-            target="_blank"
-            href={`https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=${data?.character.guild.name}`}
-          >
-            {`${data?.character.guild.name} ${data?.character.guild.rank}`}
-          </Link>
+          {data?.character.guildName && (
+            <Link
+              className="text-sm font-bold hover:text-orange-300"
+              target="_blank"
+              href={`https://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=${data?.character.guild.name}`}
+            >
+              {`${data?.character.guild.name} ${data?.character.guild.rank}`}
+            </Link>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid gap-6">
