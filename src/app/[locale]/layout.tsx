@@ -72,11 +72,7 @@ export default async function RootLayout(
           content="https://i.imgur.com/MT1S4xX.png"
         />
 
-        <link
-          rel="shortcut icon"
-          href="/tibiarise-favicon.svg"
-          type="image/x-icon"
-        />
+        <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>
       <body className={BricolageGrotesque.className}>
         <NextIntlClientProvider messages={messages}>
@@ -88,7 +84,7 @@ export default async function RootLayout(
               <div className="block lg:hidden">
                 <MobileHeader />
               </div>
-              <main className="container mx-auto min-h-[68vh]">{children}</main>
+              <main className="min-h-[68vh]">{children}</main>
               <Footer />
             </div>
           </Providers>

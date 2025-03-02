@@ -7,6 +7,7 @@ import { getCookie } from "cookies-next/client";
 import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../language-selector/language-selector";
 import { DiscordLogo } from "@phosphor-icons/react";
+import Image from "next/image";
 
 export const MobileHeader = () => {
   const locale = getCookie("NEXT_LOCALE") || "en";
@@ -14,12 +15,12 @@ export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
-      <div className="flex items-center bg-black p-4 justify-between">
+      <div className="flex items-center bg-tprimary p-4 justify-between">
         <DrawerTrigger onClick={() => setIsOpen(true)}>
           <MenuIcon className="text-white" />
         </DrawerTrigger>
-        <Link href="/" className="block text-secondary text-white">
-          <span className="block text-3xl font-black">Tibia Rise</span>
+        <Link href="/" className="block text-white">
+          <Image src="/logo.svg" width={200} height={120} alt="Tibia Rise" />
         </Link>
         <div>
           <LanguageSelector />
@@ -33,10 +34,13 @@ export const MobileHeader = () => {
         />
 
         <div className="flex justify-center items-center w-full my-8">
-          <Link href="/" className="block text-secondary text-black">
-            <span className="block text-3xl font-black text-black">
-              Tibia Rise
-            </span>
+          <Link href="/" className="block  text-black">
+            <Image
+              src="/logo-dark.svg"
+              width={200}
+              height={120}
+              alt="Tibia Rise"
+            />
           </Link>
         </div>
         <div className="flex flex-col items-center my-4 gap-4 w-full">

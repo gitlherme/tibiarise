@@ -17,11 +17,13 @@
     }
   },
   "Homepage": {
-    "title": "Acompanhe o Progresso do seu Personagem no Tibia",
+    "title": "Acompanhe a evolução do seu personagem.",
+    "subtitle": "Monitore seu progresso e alcance seus objetivos mais rápido. 🔥",
+    "description": "Comece agora e veja como sua experiência cresce dia após dia!",
     "form": {
       "name": {
-        "label": "Nome do Personagem",
-        "placeholder": "Digite o nome do seu personagem aqui"
+        "label": "Digite o nome do seu personagem",
+        "placeholder": "Ex: Kharsek"
       },
       "submit": {
         "label": "Acompanhar Progresso"
@@ -181,5 +183,11 @@
       "message": "Ganhando <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
       "estimatedDate": "Data estimada para conquista do nível"
     }
+  },
+  "Footer": {
+    "madeWith": "Feito com 💙 por",
+    "discord": "Junte-se ao nosso servidor Discord",
+    "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
+    "thanks": "Obrigado ao <data>TibiaData</data> por fornecer os dados usados neste site."
   }
 }

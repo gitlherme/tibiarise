@@ -18,10 +18,12 @@
   },
   "Homepage": {
     "title": "Track Your Tibia Character Progress",
+    "subtitle": "Dominate your progress, rise above the rest. 🔥",
+    "description": "Start tracking your character's progress in Tibia",
     "form": {
       "name": {
-        "label": "Character Name",
-        "placeholder": "Type your character name here"
+        "label": "Enter your character name",
+        "placeholder": "E.g. Kharsek"
       },
       "submit": {
         "label": "Track Progress"
@@ -183,5 +185,11 @@
     },
     "visualGraphs": "Incorporate visual graphs to illustrate your daily progress towards your goals.",
     "xpTips": "Provide suggestions for hunting areas or events that can maximize your XP gains."
+  },
+  "Footer": {
+    "madeWith": "Made with 💙 by",
+    "discord": "Join our Discord server",
+    "tibia": "<tibia>Tibia</tibia> is a registered trademark of <cip>CipSoft GmbH</cip>. Tibia and all related content are copyrighted.",
+    "thanks": "Thanks for <data>TibiaData</data> for providing the data used in this website."
   }
 }

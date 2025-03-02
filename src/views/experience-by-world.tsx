@@ -8,8 +8,10 @@ export default function ExperienceByWorld() {
   return (
     <HydrationBoundaryCustom>
       <Suspense>
-        <SearchBarExperienceByWorld />
-        <ExperienceByWorldTable />
+        <div className="container mx-auto">
+          <SearchBarExperienceByWorld />
+          <ExperienceByWorldTable />
+        </div>
       </Suspense>
     </HydrationBoundaryCustom>
   );

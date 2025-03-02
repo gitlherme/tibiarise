@@ -16,7 +16,7 @@ export default function CharacterProfileView() {
   return (
     <HydrationBoundaryCustom>
       <Suspense fallback={<div>{t("General.loading")}</div>}>
-        <div className="px-4 md:px-0">
+        <div className="px-4 md:px-0 container">
           <Search />
           {!data?.character && !isLoading ? (
             <div className="text-center">{t("CharacterPage.notFound")}</div>

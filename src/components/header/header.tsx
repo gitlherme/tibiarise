@@ -1,15 +1,19 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
+import { getCookie } from "cookies-next/client";
+import Image from "next/image";
 
 export const Header = () => {
-  const locale = "en";
+  const locale = getCookie("NEXT_LOCALE") || "en";
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
   return (
     <>
-      <Ribbon enabled>
+      <Ribbon>
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (
@@ -22,28 +26,39 @@ export const Header = () => {
           ),
         })}
       </Ribbon>
-      <div className="bg-secondary-foreground mb-12">
+      <div className="mb-12">
         <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
-          <Link href={`/${locale}`} className="block text-secondary">
-            <span className="block text-3xl font-black">Tibia Rise</span>
+          <Link href={`/${locale}`} className="block text-primary">
+            <Image
+              src="/logo-dark.svg"
+              alt="Tibia Rise Logo"
+              width={200}
+              height={120}
+            />
           </Link>
 
           <div className="flex flex-col md:flex-row items-center md:gap-12">
-            <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-secondary">
+            <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-primary">
               <li>
-                <Link href={`/${locale}`} className="hover:text-blue-300">
+                <Link
+                  href={`/${locale}`}
+                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                >
                   {t("nav.search")}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/world`} className="hover:text-blue-300">
+                <Link
+                  href={`/${locale}/world`}
+                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                >
                   {t("nav.experienceByWorld")}
                 </Link>
               </li>
               <li>
                 <Link
                   href={`/${locale}/compare-characters`}
-                  className="hover:text-blue-300"
+                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.compareCharacters")}
                 </Link>
@@ -51,7 +66,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/${locale}/experience-simulator`}
-                  className="hover:text-blue-300"
+                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.experienceSimulator")}
                 </Link>
@@ -59,7 +74,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/${locale}/support`}
-                  className="hover:text-blue-300"
+                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.contribute")}
                 </Link>

@@ -53,7 +53,7 @@ export default function CompareCharactersView() {
 
   return (
     <HydrationBoundaryCustom>
-      <div className="w-full min-h-[60vh] flex flex-col justify-center items-center gap-12 container py-12">
+      <div className="mx-auto w-full min-h-[60vh] flex flex-col justify-center items-center gap-12 container py-12">
         <h2 className="text-3xl md:text-5xl font-black text-center">
           {t("title")}
         </h2>

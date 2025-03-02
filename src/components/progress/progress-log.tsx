@@ -57,7 +57,7 @@ export const ProgressLog = () => {
       <CardHeader>
         <div className="flex flex-col-reverse md:flex-row gap-2 justify-between">
           <CardTitle>{t("title")}</CardTitle>
-          <Badge className="w-fit">{t("lastMonthLabel")}</Badge>
+          <Badge className="w-fit bg-tprimary">{t("lastMonthLabel")}</Badge>
         </div>
       </CardHeader>
       <CardContent>

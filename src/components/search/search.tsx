@@ -39,7 +39,7 @@ export const Search = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-end gap-4 pb-12"
+        className="flex items-end gap-4 pb-12 mt-8"
       >
         <FormField
           control={form.control}
@@ -59,7 +59,11 @@ export const Search = () => {
             </div>
           )}
         />
-        <Button type="submit" aria-label="Search">
+        <Button
+          type="submit"
+          aria-label="Search"
+          className="bg-tprimary hover:bg-tprimary hover:brightness-110"
+        >
           <SearchIcon />
         </Button>
       </form>
