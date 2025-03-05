@@ -4,8 +4,9 @@
 import {
   isServer,
   QueryClient,
-  QueryClientProvider
+  QueryClientProvider,
 } from "@tanstack/react-query";
+import { PostHogProvider } from "./posthog";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -46,6 +47,8 @@ export default function Providers({ children }: Readonly<ProvidersProps>) {
   //       render if it suspends and there is no boundary
   const queryClient = getQueryClient();
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <PostHogProvider>{children}</PostHogProvider>
+    </QueryClientProvider>
   );
 }
