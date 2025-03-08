@@ -12,6 +12,7 @@ import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { Toaster } from "@/components/ui/sonner";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -85,6 +86,7 @@ export default async function RootLayout(
               </div>
               <main className="min-h-[68vh]">{children}</main>
               <Footer />
+              <Toaster />
             </div>
           </Providers>
         </NextIntlClientProvider>
