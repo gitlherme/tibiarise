@@ -207,7 +207,7 @@
         "addExtraExpenses": "Adicionar Despesas Extras",
         "addExtraExpensesDescription": "Você pode adicionar despesas adicionais para cada jogador digitando a quantidade de ouro que eles gastaram.",
         "needsToPay": "{player} precisa pagar {amount} para {to}.",
-        "transferMessage": "transferir {amount} para {to}",
+        "transferMessage": "transfer {amount} to {to}",
         "copy": "Copiar",
         "copied": "Copiado para a Área de Transferência! 📋"
       }
