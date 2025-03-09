@@ -21,7 +21,7 @@ export default function ToolsView() {
           <Card className="hover:bg-tprimary/10 p-8 text-center flex items-center h-72 flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Badge className="bg-tprimary">New</Badge>
             <Image
-              src="https://www.tibiawiki.com.br/images/a/ab/Bar_of_Gold.gif"
+              src="/Bar_of_Gold.gif"
               width={64}
               height={64}
               alt="Bar of Gold Icon"
@@ -33,7 +33,7 @@ export default function ToolsView() {
         <Link href={`/${locale}/tools/compare-characters`}>
           <Card className="hover:bg-tprimary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
-              src="https://www.tibiawiki.com.br/images/f/f3/Spying_Eye.gif"
+              src="/Spying_Eye.webp"
               width={64}
               height={64}
               alt="Spying Eye Icon"
@@ -47,7 +47,7 @@ export default function ToolsView() {
         <Link href={`/${locale}/tools/experience-simulator`}>
           <Card className="hover:bg-tprimary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
-              src="https://www.tibiawiki.com.br/images/f/f3/XP_Boost.gif"
+              src="/XP_Boost.webp"
               width={64}
               height={64}
               alt="XP Boost Icon"
