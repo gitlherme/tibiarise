@@ -191,7 +191,7 @@ export default function LootSplitView() {
                   })}
                 </div>
                 <Image
-                  src="https://www.tibiawiki.com.br/images/b/b0/Gold_Coin.gif"
+                  src="/assets/Gold_Coin.gif"
                   alt="Gold Coin"
                   width={32}
                   height={32}
@@ -215,7 +215,7 @@ export default function LootSplitView() {
                   })}
                 </div>
                 <Image
-                  src="https://www.tibiawiki.com.br/images/b/b0/Gold_Coin.gif"
+                  src="/assets/Gold_Coin.gif"
                   alt="Gold Coin"
                   width={32}
                   height={32}
