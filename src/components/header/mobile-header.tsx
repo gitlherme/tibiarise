@@ -56,19 +56,8 @@ export const MobileHeader = () => {
               </Link>
             </li>
             <li>
-              <Link
-                href={`/${locale}/compare-characters`}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("nav.compareCharacters")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/experience-simulator`}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("nav.experienceSimulator")}
+              <Link href={`/${locale}/tools`} onClick={() => setIsOpen(false)}>
+                {t("nav.tools")}
               </Link>
             </li>
             <li>

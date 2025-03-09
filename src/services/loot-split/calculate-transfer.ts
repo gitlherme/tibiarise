@@ -19,12 +19,7 @@ export function calculateTransfers(players: PlayerData[]): CalculatorTransfer {
     0
   );
 
-  console.log(totalProfit, "TOTAL PROFIT");
-  console.log(playersToProcess.length, "PLAYERplayersToProcess LENGTH");
-
-  const profitEach = Math.floor(totalProfit / playersToProcess.length);
-
-  console.log(profitEach, "PROFIT EACH");
+  const profitEach = Math.ceil(totalProfit / playersToProcess.length);
 
   const creditors: { name: string; amount: number }[] = [];
   const debtors: { name: string; amount: number }[] = [];
