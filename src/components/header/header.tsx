@@ -6,6 +6,7 @@ import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
 import { getCookie } from "cookies-next/client";
 import Image from "next/image";
+import { Badge } from "../ui/badge";
 
 export const Header = () => {
   const locale = getCookie("NEXT_LOCALE") || "en";
@@ -42,7 +43,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/${locale}`}
-                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.search")}
                 </Link>
@@ -50,31 +51,24 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/${locale}/world`}
-                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.experienceByWorld")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href={`/${locale}/compare-characters`}
-                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                  href={`/${locale}/tools`}
+                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in flex gap-2"
                 >
-                  {t("nav.compareCharacters")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/experience-simulator`}
-                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
-                >
-                  {t("nav.experienceSimulator")}
+                  {t("nav.tools")}
+                  <Badge className="bg-tprimary">New</Badge>
                 </Link>
               </li>
               <li>
                 <Link
                   href={`/${locale}/support`}
-                  className="hover:text-violet-500 hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.contribute")}
                 </Link>

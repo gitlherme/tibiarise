@@ -68,6 +68,15 @@ export const Footer = () => {
               {chunks}
             </Link>
           ),
+          wiki: (chunks) => (
+            <Link
+              href="https://www.tibiawiki.com.br/"
+              target="_blank"
+              className="font-bold"
+            >
+              {chunks}
+            </Link>
+          ),
         })}
       </span>
     </footer>

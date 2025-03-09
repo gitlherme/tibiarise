@@ -1,5 +1,5 @@
 export function numberToK(number: number) {
-  number.toLocaleString("en-US", {
+  return number.toLocaleString("en-US", {
     maximumFractionDigits: 2,
     notation: "compact",
     compactDisplay: "short",

@@ -13,6 +13,7 @@
       "experienceByWorld": "Experience by World",
       "compareCharacters": "Compare Characters",
       "contribute": "Support Us",
+      "tools": "Tools",
       "experienceSimulator": "Experience Simulator"
     }
   },
@@ -186,10 +187,54 @@
     "visualGraphs": "Incorporate visual graphs to illustrate your daily progress towards your goals.",
     "xpTips": "Provide suggestions for hunting areas or events that can maximize your XP gains."
   },
+  "LootSplitPage": {
+    "title": "Loot Split",
+    "description": "It makes it easier to calculate the division of loot between team members. 🤑",
+    "form": {
+      "session": {
+        "label": "Paste your session data",
+        "placeholder": "Paste your session data below",
+        "error": "The session data is invalid. Please ensure it is in the correct format."
+      },
+      "result": {
+        "title": "Loot Analyser",
+        "description": "Paste your session data and your analysis will be shown here. 😎",
+        "totalBalance": "Total Party Balance: <balance>{balance}</balance>",
+        "profitEach": "Total Profit for each player: <profit>{profit}</profit>",
+        "transfers": "Transfers",
+        "removePlayers": "Remove Players",
+        "removePlayersDescription": "If you need to remove a player from split, you can do so by clicking on the checkbox next to their name.",
+        "addExtraExpenses": "Add Extra Expenses",
+        "addExtraExpensesDescription": "You can add additional expenses for each player by entering the number of gold spent by them.",
+        "needsToPay": "{player} needs to pay {amount} to {to}.",
+        "transferMessage": "transfer {amount} to {to}",
+        "copy": "Copy",
+        "copied": "Copied to Clipboard! 📋"
+      }
+    }
+  },
+  "ToolsPage": {
+    "title": "Tools",
+    "description": "Use our tools to enhance your experience on Tibia. 🚀",
+    "tools": {
+      "lootSplit": {
+        "title": "Loot Split",
+        "description": "It makes it easier to calculate the division of loot between team members."
+      },
+      "compareCharacters": {
+        "title": "Compare Characters",
+        "description": "Compare two characters to analyze their evolution, accumulated experience and overall performance."
+      },
+      "experienceSimulator": {
+        "title": "Experience Simulator",
+        "description": "It allows you to calculate and predict your character's level progression based on the experience gained each day."
+      }
+    }
+  },
   "Footer": {
     "madeWith": "Made with 💙 by",
     "discord": "Join our Discord server",
     "tibia": "<tibia>Tibia</tibia> is a registered trademark of <cip>CipSoft GmbH</cip>. Tibia and all related content are copyrighted.",
-    "thanks": "Thanks for <data>TibiaData</data> for providing the data used in this website."
+    "thanks": "Thanks for <data>TibiaData</data> and <wiki>TibiaWiki</wiki> for providing the data used in this website."
   }
 }

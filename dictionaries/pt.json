@@ -13,6 +13,7 @@
       "experienceByWorld": "Experiência por Mundo",
       "compareCharacters": "Comparar Personagens",
       "contribute": "Apoie-nos",
+      "tools": "Ferramentas",
       "experienceSimulator": "Simulador de Experiência"
     }
   },
@@ -182,12 +183,58 @@
     "result": {
       "message": "Ganhando <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
       "estimatedDate": "Data estimada para conquista do nível"
+    },
+    "visualGraphs": "Incorpore gráficos visuais para ilustrar seu progresso diário em direção às suas metas.",
+    "xpTips": "Forneça sugestões de áreas de caça ou eventos que podem maximizar seus ganhos de XP."
+  },
+  "LootSplitPage": {
+    "title": "Divisão de Loot",
+    "description": "Facilita o cálculo da divisão de loot entre os membros da equipe. 🤑",
+    "form": {
+      "session": {
+        "label": "Cole seu Party Hunt Analyser",
+        "placeholder": "Cole seu party hunt analyser abaixo",
+        "error": "O party hunt analyser está inválido. Certifique-se de que estão no formato correto."
+      },
+      "result": {
+        "title": "Analisador de Loot",
+        "description": "Cole seu party hunt analyser e sua análise será mostrada aqui. 😎",
+        "totalBalance": "Saldo Total do Grupo: <balance>{balance}</balance>",
+        "profitEach": "Lucro Total para cada jogador: <profit>{profit}</profit>",
+        "transfers": "Transferências",
+        "removePlayers": "Remover Jogadores",
+        "removePlayersDescription": "Se precisar remover um jogador da divisão, você pode fazer isso clicando na caixa de seleção ao lado do nome dele.",
+        "addExtraExpenses": "Adicionar Despesas Extras",
+        "addExtraExpensesDescription": "Você pode adicionar despesas adicionais para cada jogador digitando a quantidade de ouro que eles gastaram.",
+        "needsToPay": "{player} precisa pagar {amount} para {to}.",
+        "transferMessage": "transfer {amount} to {to}",
+        "copy": "Copiar",
+        "copied": "Copiado para a Área de Transferência! 📋"
+      }
+    }
+  },
+  "ToolsPage": {
+    "title": "Ferramentas",
+    "description": "Use nossas ferramentas para melhorar sua experiência no Tibia. 🚀",
+    "tools": {
+      "lootSplit": {
+        "title": "Divisão de Loot",
+        "description": "Facilita o cálculo da divisão de loot entre os membros da equipe."
+      },
+      "compareCharacters": {
+        "title": "Comparar Personagens",
+        "description": "Compare dois personagens para analisar sua evolução, experiência acumulada e desempenho geral."
+      },
+      "experienceSimulator": {
+        "title": "Simulador de Experiência",
+        "description": "Permite calcular e prever a progressão de nível do seu personagem com base na experiência ganha a cada dia."
+      }
     }
   },
   "Footer": {
     "madeWith": "Feito com 💙 por",
     "discord": "Junte-se ao nosso servidor Discord",
     "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
-    "thanks": "Obrigado ao <data>TibiaData</data> por fornecer os dados usados neste site."
+    "thanks": "Obrigado ao <data>TibiaData</data> e <wiki>TibiaWiki</wiki> por fornecer os dados usados neste site."
   }
 }
