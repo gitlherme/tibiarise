@@ -23,6 +23,14 @@ export const ExperienceTable = () => {
     return <Skeleton className="w-[100%] h-[300px] mt-12" />;
   }
 
+  if (characterTable?.length === 1) {
+    return (
+      <div className="mt-12 text-center">
+        <span>{t("experienceTable.noExperience")}</span>
+      </div>
+    );
+  }
+
   return (
     <Table className="mt-12">
       <TableHeader>

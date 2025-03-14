@@ -79,7 +79,8 @@
         "level": "Nível Alcançado",
         "totalExperience": "Experiência Total",
         "vocationRank": "Rank de Vocação"
-      }
+      },
+      "noExperience": "Você ainda não ganhou experiência. Volte amanhã!"
     },
     "progressLog": {
       "title": "Seu Registro de Progresso",

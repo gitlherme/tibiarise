@@ -79,7 +79,8 @@
         "level": "Level Achieved",
         "totalExperience": "Total Experience",
         "vocationRank": "Vocation Rank"
-      }
+      },
+      "noExperience": "You have not gained any experience yet. Go back tomorrow!"
     },
     "progressLog": {
       "title": "Your Progress Log",
