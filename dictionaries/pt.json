@@ -35,6 +35,7 @@
   },
   "CharacterPage": {
     "notFound": "Personagem não encontrado. Por favor, verifique o nome e tente novamente. O TibiaRise rastreia apenas jogadores no top 1000 dos rankings de seus mundos. Se seu personagem estiver abaixo deste ranking em seu mundo, ele não aparecerá em nosso banco de dados. Continue subindo de nível e volte mais tarde!",
+    "description": "{vocation} de {world}",
     "vocationRankLabel": "Top {rank} {vocation} em {world}",
     "shareInfo": "Este personagem pode compartilhar XP com outros entre o nível <lower>{min}</lower> e <upper>{max}</upper>.",
     "searchAnother": {

@@ -35,6 +35,7 @@
   },
   "CharacterPage": {
     "notFound": "Character not found. Please check the name and try again. TibiaRise tracks only players in the top 1000 of their world highscores. If your character is below this ranking in your world, it won’t appear in our database. Keep leveling up and check back later!",
+    "description": "{vocation} from {world}",
     "vocationRankLabel": "Top {rank} {vocation} in {world}",
     "shareInfo":  "This character can share XP with others between level <lower>{min}</lower> and <upper>{max}</upper>.",
     "searchAnother": {

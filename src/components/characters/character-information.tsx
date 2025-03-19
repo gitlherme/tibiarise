@@ -62,7 +62,12 @@ export const CharacterInformation = () => {
               </Tooltip>
             </TooltipProvider>
           </div>
-          <CardDescription>{data?.character.vocation}</CardDescription>
+          <CardDescription>
+            {t.rich("description", {
+              vocation: data?.character.vocation,
+              world: data?.character.world,
+            })}
+          </CardDescription>
           {data?.character.guild.name && (
             <Link
               className="text-sm font-bold hover:text-orange-300"
