@@ -7,11 +7,16 @@ import { LanguageSelector } from "../language-selector/language-selector";
 import { getCookie } from "cookies-next/client";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { signInGoogleAction, signOutAction } from "@/app/actions/auth.action";
+import { useSession } from "next-auth/react";
 
 export const Header = () => {
+  const { data: session } = useSession();
   const locale = getCookie("NEXT_LOCALE") || "en";
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
+  console.log(session);
   return (
     <>
       <Ribbon>
@@ -76,7 +81,13 @@ export const Header = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="flex gap-4">
+            {session ? (
+              <Button onClick={signOutAction}>Logout</Button>
+            ) : (
+              <Button onClick={signInGoogleAction}>Login</Button>
+            )}
+
             <LanguageSelector />
           </div>
         </div>
