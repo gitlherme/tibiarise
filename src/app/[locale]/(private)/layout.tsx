@@ -1,18 +1,16 @@
 import { Bricolage_Grotesque } from "next/font/google";
-import "../globals.css";
-import { Header } from "@/components/header/header";
+import "../../globals.css";
 import Providers from "@/components/utils/providers";
-import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { HotjarSnippet } from "@/components/utils/hotjar";
-import { MobileHeader } from "@/components/header/mobile-header";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/sonner";
+import { Sidebar } from "@/components/sidebar/sidebar";
 
 const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -77,15 +75,11 @@ export default async function RootLayout(
       <body className={BricolageGrotesque.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <div className="flex flex-col">
-              <div className="hidden lg:block">
-                <Header />
+            <div className="grid grid-cols-12 min-h-screen">
+              <div className="col-span-2 hidden md:block">
+                <Sidebar />
               </div>
-              <div className="block lg:hidden">
-                <MobileHeader />
-              </div>
-              <main className="min-h-[68vh]">{children}</main>
-              <Footer />
+              <main className="col-span-10 min-h-[68vh]">{children}</main>
               <Toaster />
             </div>
           </Providers>

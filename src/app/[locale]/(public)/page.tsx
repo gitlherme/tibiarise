@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { searchBarSchema } from "../schemas/search-bar";
+import { searchBarSchema } from "../../schemas/search-bar";
 import { ArrowDown, SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getCookie } from "cookies-next/client";
