@@ -34,4 +34,4 @@ EXPOSE 3000
 
 USER nextjs
 
-CMD ["node", "node_modules/.bin/next", "start"]
+CMD ["/app/node_modules/.bin/next", "start"]
