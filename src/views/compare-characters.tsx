@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useCompareCharacters } from "@/queries/compare-characters.query";
+import { useCompareCharacters } from "@/queries/compare-characters.queries";
 import { useState } from "react";
 import { CharacterCard } from "@/components/compare-characters/character-card";
 import { XIcon } from "lucide-react";

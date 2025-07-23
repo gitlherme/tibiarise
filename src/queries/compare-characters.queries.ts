@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterData } from "./character-data.query";
+import { getCharacterData } from "./character-data.queries";
 import { getQueryClient } from "@/components/utils/providers";
 import { CompareCharacters } from "@/models/compare-characters.model";
 

@@ -30,6 +30,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useGetUserCharacters } from "@/queries/user-data.query";
+import { useSession } from "next-auth/react";
 
 // Types for the character verification process
 interface CharacterVerificationState {
@@ -52,6 +54,7 @@ interface VerifiedCharacter {
 
 export const CharactersView: React.FC = () => {
   // State for the character verification process
+  const session = useSession();
   const [verificationState, setVerificationState] =
     useState<CharacterVerificationState>({
       characterName: "",
@@ -67,20 +70,9 @@ export const CharactersView: React.FC = () => {
   // State to hold verified characters.
   // We'll initialize with some mock data to demonstrate the table view.
   // In a real application, this would come from an API call.
-  const [verifiedCharacters, setVerifiedCharacters] = useState<
-    VerifiedCharacter[]
-  >([
-    {
-      id: "char1",
-      name: "KnightOfJustice",
-      verifiedDate: "2023-01-15",
-    },
-    {
-      id: "char2",
-      name: "SorcererSupreme",
-      verifiedDate: "2023-03-20",
-    },
-  ]);
+  const { data: verifiedCharacters } = useGetUserCharacters(
+    session.data?.user?.email || ""
+  );
 
   // State to control whether to show the form or the table
   const [showVerificationForm, setShowVerificationForm] = useState(false);
@@ -181,19 +173,6 @@ export const CharactersView: React.FC = () => {
           : "Invalid verification code. Please try again.",
         currentStep: isSuccess ? 2 : 1,
       });
-
-      if (isSuccess) {
-        // Add the newly verified character to the list
-        setVerifiedCharacters((prev) => [
-          ...prev,
-          {
-            id: String(prev.length + 1), // Simple ID generation
-            name: verificationState.characterName,
-            verifiedDate: new Date().toISOString().slice(0, 10), // Current date
-          },
-        ]);
-        setShowVerificationForm(false); // Hide the form after successful verification
-      }
     } catch (error) {
       setVerificationState({
         ...verificationState,
@@ -469,7 +448,7 @@ export const CharactersView: React.FC = () => {
           </Button>
         </CardHeader>
         <CardContent>
-          {verifiedCharacters.length > 0 ? (
+          {verifiedCharacters && verifiedCharacters.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
@@ -479,11 +458,13 @@ export const CharactersView: React.FC = () => {
               </TableHeader>
               <TableBody>
                 {verifiedCharacters.map((character) => (
-                  <TableRow key={character.id}>
+                  <TableRow key={character.name}>
                     <TableCell className="font-medium">
                       {character.name}
                     </TableCell>
-                    <TableCell>{character.verifiedDate}</TableCell>
+                    <TableCell>
+                      {new Date().toISOString().slice(0, 10)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -500,8 +481,8 @@ export const CharactersView: React.FC = () => {
 
   return (
     <div className="container mx-auto py-6 max-w-3xl">
-      {/* Conditionally render based on showVerificationForm state */}
-      {showVerificationForm || verifiedCharacters.length === 0
+      {showVerificationForm ||
+      (verifiedCharacters && verifiedCharacters.length === 0)
         ? renderVerificationForm()
         : renderVerifiedCharactersTable()}
     </div>

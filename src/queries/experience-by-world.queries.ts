@@ -15,9 +15,9 @@ const getExperienceByWorld = async (world: string, filter: string) => {
     }
   );
 
-  const characterData = await data.json();
+  const experienceByWorld = await data.json();
 
-  return characterData;
+  return experienceByWorld;
 };
 
 export const useGetExperienceByWorld = () => {
