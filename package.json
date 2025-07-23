@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "shadcn:add": "pnpm dlx shadcn@latest add"
+    "ui:add": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

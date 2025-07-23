@@ -32,12 +32,17 @@ import {
 } from "@/components/ui/table";
 import { useGetUserCharacters } from "@/queries/user-data.query";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import {
+  useCheckVerificationCode,
+  useGetVerificationCode,
+} from "@/queries/verify-character.queries";
 
 // Types for the character verification process
 interface CharacterVerificationState {
-  characterName: string;
-  verificationCode: string;
-  receivedCode: string | null;
+  characterName?: string;
+  verificationCode?: string;
+  receivedCode?: string | null;
   isVerifying: boolean;
   isCodeRequesting: boolean;
   isVerified: boolean;
@@ -53,7 +58,7 @@ interface VerifiedCharacter {
 }
 
 export const CharactersView: React.FC = () => {
-  // State for the character verification process
+  const t = useTranslations("Dashboard.VerifyCharacterPage");
   const session = useSession();
   const [verificationState, setVerificationState] =
     useState<CharacterVerificationState>({
@@ -67,17 +72,12 @@ export const CharactersView: React.FC = () => {
       currentStep: 0,
     });
 
-  // State to hold verified characters.
-  // We'll initialize with some mock data to demonstrate the table view.
-  // In a real application, this would come from an API call.
   const { data: verifiedCharacters } = useGetUserCharacters(
     session.data?.user?.email || ""
   );
 
-  // State to control whether to show the form or the table
   const [showVerificationForm, setShowVerificationForm] = useState(false);
 
-  // Handler for character name input change
   const handleCharacterNameChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -88,20 +88,9 @@ export const CharactersView: React.FC = () => {
     });
   };
 
-  // Handler for verification code input change
-  const handleVerificationCodeChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setVerificationState({
-      ...verificationState,
-      verificationCode: e.target.value,
-      error: null,
-    });
-  };
-
-  // Request verification code from server
+  const createVerificationCode = useGetVerificationCode();
   const requestVerificationCode = async () => {
-    if (!verificationState.characterName.trim()) {
+    if (!verificationState.characterName?.trim()) {
       setVerificationState({
         ...verificationState,
         error: "Please enter a character name",
@@ -115,74 +104,64 @@ export const CharactersView: React.FC = () => {
       error: null,
     });
 
-    try {
-      // Replace this with your actual API call
-      // const response = await api.requestVerificationCode(verificationState.characterName);
-
-      // Simulating API response for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const mockCode =
-        "TIBIA-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-
-      setVerificationState({
-        ...verificationState,
-        receivedCode: mockCode,
-        isCodeRequesting: false,
-        currentStep: 1,
-      });
-    } catch (error) {
-      setVerificationState({
-        ...verificationState,
-        error: "Failed to get verification code. Please try again.",
-        isCodeRequesting: false,
-      });
-    }
+    createVerificationCode.mutate(
+      {
+        email: session.data?.user?.email || "",
+        characterName: verificationState.characterName.trim(),
+      },
+      {
+        onSuccess: (data) => {
+          setVerificationState({
+            ...verificationState,
+            verificationCode: "",
+            receivedCode: data.code,
+            isCodeRequesting: false,
+            currentStep: 1,
+          });
+          setShowVerificationForm(true);
+        },
+        onError: (error) => {
+          setVerificationState({
+            ...verificationState,
+            error: error.message || "Failed to get verification code",
+            isCodeRequesting: false,
+          });
+        },
+      }
+    );
   };
 
-  // Submit verification code
+  const checkVerificationCode = useCheckVerificationCode();
   const verifyCharacter = async () => {
-    if (!verificationState.verificationCode.trim()) {
-      setVerificationState({
-        ...verificationState,
-        error: "Please enter the verification code",
-      });
-      return;
-    }
-
     setVerificationState({
       ...verificationState,
       isVerifying: true,
       error: null,
     });
 
-    try {
-      // Replace this with your actual API call
-      // const response = await api.verifyCharacter(verificationState.characterName, verificationState.verificationCode);
-
-      // Simulating API response for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const isSuccess =
-        verificationState.verificationCode === verificationState.receivedCode;
-
-      setVerificationState({
-        ...verificationState,
-        isVerified: isSuccess,
-        isVerifying: false,
-        error: isSuccess
-          ? null
-          : "Invalid verification code. Please try again.",
-        currentStep: isSuccess ? 2 : 1,
-      });
-    } catch (error) {
-      setVerificationState({
-        ...verificationState,
-        error: "Failed to verify character. Please try again.",
-        isVerifying: false,
-      });
-    }
+    checkVerificationCode.mutate(createVerificationCode.data?.code!, {
+      onSuccess: (verificationState) => {
+        setVerificationState({
+          ...verificationState,
+          verificationCode: "",
+          isVerified: true,
+          isVerifying: false,
+          error: null,
+          currentStep: 2,
+          isCodeRequesting: false,
+        });
+        setShowVerificationForm(false); // Hide the form after successful verification
+      },
+      onError: (error) => {
+        setVerificationState({
+          ...verificationState,
+          isVerifying: false,
+          error: error.message || "Failed to verify character",
+        });
+      },
+    });
   };
 
-  // Reset the verification process
   const resetVerification = () => {
     setVerificationState({
       characterName: "",
@@ -197,16 +176,11 @@ export const CharactersView: React.FC = () => {
     setShowVerificationForm(true); // Show the form when resetting to add another
   };
 
-  // Function to render the character verification form
   const renderVerificationForm = () => (
     <>
       <div className="flex flex-col items-center mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Character Verification
-        </h1>
-        <p className="text-muted-foreground mt-2">
-          Link your Tibia character to your account
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+        <p className="text-muted-foreground mt-2">{t("description")}</p>
       </div>
 
       {/* Step indicator */}
@@ -218,7 +192,9 @@ export const CharactersView: React.FC = () => {
           >
             1
           </Badge>
-          <span className="text-xs text-muted-foreground">Enter Name</span>
+          <span className="text-xs text-muted-foreground">
+            {t("stepsLabels.firstStep")}
+          </span>
         </div>
         <div className="grow mx-2 flex items-center">
           <Separator
@@ -234,7 +210,9 @@ export const CharactersView: React.FC = () => {
           >
             2
           </Badge>
-          <span className="text-xs text-muted-foreground">Get Code</span>
+          <span className="text-xs text-muted-foreground">
+            {t("stepsLabels.secondStep")}
+          </span>
         </div>
         <div className="grow mx-2 flex items-center">
           <Separator
@@ -250,25 +228,26 @@ export const CharactersView: React.FC = () => {
           >
             3
           </Badge>
-          <span className="text-xs text-muted-foreground">Verify</span>
+          <span className="text-xs text-muted-foreground">
+            {t("stepsLabels.thirdStep")}
+          </span>
         </div>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>
-            {verificationState.currentStep === 0 && "Enter Character Details"}
-            {verificationState.currentStep === 1 &&
-              "Verify Character Ownership"}
-            {verificationState.currentStep === 2 && "Character Verified"}
+            {verificationState.currentStep === 0 && t("steps.firstStep.title")}
+            {verificationState.currentStep === 1 && t("steps.secondStep.title")}
+            {verificationState.currentStep === 2 && t("steps.thirdStep.title")}
           </CardTitle>
           <CardDescription>
             {verificationState.currentStep === 0 &&
-              "Enter your character name to begin verification"}
+              t("steps.firstStep.description")}
             {verificationState.currentStep === 1 &&
-              "Enter the verification code to complete verification"}
+              t("steps.secondStep.description")}
             {verificationState.currentStep === 2 &&
-              `Character ${verificationState.characterName} has been verified`}
+              t("steps.thirdStep.description")}
           </CardDescription>
         </CardHeader>
 
@@ -285,8 +264,7 @@ export const CharactersView: React.FC = () => {
             <div className="flex flex-col items-center py-6">
               <CheckCircle className="h-12 w-12 text-green-500 mb-4" />
               <p className="text-center text-lg font-medium">
-                Character {verificationState.characterName} has been
-                successfully verified!
+                {t("steps.thirdStep.successMessage")}
               </p>
             </div>
           ) : (
@@ -298,11 +276,11 @@ export const CharactersView: React.FC = () => {
                       htmlFor="characterName"
                       className="text-sm font-medium"
                     >
-                      Character Name
+                      {t("steps.firstStep.inputLabel")}
                     </label>
                     <Input
                       id="characterName"
-                      placeholder="Enter your character name"
+                      placeholder={t("steps.firstStep.inputPlaceholder")}
                       value={verificationState.characterName}
                       onChange={handleCharacterNameChange}
                       disabled={verificationState.isCodeRequesting}
@@ -315,35 +293,22 @@ export const CharactersView: React.FC = () => {
                 <div className="space-y-4">
                   <Alert
                     variant="default"
-                    className="bg-blue-50 text-blue-800 border-blue-200"
+                    className="bg-blue-50 text-blue-800 border-blue-200 space-y-2"
                   >
-                    <div className="flex flex-col space-y-2">
-                      <p className="font-bold">Your verification code:</p>
-                      <p className="text-lg font-mono tracking-wider bg-blue-100 p-2 rounded text-center">
-                        {verificationState.receivedCode}
-                      </p>
-                      <p className="text-sm">
-                        Log into your Tibia account on Tibia Site and put this
-                        code on your character comment to verify ownership.
-                      </p>
-                    </div>
+                    <AlertTitle>
+                      {t("steps.secondStep.verificationCodeLabel")}
+                    </AlertTitle>
+                    <AlertDescription>
+                      <div className="space-y-2">
+                        <p className="text-lg font-mono tracking-wider bg-blue-100 p-2 rounded text-center">
+                          {verificationState.receivedCode}
+                        </p>
+                        <p className="text-sm">
+                          {t("steps.secondStep.verificationCodeDetails")}
+                        </p>
+                      </div>
+                    </AlertDescription>
                   </Alert>
-
-                  <div className="space-y-2 mt-4">
-                    <label
-                      htmlFor="verificationCode"
-                      className="text-sm font-medium"
-                    >
-                      Verification Code
-                    </label>
-                    <Input
-                      id="verificationCode"
-                      placeholder="Enter the verification code"
-                      value={verificationState.verificationCode}
-                      onChange={handleVerificationCodeChange}
-                      disabled={verificationState.isVerifying}
-                    />
-                  </div>
                 </div>
               )}
             </>
@@ -388,7 +353,7 @@ export const CharactersView: React.FC = () => {
                       Requesting Code...
                     </>
                   ) : (
-                    "Get Verification Code"
+                    t("steps.firstStep.buttonLabel")
                   )}
                 </Button>
               )}
@@ -404,7 +369,7 @@ export const CharactersView: React.FC = () => {
                       Verifying...
                     </>
                   ) : (
-                    "Verify Character"
+                    t("steps.secondStep.buttonLabel")
                   )}
                 </Button>
               )}
@@ -415,23 +380,21 @@ export const CharactersView: React.FC = () => {
 
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle className="text-lg">
-            How to verify your character
-          </CardTitle>
+          <CardTitle className="text-lg">{t("howToVerify.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ol className="list-decimal list-inside space-y-2 ml-2">
-            <li>Enter your character name and get a verification code</li>
-            <li>Log into your Tibia account on site</li>
-            <li>Put the verification code inside character comment section</li>
-            <li>Click the verify button to complete verification</li>
+            <li>{t("howToVerify.instructions.step1")}</li>
+            <li>{t("howToVerify.instructions.step2")}</li>
+            <li>{t("howToVerify.instructions.step3")}</li>
+            <li>{t("howToVerify.instructions.step4")}</li>
+            <li>{t("howToVerify.instructions.step5")}</li>
           </ol>
         </CardContent>
       </Card>
     </>
   );
 
-  // Function to render the table of verified characters
   const renderVerifiedCharactersTable = () => (
     <div className="flex flex-col items-center mb-8 w-fullp">
       <h1 className="text-3xl font-bold tracking-tight">Your Characters</h1>

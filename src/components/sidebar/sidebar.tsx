@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 import {
   ChevronLeftIcon,
@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "../ui/avatar";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
 
 interface SidebarProps {
   className?: string;
@@ -70,21 +71,21 @@ export function Sidebar({ className }: SidebarProps) {
             <NavItem
               icon={HomeIcon}
               title="Dashboard"
-              href="/en/dashboard"
+              href="/dashboard"
               active={pathname === "/dashboard"}
               collapsed={collapsed}
             />
             <NavItem
               icon={SwordIcon}
               title="Characters"
-              href="/en/dashboard/characters"
+              href="/dashboard/characters"
               active={pathname.startsWith("/characters")}
               collapsed={collapsed}
             />
             <NavItem
               icon={BadgeDollarSign}
               title="Profit Manager"
-              href="/en/dashboard/profit-manager"
+              href="/dashboard/profit-manager"
               active={pathname.startsWith("/profit-manager")}
               collapsed={collapsed}
             />

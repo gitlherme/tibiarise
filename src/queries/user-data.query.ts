@@ -7,13 +7,7 @@ interface UserCharacter {
 
 export const getUserCharacters = async (email: string) => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/character/user/${email}/`,
-    {
-      cache: "force-cache",
-      next: {
-        revalidate: 60 * 60 * 24,
-      },
-    }
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/user/${email}/characters`
   );
 
   if (!data.ok) {

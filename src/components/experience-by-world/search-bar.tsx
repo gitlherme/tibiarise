@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useGetWorlds } from "@/queries/worlds.query";
+import { useGetWorlds } from "@/queries/worlds.queries";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ByWorldFilter } from "@/models/experience-by-world.model";
 import { getCookie } from "cookies-next/client";

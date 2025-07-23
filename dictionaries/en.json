@@ -36,6 +36,7 @@
   "CharacterPage": {
     "notFound": "Character not found. Please check the name and try again. TibiaRise tracks only players in the top 1000 of their world highscores. If your character is below this ranking in your world, it won’t appear in our database. Keep leveling up and check back later!",
     "description": "{vocation} from {world}",
+    "verifiedAt": "Verified at {date} by a TibiaRise user.",
     "vocationRankLabel": "Top {rank} {vocation} in {world}",
     "shareInfo":  "This character can share XP with others between level <lower>{min}</lower> and <upper>{max}</upper>.",
     "searchAnother": {
@@ -232,6 +233,59 @@
         "description": "It allows you to calculate and predict your character's level progression based on the experience gained each day."
       }
     }
+  },
+  "Dashboard": {
+    "VerifyCharacterPage": {
+      "title": "Verify Your Character",
+      "description": "Verify your character to help us keep the data accurate and up-to-date. This will also help other players to find your character and track your progress.",
+      "stepsLabels": {
+        "firstStep": "Enter Name",
+        "secondStep": "Get Code",
+        "thirdStep": "Verify"
+      },
+      "steps": {
+        "fistStep": {
+          "title": "Enter Your Character Name",
+          "description": "Type your character name in the input field below.",
+          "inputLabel": "Character Name",
+          "inputPlaceholder": "E.g. Kharsek",
+          "buttonLabel": "Get Verification Code"
+        },
+        "secondStep": {
+          "title": "Verify Character Ownership",
+          "description": "Enter the verification code to complete verification.",
+          "verificationCodeLabel": "Your verification code",
+          "verificationCodeDetails": "Log into your Tibia account on Tibia Site and put this code on your character comment to verify ownership.",
+          "inputLabel": "Verification Code",
+          "inputPlaceholder": "Enter the verification code here",
+          "buttonLabel": "Verify Character"
+        },
+        "thirdStep": {
+          "title": "Verification Complete",
+          "description": "Your character has been successfully verified. You can now track your progress and share it with others.",
+          "successMessage": "Your character has been verified successfully! 🎉",
+          "errorMessage": "There was an error verifying your character. Please try again.",
+          "button1Label": "Go to Dashboard",
+          "button2Label": "Verify Another Character"
+        }
+      },
+      "howToVerify": {
+        "title": "How to Verify Your Character",
+        "description": "To verify your character, follow these steps:",
+        "steps": [
+          "1. Enter your character name in the input field above.",
+          "2. Click on the 'Get Verification Code' button.",
+          "3. You will receive a verification code.",
+          "4. Log into your Tibia account on the official Tibia website.",
+          "5. Go to your character's comment section and paste the verification code.",
+          "6. Save the changes.",
+          "7. Wait 5 minutes for the changes to take effect.",
+          "8. Return to this page.",
+          "9. Enter the verification code in the input field below and click 'Verify Character'."
+        ]
+      }
+    },
+    "ProfitManagerPage": {}
   },
   "Footer": {
     "madeWith": "Made with 💙 by",

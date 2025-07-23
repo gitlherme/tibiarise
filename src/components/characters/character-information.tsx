@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { VerifiedIcon } from "lucide-react";
 
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
@@ -46,7 +47,25 @@ export const CharacterInformation = () => {
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="w-full">
           <div className="flex gap-2 flex-col-reverse md:flex-row w-full justify-between">
-            <CardTitle>{data?.character.name}</CardTitle>
+            <CardTitle className="flex gap-2 items-center mb-8">
+              <span>{data?.character.name}</span>
+              {data?.character.isVerified && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <VerifiedIcon className="text-tprimary" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {t("verifiedAt", {
+                        date: new Date(
+                          data?.character.verifiedAt!
+                        ).toLocaleDateString(),
+                      })}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </CardTitle>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>

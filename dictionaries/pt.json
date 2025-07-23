@@ -233,6 +233,55 @@
       }
     }
   },
+  "Dashboard": {
+    "VerifyCharacterPage": {
+      "title": "Verifique Seu Personagem",
+      "description": "Verifique seu personagem para nos ajudar a manter os dados precisos e atualizados. Isso também ajudará outros jogadores a encontrar seu personagem e acompanhar seu progresso.",
+      "stepsLabels": {
+        "firstStep": "Inserir Nome",
+        "secondStep": "Obter Código",
+        "thirdStep": "Verificar"
+      },
+      "steps": {
+        "firstStep": {
+          "title": "Digite o Nome do Seu Personagem",
+          "description": "Digite o nome do seu personagem no campo abaixo.",
+          "inputLabel": "Nome do Personagem",
+          "inputPlaceholder": "Ex: Kharsek",
+          "buttonLabel": "Obter Código de Verificação"
+        },
+        "secondStep": {
+          "title": "Verificar Propriedade do Personagem",
+          "description": "Coloque o código de verificação no comentário do seu personagem no site do Tibia.",
+          "verificationCodeLabel": "Seu código de verificação",
+          "verificationCodeDetails": "Faça login na sua conta Tibia no site do Tibia e coloque este código no comentário do seu personagem para verificar a propriedade.",
+          "inputLabel": "Código de Verificação",
+          "inputPlaceholder": "Digite o código de verificação aqui",
+          "buttonLabel": "Verificar Personagem"
+        },
+        "thirdStep": {
+          "title": "Verificação Concluída",
+          "description": "Seu personagem foi verificado com sucesso. Agora você pode acompanhar seu progresso e compartilhá-lo com outras pessoas.",
+          "successMessage": "Seu personagem foi verificado com sucesso! 🎉",
+          "errorMessage": "Ocorreu um erro ao verificar seu personagem. Por favor, tente novamente.",
+          "button1Label": "Ir para o Painel",
+          "button2Label": "Verificar Outro Personagem"
+        }
+      },
+      "howToVerify": {
+        "title": "Como Verificar Seu Personagem",
+        "description": "Para verificar seu personagem, siga estes passos:",
+        "instructions": {
+          "step1": "Digite o nome do seu personagem e obtenha um código de verificação.",
+          "step2": "Faça login na sua conta Tibia no site.",
+          "step3": "Coloque o código de verificação na seção de comentários do seu personagem.",
+          "step4": "Aguarde cerca de 5 minutos.",
+          "step5": "Clique no botão de verificação para concluir a verificação."
+        }
+      }
+    },
+    "ProfitManagerPage": {}
+  },
   "Footer": {
     "madeWith": "Feito com 💙 por",
     "discord": "Junte-se ao nosso servidor Discord",
