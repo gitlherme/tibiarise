@@ -1,9 +1,7 @@
-import { Bricolage_Grotesque } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../../globals.css";
 import Providers from "@/components/utils/providers";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
-import { HotjarSnippet } from "@/components/utils/hotjar";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
@@ -12,7 +10,7 @@ import { routing } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/sonner";
 import { Sidebar } from "@/components/sidebar/sidebar";
 
-const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
+const fontSans = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tibia Rise",
@@ -43,52 +41,21 @@ export default async function RootLayout(
   return (
     <html lang={locale}>
       <head>
-        <meta name="title" content="Tibia Rise" />
-        <meta
-          name="description"
-          content="Discover a new level of immersion in Tibia with TibiaRise."
-        />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://tibiarise.app/" />
-        <meta property="og:title" content="Tibia Rise" />
-        <meta
-          property="og:description"
-          content="Discover a new level of immersion in Tibia with TibiaRise."
-        />
-        <meta property="og:image" content="https://i.imgur.com/MT1S4xX.png" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://tibiarise.app/" />
-        <meta property="twitter:title" content="Tibia Rise" />
-        <meta
-          property="twitter:description"
-          content="Discover a new level of immersion in Tibia with TibiaRise."
-        />
-        <meta
-          property="twitter:image"
-          content="https://i.imgur.com/MT1S4xX.png"
-        />
-
         <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>
-      <body className={BricolageGrotesque.className}>
+      <body className={fontSans.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div className="grid grid-cols-12 min-h-screen">
               <div className="col-span-2 hidden md:block">
                 <Sidebar />
               </div>
-              <main className="col-span-10 min-h-[68vh]">{children}</main>
+              <main className="col-span-10">{children}</main>
               <Toaster />
             </div>
           </Providers>
         </NextIntlClientProvider>
       </body>
-      <GoogleAnalytics
-        gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
-      />
-      <HotjarSnippet />
     </html>
   );
 }

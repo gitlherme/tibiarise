@@ -9,7 +9,6 @@ import { usePathname } from "next/navigation";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  HomeIcon,
   Users2Icon,
   SwordIcon,
   BadgeDollarSign,
@@ -19,6 +18,7 @@ import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "../ui/avatar";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 interface SidebarProps {
   className?: string;
@@ -28,6 +28,7 @@ export function Sidebar({ className }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const user = useSession();
   const pathname = usePathname();
+  const t = useTranslations("Sidebar");
 
   return (
     <div
@@ -38,30 +39,45 @@ export function Sidebar({ className }: SidebarProps) {
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
-        {!collapsed && (
-          <h2 className="font-semibold text-lg">
-            <Image
-              src="/logo-dark.svg"
-              alt="Tibia Rise Logo"
-              width={200}
-              height={120}
-            />
-          </h2>
-        )}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="ml-auto"
-          onClick={() => setCollapsed(!collapsed)}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <ChevronRightIcon size={18} />
-          ) : (
-            <ChevronLeftIcon size={18} />
+      <div className="p-4 border-b">
+        <div className="flex items-center justify-between ">
+          {!collapsed && (
+            <h2 className="font-semibold text-lg">
+              <Image
+                src="/logo-dark.svg"
+                alt="Tibia Rise Logo"
+                width={200}
+                height={120}
+              />
+            </h2>
           )}
-        </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="ml-auto"
+            onClick={() => setCollapsed(!collapsed)}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {collapsed ? (
+              <ChevronRightIcon size={18} />
+            ) : (
+              <ChevronLeftIcon size={18} />
+            )}
+          </Button>
+        </div>
+        <div className="mt-2 flex">
+          {!collapsed && (
+            <Link
+              href="/"
+              className="text-base mt-3 hover:text-tprimary text-muted-foreground"
+            >
+              <span>
+                <ChevronLeftIcon size={16} className="inline mr-1" />
+              </span>
+              {t("backlink")}
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* Navigation */}
@@ -69,22 +85,15 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="px-3 py-4">
           <nav className="space-y-1">
             <NavItem
-              icon={HomeIcon}
-              title="Dashboard"
-              href="/dashboard"
-              active={pathname === "/dashboard"}
-              collapsed={collapsed}
-            />
-            <NavItem
               icon={SwordIcon}
-              title="Characters"
+              title={t("links.characters")}
               href="/dashboard/characters"
               active={pathname.startsWith("/characters")}
               collapsed={collapsed}
             />
             <NavItem
               icon={BadgeDollarSign}
-              title="Profit Manager"
+              title={t("links.profitManager")}
               href="/dashboard/profit-manager"
               active={pathname.startsWith("/profit-manager")}
               collapsed={collapsed}

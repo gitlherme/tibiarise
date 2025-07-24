@@ -180,7 +180,9 @@ export const CharactersView: React.FC = () => {
     <>
       <div className="flex flex-col items-center mb-8">
         <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-muted-foreground mt-2">{t("description")}</p>
+        <p className="text-muted-foreground mt-2 text-center">
+          {t("description")}
+        </p>
       </div>
 
       {/* Step indicator */}
@@ -255,7 +257,6 @@ export const CharactersView: React.FC = () => {
           {verificationState.error && (
             <Alert variant="destructive" className="mb-6">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
               <AlertDescription>{verificationState.error}</AlertDescription>
             </Alert>
           )}
@@ -331,7 +332,7 @@ export const CharactersView: React.FC = () => {
               disabled={verificationState.isVerifying}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
+              {t("steps.secondStep.backButton")}
             </Button>
           )}
 
@@ -397,17 +398,15 @@ export const CharactersView: React.FC = () => {
 
   const renderVerifiedCharactersTable = () => (
     <div className="flex flex-col items-center mb-8 w-fullp">
-      <h1 className="text-3xl font-bold tracking-tight">Your Characters</h1>
-      <p className="text-muted-foreground mt-2">
-        Manage your linked Tibia characters
-      </p>
+      <h1 className="text-3xl font-bold tracking-tight">{t("list.title")}</h1>
+      <p className="text-muted-foreground mt-2">{t("list.description")}</p>
 
       <Card className="w-full mt-6">
         <CardHeader className="flex flex-row justify-between items-center">
-          <CardTitle className="text-lg">Verified Characters</CardTitle>
+          <CardTitle className="text-lg">{t("list.subtitle")}</CardTitle>
           <Button onClick={resetVerification}>
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add New Character
+            {t("list.buttonLabel")}
           </Button>
         </CardHeader>
         <CardContent>
@@ -415,8 +414,8 @@ export const CharactersView: React.FC = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Character Name</TableHead>
-                  <TableHead>Verified On</TableHead>
+                  <TableHead>{t("list.characterName")}</TableHead>
+                  <TableHead>{t("list.verifiedDate")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -434,7 +433,7 @@ export const CharactersView: React.FC = () => {
             </Table>
           ) : (
             <div className="text-center text-muted-foreground py-8">
-              You haven&apos;t verified any characters yet.
+              {t("list.noCharacters")}
             </div>
           )}
         </CardContent>

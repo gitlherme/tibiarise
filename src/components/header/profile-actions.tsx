@@ -29,7 +29,7 @@ export const ProfileActions = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/dashboard/characters">Dashboard</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

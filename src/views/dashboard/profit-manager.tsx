@@ -37,6 +37,8 @@ import {
 import { extractSessionData } from "@/services/hunt-analyser/extract-data";
 import { useCookiesNext } from "cookies-next/client";
 import { cn } from "@/lib/utils";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 interface HuntEntry {
   huntName: string;
@@ -47,6 +49,7 @@ interface HuntEntry {
 
 export const ProfitManagerView: React.FC = () => {
   const session = useSession();
+  const t = useTranslations("Dashboard.ProfitManagerPage");
   const locale = useCookiesNext().getCookie("locale") || "en-US"; // Default to 'en-US' if locale is not set
   const [form, setForm] = useState<HuntEntry>({
     huntName: "",
@@ -76,6 +79,12 @@ export const ProfitManagerView: React.FC = () => {
   const { data: history, refetch: refetchHistory } = useProfitHistory(
     selectedCharacter || ""
   );
+
+  const totalProfit = history
+    ?.reduce((acc, entry) => {
+      return acc + (Number(entry.netProfit) || 0);
+    }, 0)
+    .toLocaleString(locale);
 
   const addProfitEntryMutation = useAddProfitEntry();
   const handleSubmit = async (e: React.FormEvent) => {
@@ -121,14 +130,12 @@ export const ProfitManagerView: React.FC = () => {
 
   return (
     <div className="container mx-auto p-6 bg-background text-foreground">
-      <h2 className="text-4xl font-extrabold mb-8 text-center text-primary">
-        Hunt Profit Manager 💰
-      </h2>
+      <h2 className="text-4xl font-bold mb-8">{t("title")}</h2>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-2">
           <Label htmlFor="characterSelect" className="text-lg font-semibold">
-            Character:
+            {t("form.characterSelect.label")}:
           </Label>
           <Select
             onValueChange={handleCharacterSelect}
@@ -136,7 +143,9 @@ export const ProfitManagerView: React.FC = () => {
             defaultValue={characters?.[0]?.id || ""}
           >
             <SelectTrigger id="characterSelect" className="w-[180px]">
-              <SelectValue placeholder="Select Character" />
+              <SelectValue
+                placeholder={t("form.characterSelect.placeholder")}
+              />
             </SelectTrigger>
             <SelectContent>
               {characters?.map((char) => (
@@ -151,26 +160,27 @@ export const ProfitManagerView: React.FC = () => {
         {/* Add New Profit Button */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="px-6 py-3 text-lg">Add New Profit</Button>
+            <Button className="px-6 py-3">{t("buttons.newProfit")}</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-card text-card-foreground p-6 rounded-lg shadow-lg">
-            <DialogHeader className="mb-4">
+            <DialogHeader className="mb-4 mt-4">
               <DialogTitle className="text-2xl font-bold">
-                Add New Hunt Profit
+                {t("form.add.title")}
               </DialogTitle>
               <DialogDescription className="text-muted-foreground">
-                Enter the details for your latest hunt.
+                {t("form.add.description")}
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <Label htmlFor="huntName" className="text-sm font-medium">
-                  Hunt Name:
+                  {t("form.add.huntName")}
                 </Label>
                 <Input
                   id="huntName"
                   type="text"
                   name="huntName"
+                  placeholder={t("form.add.huntNamePlaceholder")}
                   value={form.huntName}
                   onChange={handleChange}
                   required
@@ -178,12 +188,13 @@ export const ProfitManagerView: React.FC = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="huntDate" className="text-sm font-medium">
-                  Hunt Analyser or Party Hunt Analyser
+                <Label htmlFor="huntSession" className="text-sm font-medium">
+                  {t("form.add.huntSession")}
                 </Label>
                 <Textarea
                   id="huntSession"
                   name="huntSession"
+                  placeholder={t("form.add.huntSessionPlaceholder")}
                   value={form.huntSession}
                   onChange={handleChange}
                   required
@@ -193,7 +204,7 @@ export const ProfitManagerView: React.FC = () => {
 
               <div>
                 <Label htmlFor="preysCardsUsed" className="text-sm font-medium">
-                  Preys Cards Used: (ex: 2 for 2 Prey Cards)
+                  {t("form.add.preyCards")}
                 </Label>
                 <Input
                   id="preyCardsUsed"
@@ -201,35 +212,34 @@ export const ProfitManagerView: React.FC = () => {
                   name="preyCardsUsed"
                   value={form.preyCardsUsed}
                   onChange={handleChange}
+                  placeholder={t("form.add.preyCardsPlaceholder")}
                   required
                   className="mt-1"
                 />
               </div>
               <div>
                 <Label htmlFor="boostsValue" className="text-sm font-medium">
-                  Value Spent in Boost in TCs: (ex: 30 for 30 Tibia Coins)
+                  {t("form.add.boostValue")}
                 </Label>
                 <Input
                   id="boostsValue"
                   type="number"
                   name="boostsValue"
+                  placeholder={t("form.add.boostValuePlaceholder")}
                   value={form.boostsValue}
                   onChange={handleChange}
                   required
                   className="mt-1"
                 />
               </div>
-              <Button type="submit" className="w-full text-lg py-2">
-                Submit Hunt
+              <Button type="submit" className="w-full py-2">
+                {t("form.add.submit")}
               </Button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
 
-      <h3 className="text-3xl font-bold mt-12 mb-6 text-center text-secondary-foreground">
-        Hunt History 📜
-      </h3>
       {!history || history?.length === 0 ? (
         <div className="text-center text-muted-foreground p-8 border border-dashed rounded-lg bg-secondary/20">
           <p className="text-lg">
@@ -238,68 +248,108 @@ export const ProfitManagerView: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-lg shadow-lg border border-border">
-          <Table className="min-w-full divide-y divide-border bg-card">
-            <TableHeader className="bg-muted">
-              <TableRow>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Hunt Name
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Date
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Gross Profit
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Tibia Coin Value at Moment
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Value Spent in Prey Card
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Value Spent in Boost
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Net Profit
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="divide-y divide-border">
-              {history?.map((entry, idx) => (
-                <TableRow key={idx} className="hover:bg-accent/50">
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {entry.huntName}
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {new Date(entry.huntDate).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {Number(entry.profit).toLocaleString(locale)}
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {Number(entry.tibiaCoinValue).toLocaleString(locale)}
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {Number(entry.preyCardsUsed).toLocaleString(locale)}
-                  </TableCell>
-                  <TableCell className="py-3 px-4 text-foreground">
-                    {Number(entry.boostsValue).toLocaleString(locale)}
-                  </TableCell>
-                  <TableCell
-                    className={cn(
-                      "py-3 px-4 font-bold",
-                      Number(entry.netProfit) < 0
-                        ? "text-red-500"
-                        : "text-green-500"
-                    )}
-                  >
-                    {Number(entry.netProfit).toLocaleString(locale)}
-                  </TableCell>
+        <div>
+          <div className="mb-4 grid grid-cols-3 gap-2">
+            <Card className="p-4 text-center flex flex-col gap-4">
+              <CardTitle className="text-lg">Total Profit</CardTitle>
+              <CardContent>
+                <p className="text-2xl text-center text-primary">
+                  {totalProfit || "0"}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="p-4 text-center flex flex-col gap-4">
+              <CardTitle className="text-lg">Best Profit</CardTitle>
+              <CardContent>
+                <p className="text-2xl text-center text-green-500">
+                  {history
+                    .reduce((max, entry) => {
+                      const netProfit = Number(entry.netProfit) || 0;
+                      return netProfit > max ? netProfit : max;
+                    }, 0)
+                    .toLocaleString(locale)}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="p-4 text-center flex flex-col gap-4">
+              <CardTitle className="text-lg">Worst Profit</CardTitle>
+              <CardContent>
+                <p className="text-2xl text-center text-foreground">
+                  {history
+                    .reduce((min, entry) => {
+                      const netProfit = Number(entry.netProfit) || 0;
+                      return netProfit < min ? netProfit : min;
+                    }, 0)
+                    .toLocaleString(locale)}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="overflow-x-auto rounded-lg shadow-lg border border-border">
+            <Table className="min-w-full divide-y divide-border bg-card">
+              <TableHeader className="bg-muted">
+                <TableRow>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Hunt Name
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Date
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Gross Profit
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Tibia Coin Value at Moment
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Value Spent in Prey Card
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Value Spent in Boost
+                  </TableHead>
+                  <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                    Net Profit
+                  </TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody className="divide-y divide-border">
+                {history?.map((entry, idx) => (
+                  <TableRow key={idx} className="hover:bg-accent/50">
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {entry.huntName}
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {new Date(entry.huntDate).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {Number(entry.profit).toLocaleString(locale)}
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {Number(entry.tibiaCoinValue).toLocaleString(locale)}
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {Number(entry.preyCardsUsed).toLocaleString(locale)}
+                    </TableCell>
+                    <TableCell className="py-3 px-4 text-foreground">
+                      {Number(entry.boostsValue).toLocaleString(locale)}
+                    </TableCell>
+                    <TableCell
+                      className={cn(
+                        "py-3 px-4 font-bold",
+                        Number(entry.netProfit) < 0
+                          ? "text-red-500"
+                          : "text-green-500"
+                      )}
+                    >
+                      {Number(entry.netProfit).toLocaleString(locale)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       )}
     </div>

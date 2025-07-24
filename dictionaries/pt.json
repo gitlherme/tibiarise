@@ -233,8 +233,24 @@
       }
     }
   },
+  "Sidebar": {
+    "backlink": "Sair do Dashboard",
+    "links": {
+      "characters": "Meus Personagens",
+      "profitManager": "Gerenciador de Profit"
+    }
+  },
   "Dashboard": {
     "VerifyCharacterPage": {
+      "list": {
+        "title": "Seus Personagens",
+        "description": "Gerencie seus personagens abaixo.",
+        "subtitle": "Personagens Verificados",
+        "buttonLabel": "Verificar Novo Personagem",
+        "noCharacters": "Você ainda não verificou nenhum personagem",
+        "characterName": "Nome do Personagem",
+        "verifiedDate": "Data de Verificação"
+      },
       "title": "Verifique Seu Personagem",
       "description": "Verifique seu personagem para nos ajudar a manter os dados precisos e atualizados. Isso também ajudará outros jogadores a encontrar seu personagem e acompanhar seu progresso.",
       "stepsLabels": {
@@ -257,7 +273,8 @@
           "verificationCodeDetails": "Faça login na sua conta Tibia no site do Tibia e coloque este código no comentário do seu personagem para verificar a propriedade.",
           "inputLabel": "Código de Verificação",
           "inputPlaceholder": "Digite o código de verificação aqui",
-          "buttonLabel": "Verificar Personagem"
+          "buttonLabel": "Verificar Personagem",
+          "backButton": "Voltar"
         },
         "thirdStep": {
           "title": "Verificação Concluída",
@@ -280,7 +297,49 @@
         }
       }
     },
-    "ProfitManagerPage": {}
+    "ProfitManagerPage": {
+      "title": "Gerenciador de Profit",
+      "description": "Monitore seus lucros de hunt e otimize suas estratégias de.",
+      "form": {
+        "characterSelect": {
+          "label": "Personagem",
+          "placeholder": "Selecionar"
+        },
+        "add": {
+          "title": "Adicionar Novo Registro de Profit",
+          "description": "Adicione um novo registro de profit para o personagem selecionado.",
+          "huntName": "Nome da Hunt",
+          "huntNamePlaceholder": "Ex: Ingol",
+          "huntSession": "Hunt Session",
+          "huntSessionPlaceholder": "Cole seu Session Analyser ou Party Hunt Analyser aqui",
+          "preyCards": "Número de Prey Cards usadas",
+          "preyCardsPlaceholder": "Ex: 2",
+          "boostValue": "Valor em TC gasto em Boost",
+          "boostValuePlaceholder": "Ex: 30",
+          "submit": "Adicionar"
+        }
+      },
+      "buttons": {
+        "newProfit": "Adicionar"
+      },
+
+      "noData": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de profit 🆙",
+      "profitCard": {
+        "totalProfit": "Lucro Total",
+        "averageProfitPerHunt": "Profit Médio",
+        "bestHuntProfit": "Melhor Profit",
+        "worstHuntProfit": "Pior Profit"
+      },
+      "profitHistoryTable": {
+        "headers": {
+          "name": "Nome da Hunt",
+          "date": "Data",
+          "profit": "Lucro",
+          "duration": "Duração da Caçada"
+        },
+        "noProfits": "Nenhum lucro registrado para este período."
+      }
+    }
   },
   "Footer": {
     "madeWith": "Feito com 💙 por",
