@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 
 import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
-import { getCookie } from "cookies-next/client";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -15,10 +14,8 @@ import { Link } from "@/i18n/routing";
 
 export const Header = () => {
   const { data: session } = useSession();
-  const locale = getCookie("NEXT_LOCALE") || "en";
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
-  console.log(session);
   return (
     <>
       <Ribbon>

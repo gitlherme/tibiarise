@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 interface UserCharacter {
   id: string;
   name: string;
+  world: string;
 }
 
 export const getUserCharacters = async (email: string) => {

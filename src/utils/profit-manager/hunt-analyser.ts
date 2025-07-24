@@ -14,7 +14,7 @@ export function extractSessionData(sessionData: string): {
       let grossProfit = parseFloat(balanceString);
 
       if (isNaN(date.getTime()) || isNaN(grossProfit)) {
-        console.error("Falha ao analisar a data ou o grossProfit.");
+        console.error("Failed to parse date or grossProfit.");
         return null;
       }
 
@@ -35,12 +35,12 @@ export function extractSessionData(sessionData: string): {
       };
     } else {
       console.error(
-        "Não foi possível encontrar a data ou o balanço nos dados da sessão fornecidos."
+        "Could not find date or balance in the provided session data."
       );
       return null;
     }
   } catch (error) {
-    console.error("Ocorreu um erro durante a extração de dados:", error);
+    console.error("An error occurred during data extraction:", error);
     return null;
   }
 }

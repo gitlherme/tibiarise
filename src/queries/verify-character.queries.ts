@@ -33,7 +33,6 @@ export const getVerificationCode = async ({
 };
 
 export const checkVerificationCode = async (code: string) => {
-  console.log(code);
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}/verify-character/${code}`,
     {

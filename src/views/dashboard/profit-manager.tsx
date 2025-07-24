@@ -27,46 +27,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"; // New import for Select
+import { useGetUserCharacters } from "@/queries/user-data.query";
+import { useSession } from "next-auth/react";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  useAddProfitEntry,
+  useProfitHistory,
+} from "@/queries/profit-manager.queries";
+import { extractSessionData } from "@/services/hunt-analyser/extract-data";
+import { useCookiesNext } from "cookies-next/client";
+import { cn } from "@/lib/utils";
 
 interface HuntEntry {
   huntName: string;
-  huntDate: string;
-  grossProfit: number;
-  preysCardsUsed: number;
-  boostTcsValue: number;
-  tibiaCoinValue?: number;
-  netProfit: number;
-  characterName: string; // Added characterName to the hunt entry
-}
-
-interface Character {
-  id: string;
-  name: string;
+  huntSession: string;
+  preyCardsUsed: string;
+  boostsValue: string;
 }
 
 export const ProfitManagerView: React.FC = () => {
-  const [form, setForm] = useState({
+  const session = useSession();
+  const locale = useCookiesNext().getCookie("locale") || "en-US"; // Default to 'en-US' if locale is not set
+  const [form, setForm] = useState<HuntEntry>({
     huntName: "",
-    huntDate: "",
-    grossProfit: "",
-    preysCardsUsed: "",
-    boostTcsValue: "",
+    huntSession: "",
+    preyCardsUsed: "",
+    boostsValue: "",
   });
 
-  const [history, setHistory] = useState<HuntEntry[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { data: characters } = useGetUserCharacters(
+    session.data?.user?.email || ""
+  );
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
-    null
+    characters?.[0]?.id || null
   ); // State for selected character
 
-  // Mock character data (replace with actual data from user's verified characters)
-  const characters: Character[] = [
-    { id: "1", name: "Sir Lancelot" },
-    { id: "2", name: "Mystic Mage" },
-    { id: "3", name: "Healadin" },
-  ];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -74,16 +73,12 @@ export const ProfitManagerView: React.FC = () => {
     setSelectedCharacter(value);
   };
 
-  const calculateNetProfit = (
-    grossProfit: number,
-    preysCardsUsed: number,
-    boostTcsValue: number
-  ) => {
-    // Example calculation: net = gross - (preysCardsUsed * boostTcsValue)
-    return grossProfit - preysCardsUsed * boostTcsValue;
-  };
+  const { data: history, refetch: refetchHistory } = useProfitHistory(
+    selectedCharacter || ""
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const addProfitEntryMutation = useAddProfitEntry();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedCharacter) {
@@ -91,39 +86,37 @@ export const ProfitManagerView: React.FC = () => {
       return;
     }
 
-    const grossProfit = Number(form.grossProfit);
-    const preysCardsUsed = Number(form.preysCardsUsed);
-    const boostTcsValue = Number(form.boostTcsValue);
+    const extractedSessionData = extractSessionData(form.huntSession);
 
-    const netProfit = calculateNetProfit(
-      grossProfit,
-      preysCardsUsed,
-      boostTcsValue
-    );
-
-    setHistory([
-      ...history,
+    await addProfitEntryMutation.mutate(
       {
+        boostsValue: form.boostsValue,
+        huntDate: extractedSessionData?.date.toISOString() || "",
         huntName: form.huntName,
-        huntDate: form.huntDate,
-        grossProfit,
-        preysCardsUsed,
-        boostTcsValue,
-        tibiaCoinValue: boostTcsValue * 10, // Assuming 1 Boost TC = 10 Tibia Coins
-        netProfit,
-        characterName: selectedCharacter, // Store the selected character name
+        preyCardsUsed: form.preyCardsUsed,
+        profit: extractedSessionData?.grossProfit || "0",
+        world:
+          characters?.find((char) => char.id === selectedCharacter)?.world ||
+          "",
+        characterId: selectedCharacter,
       },
-    ]);
-
-    // Reset form and close dialog
-    setForm({
-      huntName: "",
-      huntDate: "",
-      grossProfit: "",
-      preysCardsUsed: "",
-      boostTcsValue: "",
-    });
-    setIsDialogOpen(false); // Close the dialog after submission
+      {
+        onSuccess: () => {
+          refetchHistory();
+          setForm({
+            huntName: "",
+            huntSession: "",
+            preyCardsUsed: "",
+            boostsValue: "",
+          });
+          setIsDialogOpen(false);
+        },
+        onError: (error) => {
+          console.error("Error adding profit entry:", error);
+          alert("Failed to add profit entry. Please try again.");
+        },
+      }
+    );
   };
 
   return (
@@ -133,7 +126,6 @@ export const ProfitManagerView: React.FC = () => {
       </h2>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-        {/* Character Selection */}
         <div className="flex items-center gap-2">
           <Label htmlFor="characterSelect" className="text-lg font-semibold">
             Character:
@@ -141,13 +133,14 @@ export const ProfitManagerView: React.FC = () => {
           <Select
             onValueChange={handleCharacterSelect}
             value={selectedCharacter || ""}
+            defaultValue={characters?.[0]?.id || ""}
           >
             <SelectTrigger id="characterSelect" className="w-[180px]">
               <SelectValue placeholder="Select Character" />
             </SelectTrigger>
             <SelectContent>
-              {characters.map((char) => (
-                <SelectItem key={char.id} value={char.name}>
+              {characters?.map((char) => (
+                <SelectItem key={char.id} value={char.id}>
                   {char.name}
                 </SelectItem>
               ))}
@@ -186,55 +179,41 @@ export const ProfitManagerView: React.FC = () => {
               </div>
               <div>
                 <Label htmlFor="huntDate" className="text-sm font-medium">
-                  Hunt Date:
+                  Hunt Analyser or Party Hunt Analyser
                 </Label>
-                <Input
-                  id="huntDate"
-                  type="date"
-                  name="huntDate"
-                  value={form.huntDate}
+                <Textarea
+                  id="huntSession"
+                  name="huntSession"
+                  value={form.huntSession}
                   onChange={handleChange}
                   required
-                  className="mt-1"
+                  className="mt-1 resize-none max-h-[300px]"
                 />
               </div>
-              <div>
-                <Label htmlFor="grossProfit" className="text-sm font-medium">
-                  Gross Profit:
-                </Label>
-                <Input
-                  id="grossProfit"
-                  type="number"
-                  name="grossProfit"
-                  value={form.grossProfit}
-                  onChange={handleChange}
-                  required
-                  className="mt-1"
-                />
-              </div>
+
               <div>
                 <Label htmlFor="preysCardsUsed" className="text-sm font-medium">
-                  Preys Cards Used:
+                  Preys Cards Used: (ex: 2 for 2 Prey Cards)
                 </Label>
                 <Input
-                  id="preysCardsUsed"
+                  id="preyCardsUsed"
                   type="number"
-                  name="preysCardsUsed"
-                  value={form.preysCardsUsed}
+                  name="preyCardsUsed"
+                  value={form.preyCardsUsed}
                   onChange={handleChange}
                   required
                   className="mt-1"
                 />
               </div>
               <div>
-                <Label htmlFor="boostTcsValue" className="text-sm font-medium">
-                  Value in Boost TCs:
+                <Label htmlFor="boostsValue" className="text-sm font-medium">
+                  Value Spent in Boost in TCs: (ex: 30 for 30 Tibia Coins)
                 </Label>
                 <Input
-                  id="boostTcsValue"
+                  id="boostsValue"
                   type="number"
-                  name="boostTcsValue"
-                  value={form.boostTcsValue}
+                  name="boostsValue"
+                  value={form.boostsValue}
                   onChange={handleChange}
                   required
                   className="mt-1"
@@ -251,7 +230,7 @@ export const ProfitManagerView: React.FC = () => {
       <h3 className="text-3xl font-bold mt-12 mb-6 text-center text-secondary-foreground">
         Hunt History 📜
       </h3>
-      {history.length === 0 ? (
+      {!history || history?.length === 0 ? (
         <div className="text-center text-muted-foreground p-8 border border-dashed rounded-lg bg-secondary/20">
           <p className="text-lg">
             No hunt entries yet. Start by selecting a character and adding a new
@@ -264,9 +243,6 @@ export const ProfitManagerView: React.FC = () => {
             <TableHeader className="bg-muted">
               <TableRow>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Character
-                </TableHead>
-                <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Hunt Name
                 </TableHead>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -276,13 +252,13 @@ export const ProfitManagerView: React.FC = () => {
                   Gross Profit
                 </TableHead>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Prey Cards Used
+                  Tibia Coin Value at Moment
                 </TableHead>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Boost TCs Value
+                  Value Spent in Prey Card
                 </TableHead>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Tibia Coin Value
+                  Value Spent in Boost
                 </TableHead>
                 <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Net Profit
@@ -290,31 +266,35 @@ export const ProfitManagerView: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody className="divide-y divide-border">
-              {history.map((entry, idx) => (
+              {history?.map((entry, idx) => (
                 <TableRow key={idx} className="hover:bg-accent/50">
-                  <TableCell className="py-3 px-4 font-medium text-foreground">
-                    {entry.characterName}
-                  </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
                     {entry.huntName}
                   </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
-                    {entry.huntDate}
+                    {new Date(entry.huntDate).toLocaleDateString()}
                   </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
-                    {entry.grossProfit}
+                    {Number(entry.profit).toLocaleString(locale)}
                   </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
-                    {entry.preysCardsUsed}
+                    {Number(entry.tibiaCoinValue).toLocaleString(locale)}
                   </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
-                    {entry.boostTcsValue}
+                    {Number(entry.preyCardsUsed).toLocaleString(locale)}
                   </TableCell>
                   <TableCell className="py-3 px-4 text-foreground">
-                    {entry.tibiaCoinValue}
+                    {Number(entry.boostsValue).toLocaleString(locale)}
                   </TableCell>
-                  <TableCell className="py-3 px-4 font-bold text-green-600">
-                    {entry.netProfit}
+                  <TableCell
+                    className={cn(
+                      "py-3 px-4 font-bold",
+                      Number(entry.netProfit) < 0
+                        ? "text-red-500"
+                        : "text-green-500"
+                    )}
+                  >
+                    {Number(entry.netProfit).toLocaleString(locale)}
                   </TableCell>
                 </TableRow>
               ))}
