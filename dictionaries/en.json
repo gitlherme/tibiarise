@@ -234,37 +234,54 @@
       }
     }
   },
+   "Sidebar": {
+    "backlink": "Exit Dashboard",
+    "links": {
+      "characters": "My Characters",
+      "profitManager": "Profit Manager"
+    }
+  },
   "Dashboard": {
     "VerifyCharacterPage": {
+      "list": {
+        "title": "Your Characters",
+        "description": "Manage your characters below.",
+        "subtitle": "Verified Characters",
+        "buttonLabel": "Verify New Character",
+        "noCharacters": "You haven't verified any characters yet",
+        "characterName": "Character Name",
+        "verifiedDate": "Verification Date"
+      },
       "title": "Verify Your Character",
-      "description": "Verify your character to help us keep the data accurate and up-to-date. This will also help other players to find your character and track your progress.",
+      "description": "Verify your character to help us keep data accurate and up-to-date. This will also help other players find your character and track their progress.",
       "stepsLabels": {
         "firstStep": "Enter Name",
         "secondStep": "Get Code",
         "thirdStep": "Verify"
       },
       "steps": {
-        "fistStep": {
-          "title": "Enter Your Character Name",
-          "description": "Type your character name in the input field below.",
+        "firstStep": {
+          "title": "Enter Your Character's Name",
+          "description": "Enter your character's name in the field below.",
           "inputLabel": "Character Name",
-          "inputPlaceholder": "E.g. Kharsek",
+          "inputPlaceholder": "Ex: Kharsek",
           "buttonLabel": "Get Verification Code"
         },
         "secondStep": {
           "title": "Verify Character Ownership",
-          "description": "Enter the verification code to complete verification.",
+          "description": "Place the verification code in your character's comment on the Tibia website.",
           "verificationCodeLabel": "Your verification code",
-          "verificationCodeDetails": "Log into your Tibia account on Tibia Site and put this code on your character comment to verify ownership.",
+          "verificationCodeDetails": "Log in to your Tibia account on the Tibia website and place this code in your character's comment to verify ownership.",
           "inputLabel": "Verification Code",
-          "inputPlaceholder": "Enter the verification code here",
-          "buttonLabel": "Verify Character"
+          "inputPlaceholder": "Enter verification code here",
+          "buttonLabel": "Verify Character",
+          "backButton": "Back"
         },
         "thirdStep": {
           "title": "Verification Complete",
-          "description": "Your character has been successfully verified. You can now track your progress and share it with others.",
-          "successMessage": "Your character has been verified successfully! 🎉",
-          "errorMessage": "There was an error verifying your character. Please try again.",
+          "description": "Your character has been successfully verified. You can now track their progress and share it with others.",
+          "successMessage": "Your character has been successfully verified! 🎉",
+          "errorMessage": "An error occurred while verifying your character. Please try again.",
           "button1Label": "Go to Dashboard",
           "button2Label": "Verify Another Character"
         }
@@ -272,20 +289,57 @@
       "howToVerify": {
         "title": "How to Verify Your Character",
         "description": "To verify your character, follow these steps:",
-        "steps": [
-          "1. Enter your character name in the input field above.",
-          "2. Click on the 'Get Verification Code' button.",
-          "3. You will receive a verification code.",
-          "4. Log into your Tibia account on the official Tibia website.",
-          "5. Go to your character's comment section and paste the verification code.",
-          "6. Save the changes.",
-          "7. Wait 5 minutes for the changes to take effect.",
-          "8. Return to this page.",
-          "9. Enter the verification code in the input field below and click 'Verify Character'."
-        ]
+        "instructions": {
+          "step1": "Enter your character's name and get a verification code.",
+          "step2": "Log in to your Tibia account on the website.",
+          "step3": "Place the verification code in your character's comment section.",
+          "step4": "Wait about 5 minutes.",
+          "step5": "Click the verify button to complete the verification."
+        }
       }
     },
-    "ProfitManagerPage": {}
+    "ProfitManagerPage": {
+      "title": "Profit Manager",
+      "description": "Monitor your hunt profits and optimize your strategies.",
+      "form": {
+        "characterSelect": {
+          "label": "Character",
+          "placeholder": "Select"
+        },
+        "add": {
+          "title": "Add New Profit Record",
+          "description": "Add a new profit record for the selected character.",
+          "huntName": "Hunt Name",
+          "huntNamePlaceholder": "Ex: Ingol",
+          "huntSession": "Hunt Session",
+          "huntSessionPlaceholder": "Paste your Session Analyzer or Party Hunt Analyzer here",
+          "preyCards": "Number of Prey Cards used",
+          "preyCardsPlaceholder": "Ex: 2",
+          "boostValue": "TC Value spent on Boost",
+          "boostValuePlaceholder": "Ex: 30",
+          "submit": "Add"
+        }
+      },
+      "buttons": {
+        "newProfit": "Add"
+      },
+      "noData": "No data found for the selected character. Add a new profit record 🆙",
+      "profitCard": {
+        "totalProfit": "Total Profit",
+        "averageProfitPerHunt": "Average Profit",
+        "bestHuntProfit": "Best Profit",
+        "worstHuntProfit": "Worst Profit"
+      },
+      "profitHistoryTable": {
+        "headers": {
+          "name": "Hunt Name",
+          "date": "Date",
+          "profit": "Profit",
+          "duration": "Hunt Duration"
+        },
+        "noProfits": "No profits recorded for this period."
+      }
+    }
   },
   "Footer": {
     "madeWith": "Made with 💙 by",
