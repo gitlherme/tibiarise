@@ -46,11 +46,11 @@ export default async function RootLayout(
       <body className={fontSans.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <div className="grid grid-cols-12 min-h-screen">
-              <div className="col-span-2 hidden md:block">
+            <div className="flex gap-8 min-h-screen">
+              <div className="hidden md:block">
                 <Sidebar />
               </div>
-              <main className="col-span-10">{children}</main>
+              <main className="flex-1">{children}</main>
               <Toaster />
             </div>
           </Providers>

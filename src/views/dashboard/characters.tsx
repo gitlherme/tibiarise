@@ -50,13 +50,6 @@ interface CharacterVerificationState {
   currentStep: number;
 }
 
-// Type for a verified character
-interface VerifiedCharacter {
-  id: string;
-  name: string;
-  verifiedDate: string;
-}
-
 export const CharactersView: React.FC = () => {
   const t = useTranslations("Dashboard.VerifyCharacterPage");
   const session = useSession();

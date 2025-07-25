@@ -37,8 +37,10 @@ import {
 import { extractSessionData } from "@/services/hunt-analyser/extract-data";
 import { useCookiesNext } from "cookies-next/client";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { ProfitManagerCard } from "@/components/profit-manager/card";
+import { DollarSignIcon } from "lucide-react";
 
 interface HuntEntry {
   huntName: string;
@@ -128,8 +130,24 @@ export const ProfitManagerView: React.FC = () => {
     );
   };
 
+  const tProfit = history
+    ?.reduce((acc, entry) => acc + (Number(entry.netProfit) || 0), 0)
+    .toLocaleString(locale);
+
+  const totalHunts = history?.length || 0;
+
+  const bestProfit = history?.reduce((max, entry) => {
+    const netProfit = Number(entry.netProfit);
+    return netProfit > max ? netProfit : max;
+  }, 0);
+
+  const worstProfit = history?.reduce((min, entry) => {
+    const netProfit = Number(entry.netProfit);
+    return netProfit < min ? netProfit : min;
+  }, 0);
+
   return (
-    <div className="container mx-auto p-6 bg-background text-foreground">
+    <div className="p-6 bg-background text-foreground">
       <h2 className="text-4xl font-bold mb-8">{t("title")}</h2>
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
@@ -249,43 +267,36 @@ export const ProfitManagerView: React.FC = () => {
         </div>
       ) : (
         <div>
-          <div className="mb-4 grid grid-cols-3 gap-2">
-            <Card className="p-4 text-center flex flex-col gap-4">
-              <CardTitle className="text-lg">Total Profit</CardTitle>
-              <CardContent>
-                <p className="text-2xl text-center text-primary">
-                  {totalProfit || "0"}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="p-4 text-center flex flex-col gap-4">
-              <CardTitle className="text-lg">Best Profit</CardTitle>
-              <CardContent>
-                <p className="text-2xl text-center text-green-500">
-                  {history
-                    .reduce((max, entry) => {
-                      const netProfit = Number(entry.netProfit) || 0;
-                      return netProfit > max ? netProfit : max;
-                    }, 0)
-                    .toLocaleString(locale)}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="p-4 text-center flex flex-col gap-4">
-              <CardTitle className="text-lg">Worst Profit</CardTitle>
-              <CardContent>
-                <p className="text-2xl text-center text-foreground">
-                  {history
-                    .reduce((min, entry) => {
-                      const netProfit = Number(entry.netProfit) || 0;
-                      return netProfit < min ? netProfit : min;
-                    }, 0)
-                    .toLocaleString(locale)}
-                </p>
-              </CardContent>
-            </Card>
+          <div className="mb-4 grid grid-cols-6 gap-2">
+            <ProfitManagerCard
+              title="Total Profit"
+              icon={<DollarSignIcon />}
+              highlight={tProfit || "0"}
+              note={`in ${totalHunts} hunts`}
+            />
+            <ProfitManagerCard
+              title="Best Profit"
+              icon={<DollarSignIcon />}
+              highlight={String(bestProfit) || "0"}
+              note={`in ${totalHunts} hunts`}
+            />
+            <ProfitManagerCard
+              title="Worst Profit"
+              icon={<DollarSignIcon />}
+              highlight={String(worstProfit) || "0"}
+              note={`in ${totalHunts} hunts`}
+            />
+          </div>
+          <div className="text-xs mt-4 mb-2">
+            TC Value provided by:{" "}
+            <Link
+              href="https://tibiatrade.gg/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              Tibia Trade
+            </Link>
           </div>
           <div className="overflow-x-auto rounded-lg shadow-lg border border-border">
             <Table className="min-w-full divide-y divide-border bg-card">

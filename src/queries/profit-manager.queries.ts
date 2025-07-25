@@ -44,7 +44,10 @@ export const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(profitEntry),
+      body: JSON.stringify({
+        ...profitEntry,
+        profit: parseFloat(profitEntry.profit),
+      }),
     }
   );
 
