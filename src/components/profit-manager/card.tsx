@@ -28,7 +28,9 @@ export const ProfitManagerCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold text-primary">{highlight}</div>
+        <div className="text-2xl font-bold text-primary">
+          {new Intl.NumberFormat().format(Number(highlight)) || "0"}
+        </div>
       </CardContent>
       <CardFooter>
         {note && <p className="text-sm text-muted-foreground mt-2">{note}</p>}

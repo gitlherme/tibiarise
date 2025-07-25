@@ -36,7 +36,8 @@ interface AddProfitEntryParams {
   world: string;
   characterId: string;
 }
-export const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
+
+const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}/profit-manager`,
     {
@@ -59,6 +60,21 @@ export const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
   return newProfitEntry;
 };
 
+const deleteProfitEntry = async (profitEntryId: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/profit-manager/${profitEntryId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete profit entry");
+  }
+
+  return { success: true };
+};
+
 export const useProfitHistory = (characterId: string) => {
   return useQuery<ProfitEntry[]>({
     queryKey: ["characterProfitHistory", characterId, "profitHistory"],
@@ -74,6 +90,14 @@ export const useAddProfitEntry = () => {
     mutationKey: ["addProfitEntry"],
     mutationFn: (profitEntry: AddProfitEntryParams) =>
       addNewProfitEntry(profitEntry),
+    retry: false,
+  });
+};
+
+export const useDeleteProfitEntry = () => {
+  return useMutation({
+    mutationKey: ["deleteProfitEntry"],
+    mutationFn: (profitEntryId: string) => deleteProfitEntry(profitEntryId),
     retry: false,
   });
 };

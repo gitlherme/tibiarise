@@ -322,22 +322,35 @@
       "buttons": {
         "newProfit": "Adicionar"
       },
-
-      "noData": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de profit 🆙",
-      "profitCard": {
-        "totalProfit": "Lucro Total",
-        "averageProfitPerHunt": "Profit Médio",
-        "bestHuntProfit": "Melhor Profit",
-        "worstHuntProfit": "Pior Profit"
+      "noProfitEntries": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de lucro 🆙",
+      "profitCards": {
+        "totalProfit": {
+          "title": "Lucro Total",
+          "note": "em {totalHunts} caçadas"
+        },
+        "bestProfit": {
+          "title": "Melhor Lucro",
+          "note": "em {hunt}"
+        }
       },
-      "profitHistoryTable": {
+      "tibiaTradeNote": "Valor da TC fornecido por <tibiaTrade>TibiaTrade</tibiaTrade>.",
+      "table": {
         "headers": {
           "name": "Nome da Hunt",
           "date": "Data",
-          "profit": "Lucro",
-          "duration": "Duração da Caçada"
+          "grossProfit": "Lucro Bruto",
+          "tibiaCoinValue": "Valor da Tibia Coin",
+          "preyCardValue": "Valor Gasto em Prey Cards",
+          "boostValue": "Valor Gasto em Boost",
+          "netProfit": "Lucro Líquido",
+          "actions": "Ações"
         },
-        "noProfits": "Nenhum lucro registrado para este período."
+        "deleteModal": {
+          "title": "Excluir Registro de Lucro",
+          "description": "Tem certeza que deseja excluir este registro de lucro? Esta ação não pode ser desfeita.",
+          "confirm": "Excluir",
+          "cancel": "Cancelar"
+        }
       }
     }
   },

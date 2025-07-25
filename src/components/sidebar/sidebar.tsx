@@ -33,7 +33,7 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <div
       className={cn(
-        "flex flex-col h-screen border-r transition-all duration-300",
+        "flex flex-col border-r transition-all duration-300 min-h-screen h-full",
         collapsed ? "w-16" : "w-64",
         className
       )}

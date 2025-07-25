@@ -323,21 +323,35 @@
       "buttons": {
         "newProfit": "Add"
       },
-      "noData": "No data found for the selected character. Add a new profit record 🆙",
-      "profitCard": {
-        "totalProfit": "Total Profit",
-        "averageProfitPerHunt": "Average Profit",
-        "bestHuntProfit": "Best Profit",
-        "worstHuntProfit": "Worst Profit"
+      "noProfitEntries": "No data found for the selected character. Add a new profit record 🆙",
+      "profitCards": {
+        "totalProfit": {
+          "title": "Total Profit",
+          "note": "in {totalHunts} hunts"
+        },
+        "bestProfit": {
+          "title": "Best Profit",
+          "note": "on {hunt}"
+        }
       },
-      "profitHistoryTable": {
+      "tibiaTradeNote": "TC value provided by <tibiaTrade>TibiaTrade</tibiaTrade>.",
+      "table": {
         "headers": {
           "name": "Hunt Name",
           "date": "Date",
-          "profit": "Profit",
-          "duration": "Hunt Duration"
+          "grossProfit": "Gross Profit",
+          "tibiaCoinValue": "Tibia Coin Value",
+          "preyCardValue": "Value Spent in Prey Cards",
+          "boostValue": "Value Spent in Boost",
+          "netProfit": "Net Profit",
+          "actions": "Actions"
         },
-        "noProfits": "No profits recorded for this period."
+        "deleteModal": {
+          "title": "Delete Profit Record",
+          "description": "Are you sure you want to delete this profit record? This action cannot be undone.",
+          "confirm": "Delete",
+          "cancel": "Cancel"
+        }
       }
     }
   },
