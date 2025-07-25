@@ -135,6 +135,7 @@
   "CompareCharactersPage": {
     "title": "Comparação de Personagens",
     "description": "Preencha os detalhes abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
+    "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
     "form": {
       "name": {
         "label": "Nome do Personagem",
