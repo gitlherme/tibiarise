@@ -30,7 +30,7 @@ export const Header = () => {
       </Ribbon>
       <div className="mb-12">
         <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
-          <Link href={``} className="block text-primary">
+          <Link href={`/`} className="block text-primary">
             <Image
               src="/logo-dark.svg"
               alt="Tibia Rise Logo"
@@ -43,7 +43,7 @@ export const Header = () => {
             <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-primary">
               <li>
                 <Link
-                  href={``}
+                  href={`/`}
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.search")}
