@@ -46,7 +46,7 @@ export const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
       },
       body: JSON.stringify({
         ...profitEntry,
-        profit: parseFloat(profitEntry.profit),
+        profit: parseInt(profitEntry.profit),
       }),
     }
   );
