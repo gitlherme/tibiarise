@@ -135,6 +135,7 @@
   "CompareCharactersPage": {
     "title": "Comparação de Personagens",
     "description": "Preencha os detalhes abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
+    "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
     "form": {
       "name": {
         "label": "Nome do Personagem",
@@ -230,6 +231,127 @@
       "experienceSimulator": {
         "title": "Simulador de Experiência",
         "description": "Permite calcular e prever a progressão de nível do seu personagem com base na experiência ganha a cada dia."
+      }
+    }
+  },
+  "Sidebar": {
+    "backlink": "Sair do Dashboard",
+    "links": {
+      "characters": "Meus Personagens",
+      "profitManager": "Gerenciador de Profit"
+    }
+  },
+  "Dashboard": {
+    "VerifyCharacterPage": {
+      "list": {
+        "title": "Seus Personagens",
+        "description": "Gerencie seus personagens abaixo.",
+        "subtitle": "Personagens Verificados",
+        "buttonLabel": "Verificar Novo Personagem",
+        "noCharacters": "Você ainda não verificou nenhum personagem",
+        "characterName": "Nome do Personagem",
+        "verifiedDate": "Data de Verificação"
+      },
+      "title": "Verifique Seu Personagem",
+      "description": "Verifique seu personagem para nos ajudar a manter os dados precisos e atualizados. Isso também ajudará outros jogadores a encontrar seu personagem e acompanhar seu progresso.",
+      "stepsLabels": {
+        "firstStep": "Inserir Nome",
+        "secondStep": "Obter Código",
+        "thirdStep": "Verificar"
+      },
+      "steps": {
+        "firstStep": {
+          "title": "Digite o Nome do Seu Personagem",
+          "description": "Digite o nome do seu personagem no campo abaixo.",
+          "inputLabel": "Nome do Personagem",
+          "inputPlaceholder": "Ex: Kharsek",
+          "buttonLabel": "Obter Código de Verificação"
+        },
+        "secondStep": {
+          "title": "Verificar Propriedade do Personagem",
+          "description": "Coloque o código de verificação no comentário do seu personagem no site do Tibia.",
+          "verificationCodeLabel": "Seu código de verificação",
+          "verificationCodeDetails": "Faça login na sua conta Tibia no site do Tibia e coloque este código no comentário do seu personagem para verificar a propriedade.",
+          "inputLabel": "Código de Verificação",
+          "inputPlaceholder": "Digite o código de verificação aqui",
+          "buttonLabel": "Verificar Personagem",
+          "backButton": "Voltar"
+        },
+        "thirdStep": {
+          "title": "Verificação Concluída",
+          "description": "Seu personagem foi verificado com sucesso. Agora você pode acompanhar seu progresso e compartilhá-lo com outras pessoas.",
+          "successMessage": "Seu personagem foi verificado com sucesso! 🎉",
+          "errorMessage": "Ocorreu um erro ao verificar seu personagem. Por favor, tente novamente.",
+          "button1Label": "Ir para o Painel",
+          "button2Label": "Verificar Outro Personagem"
+        }
+      },
+      "howToVerify": {
+        "title": "Como Verificar Seu Personagem",
+        "description": "Para verificar seu personagem, siga estes passos:",
+        "instructions": {
+          "step1": "Digite o nome do seu personagem e obtenha um código de verificação.",
+          "step2": "Faça login na sua conta Tibia no site.",
+          "step3": "Coloque o código de verificação na seção de comentários do seu personagem.",
+          "step4": "Aguarde cerca de 5 minutos.",
+          "step5": "Clique no botão de verificação para concluir a verificação."
+        }
+      }
+    },
+    "ProfitManagerPage": {
+      "title": "Gerenciador de Profit",
+      "description": "Monitore seus lucros de hunt e otimize suas estratégias de.",
+      "form": {
+        "characterSelect": {
+          "label": "Personagem",
+          "placeholder": "Selecionar"
+        },
+        "add": {
+          "title": "Adicionar Novo Registro de Profit",
+          "description": "Adicione um novo registro de profit para o personagem selecionado.",
+          "huntName": "Nome da Hunt",
+          "huntNamePlaceholder": "Ex: Ingol",
+          "huntSession": "Hunt Session",
+          "huntSessionPlaceholder": "Cole seu Session Analyser ou Party Hunt Analyser aqui",
+          "preyCards": "Número de Prey Cards usadas",
+          "preyCardsPlaceholder": "Ex: 2",
+          "boostValue": "Valor em TC gasto em Boost",
+          "boostValuePlaceholder": "Ex: 30",
+          "submit": "Adicionar"
+        }
+      },
+      "buttons": {
+        "newProfit": "Adicionar"
+      },
+      "noProfitEntries": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de lucro 🆙",
+      "profitCards": {
+        "totalProfit": {
+          "title": "Lucro Total",
+          "note": "em {totalHunts} caçadas"
+        },
+        "bestProfit": {
+          "title": "Melhor Lucro",
+          "note": "em {hunt}"
+        }
+      },
+      "tibiaTradeNote": "Valor da TC fornecido por <tibiaTrade>TibiaTrade</tibiaTrade>.",
+      "table": {
+        "headers": {
+          "name": "Nome da Hunt",
+          "date": "Data",
+          "grossProfit": "Lucro Bruto",
+          "tibiaCoinValue": "Valor da Tibia Coin",
+          "preyCardValue": "Valor Gasto em Prey Cards",
+          "boostValue": "Valor Gasto em Boost",
+          "netProfit": "Lucro Líquido",
+          "actions": "Ações"
+        },
+        "deleteModal": {
+          "title": "Excluir Registro de Lucro",
+          "description": "Tem certeza que deseja excluir este registro de lucro? Esta ação não pode ser desfeita.",
+          "confirm": "Excluir",
+          "cancel": "Cancelar"
+        }
       }
     }
   },

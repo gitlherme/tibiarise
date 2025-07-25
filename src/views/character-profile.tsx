@@ -5,7 +5,7 @@ import { ExperienceTable } from "@/components/characters/character-table-experie
 import { ProgressLog } from "@/components/progress/progress-log";
 import { Search } from "@/components/search/search";
 import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
-import { useGetCharacterData } from "@/queries/character-data.query";
+import { useGetCharacterData } from "@/queries/character-data.queries";
 import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 

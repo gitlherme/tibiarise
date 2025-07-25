@@ -1,5 +1,5 @@
-import { Bricolage_Grotesque } from "next/font/google";
-import "../globals.css";
+import { Inter } from "next/font/google";
+import "../../globals.css";
 import { Header } from "@/components/header/header";
 import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
@@ -14,7 +14,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Toaster } from "@/components/ui/sonner";
 
-const BricolageGrotesque = Bricolage_Grotesque({ subsets: ["latin"] });
+const fontSans = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Tibia Rise",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
   }>
 ) {
   const params = await props.params;
@@ -74,7 +74,7 @@ export default async function RootLayout(
 
         <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>
-      <body className={BricolageGrotesque.className}>
+      <body className={fontSans.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div className="flex flex-col">

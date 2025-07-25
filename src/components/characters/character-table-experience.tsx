@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetCharacterData } from "@/queries/character-data.query";
+import { useGetCharacterData } from "@/queries/character-data.queries";
 import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";

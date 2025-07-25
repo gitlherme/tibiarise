@@ -1,15 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+
 import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
-import { getCookie } from "cookies-next/client";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { signInGoogleAction } from "@/app/actions/auth.action";
+import { useSession } from "next-auth/react";
+import { ProfileActions } from "./profile-actions";
+import { Link } from "@/i18n/routing";
 
 export const Header = () => {
-  const locale = getCookie("NEXT_LOCALE") || "en";
+  const { data: session } = useSession();
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
   return (
@@ -18,10 +22,7 @@ export const Header = () => {
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (
-            <Link
-              href={`/${locale}/experience-simulator`}
-              className="underline"
-            >
+            <Link href={`/experience-simulator`} className="underline">
               {chunks}
             </Link>
           ),
@@ -29,7 +30,7 @@ export const Header = () => {
       </Ribbon>
       <div className="mb-12">
         <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
-          <Link href={`/${locale}`} className="block text-primary">
+          <Link href={``} className="block text-primary">
             <Image
               src="/logo-dark.svg"
               alt="Tibia Rise Logo"
@@ -42,7 +43,7 @@ export const Header = () => {
             <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-primary">
               <li>
                 <Link
-                  href={`/${locale}`}
+                  href={``}
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.search")}
@@ -50,7 +51,7 @@ export const Header = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/world`}
+                  href={`/world`}
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.experienceByWorld")}
@@ -58,7 +59,7 @@ export const Header = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/tools`}
+                  href={`/tools`}
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in flex gap-2"
                 >
                   {t("nav.tools")}
@@ -67,7 +68,7 @@ export const Header = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/support`}
+                  href={`/support`}
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.contribute")}
@@ -76,7 +77,13 @@ export const Header = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="flex gap-4">
+            {session ? (
+              <ProfileActions />
+            ) : (
+              <Button onClick={signInGoogleAction}>Login</Button>
+            )}
+
             <LanguageSelector />
           </div>
         </div>

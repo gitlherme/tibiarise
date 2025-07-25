@@ -16,6 +16,8 @@ type CharacterInfo = {
   world: string;
   vocation: string;
   sex: string;
+  isVerified: boolean;
+  verifiedAt: string | null;
   guild: {
     name: string;
     rank: string;
