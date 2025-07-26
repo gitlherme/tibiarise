@@ -25,8 +25,6 @@ import { VerifiedIcon } from "lucide-react";
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
-  // const vocationRank =
-  //   data?.experienceTable[data.experienceTable.length - 1].vocationRank;
   const totalExperience = data?.experienceTable[0].totalExperience ?? 0;
 
   // Get the streak of days making XP
@@ -46,8 +44,8 @@ export const CharacterInformation = () => {
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="w-full">
-          <div className="flex gap-2 flex-col-reverse md:flex-row w-full justify-between">
-            <CardTitle className="flex gap-2 items-center mb-8">
+          <div className="flex gap-2 flex-col-reverse md:flex-row justify-between">
+            <CardTitle className="flex gap-2 items-center mb-2">
               <span>{data?.character.name}</span>
               {data?.character.isVerified && (
                 <TooltipProvider>

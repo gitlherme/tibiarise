@@ -271,6 +271,7 @@
           "title": "Verify Character Ownership",
           "description": "Place the verification code in your character's comment on the Tibia website.",
           "verificationCodeLabel": "Your verification code",
+          "verificationCopiedMessage": "Verification code copied to clipboard! 📋",
           "verificationCodeDetails": "Log in to your Tibia account on the Tibia website and place this code in your character's comment to verify ownership.",
           "inputLabel": "Verification Code",
           "inputPlaceholder": "Enter verification code here",
@@ -293,7 +294,7 @@
           "step1": "Enter your character's name and get a verification code.",
           "step2": "Log in to your Tibia account on the website.",
           "step3": "Place the verification code in your character's comment section.",
-          "step4": "Wait about 5 minutes.",
+          "step4": "Wait about 5 to 10 minutes.",
           "step5": "Click the verify button to complete the verification."
         }
       }

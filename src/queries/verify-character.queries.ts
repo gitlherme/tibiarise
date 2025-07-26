@@ -48,7 +48,7 @@ export const checkVerificationCode = async (code: string) => {
   return response;
 };
 
-export const useGetVerificationCode = () => {
+export const useCreateVerificationCode = () => {
   return useMutation<VerificationCode, Error, GetVerificationCodeParams>({
     mutationKey: ["user", "verification"],
     mutationFn: ({ email, characterName }) =>

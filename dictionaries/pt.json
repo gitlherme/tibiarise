@@ -272,6 +272,7 @@
           "description": "Coloque o código de verificação no comentário do seu personagem no site do Tibia.",
           "verificationCodeLabel": "Seu código de verificação",
           "verificationCodeDetails": "Faça login na sua conta Tibia no site do Tibia e coloque este código no comentário do seu personagem para verificar a propriedade.",
+          "verificationCopiedMessage": "Código de verificação copiado para a área de transferência! 📋",
           "inputLabel": "Código de Verificação",
           "inputPlaceholder": "Digite o código de verificação aqui",
           "buttonLabel": "Verificar Personagem",
@@ -293,7 +294,7 @@
           "step1": "Digite o nome do seu personagem e obtenha um código de verificação.",
           "step2": "Faça login na sua conta Tibia no site.",
           "step3": "Coloque o código de verificação na seção de comentários do seu personagem.",
-          "step4": "Aguarde cerca de 5 minutos.",
+          "step4": "Aguarde cerca de 5 a 10 minutos.",
           "step5": "Clique no botão de verificação para concluir a verificação."
         }
       }

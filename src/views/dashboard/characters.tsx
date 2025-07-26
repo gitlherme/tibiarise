@@ -12,7 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
 import {
   Loader2,
   CheckCircle,
@@ -20,8 +19,8 @@ import {
   ArrowLeft,
   UserCheck,
   PlusCircle,
+  ClipboardIcon,
 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -35,8 +34,11 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import {
   useCheckVerificationCode,
-  useGetVerificationCode,
+  useCreateVerificationCode,
 } from "@/queries/verify-character.queries";
+import { toast } from "sonner";
+import { StepIndicator } from "@/components/verify-characters/step-indicator";
+import { HowToVerify } from "@/components/verify-characters/how-to-verify";
 
 // Types for the character verification process
 interface CharacterVerificationState {
@@ -81,7 +83,7 @@ export const CharactersView: React.FC = () => {
     });
   };
 
-  const createVerificationCode = useGetVerificationCode();
+  const createVerificationCode = useCreateVerificationCode();
   const requestVerificationCode = async () => {
     if (!verificationState.characterName?.trim()) {
       setVerificationState({
@@ -178,56 +180,8 @@ export const CharactersView: React.FC = () => {
         </p>
       </div>
 
-      {/* Step indicator */}
-      <div className="flex justify-between mb-8">
-        <div className="flex flex-col items-center">
-          <Badge
-            variant={verificationState.currentStep >= 0 ? "default" : "outline"}
-            className="mb-2"
-          >
-            1
-          </Badge>
-          <span className="text-xs text-muted-foreground">
-            {t("stepsLabels.firstStep")}
-          </span>
-        </div>
-        <div className="grow mx-2 flex items-center">
-          <Separator
-            className={`h-0.5 ${
-              verificationState.currentStep >= 1 ? "bg-primary" : "bg-border"
-            }`}
-          />
-        </div>
-        <div className="flex flex-col items-center">
-          <Badge
-            variant={verificationState.currentStep >= 1 ? "default" : "outline"}
-            className="mb-2"
-          >
-            2
-          </Badge>
-          <span className="text-xs text-muted-foreground">
-            {t("stepsLabels.secondStep")}
-          </span>
-        </div>
-        <div className="grow mx-2 flex items-center">
-          <Separator
-            className={`h-0.5 ${
-              verificationState.currentStep >= 2 ? "bg-primary" : "bg-border"
-            }`}
-          />
-        </div>
-        <div className="flex flex-col items-center">
-          <Badge
-            variant={verificationState.currentStep >= 2 ? "default" : "outline"}
-            className="mb-2"
-          >
-            3
-          </Badge>
-          <span className="text-xs text-muted-foreground">
-            {t("stepsLabels.thirdStep")}
-          </span>
-        </div>
-      </div>
+      <HowToVerify />
+      <StepIndicator verificationState={verificationState} />
 
       <Card>
         <CardHeader>
@@ -294,9 +248,26 @@ export const CharactersView: React.FC = () => {
                     </AlertTitle>
                     <AlertDescription>
                       <div className="space-y-2">
-                        <p className="text-lg font-mono tracking-wider bg-blue-100 p-2 rounded text-center">
-                          {verificationState.receivedCode}
-                        </p>
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-lg w-7/8 font-mono tracking-wider bg-blue-100 p-2 rounded text-center">
+                            {verificationState.receivedCode}
+                          </p>
+                          <Button
+                            className="w-1/8 py-6"
+                            variant="default"
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                verificationState.receivedCode || ""
+                              );
+
+                              toast.info(
+                                t("steps.secondStep.verificationCopiedMessage")
+                              );
+                            }}
+                          >
+                            <ClipboardIcon size={24} />
+                          </Button>
+                        </div>
                         <p className="text-sm">
                           {t("steps.secondStep.verificationCodeDetails")}
                         </p>
@@ -370,21 +341,6 @@ export const CharactersView: React.FC = () => {
             </>
           )}
         </CardFooter>
-      </Card>
-
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle className="text-lg">{t("howToVerify.title")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ol className="list-decimal list-inside space-y-2 ml-2">
-            <li>{t("howToVerify.instructions.step1")}</li>
-            <li>{t("howToVerify.instructions.step2")}</li>
-            <li>{t("howToVerify.instructions.step3")}</li>
-            <li>{t("howToVerify.instructions.step4")}</li>
-            <li>{t("howToVerify.instructions.step5")}</li>
-          </ol>
-        </CardContent>
       </Card>
     </>
   );
