@@ -6,13 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 const getExperienceByWorld = async (world: string, filter: string) => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_API_URL}/experience-by-world/${world}/${filter}`,
-    {
-      cache: "force-cache",
-      next: {
-        revalidate: 60 * 60 * 24,
-      },
-    }
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/experience-by-world/${world}/${filter}`
   );
 
   const experienceByWorld = await data.json();

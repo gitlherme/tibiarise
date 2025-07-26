@@ -37,6 +37,7 @@
     "notFound": "Personagem não encontrado. Por favor, verifique o nome e tente novamente. O TibiaRise rastreia apenas jogadores no top 1000 dos rankings de seus mundos. Se seu personagem estiver abaixo deste ranking em seu mundo, ele não aparecerá em nosso banco de dados. Continue subindo de nível e volte mais tarde!",
     "description": "{vocation} de {world}",
     "vocationRankLabel": "Top {rank} {vocation} em {world}",
+    "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
     "shareInfo": "Este personagem pode compartilhar XP com outros entre o nível <lower>{min}</lower> e <upper>{max}</upper>.",
     "searchAnother": {
       "label": "Pesquisar outro personagem",
@@ -135,7 +136,6 @@
   "CompareCharactersPage": {
     "title": "Comparação de Personagens",
     "description": "Preencha os detalhes abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
-    "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
     "form": {
       "name": {
         "label": "Nome do Personagem",
