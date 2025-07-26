@@ -15,7 +15,8 @@
       "contribute": "Support Us",
       "tools": "Tools",
       "experienceSimulator": "Experience Simulator"
-    }
+    },
+    "goToDashboard": "Go to Dashboard"
   },
   "Homepage": {
     "title": "Track Your Tibia Character Progress",
