@@ -10,9 +10,10 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.queries";
 import { formatNumberToLocale } from "@/utils/format-number";
-import Link from "next/link";
+
 import { useTranslations } from "next-intl";
 import { getCookie } from "cookies-next/client";
+import { Link } from "@/i18n/routing";
 
 export const ExperienceByWorldTable = () => {
   const t = useTranslations("ExperienceByWorldPage");
@@ -42,8 +43,7 @@ export const ExperienceByWorldTable = () => {
               <TableCell>
                 <Link
                   className="underline"
-                  target="_blank"
-                  href={`/${locale}/character/${player.characterName}`}
+                  href={`/character/${player.characterName}`}
                 >
                   {player.characterName}
                 </Link>
