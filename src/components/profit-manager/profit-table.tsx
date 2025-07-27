@@ -23,6 +23,7 @@ import {
 } from "../ui/dialog";
 import { Trash2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { convertMinutesToHoursAndMinutes } from "@/utils/format-number";
 
 export const ProfitTable = ({ character }: { character: string }) => {
   const t = useTranslations("Dashboard.ProfitManagerPage");
@@ -86,6 +87,9 @@ export const ProfitTable = ({ character }: { character: string }) => {
               {t("table.headers.date")}
             </TableHead>
             <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              {t("table.headers.duration")}
+            </TableHead>
+            <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
               {t("table.headers.grossProfit")}
             </TableHead>
             <TableHead className="py-3 px-4 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -113,6 +117,9 @@ export const ProfitTable = ({ character }: { character: string }) => {
               </TableCell>
               <TableCell className="py-3 px-4 text-foreground">
                 {new Date(entry.huntDate).toLocaleDateString()}
+              </TableCell>
+              <TableCell className="py-3 px-4 text-foreground">
+                {convertMinutesToHoursAndMinutes(entry.huntDuration) || ""}
               </TableCell>
               <TableCell className="py-3 px-4 text-foreground">
                 {Number(entry.profit).toLocaleString(locale)}

@@ -5,6 +5,7 @@ interface ProfitEntry {
   characterId: string;
   huntName: string;
   huntDate: string;
+  huntDuration: number;
   profit: string;
   preyCardsUsed: string;
   boostsValue: string;
@@ -23,13 +24,14 @@ export const getProfitHistoryData = async (characterId: string) => {
     throw new Error("Failed to fetch user characters");
   }
 
-  const profitData = await data.json();
+  const profitData: ProfitEntry[] = await data.json();
   return profitData;
 };
 
 interface AddProfitEntryParams {
   huntName: string;
   huntDate: string;
+  huntDuration: number;
   profit: string;
   preyCardsUsed: string;
   boostsValue: string;

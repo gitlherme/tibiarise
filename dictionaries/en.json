@@ -342,6 +342,7 @@
           "name": "Hunt Name",
           "date": "Date",
           "grossProfit": "Gross Profit",
+          "duration": "Hunt Duration",
           "tibiaCoinValue": "Tibia Coin Value",
           "preyCardValue": "Value Spent in Prey Cards",
           "boostValue": "Value Spent in Boost",

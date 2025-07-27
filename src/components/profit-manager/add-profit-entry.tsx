@@ -57,12 +57,14 @@ export const AddProfitEntry = ({
     }
 
     const extractedSessionData = extractSessionData(form.huntSession);
+    console.log("Extracted Session Data:", extractedSessionData);
 
     await addProfitEntryMutation.mutate(
       {
         boostsValue: form.boostsValue,
         huntDate: extractedSessionData?.date.toISOString() || "",
         huntName: form.huntName,
+        huntDuration: extractedSessionData?.duration || 0,
         preyCardsUsed: form.preyCardsUsed,
         profit: extractedSessionData?.grossProfit || "0",
         world: characters?.find((char) => char.id === character)?.world || "",
