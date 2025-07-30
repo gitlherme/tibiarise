@@ -298,6 +298,18 @@
           "step4": "Aguarde cerca de 5 a 10 minutos.",
           "step5": "Clique no botão de verificação para concluir a verificação."
         }
+      },
+      "errors": {
+      "verificationFailed": "Verificação falhou. Por favor, espere alguns minutos antes de tentar novamente e certifique-se de que o personagem tem o código de verificação no comentário."
+      },
+      "buttons": {
+        "requestingCode": "Solicitando código...",
+        "verifyingButtonLabel": "Verificando..."
+      },
+      "confirmCharacterDialog": {
+        "title": "Confirmar Personagem",
+        "description": "Tem certeza de que deseja verificar este personagem?",
+        "confirm": "Verificar"
       }
     },
     "ProfitManagerPage": {

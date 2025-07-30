@@ -298,6 +298,18 @@
           "step4": "Wait about 5 to 10 minutes.",
           "step5": "Click the verify button to complete the verification."
         }
+      },
+      "errors": {
+        "verificationFailed": "Verification failed. Please wait some few minutes before try again and make sure the character has the verification code on comment."
+      },
+      "buttons": {
+        "requestingCode": "Requesting code...",
+        "verifyingButtonLabel": "Verifying..."
+      },
+      "confirmCharacterDialog": {
+        "title": "Confirm Character",
+        "description": "Are you sure you want to verify this character?",
+        "confirm": "Verify"
       }
     },
     "ProfitManagerPage": {

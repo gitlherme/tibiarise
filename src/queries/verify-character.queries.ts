@@ -1,18 +1,18 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface VerificationCode {
   code: string;
 }
 
-interface GetVerificationCodeParams {
+interface CreateVerificationCodeParams {
   email: string;
   characterName: string;
 }
 
-export const getVerificationCode = async ({
+export const createVerificationCode = async ({
   email,
   characterName,
-}: GetVerificationCodeParams) => {
+}: CreateVerificationCodeParams) => {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}/verify-character`,
     {
@@ -32,7 +32,24 @@ export const getVerificationCode = async ({
   return code;
 };
 
-export const checkVerificationCode = async (code: string) => {
+export const checkVerificationCode = async (characterName: string) => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API_URL}/verify-character/check/${characterName}`,
+    {
+      method: "GET",
+    }
+  );
+
+  const res: VerificationCode = await data.json();
+
+  if (!data.ok) {
+    throw new Error("User doesn't have a verification code");
+  }
+
+  return res;
+};
+
+export const updateVerificationCode = async (code: string) => {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API_URL}/verify-character/${code}`,
     {
@@ -49,18 +66,26 @@ export const checkVerificationCode = async (code: string) => {
 };
 
 export const useCreateVerificationCode = () => {
-  return useMutation<VerificationCode, Error, GetVerificationCodeParams>({
+  return useMutation<VerificationCode, Error, CreateVerificationCodeParams>({
     mutationKey: ["user", "verification"],
     mutationFn: ({ email, characterName }) =>
-      getVerificationCode({ email, characterName }),
+      createVerificationCode({ email, characterName }),
     retry: false,
   });
 };
 
-export const useCheckVerificationCode = () => {
+export const useCheckVerificationCode = (characterName: string) => {
+  return useQuery({
+    queryKey: ["user", "verificationCheck", characterName],
+    queryFn: () => checkVerificationCode(characterName),
+    retry: false,
+  });
+};
+
+export const useUpdateVerificationCode = () => {
   return useMutation<{ message: string }, Error, string>({
     mutationKey: ["user", "verification"],
-    mutationFn: (code: string) => checkVerificationCode(code),
+    mutationFn: (code: string) => updateVerificationCode(code),
     retry: false,
   });
 };

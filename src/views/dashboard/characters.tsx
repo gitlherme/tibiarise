@@ -35,10 +35,14 @@ import { useTranslations } from "next-intl";
 import {
   useCheckVerificationCode,
   useCreateVerificationCode,
+  useUpdateVerificationCode,
 } from "@/queries/verify-character.queries";
 import { toast } from "sonner";
 import { StepIndicator } from "@/components/verify-characters/step-indicator";
 import { HowToVerify } from "@/components/verify-characters/how-to-verify";
+import { useGetCharacterDataByName } from "@/queries/character-data.queries";
+import { Dialog } from "@radix-ui/react-dialog";
+import { DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 // Types for the character verification process
 interface CharacterVerificationState {
@@ -67,11 +71,12 @@ export const CharactersView: React.FC = () => {
       currentStep: 0,
     });
 
+  const [characterExistsModal, setCharacterExistsModal] = useState(false);
+  const [showVerificationForm, setShowVerificationForm] = useState(false);
+
   const { data: verifiedCharacters } = useGetUserCharacters(
     session.data?.user?.email || ""
   );
-
-  const [showVerificationForm, setShowVerificationForm] = useState(false);
 
   const handleCharacterNameChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -84,6 +89,13 @@ export const CharactersView: React.FC = () => {
   };
 
   const createVerificationCode = useCreateVerificationCode();
+  const characterHasOldVerificationCode = useCheckVerificationCode(
+    verificationState.characterName || ""
+  );
+
+  const { data: characterData, refetch: characterDataRefetch } =
+    useGetCharacterDataByName(verificationState.characterName || "");
+
   const requestVerificationCode = async () => {
     if (!verificationState.characterName?.trim()) {
       setVerificationState({
@@ -95,14 +107,93 @@ export const CharactersView: React.FC = () => {
 
     setVerificationState({
       ...verificationState,
-      isCodeRequesting: true,
+      isCodeRequesting: true, // Começa a requestar o código (inclui a busca de dados do char)
       error: null,
     });
+
+    try {
+      const { data: fetchedCharacterData } = await characterDataRefetch();
+      if (fetchedCharacterData) {
+        setCharacterExistsModal(true);
+        setVerificationState((prevState) => ({
+          ...prevState,
+          isCodeRequesting: false,
+        }));
+      } else {
+        const { data: oldCodeData } =
+          await characterHasOldVerificationCode.refetch();
+
+        if (oldCodeData?.code) {
+          setVerificationState({
+            ...verificationState,
+            receivedCode: oldCodeData.code,
+            isCodeRequesting: false,
+            currentStep: 1,
+          });
+          setShowVerificationForm(true);
+          return;
+        }
+
+        createVerificationCode.mutate(
+          {
+            email: session.data?.user?.email || "",
+            characterName: verificationState.characterName.trim(),
+          },
+          {
+            onSuccess: (data) => {
+              setVerificationState({
+                ...verificationState,
+                verificationCode: "",
+                receivedCode: data.code,
+                isCodeRequesting: false,
+                currentStep: 1,
+              });
+              setShowVerificationForm(true);
+            },
+            onError: (error) => {
+              setVerificationState({
+                ...verificationState,
+                error: error.message || "Failed to get verification code",
+                isCodeRequesting: false,
+              });
+            },
+          }
+        );
+      }
+    } catch (error: any) {
+      setVerificationState({
+        ...verificationState,
+        error: error.message || "Failed to fetch character data",
+        isCodeRequesting: false,
+      });
+    }
+  };
+
+  const confirmAndRequestCode = async () => {
+    setCharacterExistsModal(false);
+    setVerificationState((prevState) => ({
+      ...prevState,
+      isCodeRequesting: true,
+    }));
+
+    const { data: oldCodeData } =
+      await characterHasOldVerificationCode.refetch();
+
+    if (oldCodeData?.code) {
+      setVerificationState({
+        ...verificationState,
+        receivedCode: oldCodeData.code,
+        isCodeRequesting: false,
+        currentStep: 1,
+      });
+      setShowVerificationForm(true);
+      return;
+    }
 
     createVerificationCode.mutate(
       {
         email: session.data?.user?.email || "",
-        characterName: verificationState.characterName.trim(),
+        characterName: verificationState.characterName?.trim() || "",
       },
       {
         onSuccess: (data) => {
@@ -126,7 +217,7 @@ export const CharactersView: React.FC = () => {
     );
   };
 
-  const checkVerificationCode = useCheckVerificationCode();
+  const updateVerificationCode = useUpdateVerificationCode();
   const verifyCharacter = async () => {
     setVerificationState({
       ...verificationState,
@@ -134,10 +225,10 @@ export const CharactersView: React.FC = () => {
       error: null,
     });
 
-    checkVerificationCode.mutate(createVerificationCode.data?.code!, {
-      onSuccess: (verificationState) => {
+    updateVerificationCode.mutate(verificationState.receivedCode!, {
+      onSuccess: (data) => {
         setVerificationState({
-          ...verificationState,
+          ...verificationState, // Keep existing state, but update specific fields
           verificationCode: "",
           isVerified: true,
           isVerifying: false,
@@ -151,7 +242,7 @@ export const CharactersView: React.FC = () => {
         setVerificationState({
           ...verificationState,
           isVerifying: false,
-          error: error.message || "Failed to verify character",
+          error: t("errors.verificationFailed"),
         });
       },
     });
@@ -182,6 +273,41 @@ export const CharactersView: React.FC = () => {
 
       <HowToVerify />
       <StepIndicator verificationState={verificationState} />
+
+      {characterExistsModal && (
+        <Dialog
+          open={characterExistsModal}
+          onOpenChange={setCharacterExistsModal}
+        >
+          <DialogContent>
+            <DialogTitle>{t("confirmCharacterDialog.title")}</DialogTitle>
+            <div>
+              {t("confirmCharacterDialog.description")}
+              {characterData && (
+                <div className="flex flex-col my-4 text-foreground">
+                  <span>Name: {characterData.name}</span>
+                  <span>Vocation: {characterData.vocation}</span>
+                  <span>Level: {characterData.level}</span>
+                  <span>World: {characterData.world}</span>
+                </div>
+              )}
+            </div>
+            <Button
+              onClick={confirmAndRequestCode}
+              disabled={createVerificationCode.isPending}
+            >
+              {createVerificationCode.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t("buttons.requestingCode")}
+                </>
+              ) : (
+                t("confirmCharacterDialog.confirm")
+              )}
+            </Button>
+          </DialogContent>
+        </Dialog>
+      )}
 
       <Card>
         <CardHeader>
@@ -309,13 +435,16 @@ export const CharactersView: React.FC = () => {
             <>
               {verificationState.currentStep === 0 && (
                 <Button
-                  onClick={requestVerificationCode}
-                  disabled={verificationState.isCodeRequesting}
+                  onClick={requestVerificationCode} // Chama a função que gerencia a busca e o modal
+                  disabled={
+                    verificationState.isCodeRequesting ||
+                    !verificationState.characterName
+                  }
                 >
                   {verificationState.isCodeRequesting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Requesting Code...
+                      {t("buttons.requestingCode")}
                     </>
                   ) : (
                     t("steps.firstStep.buttonLabel")
@@ -331,7 +460,7 @@ export const CharactersView: React.FC = () => {
                   {verificationState.isVerifying ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Verifying...
+                      {t("buttons.verifyingButtonLabel")}
                     </>
                   ) : (
                     t("steps.secondStep.buttonLabel")
