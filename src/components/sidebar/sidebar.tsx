@@ -42,14 +42,14 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="p-4 border-b">
         <div className="flex items-center justify-between ">
           {!collapsed && (
-            <h2 className="font-semibold text-lg">
+            <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo-dark.svg"
                 alt="Tibia Rise Logo"
                 width={200}
                 height={120}
               />
-            </h2>
+            </Link>
           )}
           <Button
             variant="ghost"

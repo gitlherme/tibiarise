@@ -51,7 +51,7 @@ export const AddProfitEntry = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!character) {
+    if (character === "" || !character) {
       alert("Please select a character."); // Simple validation
       return;
     }
