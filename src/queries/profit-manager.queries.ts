@@ -81,7 +81,6 @@ export const useProfitHistory = (characterId: string) => {
   return useQuery<ProfitEntry[]>({
     queryKey: ["characterProfitHistory", characterId, "profitHistory"],
     queryFn: () => getProfitHistoryData(characterId),
-    gcTime: 1000 * 60 * 60 * 12, // 12 hours
     enabled: !!characterId,
     retry: false,
   });

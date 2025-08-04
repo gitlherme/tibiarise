@@ -29,8 +29,6 @@ export const getCharacterDataFromTibiaData = async (name: string) => {
     throw new Error("Character data not found");
   }
 
-  console.log(res);
-
   return {
     name: res.character.character.name,
     vocation: res.character.character.vocation,
@@ -47,9 +45,9 @@ export const useGetCharacterData = () => {
     queryKey: ["character", name?.toLowerCase()],
     queryFn: () => getCharacterData(String(name).toLowerCase()),
     initialData: getQueryClient().getQueryData(["character", name]),
-    gcTime: 1000 * 60 * 60 * 12, // 1 minute
     enabled: !!name,
     retry: false,
+    refetchOnWindowFocus: true,
   });
 };
 

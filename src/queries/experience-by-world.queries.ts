@@ -27,7 +27,6 @@ export const useGetExperienceByWorld = () => {
         String(filter).toLowerCase()
       ),
     initialData: getQueryClient().getQueryData(["world", world]),
-    staleTime: 60 * 1000, // 1 minute
     enabled: !!world && !!filter,
     retry: false,
   });

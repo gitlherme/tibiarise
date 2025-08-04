@@ -23,7 +23,6 @@ export const useGetUserCharacters = (email: string) => {
   return useQuery<UserCharacter[]>({
     queryKey: ["user", email, "characters"],
     queryFn: () => getUserCharacters(email),
-    gcTime: 1000 * 60 * 60 * 12, // 12 hours
     enabled: !!email,
     retry: false,
   });
