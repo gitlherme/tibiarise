@@ -36,6 +36,7 @@ import {
 } from "@tanstack/react-table";
 import { ArrowUpDown, TrashIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
+import moment from "moment";
 
 export const ProfitTable = ({ character }: { character: string }) => {
   const t = useTranslations("Dashboard.ProfitManagerPage");
@@ -122,7 +123,9 @@ export const ProfitTable = ({ character }: { character: string }) => {
           </Button>
         );
       },
-      cell: ({ row }) => new Date(row.original.huntDate).toLocaleDateString(),
+      cell: ({ row }) => (
+        <span>{moment(row.original.huntDate).utc().format("DD/MM/YYYY")}</span>
+      ),
     },
     {
       accessorKey: "huntDuration",

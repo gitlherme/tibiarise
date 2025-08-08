@@ -352,7 +352,7 @@
       "table": {
         "headers": {
           "name": "Hunt Name",
-          "date": "Date",
+          "date": "Date (DD/MM/YYYY)",
           "grossProfit": "Gross Profit",
           "duration": "Hunt Duration",
           "tibiaCoinValue": "Tibia Coin Value",
