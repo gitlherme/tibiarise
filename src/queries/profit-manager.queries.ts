@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-interface ProfitEntry {
+export interface ProfitEntry {
   id: string;
   characterId: string;
   huntName: string;

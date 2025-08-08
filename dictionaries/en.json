@@ -375,5 +375,21 @@
     "discord": "Join our Discord server",
     "tibia": "<tibia>Tibia</tibia> is a registered trademark of <cip>CipSoft GmbH</cip>. Tibia and all related content are copyrighted.",
     "thanks": "Thanks for <data>TibiaData</data> and <wiki>TibiaWiki</wiki> for providing the data used in this website."
+  },
+  "DataTable": {
+    "noData": "No data available",
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "filter": {
+      "placeholder": "Filter...",
+      "noResults": "No results found"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of",
+      "rowsPerPage": "Rows per page"
+    }
   }
 }

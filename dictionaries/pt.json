@@ -351,13 +351,13 @@
       "tibiaTradeNote": "Valor da TC fornecido por <tibiaTrade>TibiaTrade</tibiaTrade>.",
       "table": {
         "headers": {
-          "name": "Nome da Hunt",
+          "name": "Hunt",
           "date": "Data",
           "grossProfit": "Lucro Bruto",
-          "duration": "Duração da Hunt",
-          "tibiaCoinValue": "Valor da Tibia Coin",
-          "preyCardValue": "Valor Gasto em Prey Cards",
-          "boostValue": "Valor Gasto em Boost",
+          "duration": "Duração",
+          "tibiaCoinValue": "Valor TC",
+          "preyCardValue": "Valor Prey Cards",
+          "boostValue": "Valor Boost",
           "netProfit": "Lucro Líquido",
           "actions": "Ações"
         },
@@ -375,5 +375,21 @@
     "discord": "Junte-se ao nosso servidor Discord",
     "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
     "thanks": "Obrigado ao <data>TibiaData</data> e <wiki>TibiaWiki</wiki> por fornecer os dados usados neste site."
+  },
+  "DataTable": {
+    "noData": "Nenhum dado disponível",
+    "loading": "Carregando...",
+    "error": "Erro ao carregar dados",
+    "filter": {
+      "placeholder": "Filtrar por data...",
+      "noResults": "Nenhum resultado encontrado"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Próximo",
+      "page": "Página",
+      "of": "de",
+      "rowsPerPage": "Linhas por página"
+    }
   }
 }

@@ -26,7 +26,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { AddProfitEntry } from "@/components/profit-manager/add-profit-entry";
 import { ProfitManagerCards } from "@/components/profit-manager/profit-manager-cards";
-import { ProfitTable } from "@/components/profit-manager/profit-table";
+import { ProfitTable } from "@/components/profit-manager/profit-table/profit-table";
 
 export const ProfitManagerView: React.FC = () => {
   const session = useSession();
