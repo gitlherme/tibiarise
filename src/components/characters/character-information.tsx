@@ -51,7 +51,7 @@ export const CharacterInformation = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <VerifiedIcon className="text-tprimary" />
+                      <VerifiedIcon className="text-primary" />
                     </TooltipTrigger>
                     <TooltipContent>
                       {t("verifiedAt", {

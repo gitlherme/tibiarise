@@ -72,7 +72,7 @@ export default function Home() {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className=" border-2 focus-visible:ring-tprimary bg-background text-sm text-muted-foreground rounded-full"
+                    className=" border-2 focus-visible:ring-primary bg-background text-sm text-muted-foreground rounded-full"
                     placeholder={t("form.name.placeholder")}
                     {...field}
                   />
@@ -83,7 +83,7 @@ export default function Home() {
           />
           <Button
             type="submit"
-            className="bg-tprimary hover:bg-tprimary hover:brightness-110 cursor-pointer rounded-full hover:rounded-full"
+            className="bg-primary hover:bg-primary hover:brightness-110 cursor-pointer rounded-full hover:rounded-full"
           >
             <SearchIcon aria-label="Search" />
           </Button>

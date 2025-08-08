@@ -62,7 +62,7 @@ export const Search = () => {
         <Button
           type="submit"
           aria-label="Search"
-          className="bg-tprimary hover:bg-tprimary hover:brightness-110"
+          className="bg-primary hover:bg-primary hover:brightness-110"
         >
           <SearchIcon />
         </Button>

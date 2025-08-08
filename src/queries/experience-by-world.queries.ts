@@ -1,5 +1,4 @@
 "use client";
-import { getQueryClient } from "@/components/utils/providers";
 import { ExperienceByWorld } from "@/models/experience-by-world.model";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
@@ -26,7 +25,6 @@ export const useGetExperienceByWorld = () => {
         String(world).toLowerCase(),
         String(filter).toLowerCase()
       ),
-    initialData: getQueryClient().getQueryData(["world", world]),
     enabled: !!world && !!filter,
     retry: false,
   });

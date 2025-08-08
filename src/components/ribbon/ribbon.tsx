@@ -8,7 +8,7 @@ type RibbonProps = {
 export const Ribbon = ({ children, enabled = false }: RibbonProps) => {
   return (
     enabled && (
-      <div className="bg-tprimary text-white w-full p-4 text-center">
+      <div className="bg-primary text-white w-full p-4 text-center">
         {children}
       </div>
     )

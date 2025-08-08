@@ -18,8 +18,8 @@ export default function ToolsView() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <Link href={`/${locale}/tools/loot-split`}>
-          <Card className="hover:bg-tprimary/10 p-8 text-center flex items-center h-72 flex-col gap-4 transition-all ease-in hover:shadow-lg">
-            <Badge className="bg-tprimary">New</Badge>
+          <Card className="hover:bg-primary/10 p-8 text-center flex items-center h-72 flex-col gap-4 transition-all ease-in hover:shadow-lg">
+            <Badge className="bg-primary">New</Badge>
             <Image
               src="/assets/Bar_of_Gold.gif"
               width={64}
@@ -31,7 +31,7 @@ export default function ToolsView() {
           </Card>
         </Link>
         <Link href={`/${locale}/tools/compare-characters`}>
-          <Card className="hover:bg-tprimary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
+          <Card className="hover:bg-primary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
               src="/assets/Spying_Eye.webp"
               width={64}
@@ -45,7 +45,7 @@ export default function ToolsView() {
           </Card>
         </Link>
         <Link href={`/${locale}/tools/experience-simulator`}>
-          <Card className="hover:bg-tprimary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
+          <Card className="hover:bg-primary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
               src="/assets/XP_Boost.webp"
               width={64}

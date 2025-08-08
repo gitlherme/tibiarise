@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "../../globals.css";
 import { Header } from "@/components/header/header";
-import Providers from "@/components/utils/providers";
+import Providers from "@/components/utils/providers/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
@@ -42,7 +42,7 @@ export default async function RootLayout(
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <meta name="title" content="Tibia Rise" />
         <meta
@@ -73,7 +73,7 @@ export default async function RootLayout(
 
         <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>
-      <body className={fontSans.className}>
+      <body className={`${fontSans.className}`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div className="flex flex-col">

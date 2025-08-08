@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "../../globals.css";
-import Providers from "@/components/utils/providers";
+import Providers from "@/components/utils/providers/providers";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
@@ -39,7 +39,7 @@ export default async function RootLayout(
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>

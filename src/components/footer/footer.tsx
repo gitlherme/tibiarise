@@ -4,13 +4,13 @@ import { useTranslations } from "next-intl";
 export const Footer = () => {
   const t = useTranslations("Footer");
   return (
-    <footer className="py-8 flex gap-1 flex-col items-center justify-center text-center border-t-2 text-black mt-12">
+    <footer className="py-8 flex gap-1 flex-col items-center justify-center text-center border-t-2 text-foreground mt-12">
       <span className="block">
         {t("madeWith")}{" "}
         <Link
           href="https://github.com/gitlherme"
           target="_blank"
-          className="font-bold "
+          className="font-bold"
         >
           gitlherme
         </Link>
@@ -18,7 +18,7 @@ export const Footer = () => {
 
       <span className="block">
         <Link
-          className="text-black hover:text-blue-600"
+          className="text-foreground hover:text-blue-600"
           href="mailto:contact@tibiarise.app"
         >
           contact@tibiarise.app
@@ -27,7 +27,7 @@ export const Footer = () => {
 
       <span className="block">
         <Link
-          className="text-black hover:text-blue-600"
+          className="text-foreground hover:text-blue-600"
           href="https://discord.gg/BAZDE29Eyf"
         >
           {t("discord")}

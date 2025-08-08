@@ -15,7 +15,7 @@ export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
-      <div className="flex items-center bg-tprimary p-4 justify-between">
+      <div className="flex items-center bg-primary p-4 justify-between">
         <DrawerTrigger onClick={() => setIsOpen(true)}>
           <MenuIcon className="text-white" />
         </DrawerTrigger>

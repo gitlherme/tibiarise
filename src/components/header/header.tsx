@@ -10,13 +10,14 @@ import { signInGoogleAction } from "@/app/actions/auth.action";
 import { useSession } from "next-auth/react";
 import { ProfileActions } from "./profile-actions";
 import { Link } from "@/i18n/routing";
+import { SwitchTheme } from "../utils/switch-theme";
 
 export const Header = () => {
   const { data: session } = useSession();
   const t = useTranslations("Header");
   const tRibbon = useTranslations("Ribbon");
   return (
-    <>
+    <div suppressHydrationWarning>
       <Ribbon enabled>
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
@@ -29,21 +30,30 @@ export const Header = () => {
       </Ribbon>
       <div className="mb-12">
         <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
-          <Link href={`/`} className="block text-primary">
+          <Link href={`/`} className="block text-foreground">
             <Image
               src="/logo-dark.svg"
               alt="Tibia Rise Logo"
               width={200}
               height={120}
+              className="block dark:hidden"
+            />
+
+            <Image
+              src="/logo.svg"
+              alt="Tibia Rise Logo"
+              width={200}
+              height={120}
+              className="hidden dark:block"
             />
           </Link>
 
           <div className="flex flex-col md:flex-row items-center md:gap-12">
-            <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-primary">
+            <ul className="flex flex-row my-4 md:my-0 gap-4 md:gap-8 text-foreground">
               <li>
                 <Link
                   href={`/`}
-                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-primary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.search")}
                 </Link>
@@ -51,7 +61,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/world`}
-                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-primary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.experienceByWorld")}
                 </Link>
@@ -59,7 +69,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/tools`}
-                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in flex gap-2"
+                  className="hover:text-primary hover:font-semibold hover:transition-all hover:ease-in flex gap-2"
                 >
                   {t("nav.tools")}
                 </Link>
@@ -67,7 +77,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/support`}
-                  className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in"
+                  className="hover:text-primary hover:font-semibold hover:transition-all hover:ease-in"
                 >
                   {t("nav.contribute")}
                 </Link>
@@ -82,10 +92,13 @@ export const Header = () => {
               <Button onClick={signInGoogleAction}>Login</Button>
             )}
 
-            <LanguageSelector />
+            <div className="flex items-center gap-2">
+              <LanguageSelector />
+              <SwitchTheme />
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

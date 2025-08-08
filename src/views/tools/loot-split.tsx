@@ -305,7 +305,7 @@ export default function LootSplitView() {
                           transfer {transfer.amount} to {transfer.to}
                         </span>
                         <Button
-                          className="cursor-pointer bg-tprimary h-8 px-2 hover:bg-tprimary/80"
+                          className="cursor-pointer bg-primary h-8 px-2 hover:bg-primary/80"
                           onClick={() => copyTransferMessage(transfer)}
                         >
                           Copy
@@ -316,7 +316,7 @@ export default function LootSplitView() {
                   <div className="flex flex-col gap-2 items-center">
                     <Button
                       onClick={() => copyAllMessages(transfers.transfers)}
-                      className="w-fit cursor-pointer bg-tprimary hover:bg-tprimary/80"
+                      className="w-fit cursor-pointer bg-primary hover:bg-primary/80"
                     >
                       Copy Full Message
                     </Button>
@@ -334,7 +334,7 @@ export default function LootSplitView() {
                                 player
                               )
                             }
-                            className="w-fit cursor-pointer bg-tprimary hover:bg-tprimary/80"
+                            className="w-fit cursor-pointer bg-primary hover:bg-primary/80"
                           >
                             Copy {player.name} transfers
                           </Button>

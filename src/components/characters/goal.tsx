@@ -78,7 +78,7 @@ export const Goal = ({ experienceTable }: GoalProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-tprimary hover:bg-tprimary hover:brightness-110">
+        <Button className="bg-primary hover:bg-primary hover:brightness-110">
           {t("goal.cta.label")}
         </Button>
       </DialogTrigger>
@@ -102,7 +102,7 @@ export const Goal = ({ experienceTable }: GoalProps) => {
                       <FormLabel>{t("goal.form.level.label")}</FormLabel>
                       <FormControl>
                         <Input
-                          className="ring-tprimary"
+                          className="ring-primary"
                           placeholder={t("goal.form.level.placeholder")}
                           {...field}
                         />
@@ -112,7 +112,7 @@ export const Goal = ({ experienceTable }: GoalProps) => {
                   )}
                 />
                 <Button
-                  className="bg-tprimary hover:bg-tprimary hover:brightness-110"
+                  className="bg-primary hover:bg-primary hover:brightness-110"
                   type="submit"
                 >
                   {t("goal.form.submit.label")}

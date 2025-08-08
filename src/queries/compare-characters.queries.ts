@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCharacterData } from "./character-data.queries";
-import { getQueryClient } from "@/components/utils/providers";
 import { CompareCharacters } from "@/models/compare-characters.model";
 
 interface UseCompareCharactersProps {
@@ -36,7 +35,6 @@ export const useCompareCharacters = ({
         String(firstCharacter).toLowerCase(),
         String(secondCharacter).toLowerCase()
       ),
-    initialData: getQueryClient().getQueryData(["character", name]),
     staleTime: 60 * 1000, // 1 minute
     enabled: !!firstCharacter && !!secondCharacter,
     retry: false,

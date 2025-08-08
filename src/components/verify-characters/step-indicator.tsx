@@ -26,7 +26,7 @@ export const StepIndicator = ({
       <div className="grow mx-2 flex items-center">
         <Separator
           className={`h-0.5 ${
-            verificationState.currentStep >= 1 ? "bg-tprimary" : "bg-border"
+            verificationState.currentStep >= 1 ? "bg-primary" : "bg-border"
           }`}
         />
       </div>
@@ -44,7 +44,7 @@ export const StepIndicator = ({
       <div className="grow mx-2 flex items-center">
         <Separator
           className={`h-0.5 ${
-            verificationState.currentStep >= 2 ? "bg-tprimary" : "bg-border"
+            verificationState.currentStep >= 2 ? "bg-primary" : "bg-border"
           }`}
         />
       </div>

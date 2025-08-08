@@ -19,6 +19,7 @@ import { AvatarFallback, AvatarImage } from "../ui/avatar";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { SwitchTheme } from "../utils/switch-theme";
 
 interface SidebarProps {
   className?: string;
@@ -48,6 +49,15 @@ export function Sidebar({ className }: SidebarProps) {
                 alt="Tibia Rise Logo"
                 width={200}
                 height={120}
+                className="block dark:hidden"
+              />
+
+              <Image
+                src="/logo.svg"
+                alt="Tibia Rise Logo"
+                width={200}
+                height={120}
+                className="hidden dark:block"
               />
             </Link>
           )}
@@ -69,7 +79,7 @@ export function Sidebar({ className }: SidebarProps) {
           {!collapsed && (
             <Link
               href="/"
-              className="text-base mt-3 hover:text-tprimary text-muted-foreground"
+              className="text-base mt-3 hover:text-primary text-muted-foreground"
             >
               <span>
                 <ChevronLeftIcon size={16} className="inline mr-1" />
@@ -105,31 +115,34 @@ export function Sidebar({ className }: SidebarProps) {
       {/* User Profile */}
       <div className="p-4 border-t">
         {!collapsed ? (
-          <div className="flex items-center gap-3 px-2 py-2">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-              {user.data?.user?.image ? (
-                <Avatar>
-                  <AvatarImage
-                    src={user.data.user.image}
-                    alt={user.data.user.name || "User Avatar"}
-                    className="rounded-full"
-                  />
-                  <AvatarFallback>
-                    {user.data.user.name
-                      ? user.data.user.name.charAt(0).toUpperCase()
-                      : "U"}
-                  </AvatarFallback>
-                </Avatar>
-              ) : (
-                <Users2Icon size={16} className="text-primary" />
-              )}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 px-2 py-2">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                {user.data?.user?.image ? (
+                  <Avatar>
+                    <AvatarImage
+                      src={user.data.user.image}
+                      alt={user.data.user.name || "User Avatar"}
+                      className="rounded-full"
+                    />
+                    <AvatarFallback>
+                      {user.data.user.name
+                        ? user.data.user.name.charAt(0).toUpperCase()
+                        : "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                ) : (
+                  <Users2Icon size={16} className="text-primary" />
+                )}
+              </div>
+              <div className="flex flex-col">
+                <p className="text-sm font-medium">{user.data?.user?.name}</p>
+                <p className="text-xs text-muted-foreground">
+                  {user.data?.user?.email}
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <p className="text-sm font-medium">{user.data?.user?.name}</p>
-              <p className="text-xs text-muted-foreground">
-                {user.data?.user?.email}
-              </p>
-            </div>
+            <SwitchTheme />
           </div>
         ) : (
           <div className="flex justify-center">
