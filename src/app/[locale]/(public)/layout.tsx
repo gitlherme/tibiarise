@@ -5,7 +5,6 @@ import Providers from "@/components/utils/providers";
 import { Footer } from "@/components/footer/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
-import { HotjarSnippet } from "@/components/utils/hotjar";
 import { MobileHeader } from "@/components/header/mobile-header";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
@@ -94,7 +93,6 @@ export default async function RootLayout(
       <GoogleAnalytics
         gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID)}
       />
-      <HotjarSnippet />
     </html>
   );
 }
