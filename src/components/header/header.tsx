@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { Ribbon } from "../ribbon/ribbon";
 import { LanguageSelector } from "../language-selector/language-selector";
 import Image from "next/image";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { signInGoogleAction } from "@/app/actions/auth.action";
 import { useSession } from "next-auth/react";
@@ -18,7 +17,7 @@ export const Header = () => {
   const tRibbon = useTranslations("Ribbon");
   return (
     <>
-      <Ribbon>
+      <Ribbon enabled>
         {tRibbon.rich("message", {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (
@@ -63,7 +62,6 @@ export const Header = () => {
                   className="hover:text-tprimary hover:font-semibold hover:transition-all hover:ease-in flex gap-2"
                 >
                   {t("nav.tools")}
-                  <Badge className="bg-tprimary">New</Badge>
                 </Link>
               </li>
               <li>
