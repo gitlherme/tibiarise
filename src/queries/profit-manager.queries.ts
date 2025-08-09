@@ -83,6 +83,8 @@ export const useProfitHistory = (characterId: string) => {
     queryFn: () => getProfitHistoryData(characterId),
     enabled: !!characterId,
     retry: false,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };
 
