@@ -4,7 +4,7 @@ export enum ByWorldFilter {
   "MONTH" = "monthly",
 }
 
-type PlayerExperienceByWorld = {
+export type PlayerExperienceByWorld = {
   characterId: string;
   characterName: string;
   level: number;

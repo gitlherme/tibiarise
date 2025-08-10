@@ -10,64 +10,108 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { useGetExperienceByWorld } from "@/queries/experience-by-world.queries";
 import { formatNumberToLocale } from "@/utils/format-number";
-
 import { useTranslations } from "next-intl";
-import { getCookie } from "cookies-next/client";
 import { Link } from "@/i18n/routing";
+import { ColumnDef, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";
+import { PlayerExperienceByWorld } from "@/models/experience-by-world.model";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "../ui/button";
+import { useState } from "react";
+import { DataTable } from "../general/data-table";
+
 
 export const ExperienceByWorldTable = () => {
   const t = useTranslations("ExperienceByWorldPage");
-  const locale = getCookie("NEXT_LOCALE") || "en";
-  const { data, isLoading } = useGetExperienceByWorld();
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const { data } = useGetExperienceByWorld();
 
-  if (isLoading) {
-    return <Skeleton className="w-[100%] h-[300px] mt-12" />;
-  }
+  const columns: ColumnDef<PlayerExperienceByWorld>[] = [
+    {
+      accessorKey: "rank",
+      header: () => {
+        return (
+          <span>Rank</span>
+        );
+      },
+      cell: ({ row }) => row.index + 1,
+    },
+    {
+      accessorKey: "characterName",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {t("table.headers.name")}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => {
+        return (
+          <Link href={`/character/${row.original.characterName}`} className="hover:text-primary">
+            {row.original.characterName}
+          </Link>
+        )
+      },
+    },
+    {
+      accessorKey: "experienceGained",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {t("table.headers.xpGain")}
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <span
+          className={
+            Math.sign(row.original.experienceGained) === 1
+              ? "text-green-500"
+              : Math.sign(row.original.experienceGained) === -1
+              ? "text-red-500"
+              : ""
+          }
+        >
+          {Math.sign(row.original.experienceGained) === 1
+            ? `+${formatNumberToLocale(row.original.experienceGained)}`
+            : Math.sign(row.original.experienceGained) === 0
+            ? formatNumberToLocale(row.original.experienceGained)
+            : `${formatNumberToLocale(row.original.experienceGained)}`}
+        </span>
+      ),
+    },
 
-  const table = data?.topGainers;
+
+  ]
+
+  const table = useReactTable({
+      data: data?.topGainers || [],
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      onSortingChange: setSorting,
+      getSortedRowModel: getSortedRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      state: {
+        sorting,
+      },
+      initialState: {
+        pagination: {
+          pageSize: 50,
+        },
+      },
+    });
 
   return (
-    table && (
-      <Table className="mt-12">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Rank</TableHead>
-            <TableHead>{t("table.headers.name")}</TableHead>
-            <TableHead>{t("table.headers.xpGain")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {table?.map((player, index) => (
-            <TableRow key={player.characterName}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>
-                <Link
-                  className="underline"
-                  href={`/character/${player.characterName}`}
-                >
-                  {player.characterName}
-                </Link>
-              </TableCell>
-
-              <TableCell
-                className={
-                  Math.sign(player.experienceGained) === 1
-                    ? "text-green-500"
-                    : Math.sign(player.experienceGained) === -1
-                    ? "text-red-500"
-                    : ""
-                }
-              >
-                {Math.sign(player.experienceGained) === 1
-                  ? `+${formatNumberToLocale(player.experienceGained)}`
-                  : Math.sign(player.experienceGained) === 0
-                  ? formatNumberToLocale(player.experienceGained)
-                  : `${formatNumberToLocale(player.experienceGained)}`}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    data?.topGainers && (
+      <DataTable table={table} />
     )
   );
 };
