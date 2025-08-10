@@ -83,7 +83,7 @@ export default async function RootLayout(
               <div className="block lg:hidden">
                 <MobileHeader />
               </div>
-              <main className="min-h-[68vh]">{children}</main>
+              <main className="min-h-[68vh] md:px-12">{children}</main>
               <Footer />
               <Toaster />
             </div>

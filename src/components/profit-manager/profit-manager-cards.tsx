@@ -1,15 +1,12 @@
-import { useProfitHistory } from "@/queries/profit-manager.queries";
 import { ProfitManagerCard } from "./card";
 import { DollarSignIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { profitHistoryStore } from "@/stores/profit-history.store";
+import { useAtomValue } from "jotai";
 
-interface ProfitManagerCardsParams {
-  character: string;
-}
-
-export const ProfitManagerCards = ({ character }: ProfitManagerCardsParams) => {
+export const ProfitManagerCards = () => {
   const t = useTranslations("Dashboard.ProfitManagerPage");
-  const { data: history } = useProfitHistory(character || "");
+  const { history } = useAtomValue(profitHistoryStore);
   const totalProfit = history?.reduce(
     (acc, entry) => acc + (Number(entry.netProfit) || 0),
     0

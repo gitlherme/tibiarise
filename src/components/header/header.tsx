@@ -29,7 +29,7 @@ export const Header = () => {
         })}
       </Ribbon>
       <div className="mb-12">
-        <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 items-center">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between container mx-auto py-6 px-12 items-center">
           <Link href={`/`} className="block text-foreground">
             <Image
               src="/logo-dark.svg"

@@ -1,15 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { useCookiesNext } from "cookies-next/client";
 import { Button } from "../../ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ProfitEntry,
   useDeleteProfitEntry,
@@ -26,7 +18,6 @@ import { useTranslations } from "next-intl";
 import { convertMinutesToHoursAndMinutes } from "@/utils/format-number";
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -37,20 +28,40 @@ import {
 import { ArrowUpDown, TrashIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 import moment from "moment";
+import { DataTable } from "@/components/general/data-table";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useAtom } from "jotai";
+import { profitHistoryStore } from "@/stores/profit-history.store";
 
 export const ProfitTable = ({ character }: { character: string }) => {
   const t = useTranslations("Dashboard.ProfitManagerPage");
-  const dtTranslations = useTranslations("DataTable");
+
   const { data: history, refetch: refetchHistory } =
     useProfitHistory(character);
   const locale = useCookiesNext().getCookie("NEXT_LOCALE") || "en-US";
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [entryId, setEntryId] = useState<string | null>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+
+  const baseDate = {
     from: new Date(new Date().setDate(new Date().getDate() - 30)),
     to: new Date(),
-  });
+  };
+
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(baseDate);
+
+  const [filteredTable, setFilteredTable] = useAtom(profitHistoryStore);
+
+  useEffect(() => {
+    setFilteredTable({
+      history: history!.filter(
+        (item) =>
+          moment(item.huntDate).isSameOrAfter(dateRange?.from) &&
+          moment(item.huntDate).isSameOrBefore(dateRange?.to)
+      ),
+    });
+  }, [dateRange, history, setFilteredTable]);
 
   const deleteEntryProfitMutation = useDeleteProfitEntry();
   const DeleteDialog = () => {
@@ -251,7 +262,7 @@ export const ProfitTable = ({ character }: { character: string }) => {
   ];
 
   const table = useReactTable({
-    data: history || [],
+    data: filteredTable.history || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -269,77 +280,59 @@ export const ProfitTable = ({ character }: { character: string }) => {
     },
   });
 
+  const resetDateFields = () => {
+    const fields =
+      document.querySelectorAll<HTMLInputElement>('input[type="date"]');
+    fields.forEach((field) => (field.value = ""));
+  };
+
   return (
     <>
-      {/* <div className="flex items-center py-4">
-        <Calendar
-          mode="range"
-          defaultMonth={new Date()}
-          selected={dateRange}
-          onSelect={setDateRange}
-          className="rounded-lg border shadow-sm"
-        />
-      </div> */}
-      <Table className="mt-8">
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id} className="p-0 text-left">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                {dtTranslations("noData")}
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-end gap-4">
+        <div>
+          <Label>{t("labels.startDateFilter")}</Label>
+          <Input
+            className="max-w-[300px]"
+            type="date"
+            defaultValue={dateRange?.from as unknown as string}
+            onChange={(e) => {
+              const date = new Date(e.target.value);
+              setDateRange({
+                from: date,
+                to: dateRange?.to,
+              });
+            }}
+            max={moment().format("YYYY-MM-DD")}
+          />
+        </div>
+
+        <div>
+          <Label>{t("labels.endDateFilter")}</Label>
+          <Input
+            className="max-w-[300px]"
+            type="date"
+            defaultValue={dateRange?.to as unknown as string}
+            onChange={(e) => {
+              const date = new Date(e.target.value);
+              setDateRange({
+                from: dateRange?.from,
+                to: date,
+              });
+            }}
+            max={moment().format("YYYY-MM-DD")}
+          />
+        </div>
+
         <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          onClick={() => {
+            setDateRange(baseDate);
+            resetDateFields();
+          }}
         >
-          {dtTranslations("pagination.previous")}
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {dtTranslations("pagination.next")}
+          {t("buttons.resetFilter")}
         </Button>
       </div>
+      <DataTable table={table} />
       <DeleteDialog />
     </>
   );

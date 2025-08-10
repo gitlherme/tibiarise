@@ -335,7 +335,12 @@
         }
       },
       "buttons": {
-        "newProfit": "Add"
+        "newProfit": "Add",
+        "resetFilter": "Reset"
+      },
+      "labels": {
+        "startDateFilter": "From",
+        "endDateFilter": "To"
       },
       "noProfitEntries": "No data found for the selected character. Add a new profit record 🆙",
       "profitCards": {

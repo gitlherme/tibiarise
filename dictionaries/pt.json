@@ -335,7 +335,12 @@
         }
       },
       "buttons": {
-        "newProfit": "Adicionar"
+        "newProfit": "Adicionar",
+        "resetFilter": "Limpar"
+      },
+      "labels": {
+        "startDateFilter": "De",
+        "endDateFilter": "Até"
       },
       "noProfitEntries": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de lucro 🆙",
       "profitCards": {
