@@ -23,6 +23,7 @@ export const useGetUserCharacters = (email: string) => {
   return useQuery<UserCharacter[]>({
     queryKey: ["user", email, "characters"],
     queryFn: () => getUserCharacters(email),
+    refetchOnWindowFocus: true,
     enabled: !!email,
     retry: false,
   });
