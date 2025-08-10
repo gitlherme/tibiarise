@@ -100,7 +100,7 @@ export const ProfitManagerView: React.FC = () => {
         </div>
       ) : (
         <div>
-          <ProfitManagerCards character={String(selectedCharacter)} />
+          <ProfitManagerCards />
           <div className="text-xs mt-4 mb-2">
             {t.rich("tibiaTradeNote", {
               tibiaTrade: (chunks) => (
