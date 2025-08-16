@@ -9,6 +9,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { ExperienceTableValue } from "@/models/character-data.model";
+import { formatNumberToLocale } from "@/utils/format-number";
+import { levelExperience } from "@/utils/level-formulae";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getCookie } from "cookies-next/client";
+import moment from "moment";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -17,17 +28,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ExperienceTableValue } from "@/models/character-data.model";
-import { useState } from "react";
-import { levelExperience } from "@/utils/level-formulae";
-import { formatNumberToLocale } from "@/utils/format-number";
-import moment from "moment";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { getCookie } from "cookies-next/client";
 
 interface GoalProps {
   experienceTable: ExperienceTableValue[];
@@ -62,7 +62,8 @@ export const Goal = ({ experienceTable }: GoalProps) => {
     { experience: 0 }
   ).experience;
 
-  const dailyExperience = monthlyExperience / 30;
+  console.log(experienceTable.length);
+  const dailyExperience = monthlyExperience / experienceTable.length;
 
   const onSubmit = (data: any) => {
     const goalLevelExperience = levelExperience(parseInt(data.level));

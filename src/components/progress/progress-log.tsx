@@ -1,14 +1,14 @@
 "use client";
 import { useGetCharacterData } from "@/queries/character-data.queries";
+import { formatNumberToLocale } from "@/utils/format-number";
+import { ArrowDown, ArrowUp, Minus } from "@phosphor-icons/react";
+import clsx from "clsx";
+import moment from "moment";
+import { useTranslations } from "next-intl";
 import { Badge } from "../ui/badge";
-import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
-import { formatNumberToLocale } from "@/utils/format-number";
-import { useTranslations } from "next-intl";
-import clsx from "clsx";
-import { ArrowDown, ArrowUp, Minus } from "@phosphor-icons/react";
-import moment from "moment";
 
 export const ProgressLog = () => {
   const t = useTranslations("CharacterPage.progressLog");
@@ -37,7 +37,7 @@ export const ProgressLog = () => {
     { experience: 0 }
   ).experience;
 
-  const averageXPByDay = totalExperienceMonth / 30;
+  const averageXPByDay = totalExperienceMonth / experienceTable.length;
   const averageXPByWeek = totalExperienceMonth / 4;
 
   const sortedExperience = experienceTableCopy.sort(
