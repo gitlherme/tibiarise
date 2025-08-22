@@ -46,8 +46,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
           <div className="text-sm font-medium">{t("card.experience")}</div>
           <div className="text-2xl font-bold">
             {formatNumberToLocale(
-              character.experienceTable[character.experienceTable.length - 1]
-                .totalExperience
+              character.experienceTable[0].totalExperience
             )}
           </div>
         </div>
