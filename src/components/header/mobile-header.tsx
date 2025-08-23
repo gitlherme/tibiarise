@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../language-selector/language-selector";
 import { DiscordLogo } from "@phosphor-icons/react";
 import Image from "next/image";
+import { SwitchTheme } from "../utils/switch-theme";
 
 export const MobileHeader = () => {
   const locale = getCookie("NEXT_LOCALE") || "en";
@@ -20,31 +21,51 @@ export const MobileHeader = () => {
           <MenuIcon className="text-white" />
         </DrawerTrigger>
         <Link href="/" className="block text-white">
-          <Image src="/logo.svg" width={200} height={120} alt="Tibia Rise" />
+          <Image
+            src="/logo-dark.svg"
+            alt="Tibia Rise Logo"
+            width={200}
+            height={120}
+            className="block dark:hidden"
+          />
+
+          <Image
+            src="/logo.svg"
+            alt="Tibia Rise Logo"
+            width={200}
+            height={120}
+            className="hidden dark:block"
+          />
         </Link>
-        <div>
-          <LanguageSelector />
-        </div>
       </div>
       <DrawerContent className="h-full rounded-none flex items-center text-center px-4 py-20">
         <XCircleIcon
           size={32}
-          className="self-end"
+          className="absolute right-0 top-0 m-2"
           onClick={() => setIsOpen(false)}
         />
 
         <div className="flex justify-center items-center w-full my-8">
-          <Link href="/" className="block  text-black">
+          <Link href="/" className="block text-primary-foreground">
             <Image
               src="/logo-dark.svg"
+              alt="Tibia Rise Logo"
               width={200}
               height={120}
-              alt="Tibia Rise"
+              className="block dark:hidden"
+            />
+
+            <Image
+              src="/logo.svg"
+              alt="Tibia Rise Logo"
+              width={200}
+              height={120}
+              className="hidden dark:block"
             />
           </Link>
         </div>
         <div className="flex flex-col items-center my-4 gap-4 w-full">
-          <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-black">
+          <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-secondary-foreground dark:text-primary-foreground">
             <li>
               <Link href={`/${locale}`} onClick={() => setIsOpen(false)}>
                 {t("nav.search")}
@@ -71,12 +92,17 @@ export const MobileHeader = () => {
           </ul>
           <span className="block mt-10">
             <Link
-              className="text-black hover:text-blue-600"
+              className="text-secondary-foreground dark:text-primary-foreground hover:text-blue-600"
               href="https://discord.gg/BAZDE29Eyf"
             >
               <DiscordLogo size={32} />
             </Link>
           </span>
+
+          <div className="flex gap-4 absolute right-0 bottom-0 p-4">
+            <LanguageSelector />
+            <SwitchTheme />
+          </div>
         </div>
       </DrawerContent>
     </Drawer>
