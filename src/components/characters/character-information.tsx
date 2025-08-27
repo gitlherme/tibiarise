@@ -12,7 +12,6 @@ import { Skeleton } from "../ui/skeleton";
 import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
 import { Goal } from "./goal";
-import { ExperienceTableValue } from "@/models/character-data.model";
 import Link from "next/link";
 import {
   Tooltip,
@@ -26,10 +25,8 @@ export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
   const totalExperience = data?.experienceTable[0].totalExperience ?? 0;
+  const streak = data?.character.streak || 0;
 
-  // Get the streak of days making XP
-  const valueIsZero = (el: ExperienceTableValue) => el.experience === 0;
-  const streak = data?.experienceTable.findIndex(valueIsZero);
 
   if (isLoading) {
     return <Skeleton className="w-[100%] h-[100%]" />;

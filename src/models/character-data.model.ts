@@ -18,6 +18,7 @@ type CharacterInfo = {
   sex: string;
   isVerified: boolean;
   verifiedAt: string | null;
+  streak: number;
   guild: {
     name: string;
     rank: string;
