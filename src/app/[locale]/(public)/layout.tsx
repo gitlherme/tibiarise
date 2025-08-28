@@ -1,17 +1,17 @@
-import { Inter } from "next/font/google";
-import "../../globals.css";
-import { Header } from "@/components/header/header";
-import Providers from "@/components/utils/providers/providers";
 import { Footer } from "@/components/footer/footer";
+import { Header } from "@/components/header/header";
+import { MobileHeader } from "@/components/header/mobile-header";
+import { Toaster } from "@/components/ui/sonner";
+import Providers from "@/components/utils/providers/providers";
+import { routing } from "@/i18n/routing";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
-import { MobileHeader } from "@/components/header/mobile-header";
 import { NextIntlClientProvider } from "next-intl";
-import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
+import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import { Toaster } from "@/components/ui/sonner";
+import "../../globals.css";
 
 const fontSans = Inter({ subsets: ["latin"] });
 
@@ -83,7 +83,7 @@ export default async function RootLayout(
               <div className="block lg:hidden">
                 <MobileHeader />
               </div>
-              <main className="min-h-[68vh] md:px-12">{children}</main>
+              <main className="min-h-[68vh] px-8 md:px-12">{children}</main>
               <Footer />
               <Toaster />
             </div>

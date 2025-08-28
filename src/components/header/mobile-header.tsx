@@ -1,13 +1,13 @@
 "use client";
+import { DiscordLogo } from "@phosphor-icons/react";
+import { getCookie } from "cookies-next/client";
 import { MenuIcon, XCircleIcon } from "lucide-react";
-import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { getCookie } from "cookies-next/client";
-import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../language-selector/language-selector";
-import { DiscordLogo } from "@phosphor-icons/react";
-import Image from "next/image";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { SwitchTheme } from "../utils/switch-theme";
 
 export const MobileHeader = () => {
@@ -16,11 +16,11 @@ export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
-      <div className="flex items-center bg-primary p-4 justify-between">
+      <div className="flex items-center bg-primary p-4">
         <DrawerTrigger onClick={() => setIsOpen(true)}>
           <MenuIcon className="text-white" />
         </DrawerTrigger>
-        <Link href="/" className="block text-white">
+        <Link href="/" className="block text-white mx-auto">
           <Image
             src="/logo-dark.svg"
             alt="Tibia Rise Logo"
