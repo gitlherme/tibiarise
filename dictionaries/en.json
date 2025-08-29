@@ -1,45 +1,45 @@
 {
   "General": {
-    "loading": "Loading your data...",
-    "error": "Oops! An error occurred while processing your request.",
-    "noData": "No data found for the provided character."
+    "loading": "Fetching your data...",
+    "error": "Whoops! Something went wrong. Please try again.",
+    "noData": "No data found for this character."
   },
   "Ribbon": {
-    "message": "We have new features: Verify your character and Manage your hunt profits in the dashboard! Just log in to check it 🚀"
+    "message": "New features are live! Manage hunt profits and verify your character in the Dashboard. Log in now and check it out! 🚀"
   },
   "Header": {
     "nav": {
-      "search": "Search for a character",
-      "experienceByWorld": "Experience by World",
-      "compareCharacters": "Compare Characters",
-      "contribute": "Support Us",
-      "tools": "Tools",
+      "search": "Search Character",
+      "experienceByWorld": "World XP Rankings",
+      "compareCharacters": "Character Comparator",
+      "contribute": "Support the Project",
+      "tools": "Useful Tools",
       "experienceSimulator": "Experience Simulator"
     },
-    "goToDashboard": "Go to Dashboard"
+    "goToDashboard": "My Dashboard"
   },
   "Homepage": {
-    "title": "Track Your Tibia Character Progress",
-    "subtitle": "Dominate your progress, rise above the rest. 🔥",
-    "description": "Start tracking your character's progress in Tibia",
+    "title": "Your Tibia Journey, Mapped.",
+    "subtitle": "Level up and dominate faster than anyone. 🔥",
+    "description": "Start tracking your character's daily XP progression!",
     "form": {
       "name": {
-        "label": "Enter your character name",
+        "label": "Character Name",
         "placeholder": "E.g. Kharsek"
       },
       "submit": {
         "label": "Track Progress"
       }
     },
-    "examples": "Discover top players from your world and see their achievements.",
+    "examples": "Discover top players in your world and their latest feats.",
     "tips": "Learn how to effectively track your daily XP progress and plan for your next level."
   },
   "CharacterPage": {
-    "notFound": "Character not found. Please check the name and try again. TibiaRise tracks only players in the top 1000 of their world highscores. If your character is below this ranking in your world, it won’t appear in our database. Keep leveling up and check back later!",
+    "notFound": "Character not found. TibiaRise only tracks players in the top 1000 of their world's highscores. If you are below this rank, keep leveling up and check back later!",
     "description": "{vocation} from {world}",
     "verifiedAt": "Verified at {date} by a TibiaRise user.",
-    "vocationRankLabel": "Top {rank} {vocation} in {world}",
-    "shareInfo":  "This character can share XP with others between level <lower>{min}</lower> and <upper>{max}</upper>.",
+    "vocationRankLabel": "Top {rank} {vocation} on {world}",
+    "shareInfo": "This character can share XP with players between levels <lower>{min}</lower> and <upper>{max}</upper>.",
     "searchAnother": {
       "label": "Search for another character",
       "placeholder": "Type another character name"
@@ -51,7 +51,7 @@
     "goal": {
       "cta": {
         "description": "Find out how many days you need to reach your desired level.",
-        "label": "Set Your Goal"
+        "label": "Simulate Level Goal"
       },
       "title": "Set a Level Goal",
       "description": "What level would you like to achieve?",
@@ -66,11 +66,11 @@
         }
       },
       "result": {
-        "message": "In the past month, you averaged <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP per day, and you need an additional <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> to reach your goal. If you maintain this XP rate, you'll achieve level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in <daysHighlight>{days}</daysHighlight> days.",
+        "message": "By maintaining your average daily XP of <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight>, you will reach level <goalLevelHighlight>{goalLevel}</goalLevelHighlight> in approximately <daysHighlight>{days}</daysHighlight> days.",
         "estimatedDate": "Estimated date to reach your goal"
       },
       "disclaimer": {
-        "message": "Want to know how many days you need to achieve your goal with custom experience rates? Use the <simulator>Experience Simulator</simulator>."
+        "message": "Want to run custom simulations? Use the <simulator>Experience Simulator</simulator> to set custom XP rates."
       },
       "additionalStats": "View vocation distribution, best hunts, and tips tailored to your character's level.",
       "customGoals": "Receive personalized suggestions for your goals based on your play history, like reaching level Y in Z days."
@@ -94,11 +94,11 @@
       "averageXPByWeek": "Average XP per Week",
       "bestXPMonth": "Best XP on Month",
       "levelsGained": "Levels Achieved",
-      "vocationRank":"Vocation Rank"
+      "vocationRank": "Vocation Rank"
     }
   },
   "ExperienceByWorldPage": {
-    "title": "Experience by World Overview",
+    "title": "World XP Rankings",
     "form": {
       "world": {
         "label": "Select World"
@@ -122,14 +122,14 @@
         "levelAtBeggining": "Starting Level",
         "xpGain": "XP Gained"
       },
-      "trends": "View graphs showing XP growth trends by world.",
-      "xpAverage": "Compare average XP for each world against global averages."
+      "trends": "Advanced Analytics: Compare XP growth trends among top players.",
+      "xpAverage": "Analyze world XP averages against global player statistics."
     }
   },
   "SupportPage": {
     "title": "Support TibiaRise Development",
-    "message1": "If you'd like to support TibiaRise's ongoing development, consider donating some Tibia Coins to <character>Rise Donations</character>.",
-    "message2": "Please also send me an in-game letter; I truly appreciate all support and would love to hear your feedback and thoughts on the project.",
+    "message1": "Support TibiaRise! Consider donating some Tibia Coins to <character>Rise Donations</character> to help us continue improving.",
+    "message2": "I also love receiving in-game letters! I appreciate all the support and would love to hear your feedback on the project.",
     "message3": "Feel free to join our <discord>Discord</discord> server to share your ideas and feedback with the community, report bugs, or anything else. 🚀",
     "recognition": "Consider adding a list of contributors or supporter badges.",
     "successStories": "Include testimonials from players who achieved their goals using TibiaRise."
@@ -196,21 +196,21 @@
     "description": "It makes it easier to calculate the division of loot between team members. 🤑",
     "form": {
       "session": {
-        "label": "Paste your session data",
+        "label": "Paste your hunt session data",
         "placeholder": "Paste your session data below",
         "error": "The session data is invalid. Please ensure it is in the correct format."
       },
       "result": {
         "title": "Loot Analyser",
-        "description": "Paste your session data and your analysis will be shown here. 😎",
+        "description": "Paste your hunt session data here and get an instant breakdown! 😎",
         "totalBalance": "Total Party Balance: <balance>{balance}</balance>",
         "profitEach": "Total Profit for each player: <profit>{profit}</profit>",
-        "transfers": "Transfers",
+        "transfers": "Fair Split",
         "removePlayers": "Remove Players",
         "removePlayersDescription": "If you need to remove a player from split, you can do so by clicking on the checkbox next to their name.",
         "addExtraExpenses": "Add Extra Expenses",
         "addExtraExpensesDescription": "You can add additional expenses for each player by entering the number of gold spent by them.",
-        "needsToPay": "{player} needs to pay {amount} to {to}.",
+        "needsToPay": "{player} owes {to} {amount}.",
         "transferMessage": "transfer {amount} to {to}",
         "copy": "Copy",
         "copied": "Copied to Clipboard! 📋"
@@ -218,24 +218,24 @@
     }
   },
   "ToolsPage": {
-    "title": "Tools",
-    "description": "Use our tools to enhance your experience on Tibia. 🚀",
+    "title": "TibiaRise Arsenal",
+    "description": "Dominate the game with our powerful toolkit. 🚀",
     "tools": {
       "lootSplit": {
         "title": "Loot Split",
-        "description": "It makes it easier to calculate the division of loot between team members."
+        "description": "Calculate your party's loot split quickly and fairly."
       },
       "compareCharacters": {
         "title": "Compare Characters",
-        "description": "Compare two characters to analyze their evolution, accumulated experience and overall performance."
+        "description": "Analyze the evolution, XP, and overall performance of two characters side-by-side."
       },
       "experienceSimulator": {
         "title": "Experience Simulator",
-        "description": "It allows you to calculate and predict your character's level progression based on the experience gained each day."
+        "description": "Calculate how long it will take to reach your next level based on your daily XP gains."
       }
     }
   },
-   "Sidebar": {
+  "Sidebar": {
     "backlink": "Exit Dashboard",
     "links": {
       "characters": "My Characters",

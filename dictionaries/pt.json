@@ -1,57 +1,57 @@
 {
   "General": {
-    "loading": "Carregando seus dados...",
-    "error": "Ops! Ocorreu um erro ao processar sua solicitação.",
-    "noData": "Nenhum dado encontrado para o personagem fornecido."
+    "loading": "A caminho! Carregando seus dados...",
+    "error": "Opa, algo deu errado. Tente novamente!",
+    "noData": "Ainda não há dados para este personagem."
   },
   "Ribbon": {
-    "message": "Estamos com novas funcionalidades: verifique seu personagem e gerencie seus lucros de hunt no dashboard! Basta fazer login e testar 🚀"
+    "message": "Novidades no ar! Agora você pode gerenciar seus lucros de hunt e verificar seu personagem no Dashboard. Faça login e confira! 🚀"
   },
   "Header": {
     "nav": {
-      "search": "Pesquisar um personagem",
-      "experienceByWorld": "Experiência por Mundo",
-      "compareCharacters": "Comparar Personagens",
-      "contribute": "Apoie-nos",
-      "tools": "Ferramentas",
+      "search": "Buscar Personagem",
+      "experienceByWorld": "Rankings de XP por Mundo",
+      "compareCharacters": "Comparador de Personagens",
+      "contribute": "Apoie o Projeto",
+      "tools": "Ferramentas Úteis",
       "experienceSimulator": "Simulador de Experiência"
     },
-    "goToDashboard": "Ir para o Dashboard"
+    "goToDashboard": "Meu Dashboard"
   },
   "Homepage": {
-    "title": "Acompanhe a evolução do seu personagem.",
-    "subtitle": "Monitore seu progresso e alcance seus objetivos mais rápido. 🔥",
-    "description": "Comece agora e veja como sua experiência cresce dia após dia!",
+    "title": "Sua Jornada em Tibia, Mapeada.",
+    "subtitle": "Alcance seus objetivos de nível e dominação mais rápido. 🔥",
+    "description": "Comece agora e veja seu progresso diário em detalhes!",
     "form": {
       "name": {
-        "label": "Digite o nome do seu personagem",
+        "label": "Nome do Personagem",
         "placeholder": "Ex: Kharsek"
       },
       "submit": {
-        "label": "Acompanhar Progresso"
+        "label": "Acompanhar"
       }
     },
     "examples": "Descubra os melhores jogadores do seu mundo e veja suas conquistas.",
     "tips": "Aprenda como acompanhar efetivamente seu progresso de XP diário e planejar seu próximo nível."
   },
   "CharacterPage": {
-    "notFound": "Personagem não encontrado. Por favor, verifique o nome e tente novamente. O TibiaRise rastreia apenas jogadores no top 1000 dos rankings de seus mundos. Se seu personagem estiver abaixo deste ranking em seu mundo, ele não aparecerá em nosso banco de dados. Continue subindo de nível e volte mais tarde!",
+    "notFound": "Personagem não encontrado. O TibiaRise rastreia apenas jogadores no top 1000 de seus mundos. Se você estiver abaixo disso, continue upando e volte mais tarde!",
     "description": "{vocation} de {world}",
-    "vocationRankLabel": "Top {rank} {vocation} em {world}",
     "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
-    "shareInfo": "Este personagem pode compartilhar XP com outros entre o nível <lower>{min}</lower> e <upper>{max}</upper>.",
+    "vocationRankLabel": "Top {rank} {vocation} do mundo {world}",
+    "shareInfo": "Este personagem pode compartilhar XP com jogadores entre os níveis <lower>{min}</lower> e <upper>{max}</upper>.",
     "searchAnother": {
       "label": "Pesquisar outro personagem",
       "placeholder": "Digite o nome de outro personagem"
     },
     "streak": {
-      "label": "dias seguidos 🔥",
+      "label": "dias de streak 🔥",
       "description": "Esse personagem está fazendo XP por {days} dias em sequência."
     },
     "goal": {
       "cta": {
         "description": "Descubra quantos dias você precisa para alcançar seu nível desejado.",
-        "label": "Definir Sua Meta"
+        "label": "Simular Meta de Nível"
       },
       "title": "Definir uma Meta de Nível",
       "description": "Qual nível você gostaria de alcançar?",
@@ -66,19 +66,19 @@
         }
       },
       "result": {
-        "message": "No último mês, você obteve uma média de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP por dia, e você precisa de mais <remainingExperienceHighlight>{remainingExperience}</remainingExperienceHighlight> para atingir sua meta. Se mantiver essa taxa de XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+        "message": "Mantendo sua média de XP diária de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em aproximadamente <daysHighlight>{days}</daysHighlight> dias.",
         "estimatedDate": "Data estimada para atingir sua meta"
       },
       "disclaimer": {
-        "message": "Quer saber quantos dias você precisa para atingir sua meta com taxas de experiência personalizadas? Use o <simulator>Simulador de Experiência</simulator>."
+        "message": "Quer fazer simulações personalizadas? Use o nosso <simulator>Simulador de Experiência</simulator> para definir taxas de XP e níveis específicos."
       },
-      "additionalStats": "Veja distribuição de vocação, melhores caçadas e dicas adaptadas ao nível do seu personagem.",
+      "additionalStats": "Veja distribuição de vocação, melhores caçadas, e dicas adaptadas ao nível do seu personagem.",
       "customGoals": "Receba sugestões personalizadas para suas metas com base no seu histórico de jogo, como atingir o nível Y em Z dias."
     },
     "experienceTable": {
       "headers": {
         "date": "Data",
-        "xpGain": "XP Ganho",
+        "xpGain": "XP Ganhado",
         "level": "Nível Alcançado",
         "totalExperience": "Experiência Total",
         "vocationRank": "Rank de Vocação"
@@ -88,7 +88,7 @@
     "progressLog": {
       "title": "Seu Registro de Progresso",
       "lastMonthLabel": "Progresso do Último Mês",
-      "xpGained": "XP Total Ganho",
+      "xpGained": "XP Total Ganhado",
       "lastWeekXP": "XP Ganho na Última Semana",
       "averageXPByDay": "Média de XP por Dia",
       "averageXPByWeek": "Média de XP por Semana",
@@ -98,7 +98,7 @@
     }
   },
   "ExperienceByWorldPage": {
-    "title": "Visão Geral de Experiência por Mundo",
+    "title": "Top Players de XP por Mundo",
     "form": {
       "world": {
         "label": "Selecionar Mundo"
@@ -120,16 +120,16 @@
         "name": "Nome do Jogador",
         "vocation": "Vocação do Jogador",
         "levelAtBeggining": "Nível Inicial",
-        "xpGain": "XP Ganho"
+        "xpGain": "XP Ganhado"
       },
-      "trends": "Veja gráficos mostrando tendências de crescimento de XP por mundo.",
+      "trends": "Análise Avançada: Compare as tendências de XP dos jogadores em cada mundo.",
       "xpAverage": "Compare a média de XP de cada mundo com as médias globais."
     }
   },
   "SupportPage": {
     "title": "Apoie o Desenvolvimento do TibiaRise",
-    "message1": "Se você gostaria de apoiar o desenvolvimento contínuo do TibiaRise, considere doar algumas Tibia Coins para <character>Rise Donations</character>.",
-    "message2": "Por favor, também me envie uma carta no jogo; eu realmente aprecio todo apoio e adoraria ouvir seu feedback e pensamentos sobre o projeto.",
+    "message1": "Apoie o TibiaRise! Considere doar algumas Tibia Coins para <character>Rise Donations</character> para nos ajudar a continuar melhorando.",
+    "message2": "Também adoro receber cartas no jogo! Fico grato por todo apoio e adoro ler o feedback de vocês.",
     "message3": "Sinta-se à vontade para entrar no nosso servidor do <discord>Discord</discord> para compartilhar suas ideias e feedback com a comunidade, reportar bugs ou qualquer outra coisa. 🚀",
     "recognition": "Considere adicionar uma lista de colaboradores ou emblemas de apoiadores.",
     "successStories": "Inclua depoimentos de jogadores que alcançaram suas metas usando o TibiaRise."
@@ -196,7 +196,7 @@
     "description": "Facilita o cálculo da divisão de loot entre os membros da equipe. 🤑",
     "form": {
       "session": {
-        "label": "Cole seu Party Hunt Analyser",
+        "label": "Cole os dados da sua hunt",
         "placeholder": "Cole seu party hunt analyser abaixo",
         "error": "O party hunt analyser está inválido. Certifique-se de que estão no formato correto."
       },
@@ -218,20 +218,20 @@
     }
   },
   "ToolsPage": {
-    "title": "Ferramentas",
-    "description": "Use nossas ferramentas para melhorar sua experiência no Tibia. 🚀",
+    "title": "Arsenal TibiaRise",
+    "description": "Domine o seu jogo com nossas ferramentas exclusivas. 🚀",
     "tools": {
       "lootSplit": {
         "title": "Divisão de Loot",
-        "description": "Facilita o cálculo da divisão de loot entre os membros da equipe."
+        "description": "Calcule a divisão de loot da sua party de forma rápida e justa."
       },
       "compareCharacters": {
         "title": "Comparar Personagens",
-        "description": "Compare dois personagens para analisar sua evolução, experiência acumulada e desempenho geral."
+        "description": "Analise a evolução, XP e desempenho de dois personagens lado a lado."
       },
       "experienceSimulator": {
         "title": "Simulador de Experiência",
-        "description": "Permite calcular e prever a progressão de nível do seu personagem com base na experiência ganha a cada dia."
+        "description": "Calcule quanto tempo falta para o seu próximo nível com base nos seus ganhos diários."
       }
     }
   },
@@ -300,7 +300,7 @@
         }
       },
       "errors": {
-      "verificationFailed": "Verificação falhou. Por favor, espere alguns minutos antes de tentar novamente e certifique-se de que o personagem tem o código de verificação no comentário."
+        "verificationFailed": "Verificação falhou. Por favor, espere alguns minutos antes de tentar novamente e certifique-se de que o personagem tem o código de verificação no comentário."
       },
       "buttons": {
         "requestingCode": "Solicitando código...",
@@ -386,7 +386,7 @@
     "loading": "Carregando...",
     "error": "Erro ao carregar dados",
     "filter": {
-      "placeholder": "Filtrar por data...",
+      "placeholder": "Filtrar...",
       "noResults": "Nenhum resultado encontrado"
     },
     "pagination": {
