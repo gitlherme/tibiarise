@@ -9,6 +9,7 @@ export type PlayerExperienceByWorld = {
   characterName: string;
   level: number;
   world: string;
+  vocation: string;
   experienceGained: number;
   experiencePerHour: number;
   percentageGain: number;

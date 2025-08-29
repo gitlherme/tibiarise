@@ -1,17 +1,22 @@
 "use client";
+import { ByWorldFilter } from "@/models/experience-by-world.model";
+import { useGetWorlds } from "@/queries/worlds.queries";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getCookie } from "cookies-next/client";
 import { SearchIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "../ui/button";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "../ui/form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Select,
   SelectContent,
@@ -19,11 +24,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useGetWorlds } from "@/queries/worlds.queries";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ByWorldFilter } from "@/models/experience-by-world.model";
-import { getCookie } from "cookies-next/client";
-import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -55,12 +55,12 @@ export const SearchBarExperienceByWorld = () => {
   const { data, isLoading: worldsIsLoading } = useGetWorlds();
 
   return worldsIsLoading ? (
-    <div>{tg("loading")}</div>
+    <div className="w-full flex justify-center items-center">
+      {tg("loading")}
+    </div>
   ) : (
-    <div className={`flex flex-col justify-center items-center`}>
-      <h2 className="text-4xl md:text-5xl font-black text-center my-4">
-        {t("title")}
-      </h2>
+    <div className={`flex flex-col items-center`}>
+      <h2 className="text-4xl md:text-5xl font-bold my-12">{t("title")}</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

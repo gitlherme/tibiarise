@@ -8,7 +8,7 @@ export default function ExperienceByWorld() {
   return (
     <HydrationBoundaryCustom>
       <Suspense>
-        <div className="container mx-auto">
+        <div className="container mx-auto flex flex-col gap-8">
           <SearchBarExperienceByWorld />
           <ExperienceByWorldTable />
         </div>
