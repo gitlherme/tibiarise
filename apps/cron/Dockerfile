@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy root package files for workspaces
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json turbo.json ./
 
 # Copy packages that cron depends on
 COPY packages/database ./packages/database
