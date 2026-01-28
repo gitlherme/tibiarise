@@ -18,6 +18,9 @@ RUN npm ci
 # Generate Prisma Client
 RUN npm run db:generate
 
+# Build dependencies
+RUN npm run build --workspace=@tibiarise/database
+
 # Build cron app
 WORKDIR /app/apps/cron
 RUN npm run build
