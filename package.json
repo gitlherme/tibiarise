@@ -14,7 +14,8 @@
     "dev:cron": "turbo run dev --filter=@tibiarise/cron",
     "db:generate": "turbo run db:generate --filter=@tibiarise/database",
     "db:migrate": "turbo run db:migrate --filter=@tibiarise/database",
-    "db:push": "turbo run db:push --filter=@tibiarise/database"
+    "db:push": "turbo run db:push --filter=@tibiarise/database",
+    "deploy:web": "npx prisma generate --schema=packages/database/prisma/schema.prisma --config-file=packages/database/prisma.config && npx prisma migrate deploy --schema=packages/database/prisma/schema.prisma packages/database/prisma.config && npm run build --filter=@tibiarise/web"
   },
   "devDependencies": {
     "turbo": "^2.4.0"
