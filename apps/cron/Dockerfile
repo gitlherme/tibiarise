@@ -34,7 +34,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Copy packages
+# Copy packages definition
 COPY packages/database ./packages/database
+
+# Copy built database package (overwrite with built dist)
+COPY --from=builder /app/packages/database/dist ./packages/database/dist
 
 # Copy cron app
 COPY apps/cron/package.json ./apps/cron/
