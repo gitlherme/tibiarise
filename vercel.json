@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npx prisma generate --schema=packages/database/prisma/schema.prisma --config-file=packages/database/prisma.config && npx prisma migrate deploy --schema=packages/database/prisma/schema.prisma packages/database/prisma.config && npm run build --filter=@tibiarise/web",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": "apps/web/.next"
+}
