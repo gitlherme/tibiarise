@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ui:add": "npx shadcn@latest add"
+    "ui:add": "npx shadcn@latest add",
+    "deploy:web": "cd ../.. && npm run deploy:web"
   },
   "dependencies": {
     "@tibiarise/database": "*",

@@ -15,9 +15,10 @@
     "db:generate": "turbo run db:generate --filter=@tibiarise/database",
     "db:migrate": "turbo run db:migrate --filter=@tibiarise/database",
     "db:push": "turbo run db:push --filter=@tibiarise/database",
-    "deploy:web": "npx prisma generate --schema=packages/database/prisma/schema.prisma --config-file=packages/database/prisma.config && npx prisma migrate deploy --schema=packages/database/prisma/schema.prisma packages/database/prisma.config && npm run build --filter=@tibiarise/web"
+    "deploy:web": "dotenv -e .env -- sh -c 'npm run db:generate && npm run db:migrate && npm run build --filter=@tibiarise/web'"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "turbo": "^2.4.0"
   },
   "engines": {
