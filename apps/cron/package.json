@@ -4,12 +4,12 @@
   "description": "Standalone cron service for TibiaRise data management",
   "private": true,
   "scripts": {
-    "dev": "tsx src/index.ts",
+    "dev": "if [ -f .env ]; then dotenv -e .env -- tsx src/index.ts; else tsx src/index.ts; fi",
     "build": "tsc",
     "start": "node dist/index.js",
-    "seed": "tsx src/seed-experience.ts",
-    "deduplicate": "tsx src/deduplicate-characters.ts",
-    "cleanup": "tsx src/delete-old-experience.ts"
+    "seed": "if [ -f .env ]; then dotenv -e .env -- tsx src/seed-experience.ts; else tsx src/seed-experience.ts; fi",
+    "deduplicate": "if [ -f .env ]; then dotenv -e .env -- tsx src/deduplicate-characters.ts; else tsx src/deduplicate-characters.ts; fi",
+    "cleanup": "if [ -f .env ]; then dotenv -e .env -- tsx src/delete-old-experience.ts; else tsx src/delete-old-experience.ts; fi"
   },
   "dependencies": {
     "@tibiarise/database": "*",
