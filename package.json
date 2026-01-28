@@ -1,0 +1,25 @@
+{
+  "name": "tibiarise",
+  "private": true,
+  "packageManager": "npm@10.2.4",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "dev:web": "turbo run dev --filter=@tibiarise/web",
+    "dev:cron": "turbo run dev --filter=@tibiarise/cron",
+    "db:generate": "turbo run db:generate --filter=@tibiarise/database",
+    "db:migrate": "turbo run db:migrate --filter=@tibiarise/database",
+    "db:push": "turbo run db:push --filter=@tibiarise/database"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

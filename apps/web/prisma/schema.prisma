@@ -1,0 +1,99 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model Character {
+    id              String            @id @default(uuid())
+    name            String            @unique
+    world           String
+    level           Int
+    experience      BigInt
+    streak          Int               @default(1)
+    createdAt       DateTime          @default(now())
+    updatedAt       DateTime          @updatedAt
+    userId          String?
+    verified        Boolean?          @default(false)
+    verifiedAt      DateTime?
+    vocation        String?
+    user            User?             @relation(fields: [userId], references: [id])
+    dailyExperience DailyExperience[]
+    PartyMember     PartyMember[]
+    profitHistory   ProfitEntry[]
+    formerNames     String[]          @default([])
+    formerWorlds    String[]          @default([])
+}
+
+model User {
+    id               String        @id @default(uuid())
+    email            String        @unique
+    showProfitOnHome Boolean       @default(false)
+    characters       Character[]
+    createdParties   Party[]       @relation("CreatedParties")
+    partyMembership  PartyMember[]
+}
+
+model ProfitEntry {
+    id             String    @id @default(uuid())
+    characterId    String
+    huntName       String    @default("")
+    huntDate       DateTime  @default(now())
+    profit         BigInt
+    preyCardsUsed  Int
+    boostsValue    Int
+    tibiaCoinValue BigInt
+    netProfit      BigInt    @default(0)
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime  @updatedAt
+    huntDuration   Int?
+    character      Character @relation(fields: [characterId], references: [id])
+}
+
+model VerifyCharacter {
+    id               String   @id @default(uuid())
+    characterName    String
+    verificationCode String
+    userId           String
+    expiresAt        DateTime
+    createdAt        DateTime @default(now())
+}
+
+model DailyExperience {
+    id          String    @id @default(uuid())
+    value       BigInt
+    level       Int
+    date        String
+    characterId String
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    character   Character @relation(fields: [characterId], references: [id])
+}
+
+model Party {
+    id          String        @id @default(uuid())
+    name        String
+    description String?
+    inviteCode  String        @unique @default(cuid())
+    isActive    Boolean       @default(true)
+    maxMembers  Int           @default(5)
+    createdBy   String
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+    creator     User          @relation("CreatedParties", fields: [createdBy], references: [id])
+    members     PartyMember[]
+}
+
+model PartyMember {
+    id          String    @id @default(uuid())
+    partyId     String
+    userId      String
+    characterId String
+    isLeader    Boolean   @default(false)
+    joinedAt    DateTime  @default(now())
+    character   Character @relation(fields: [characterId], references: [id])
+    party       Party     @relation(fields: [partyId], references: [id], onDelete: Cascade)
+    user        User      @relation(fields: [userId], references: [id])
+}

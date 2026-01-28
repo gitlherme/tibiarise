@@ -1,0 +1,462 @@
+{
+  "General": {
+    "loading": "A caminho! Carregando seus dados...",
+    "error": "Opa, algo deu errado. Tente novamente!",
+    "noData": "Ainda não há dados para este personagem."
+  },
+  "Ribbon": {
+    "message": "Novidades no ar! Agora você pode gerenciar seus lucros de hunt e verificar seu personagem no Dashboard. Faça login e confira! 🚀"
+  },
+  "Header": {
+    "nav": {
+      "search": "Buscar Personagem",
+      "experienceByWorld": "Rankings de XP por Mundo",
+      "compareCharacters": "Comparador de Personagens",
+      "contribute": "Apoie o Projeto",
+      "tools": "Ferramentas Úteis",
+      "experienceSimulator": "Simulador de Experiência"
+    },
+    "goToDashboard": "Meu Dashboard"
+  },
+  "Homepage": {
+    "title": "Sua Jornada em Tibia, Mapeada.",
+    "subtitle": "Alcance seus objetivos de nível e dominação mais rápido. 🔥",
+    "description": "Comece agora e veja seu progresso diário em detalhes!",
+    "form": {
+      "name": {
+        "label": "Nome do Personagem",
+        "placeholder": "Ex: Kharsek"
+      },
+      "submit": {
+        "label": "Acompanhar"
+      }
+    },
+    "examples": "Descubra os melhores jogadores do seu mundo e veja suas conquistas.",
+    "tips": "Aprenda como acompanhar efetivamente seu progresso de XP diário e planejar seu próximo nível.",
+    "Bento": {
+      "risingStars": {
+        "title": "Estrelas em Ascensão",
+        "subtitle": "Maiores ganhos de XP ontem",
+        "cta": "Ver Rankings"
+      },
+      "topLevel": {
+        "title": "Top Level",
+        "subtitle": "Maior nível rastreado"
+      },
+      "community": {
+        "title": "Comunidade",
+        "subtitle": "Personagens Rastreados"
+      },
+      "lootSplitter": {
+        "title": "Divisor de Loot",
+        "subtitle": "Divisão justa e fácil"
+      }
+    },
+    "Features": {
+      "title": "Tudo que você precisa para <span class=\"text-primary\">Subir</span>",
+      "subtitle": "Tibia Rise oferece um conjunto de ferramentas projetadas para melhorar seu fluxo de jogo, desde o rastreamento de progresso individual até o gerenciamento da economia da equipe.",
+      "xpTracking": {
+        "title": "Rastreamento de XP e Skills",
+        "description": "Monitore o progresso diário do seu personagem com precisão. Visualize ganhos ao longo do tempo."
+      },
+      "profitAnalytics": {
+        "title": "Análise de Profit",
+        "description": "Rastreie seus lucros de caça, despesas e suprimentos. Visualize sua economia e otimize suas hunts."
+      },
+      "lootSplitter": {
+        "title": "Divisor de Loot",
+        "description": "Calcule e divida facilmente o loot entre os membros do grupo de forma justa."
+      },
+      "characterSearch": {
+        "title": "Busca de Personagem",
+        "description": "Encontre qualquer personagem e veja suas estatísticas públicas, histórico de guilda e lista de mortes."
+      },
+      "compareCharacters": {
+        "title": "Comparar Personagens",
+        "description": "Compare dois personagens lado a lado. Veja quem tem as melhores estatísticas e consistência."
+      },
+      "experienceSimulator": {
+        "title": "Simulador de Experiência",
+        "description": "Calcule quanto tempo falta para atingir seu objetivo de nível com base no ganho atual de XP."
+      }
+    }
+  },
+  "CharacterPage": {
+    "notFound": "Personagem não encontrado. O TibiaRise rastreia apenas jogadores no top 1000 de seus mundos. Se você estiver abaixo disso, continue upando e volte mais tarde!",
+    "description": "{vocation} de {world}",
+    "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
+    "vocationRankLabel": "Top {rank} {vocation} do mundo {world}",
+    "shareInfo": "Este personagem pode compartilhar XP com jogadores entre os níveis <lower>{min}</lower> e <upper>{max}</upper>.",
+    "searchAnother": {
+      "label": "Pesquisar outro personagem",
+      "placeholder": "Digite o nome de outro personagem"
+    },
+    "streak": {
+      "label": "dias de streak 🔥",
+      "description": "Esse personagem está fazendo XP por {days} dias em sequência."
+    },
+    "goal": {
+      "cta": {
+        "description": "Descubra quantos dias você precisa para alcançar seu nível desejado.",
+        "label": "Simular Meta de Nível"
+      },
+      "title": "Definir uma Meta de Nível",
+      "description": "Qual nível você gostaria de alcançar?",
+      "form": {
+        "level": {
+          "label": "Nível",
+          "placeholder": "Digite seu nível alvo",
+          "error": "O nível alvo deve ser maior que seu nível atual."
+        },
+        "submit": {
+          "label": "Calcular"
+        }
+      },
+      "result": {
+        "message": "Mantendo sua média de XP diária de <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em aproximadamente <daysHighlight>{days}</daysHighlight> dias.",
+        "estimatedDate": "Data estimada para atingir sua meta"
+      },
+      "disclaimer": {
+        "message": "Quer fazer simulações personalizadas? Use o nosso <simulator>Simulador de Experiência</simulator> para definir taxas de XP e níveis específicos."
+      },
+      "additionalStats": "Veja distribuição de vocação, melhores caçadas, e dicas adaptadas ao nível do seu personagem.",
+      "customGoals": "Receba sugestões personalizadas para suas metas com base no seu histórico de jogo, como atingir o nível Y em Z dias."
+    },
+    "experienceTable": {
+      "headers": {
+        "date": "Data",
+        "xpGain": "XP Ganhado",
+        "level": "Nível Alcançado",
+        "totalExperience": "Experiência Total",
+        "vocationRank": "Rank de Vocação"
+      },
+      "noExperience": "Você ainda não ganhou experiência. Volte amanhã!"
+    },
+    "progressLog": {
+      "title": "Seu Registro de Progresso",
+      "lastMonthLabel": "Progresso do Último Mês",
+      "xpGained": "XP Total Ganhado",
+      "lastWeekXP": "XP Ganho na Última Semana",
+      "averageXPByDay": "Média de XP por Dia",
+      "averageXPByWeek": "Média de XP por Semana",
+      "bestXPMonth": "Melhor XP do Mês",
+      "levelsGained": "Níveis Alcançados",
+      "vocationRank": "Rank de Vocação"
+    }
+  },
+  "ExperienceByWorldPage": {
+    "title": "Top Players de XP por Mundo",
+    "form": {
+      "world": {
+        "label": "Selecionar Mundo"
+      },
+      "filter": {
+        "label": "Filtrar por Período",
+        "options": {
+          "yesterday": "Ontem",
+          "week": "Última Semana",
+          "month": "Último Mês"
+        }
+      },
+      "submit": {
+        "label": "Pesquisar"
+      }
+    },
+    "table": {
+      "headers": {
+        "name": "Nome do Jogador",
+        "vocation": "Vocação do Jogador",
+        "levelAtBeggining": "Nível Inicial",
+        "xpGain": "XP Ganhado"
+      },
+      "trends": "Análise Avançada: Compare as tendências de XP dos jogadores em cada mundo.",
+      "xpAverage": "Compare a média de XP de cada mundo com as médias globais."
+    }
+  },
+  "SupportPage": {
+    "title": "Apoie o Desenvolvimento do TibiaRise",
+    "message1": "Apoie o TibiaRise! Considere doar algumas Tibia Coins para <character>Rise Donations</character> para nos ajudar a continuar melhorando.",
+    "message2": "Também adoro receber cartas no jogo! Fico grato por todo apoio e adoro ler o feedback de vocês.",
+    "message3": "Sinta-se à vontade para entrar no nosso servidor do <discord>Discord</discord> para compartilhar suas ideias e feedback com a comunidade, reportar bugs ou qualquer outra coisa. 🚀",
+    "recognition": "Considere adicionar uma lista de colaboradores ou emblemas de apoiadores.",
+    "successStories": "Inclua depoimentos de jogadores que alcançaram suas metas usando o TibiaRise."
+  },
+  "CompareCharactersPage": {
+    "title": "Comparação de Personagens",
+    "description": "Preencha os detalhes abaixo para comparar dois personagens e ver suas estatísticas lado a lado. 🔥",
+    "form": {
+      "name": {
+        "label": "Nome do Personagem",
+        "placeholder": "Digite o nome do personagem"
+      },
+      "submit": {
+        "label": "Comparar Agora"
+      }
+    },
+    "loading": "Comparando personagens...",
+    "error": "Houve um erro ao comparar personagens. Por favor, certifique-se de que os nomes estão corretos. Se você mudou seu nome recentemente, tente usar seu nome antigo.",
+    "card": {
+      "level": "Nível",
+      "experience": "XP Total",
+      "vocationRank": "Rank de Vocação Atual",
+      "lastMonthLabel": "Status do Último Mês",
+      "xpGained": "XP Ganho",
+      "levelsGained": "Níveis Alcançados",
+      "medianXPByDay": "Média de XP por Dia",
+      "medianXPByWeek": "Média de XP por Semana",
+      "medianXPByHour": "Média de XP por Hora",
+      "deaths": "Total de Mortes"
+    },
+    "achievementHistory": "Destaque 'Melhores Momentos' para cada personagem, como os maiores ganhos de XP.",
+    "characterSuggestions": "Sugira personagens adicionais para comparação com base na vocação ou nível."
+  },
+  "ExperienceSimulatorPage": {
+    "title": "Simulador de Nível de Experiência",
+    "description": "Simule quantos dias você precisa para atingir seu nível desejado.",
+    "form": {
+      "currentLevel": {
+        "label": "Seu Nível Atual",
+        "placeholder": "Digite seu nível atual"
+      },
+      "goalLevel": {
+        "label": "Nível Desejado",
+        "placeholder": "Digite seu nível alvo",
+        "error": "O nível desejado deve ser maior que seu nível atual."
+      },
+      "dailyExperience": {
+        "label": "Experiência Diária Obtida",
+        "placeholder": "Digite sua média diária de XP"
+      },
+      "submit": {
+        "label": "Simular Progresso"
+      }
+    },
+    "result": {
+      "message": "Ganhando <dailyExperienceHighlight>{dailyExperience}</dailyExperienceHighlight> XP diariamente, você alcançará o nível <goalLevelHighlight>{goalLevel}</goalLevelHighlight> em <daysHighlight>{days}</daysHighlight> dias.",
+      "estimatedDate": "Data estimada para conquista do nível"
+    },
+    "visualGraphs": "Incorpore gráficos visuais para ilustrar seu progresso diário em direção às suas metas.",
+    "xpTips": "Forneça sugestões de áreas de caça ou eventos que podem maximizar seus ganhos de XP."
+  },
+  "LootSplitPage": {
+    "title": "Divisão de Loot",
+    "description": "Facilita o cálculo da divisão de loot entre os membros da equipe. 🤑",
+    "form": {
+      "session": {
+        "label": "Cole os dados da sua hunt",
+        "placeholder": "Cole seu party hunt analyser abaixo",
+        "error": "O party hunt analyser está inválido. Certifique-se de que estão no formato correto."
+      },
+      "result": {
+        "title": "Analisador de Loot",
+        "description": "Cole seu party hunt analyser e sua análise será mostrada aqui. 😎",
+        "totalBalance": "Saldo Total do Grupo: <balance>{balance}</balance>",
+        "profitEach": "Lucro Total para cada jogador: <profit>{profit}</profit>",
+        "transfers": "Transferências",
+        "removePlayers": "Remover Jogadores",
+        "removePlayersDescription": "Se precisar remover um jogador da divisão, você pode fazer isso clicando na caixa de seleção ao lado do nome dele.",
+        "addExtraExpenses": "Adicionar Despesas Extras",
+        "addExtraExpensesDescription": "Você pode adicionar despesas adicionais para cada jogador digitando a quantidade de ouro que eles gastaram.",
+        "needsToPay": "{player} precisa pagar {amount} para {to}.",
+        "transferMessage": "transfer {amount} to {to}",
+        "copy": "Copiar",
+        "copied": "Copiado para a Área de Transferência! 📋"
+      }
+    }
+  },
+  "ToolsPage": {
+    "title": "Arsenal TibiaRise",
+    "description": "Domine o seu jogo com nossas ferramentas exclusivas. 🚀",
+    "tools": {
+      "lootSplit": {
+        "title": "Divisão de Loot",
+        "description": "Calcule a divisão de loot da sua party de forma rápida e justa."
+      },
+      "compareCharacters": {
+        "title": "Comparar Personagens",
+        "description": "Analise a evolução, XP e desempenho de dois personagens lado a lado."
+      },
+      "experienceSimulator": {
+        "title": "Simulador de Experiência",
+        "description": "Calcule quanto tempo falta para o seu próximo nível com base nos seus ganhos diários."
+      }
+    }
+  },
+  "Sidebar": {
+    "backlink": "Sair do Dashboard",
+    "links": {
+      "characters": "Meus Personagens",
+      "profitManager": "Gerenciador de Profit",
+      "settings": "Configurações"
+    }
+  },
+  "Dashboard": {
+    "VerifyCharacterPage": {
+      "list": {
+        "title": "Seus Personagens",
+        "description": "Gerencie seus personagens abaixo.",
+        "subtitle": "Personagens Verificados",
+        "buttonLabel": "Verificar Novo Personagem",
+        "noCharacters": "Você ainda não verificou nenhum personagem",
+        "characterName": "Nome do Personagem",
+        "verifiedDate": "Data de Verificação"
+      },
+      "title": "Verifique Seu Personagem",
+      "description": "Verifique seu personagem para nos ajudar a manter os dados precisos e atualizados. Isso também ajudará outros jogadores a encontrar seu personagem e acompanhar seu progresso.",
+      "stepsLabels": {
+        "firstStep": "Inserir Nome",
+        "secondStep": "Obter Código",
+        "thirdStep": "Verificar"
+      },
+      "steps": {
+        "firstStep": {
+          "title": "Digite o Nome do Seu Personagem",
+          "description": "Digite o nome do seu personagem no campo abaixo.",
+          "inputLabel": "Nome do Personagem",
+          "inputPlaceholder": "Ex: Kharsek",
+          "buttonLabel": "Obter Código de Verificação"
+        },
+        "secondStep": {
+          "title": "Verificar Propriedade do Personagem",
+          "description": "Coloque o código de verificação no comentário do seu personagem no site do Tibia.",
+          "verificationCodeLabel": "Seu código de verificação",
+          "verificationCodeDetails": "Faça login na sua conta Tibia no site do Tibia e coloque este código no comentário do seu personagem para verificar a propriedade.",
+          "verificationCopiedMessage": "Código de verificação copiado para a área de transferência! 📋",
+          "inputLabel": "Código de Verificação",
+          "inputPlaceholder": "Digite o código de verificação aqui",
+          "buttonLabel": "Verificar Personagem",
+          "backButton": "Voltar"
+        },
+        "thirdStep": {
+          "title": "Verificação Concluída",
+          "description": "Seu personagem foi verificado com sucesso. Agora você pode acompanhar seu progresso e compartilhá-lo com outras pessoas.",
+          "successMessage": "Seu personagem foi verificado com sucesso! 🎉",
+          "errorMessage": "Ocorreu um erro ao verificar seu personagem. Por favor, tente novamente.",
+          "button1Label": "Ir para o Painel",
+          "button2Label": "Verificar Outro Personagem"
+        }
+      },
+      "howToVerify": {
+        "title": "Como Verificar Seu Personagem",
+        "description": "Para verificar seu personagem, siga estes passos:",
+        "instructions": {
+          "step1": "Digite o nome do seu personagem e obtenha um código de verificação.",
+          "step2": "Faça login na sua conta Tibia no site.",
+          "step3": "Coloque o código de verificação na seção de comentários do seu personagem.",
+          "step4": "Aguarde cerca de 5 a 10 minutos.",
+          "step5": "Clique no botão de verificação para concluir a verificação."
+        }
+      },
+      "errors": {
+        "verificationFailed": "Verificação falhou. Por favor, espere alguns minutos antes de tentar novamente e certifique-se de que o personagem tem o código de verificação no comentário."
+      },
+      "buttons": {
+        "requestingCode": "Solicitando código...",
+        "verifyingButtonLabel": "Verificando..."
+      },
+      "confirmCharacterDialog": {
+        "title": "Confirmar Personagem",
+        "description": "Tem certeza de que deseja verificar este personagem?",
+        "confirm": "Verificar"
+      }
+    },
+    "ProfitManagerPage": {
+      "title": "Gerenciador de Profit",
+      "description": "Monitore seus lucros de hunt e otimize suas estratégias de.",
+      "form": {
+        "characterSelect": {
+          "label": "Personagem",
+          "placeholder": "Selecionar"
+        },
+        "add": {
+          "title": "Adicionar Novo Registro de Profit",
+          "description": "Adicione um novo registro de profit para o personagem selecionado.",
+          "huntName": "Nome da Hunt",
+          "huntNamePlaceholder": "Ex: Ingol",
+          "huntSession": "Hunt Session",
+          "huntSessionPlaceholder": "Cole seu Session Analyser ou Party Hunt Analyser aqui",
+          "preyCards": "Número de Prey Cards usadas",
+          "preyCardsPlaceholder": "Ex: 2",
+          "boostValue": "Valor em TC gasto em Boost",
+          "boostValuePlaceholder": "Ex: 30",
+          "submit": "Adicionar"
+        }
+      },
+      "buttons": {
+        "newProfit": "Adicionar",
+        "resetFilter": "Limpar",
+        "lastWeek": "Última Semana",
+        "lastMonth": "Último Mês",
+        "lastYear": "Último Ano"
+      },
+      "labels": {
+        "startDateFilter": "De",
+        "endDateFilter": "Até"
+      },
+      "noProfitEntries": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de lucro 🆙",
+      "profitCards": {
+        "totalProfit": {
+          "title": "Lucro Total",
+          "note": "em {totalHunts} caçadas"
+        },
+        "bestProfit": {
+          "title": "Melhor Lucro",
+          "note": "em {hunt}"
+        }
+      },
+      "tibiaTradeNote": "Valor da TC fornecido por <tibiaTrade>TibiaTrade</tibiaTrade>.",
+      "table": {
+        "headers": {
+          "name": "Hunt",
+          "date": "Data",
+          "grossProfit": "Lucro Bruto",
+          "duration": "Duração",
+          "tibiaCoinValue": "Valor TC",
+          "preyCardValue": "Valor Prey Cards",
+          "boostValue": "Valor Boost",
+          "netProfit": "Lucro Líquido",
+          "actions": "Ações"
+        },
+        "deleteModal": {
+          "title": "Excluir Registro de Lucro",
+          "description": "Tem certeza que deseja excluir este registro de lucro? Esta ação não pode ser desfeita.",
+          "confirm": "Excluir",
+          "cancel": "Cancelar"
+        }
+      }
+    },
+    "SettingsPage": {
+      "title": "Configurações da Conta",
+      "privacy": {
+        "title": "Privacidade",
+        "description": "Gerencie como seus dados são exibidos publicamente."
+      },
+      "profitVisibility": {
+        "label": "Mostrar Profit na Homepage",
+        "description": "Permitir que seus lucros de caça recentes apareçam no ticker ao vivo na página inicial."
+      }
+    }
+  },
+  "Footer": {
+    "madeWith": "Feito com 💙 por",
+    "discord": "Junte-se ao nosso servidor Discord",
+    "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
+    "thanks": "Obrigado ao <data>TibiaData</data> e <wiki>TibiaWiki</wiki> por fornecer os dados usados neste site."
+  },
+  "DataTable": {
+    "noData": "Nenhum dado disponível",
+    "loading": "Carregando...",
+    "error": "Erro ao carregar dados",
+    "filter": {
+      "placeholder": "Filtrar...",
+      "noResults": "Nenhum resultado encontrado"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Próximo",
+      "page": "Página",
+      "of": "de",
+      "rowsPerPage": "Linhas por página"
+    }
+  }
+}
