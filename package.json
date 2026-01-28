@@ -15,7 +15,7 @@
     "db:generate": "turbo run db:generate --filter=@tibiarise/database",
     "db:migrate": "turbo run db:migrate --filter=@tibiarise/database",
     "db:push": "turbo run db:push --filter=@tibiarise/database",
-    "deploy:web": "dotenv -e .env -- sh -c 'npm run db:generate && npm run db:migrate && npm run build --filter=@tibiarise/web'"
+    "deploy:web": "if [ -f .env ]; then dotenv -e .env -- sh -c 'npm run db:generate && npm run db:migrate && npm run build --filter=@tibiarise/web'; else npm run db:generate && npm run db:migrate && npm run build --filter=@tibiarise/web; fi"
   },
   "devDependencies": {
     "dotenv-cli": "^11.0.0",
