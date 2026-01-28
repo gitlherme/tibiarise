@@ -58,4 +58,4 @@ WORKDIR /app/apps/cron
 ENV NODE_ENV=production
 
 # Default command
-CMD ['echo [CRON] Running, awaiting for jobs...']
+CMD ["sh", "-c", "echo '[CRON] Running, awaiting for jobs...' && tail -f /dev/null"]
