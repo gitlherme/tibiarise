@@ -25,18 +25,18 @@ export function BentoGrid({ stats }: BentoGridProps) {
   const t = useTranslations("Homepage.Bento");
 
   return (
-    <div className="col-span-1 lg:col-span-7 grid grid-cols-2 md:grid-cols-6 gap-4 h-full min-h-[500px]">
+    <div className="col-span-1 lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 h-full min-h-[500px]">
       {/* Main Large Card - Rising Stars */}
-      <div className="col-span-2 md:col-span-4 row-span-2 relative group overflow-hidden rounded-[2rem] border border-border/50 shadow-sm bg-card">
+      <div className="col-span-1 sm:col-span-2 md:col-span-4 row-span-2 relative group overflow-hidden rounded-[2rem] border border-border/50 shadow-sm bg-card aspect-[4/3] md:aspect-auto">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-600/20 mix-blend-multiply z-10 opacity-60 transition-opacity group-hover:opacity-70 dark:opacity-40" />
         <div className="absolute inset-0 bg-[url(/four-voc.webp)] bg-cover bg-center opacity-30 dark:opacity-40 group-hover:scale-105 transition-transform duration-700" />
 
-        <div className="relative z-20 p-8 h-full flex flex-col justify-between">
+        <div className="relative z-20 p-6 md:p-8 h-full flex flex-col justify-between">
           <div>
-            <h3 className="text-3xl font-heading font-bold mb-2 text-foreground">
+            <h3 className="text-2xl md:text-3xl font-heading font-bold mb-2 text-foreground">
               {t("risingStars.title")}
             </h3>
-            <p className="text-muted-foreground font-medium">
+            <p className="text-sm md:text-base text-muted-foreground font-medium">
               {t("risingStars.subtitle")}
             </p>
           </div>
@@ -46,11 +46,11 @@ export function BentoGrid({ stats }: BentoGridProps) {
               stats.topGainers.map((char, i) => (
                 <div
                   key={char.id}
-                  className="flex items-center justify-between bg-white/70 dark:bg-black/40 backdrop-blur-md p-3 rounded-xl border border-border/20 shadow-sm"
+                  className="flex items-center justify-between bg-white/70 dark:bg-black/40 backdrop-blur-md p-2 md:p-3 rounded-xl border border-border/20 shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <span
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                      className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-[10px] md:text-xs font-bold ${
                         i === 0
                           ? "bg-amber-400 text-amber-900"
                           : "bg-muted text-muted-foreground"
@@ -58,11 +58,11 @@ export function BentoGrid({ stats }: BentoGridProps) {
                     >
                       {i + 1}
                     </span>
-                    <span className="font-semibold text-foreground">
+                    <span className="text-sm md:text-base font-semibold text-foreground truncate max-w-[100px] md:max-w-[140px]">
                       {char.characterName}
                     </span>
                   </div>
-                  <div className="text-sm font-mono text-primary font-bold">
+                  <div className="text-xs md:text-sm font-mono text-primary font-bold whitespace-nowrap">
                     +{char.value.toLocaleString()} XP
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
       </div>
 
       {/* Secondary Vertical Card - Top Level */}
-      <div className="col-span-1 md:col-span-2 row-span-2 bg-secondary/10 relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm flex flex-col justify-between p-6 group">
+      <div className="col-span-1 sm:col-span-1 md:col-span-2 row-span-2 bg-secondary/10 relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm flex flex-col justify-between p-6 group min-h-[200px]">
         <div className="absolute -right-10 -top-10 w-32 h-32 bg-secondary/20 rounded-full blur-2xl group-hover:bg-secondary/30 transition-all" />
         <div className="space-y-2 relative z-10">
           <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-secondary-foreground mb-4 shadow-lg shadow-secondary/20">
@@ -122,7 +122,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
       </div>
 
       {/* Small Feature Card 1 - Community */}
-      <div className="col-span-1 md:col-span-3 h-40 bg-card relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm p-6 flex flex-row items-center justify-between group hover:border-primary/50 transition-colors">
+      <div className="col-span-1 sm:col-span-1 md:col-span-3 h-32 md:h-40 bg-card relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm p-6 flex flex-row items-center justify-between group hover:border-primary/50 transition-colors">
         <div>
           <h4 className="text-lg font-heading font-bold text-foreground">
             {t("community.title")}
@@ -142,7 +142,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
       {/* Small Feature Card 2 - Loot Splitter */}
       <Link
         href="/tools/loot-split"
-        className="col-span-1 md:col-span-3 h-40 bg-card relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm p-6 flex flex-row items-center justify-between group hover:border-blue-500/50 transition-colors cursor-pointer"
+        className="col-span-1 sm:col-span-2 md:col-span-3 h-32 md:h-40 bg-card relative overflow-hidden rounded-[2rem] border border-border/50 shadow-sm p-6 flex flex-row items-center justify-between group hover:border-blue-500/50 transition-colors cursor-pointer"
       >
         <div>
           <h4 className="text-lg font-heading font-bold text-foreground">

@@ -28,7 +28,7 @@ export default async function Home() {
   // 3. Pass stats to BentoGrid (client).
 
   return (
-    <main className="w-full min-h-[80vh] flex flex-col justify-center py-12 gap-12">
+    <main className="w-full min-h-[80vh] flex flex-col justify-center py-6 md:py-12 gap-8 md:gap-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full max-w-7xl mx-auto px-4 lg:px-0">
         {/* Left Column: Hero Text & Search */}
         <div className="col-span-1 lg:col-span-5 flex flex-col justify-center gap-8 py-6">

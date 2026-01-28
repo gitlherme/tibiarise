@@ -36,7 +36,7 @@ export function HomeSearch({ locale }: { locale: string }) {
   };
 
   return (
-    <div className="bg-card/50 backdrop-blur-sm p-6 rounded-[2rem] border border-border/50 shadow-sm">
+    <div className="bg-card/50 backdrop-blur-sm p-4 md:p-6 rounded-[2rem] border border-border/50 shadow-sm">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
