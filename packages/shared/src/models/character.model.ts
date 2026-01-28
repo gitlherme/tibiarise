@@ -13,23 +13,15 @@ export interface Character {
   other_characters: OtherCharacter[];
 }
 
-export interface AccountBadge {
-  description: string;
-  icon_url: string;
-  name: string;
-}
-
-export interface AccountInformation {
-  created: string;
-  loyalty_title: string;
-  position: string;
-}
-
-export interface Achievement {
-  grade: number;
-  name: string;
-  secret: boolean;
-}
+import {
+  AccountBadge,
+  AccountInformation,
+  Achievement,
+  Death,
+  Guild,
+  House,
+  OtherCharacter,
+} from "./tibia-common.model";
 
 export interface Character2 {
   account_status: string;
@@ -54,64 +46,4 @@ export interface Character2 {
   world: string;
 }
 
-export interface Guild {
-  name: string;
-  rank: string;
-}
-
-export interface House {
-  houseid: number;
-  name: string;
-  paid: string;
-  town: string;
-}
-
-export interface Death {
-  assists: Assist[];
-  killers: Killer[];
-  level: number;
-  reason: string;
-  time: string;
-}
-
-export interface Assist {
-  name: string;
-  player: boolean;
-  summon: string;
-  traded: boolean;
-}
-
-export interface Killer {
-  name: string;
-  player: boolean;
-  summon: string;
-  traded: boolean;
-}
-
-export interface OtherCharacter {
-  deleted: boolean;
-  main: boolean;
-  name: string;
-  position: string;
-  status: string;
-  traded: boolean;
-  world: string;
-}
-
-export interface Information {
-  api: Api;
-  status: Status;
-  timestamp: string;
-}
-
-export interface Api {
-  commit: string;
-  release: string;
-  version: number;
-}
-
-export interface Status {
-  error: number;
-  http_code: number;
-  message: string;
-}
+import { Information } from "./api-common.model";

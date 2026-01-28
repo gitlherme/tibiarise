@@ -1,9 +1,4 @@
-export type ExperienceTableValue = {
-  date: string;
-  experience: number;
-  totalExperience: number;
-  level: number;
-};
+import { ExperienceTableValue } from "./tibia-common.model";
 
 export type CharacterData = {
   character: CharacterInfo;

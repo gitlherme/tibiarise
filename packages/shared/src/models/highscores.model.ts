@@ -1,3 +1,5 @@
+import { Information } from "./api-common.model";
+
 export interface HighscoreModel {
   highscores: Highscores;
   information: Information;
@@ -26,22 +28,4 @@ export interface HighscorePage {
   current_page: number;
   total_pages: number;
   total_records: number;
-}
-
-export interface Information {
-  api: Api;
-  status: Status;
-  timestamp: string;
-}
-
-export interface Api {
-  commit: string;
-  release: string;
-  version: number;
-}
-
-export interface Status {
-  error: number;
-  http_code: number;
-  message: string;
 }
