@@ -58,4 +58,4 @@ WORKDIR /app/apps/cron
 ENV NODE_ENV=production
 
 # Default command
-CMD ["node", "dist/index.js", "seed"]
+CMD ['echo [CRON] Running, awaiting for jobs...']
