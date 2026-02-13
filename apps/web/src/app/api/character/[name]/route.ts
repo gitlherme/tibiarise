@@ -102,7 +102,7 @@ export async function GET(
       },
     );
 
-    const response = await fetch(`${TIBIA_DATA_API_URL}/character/${name}`);
+    const response = await fetch(`${TIBIA_DATA_API_URL}/character/${encodeURIComponent(name)}`);
     const characterDataResponse: TibiaDataCharacterEndpoint =
       await response.json();
 
