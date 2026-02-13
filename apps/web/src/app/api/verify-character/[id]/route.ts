@@ -8,7 +8,7 @@ const TIBIA_DATA_API_URL =
 // GET - Find verification by code or character name
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
 
@@ -35,7 +35,7 @@ export async function GET(
     if (!verification) {
       return NextResponse.json(
         { error: "Verification not found" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -44,7 +44,7 @@ export async function GET(
     console.error("Error fetching verification:", error);
     return NextResponse.json(
       { error: "Failed to fetch verification" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -52,7 +52,7 @@ export async function GET(
 // PUT - Validate verification code (check character comment)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
 
@@ -66,46 +66,43 @@ export async function PUT(
     if (!verification) {
       return NextResponse.json(
         { error: "Verification not found" },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
     // Fetch character data from TibiaData API
     const response = await fetch(
-      `${TIBIA_DATA_API_URL}/character/${verification.characterName}`,
+      `${TIBIA_DATA_API_URL}/character/${encodeURIComponent(
+        verification.characterName
+      )}`
     );
+
+    if (!response.ok) {
+      throw new Error(`TibiaData API returned ${response.status}`);
+    }
+
     const data: TibiaDataCharacterEndpoint = await response.json();
 
-    const comment = data.character.character.comment;
-    const commentHasCode =
-      comment !== undefined && comment.toLowerCase().includes(id.toLowerCase());
+    if (!data.character || !data.character.character) {
+      return NextResponse.json(
+        { error: "Character not found on TibiaData" },
+        { status: 404 }
+      );
+    }
+
+    const characterData = data.character.character;
+    const comment = characterData.comment || "";
+    const commentHasCode = comment.toLowerCase().includes(id.toLowerCase());
 
     if (!commentHasCode) {
       console.error(`Comment does not contain verification code
+        - Character: ${verification.characterName}
         - Current comment: ${comment}
         - Verification code: ${id}  
       `);
       return NextResponse.json(
         { error: "Comment does not contain verification code" },
-        { status: 401 },
-      );
-    }
-
-    // Check if character exists in database
-    const characterExists = await prisma.character.findFirst({
-      where: {
-        name: {
-          equals: verification.characterName,
-          mode: "insensitive",
-        },
-      },
-    });
-
-    if (!characterExists) {
-      console.error(`Character does not exist: ${verification.characterName}`);
-      return NextResponse.json(
-        { error: "Character does not exist" },
-        { status: 401 },
+        { status: 401 }
       );
     }
 
@@ -124,17 +121,43 @@ export async function PUT(
       });
     }
 
-    // Update character as verified
-    await prisma.character.update({
+    // Check if character exists in database
+    const characterExists = await prisma.character.findFirst({
       where: {
-        name: characterExists.name,
-      },
-      data: {
-        verified: true,
-        verifiedAt: new Date(),
-        userId: user.id,
+        name: {
+          equals: verification.characterName,
+          mode: "insensitive",
+        },
       },
     });
+
+    if (characterExists) {
+      // Update existing character as verified
+      await prisma.character.update({
+        where: {
+          id: characterExists.id,
+        },
+        data: {
+          verified: true,
+          verifiedAt: new Date(),
+          userId: user.id,
+        },
+      });
+    } else {
+      // Create character if it doesn't exist
+      await prisma.character.create({
+        data: {
+          name: characterData.name,
+          world: characterData.world,
+          level: characterData.level,
+          vocation: characterData.vocation,
+          experience: BigInt(0),
+          verified: true,
+          verifiedAt: new Date(),
+          userId: user.id,
+        },
+      });
+    }
 
     // Remove verification record
     await prisma.verifyCharacter.delete({
@@ -150,7 +173,7 @@ export async function PUT(
     console.error("Error validating verification:", error);
     return NextResponse.json(
       { error: "Failed to validate verification" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -158,7 +181,7 @@ export async function PUT(
 // DELETE - Remove verification
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
 
@@ -174,7 +197,7 @@ export async function DELETE(
     console.error("Error deleting verification:", error);
     return NextResponse.json(
       { error: "Failed to delete verification" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
