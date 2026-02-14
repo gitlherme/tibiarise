@@ -443,6 +443,7 @@ export default function CharmFinderView() {
                               width={48}
                               height={48}
                               className="object-contain"
+                              unoptimized
                             />
                           )}
                           <div>
@@ -553,6 +554,7 @@ export default function CharmFinderView() {
                                       width={32}
                                       height={32}
                                       className="object-contain"
+                                      unoptimized
                                     />
                                   )}
                                   <span className="capitalize text-sm font-medium">
