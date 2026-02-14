@@ -17,9 +17,23 @@ export default function ToolsView() {
         <h2>{t("description")}</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <Link href={`/${locale}/tools/loot-split`}>
+        <Link href={`/tools/charm-finder`}>
           <Card className="hover:bg-primary/10 p-8 text-center flex items-center h-72 flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Badge className="bg-primary">New</Badge>
+            <Image
+              src="/assets/charms/Carnage_Icon.gif"
+              width={64}
+              height={64}
+              alt="Charm Finder Icon"
+            />
+            <h2 className="text-xl font-bold">
+              {t("tools.charmFinder.title")}
+            </h2>
+            <p>{t("tools.charmFinder.description")}</p>
+          </Card>
+        </Link>
+        <Link href={`/tools/loot-split`}>
+          <Card className="hover:bg-primary/10 p-8 text-center flex items-center h-72 flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
               src="/assets/Bar_of_Gold.gif"
               width={64}
@@ -30,7 +44,7 @@ export default function ToolsView() {
             <p>{t("tools.lootSplit.description")}</p>
           </Card>
         </Link>
-        <Link href={`/${locale}/tools/compare-characters`}>
+        <Link href={`/tools/compare-characters`}>
           <Card className="hover:bg-primary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
               src="/assets/Spying_Eye.webp"
@@ -44,7 +58,7 @@ export default function ToolsView() {
             <p>{t("tools.compareCharacters.description")}</p>
           </Card>
         </Link>
-        <Link href={`/${locale}/tools/experience-simulator`}>
+        <Link href={`/tools/experience-simulator`}>
           <Card className="hover:bg-primary/10 p-8 text-center items-center h-72 flex flex-col gap-4 transition-all ease-in hover:shadow-lg">
             <Image
               src="/assets/XP_Boost.webp"

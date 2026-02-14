@@ -9,6 +9,7 @@ import {
   Search,
   Timer,
   Wallet,
+  Eye,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -27,6 +28,12 @@ export function FeaturesSection() {
       title: t("profitAnalytics.title"),
       description: t("profitAnalytics.description"),
       href: "/dashboard",
+    },
+    {
+      icon: Eye,
+      title: t("charmFinder.title"),
+      description: t("charmFinder.description"),
+      href: "/tools/charm-finder",
     },
     {
       icon: Coins,

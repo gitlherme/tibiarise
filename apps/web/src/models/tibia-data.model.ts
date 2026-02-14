@@ -118,3 +118,74 @@ export interface OtherCharacter {
   traded: boolean;
   world: string;
 }
+
+export interface TibiaDataCreatureEndpoint {
+  creature: TibiaDataCreature;
+}
+
+export interface TibiaDataCreature {
+  beastiary_slug: string;
+  beastiary_name: string;
+  name: string;
+  race: string;
+  image_url: string;
+  description: string;
+  behaviour: string;
+  hitpoints: number;
+  immune?: string[];
+  strong?: string[];
+  weakness?: string[];
+  healed?: string[];
+  experience_points: number;
+  loot_list?: string[];
+}
+
+export interface TibiaWikiCreature {
+  name: string;
+  actualname: string;
+  hp: string;
+  exp: string;
+  maxdmg: string;
+  summon: string;
+  weakness: [];
+  illusionable: string;
+  pushable: string;
+  pushes: string;
+  physicalDmgMod: string;
+  holyDmgMod: string;
+  deathDmgMod: string;
+  fireDmgMod: string;
+  energyDmgMod: string;
+  iceDmgMod: string;
+  earthDmgMod: string;
+  drownDmgMod: string;
+  lifedrainDmgMod: string;
+  manadrainDmgMod: string;
+  bestiaryname?: string;
+  image_url?: string; // Optional, might be constructed or fetched
+  immune?: string[]; // TibiaWiki usually returns strings like "fire, earth" or array?
+  mitigation?: string; // e.g. "2.92"
+} // Actually the API returns percentage strings like "100%", "0%".
+// The immune field is redundant if DmgMod is "0%".
+
+export interface TibiaDataCreatureEndpoint {
+  creature: TibiaDataCreature;
+}
+
+export interface TibiaDataCreature {
+  beastiary_slug: string;
+  beastiary_name: string;
+  name: string;
+  race: string;
+  image_url: string;
+  description: string;
+  behaviour: string;
+  hitpoints: number;
+  immune?: string[];
+  strong?: string[];
+  weakness?: string[];
+  healed?: string[];
+  experience_points: number;
+  loot_list?: string[];
+  // Add other fields as necessary based on API response
+}

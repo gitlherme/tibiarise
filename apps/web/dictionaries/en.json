@@ -63,6 +63,10 @@
         "title": "Profit Analytics",
         "description": "Track your hunt profits, expenses, and supplies. Visualize your economy and optimize your hunts."
       },
+      "charmFinder": {
+        "title": "Charm Finder",
+        "description": "Find the best charms for your hunt based on creature density and weaknesses."
+      },
       "lootSplitter": {
         "title": "Loot Splitter",
         "description": "Easily calculate and split loot among party members. Fair distribution made simple."
@@ -279,7 +283,15 @@
       "experienceSimulator": {
         "title": "Experience Simulator",
         "description": "Calculate how long it will take to reach your next level based on your daily XP gains."
+      },
+      "charmFinder": {
+        "title": "Charm Finder",
+        "description": "Find the best charms for your hunt based on creature density and weaknesses."
       }
+    },
+    "charmFinder": {
+      "title": "Charm Finder",
+      "description": "Find the best charms for your hunt based on creature density and weaknesses."
     }
   },
   "Sidebar": {

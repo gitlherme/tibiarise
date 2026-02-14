@@ -63,6 +63,10 @@
         "title": "Análise de Profit",
         "description": "Rastreie seus lucros de caça, despesas e suprimentos. Visualize sua economia e otimize suas hunts."
       },
+      "charmFinder": {
+        "title": "Buscador de Charms",
+        "description": "Encontre os melhores charms para sua hunt baseado na densidade e fraquezas das criaturas."
+      },
       "lootSplitter": {
         "title": "Divisor de Loot",
         "description": "Calcule e divida facilmente o loot entre os membros do grupo de forma justa."
@@ -279,7 +283,15 @@
       "experienceSimulator": {
         "title": "Simulador de Experiência",
         "description": "Calcule quanto tempo falta para o seu próximo nível com base nos seus ganhos diários."
+      },
+      "charmFinder": {
+        "title": "Buscador de Charms",
+        "description": "Encontre os melhores charms para sua hunt baseado na densidade e fraquezas das criaturas."
       }
+    },
+    "charmFinder": {
+      "title": "Buscador de Charms",
+      "description": "Encontre os melhores charms para sua hunt baseado na densidade e fraquezas das criaturas."
     }
   },
   "Sidebar": {
