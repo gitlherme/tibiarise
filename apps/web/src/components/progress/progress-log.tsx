@@ -25,7 +25,7 @@ export const ProgressLog = () => {
   ];
 
   const experienceTableCopy = [...experienceTable];
-  const weeklyExperience = experienceTable.slice(-7);
+  const weeklyExperience = experienceTable.slice(0, 7);
 
   const totalExperienceMonth = experienceTable.reduce(
     (acc, curr) => ({ experience: acc.experience + curr.experience }),

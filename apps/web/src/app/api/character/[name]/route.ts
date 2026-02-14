@@ -91,16 +91,17 @@ export async function GET(
       );
     }
 
-    const characterDailyExperienceTable = await prisma.dailyExperience.findMany(
-      {
+    const characterDailyExperienceTable = (
+      await prisma.dailyExperience.findMany({
         where: {
           characterId: character.id,
         },
         orderBy: {
-          date: "asc",
+          date: "desc",
         },
-      },
-    );
+        take: 31,
+      })
+    ).reverse();
 
     const response = await fetch(`${TIBIA_DATA_API_URL}/character/${encodeURIComponent(name)}`);
     const characterDataResponse: TibiaDataCharacterEndpoint =
