@@ -17,7 +17,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "static.tibia.com",
         port: "",
-        pathname: "/images/library/**",
       },
     ],
   },
