@@ -48,8 +48,8 @@ export const ProfitManagerCard = ({
             <span
               className={cn(
                 "p-2 rounded-lg",
-                finalVariant === "profit" && "bg-green-500/20 text-green-400",
-                finalVariant === "loss" && "bg-red-500/20 text-red-400",
+                finalVariant === "profit" && "bg-success/20 text-success",
+                finalVariant === "loss" && "bg-destructive/20 text-destructive",
                 finalVariant === "neutral" && "bg-primary/20 text-primary",
               )}
             >
@@ -63,8 +63,8 @@ export const ProfitManagerCard = ({
             <span
               className={cn(
                 "flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full",
-                finalVariant === "profit" && "bg-green-500/20 text-green-400",
-                finalVariant === "loss" && "bg-red-500/20 text-red-400",
+                finalVariant === "profit" && "bg-success/20 text-success",
+                finalVariant === "loss" && "bg-destructive/20 text-destructive",
               )}
             >
               {finalVariant === "profit" ? (
@@ -79,9 +79,9 @@ export const ProfitManagerCard = ({
         {/* Value */}
         <div
           className={cn(
-            "text-3xl font-bold tracking-tight",
-            finalVariant === "profit" && "text-green-400 text-glow-primary",
-            finalVariant === "loss" && "text-red-400",
+            "text-3xl font-bold font-mono tracking-tight",
+            finalVariant === "profit" && "text-success",
+            finalVariant === "loss" && "text-destructive",
             finalVariant === "neutral" && "text-primary text-glow-primary",
           )}
         >

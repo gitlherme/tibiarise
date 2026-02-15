@@ -354,8 +354,8 @@ export const CharactersView: React.FC = () => {
 
           {verificationState.isVerified ? (
             <div className="flex flex-col items-center py-6">
-              <div className="h-20 w-20 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
-                <CheckCircle className="h-10 w-10 text-green-500" />
+              <div className="h-20 w-20 rounded-full bg-success/10 flex items-center justify-center mb-6">
+                <CheckCircle className="h-10 w-10 text-success" />
               </div>
               <p className="text-center text-xl font-medium text-foreground">
                 {t("steps.thirdStep.successMessage")}
@@ -510,7 +510,7 @@ export const CharactersView: React.FC = () => {
           <div>
             <h3 className="text-xl font-bold">{t("list.subtitle")}</h3>
             <p className="text-sm text-muted-foreground">
-              Manage your verified characters
+              {t("list.manageCharacters")}
             </p>
           </div>
           <Button
@@ -566,7 +566,7 @@ export const CharactersView: React.FC = () => {
               <div>
                 <p className="text-lg font-medium">{t("list.noCharacters")}</p>
                 <p className="text-sm text-muted-foreground">
-                  Verify a character to see it here
+                  {t("list.noCharactersDescription")}
                 </p>
               </div>
               <Button
@@ -574,7 +574,7 @@ export const CharactersView: React.FC = () => {
                 variant="outline"
                 className="mt-4 rounded-xl"
               >
-                Verify First Character
+                {t("list.verifyFirstCharacter")}
               </Button>
             </div>
           )}

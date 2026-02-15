@@ -70,10 +70,10 @@ export const ExperienceTable = () => {
                 <TableCell
                   className={
                     Math.sign(day.experience) === 1
-                      ? "text-emerald-500 font-bold"
+                      ? "text-success font-mono font-bold"
                       : Math.sign(day.experience) === -1
-                        ? "text-red-500 font-bold"
-                        : "text-muted-foreground"
+                        ? "text-destructive font-mono font-bold"
+                        : "text-muted-foreground font-mono"
                   }
                 >
                   {Math.sign(day.experience) === 1

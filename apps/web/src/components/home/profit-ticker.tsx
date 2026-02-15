@@ -27,7 +27,7 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
       {/* Header / Stats */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-6 px-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-500">
+          <div className="p-2 bg-success/10 rounded-lg text-success">
             <Coins className="w-6 h-6" />
           </div>
           <div>
@@ -44,7 +44,7 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
           <span className="text-sm text-muted-foreground font-medium">
             Total Profit Tracked:
           </span>
-          <span className="text-lg font-black text-emerald-500 font-mono">
+          <span className="text-lg font-black text-success font-mono">
             {formatTibiaCurrency(totalProfit)} Gold
           </span>
         </div>
@@ -75,7 +75,7 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
                 className="flex items-center gap-4 bg-background/80 border border-border/50 rounded-2xl px-5 py-3 min-w-[300px] shrink-0 shadow-sm hover:border-primary/30 transition-colors duration-300"
               >
                 <div
-                  className={`p-2 rounded-xl ${hunt.profit >= 0 ? "bg-emerald-500/10 text-emerald-500" : "bg-red-500/10 text-red-500"}`}
+                  className={`p-2 rounded-xl ${hunt.profit >= 0 ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}
                 >
                   {hunt.profit >= 0 ? (
                     <TrendingUp size={18} />
@@ -95,7 +95,7 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
 
                 <div className="ml-auto flex flex-col items-end">
                   <span
-                    className={`font-mono font-bold text-sm ${hunt.profit >= 0 ? "text-emerald-500" : "text-red-500"}`}
+                    className={`font-mono font-bold text-sm ${hunt.profit >= 0 ? "text-success" : "text-destructive"}`}
                   >
                     {hunt.profit > 0 ? "+" : ""}
                     {formatTibiaCurrency(hunt.profit)}

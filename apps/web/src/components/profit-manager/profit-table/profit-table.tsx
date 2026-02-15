@@ -253,10 +253,10 @@ export const ProfitTable = ({ character }: { character: string }) => {
       cell: ({ row }) => (
         <span
           className={cn(
-            "font-bold",
+            "font-bold font-mono",
             Number(row.original.netProfit) < 0
-              ? "text-red-500"
-              : "text-green-500",
+              ? "text-destructive"
+              : "text-success",
           )}
         >
           {Number(row.original.netProfit).toLocaleString(locale)}
@@ -312,7 +312,9 @@ export const ProfitTable = ({ character }: { character: string }) => {
         <div className="flex flex-col md:flex-row justify-between gap-4 items-end">
           <div className="flex flex-col gap-4 w-full md:w-auto">
             {/* Quick filter buttons */}
-            <Label className="text-muted-foreground ml-1">Quick Filters</Label>
+            <Label className="text-muted-foreground ml-1">
+              {t("labels.quickFilters")}
+            </Label>
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"

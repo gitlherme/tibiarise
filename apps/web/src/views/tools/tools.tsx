@@ -79,9 +79,9 @@ export default function ToolsView() {
 
         <Link href={`/tools/loot-split`} className="focus-visible:outline-none">
           <Card className="group relative h-full p-8 flex flex-col items-center text-center gap-6 overflow-hidden rounded-[2rem] border-border/50 bg-card/60 backdrop-blur-md shadow-soft hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-card/80 focus-visible:ring-2 focus-visible:ring-primary">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br from-warning/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-yellow-500/30 transition-colors duration-300">
+            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-warning/30 transition-colors duration-300">
               <Image
                 src="/assets/Bar_of_Gold.gif"
                 width={48}
@@ -92,7 +92,7 @@ export default function ToolsView() {
             </div>
 
             <div className="relative z-10 space-y-2">
-              <h2 className="text-2xl font-bold group-hover:text-yellow-500 transition-colors duration-300">
+              <h2 className="text-2xl font-bold group-hover:text-warning transition-colors duration-300">
                 {t("tools.lootSplit.title")}
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
@@ -101,7 +101,7 @@ export default function ToolsView() {
             </div>
 
             <div className="mt-auto pt-4 relative z-10 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-              <span className="text-yellow-500 font-medium text-sm flex items-center gap-1">
+              <span className="text-warning font-medium text-sm flex items-center gap-1">
                 Open Tool <span className="text-lg">→</span>
               </span>
             </div>
@@ -113,9 +113,9 @@ export default function ToolsView() {
           className="focus-visible:outline-none"
         >
           <Card className="group relative h-full p-8 flex flex-col items-center text-center gap-6 overflow-hidden rounded-[2rem] border-border/50 bg-card/60 backdrop-blur-md shadow-soft hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-card/80 focus-visible:ring-2 focus-visible:ring-primary">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-blue-500/30 transition-colors duration-300">
+            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-primary/30 transition-colors duration-300">
               <Image
                 src="/assets/Spying_Eye.webp"
                 width={48}
@@ -126,7 +126,7 @@ export default function ToolsView() {
             </div>
 
             <div className="relative z-10 space-y-2">
-              <h2 className="text-2xl font-bold group-hover:text-blue-500 transition-colors duration-300">
+              <h2 className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">
                 {t("tools.compareCharacters.title")}
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
@@ -135,7 +135,7 @@ export default function ToolsView() {
             </div>
 
             <div className="mt-auto pt-4 relative z-10 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-              <span className="text-blue-500 font-medium text-sm flex items-center gap-1">
+              <span className="text-primary font-medium text-sm flex items-center gap-1">
                 Open Tool <span className="text-lg">→</span>
               </span>
             </div>
@@ -147,9 +147,9 @@ export default function ToolsView() {
           className="focus-visible:outline-none"
         >
           <Card className="group relative h-full p-8 flex flex-col items-center text-center gap-6 overflow-hidden rounded-[2rem] border-border/50 bg-card/60 backdrop-blur-md shadow-soft hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-card/80 focus-visible:ring-2 focus-visible:ring-primary">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-green-500/30 transition-colors duration-300">
+            <div className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-background/50 to-background/80 shadow-inner flex items-center justify-center border border-border/50 group-hover:border-secondary/30 transition-colors duration-300">
               <Image
                 src="/assets/XP_Boost.webp"
                 width={48}
@@ -160,7 +160,7 @@ export default function ToolsView() {
             </div>
 
             <div className="relative z-10 space-y-2">
-              <h2 className="text-2xl font-bold group-hover:text-green-500 transition-colors duration-300">
+              <h2 className="text-2xl font-bold group-hover:text-secondary transition-colors duration-300">
                 {t("tools.experienceSimulator.title")}
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
@@ -169,7 +169,7 @@ export default function ToolsView() {
             </div>
 
             <div className="mt-auto pt-4 relative z-10 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-              <span className="text-green-500 font-medium text-sm flex items-center gap-1">
+              <span className="text-secondary font-medium text-sm flex items-center gap-1">
                 Open Tool <span className="text-lg">→</span>
               </span>
             </div>

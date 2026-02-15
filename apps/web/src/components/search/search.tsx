@@ -65,9 +65,9 @@ export const Search = () => {
         <Button
           type="submit"
           aria-label="Search"
-          className="h-12 w-12 rounded-full bg-primary hover:bg-primary/90 hover:scale-105 shadow-soft-primary transition-all duration-300 shrink-0"
+          className="w-16 h-12 bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-105 shadow-soft-primary transition-all duration-300"
         >
-          <SearchIcon className="w-5 h-5" />
+          <SearchIcon width={20} height={20} />
         </Button>
       </form>
     </Form>

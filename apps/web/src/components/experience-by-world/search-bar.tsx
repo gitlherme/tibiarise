@@ -60,7 +60,7 @@ export const SearchBarExperienceByWorld = () => {
   ) : (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-2">
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground text-glow-primary">
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground">
           {t("title")}
         </h2>
         <p className="text-muted-foreground text-lg">{t("subtitle")}</p>

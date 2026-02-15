@@ -43,7 +43,7 @@ export const CharacterInformation = () => {
         <div className="w-full">
           <div className="flex gap-2 flex-col-reverse md:flex-row justify-between items-start md:items-center">
             <CardTitle className="flex gap-3 items-center mb-2">
-              <span className="text-3xl font-heading font-bold text-foreground text-glow-primary">
+              <span className="text-3xl font-heading font-bold text-foreground">
                 {data?.character.name}
               </span>
               {data?.character.isVerified && (
@@ -66,7 +66,7 @@ export const CharacterInformation = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Badge className="w-fit text-sm font-bold text-amber-950 bg-gradient-to-r from-amber-200 to-amber-400 cursor-default hover:from-amber-300 hover:to-amber-500 border-0 shadow-amber-500/20 shadow-lg transition-all duration-300">
+                  <Badge className="w-fit text-sm font-bold text-warning-foreground bg-gradient-to-r from-warning/60 to-warning cursor-default hover:from-warning/70 hover:to-warning border-0 shadow-warning/20 shadow-lg transition-all duration-300">
                     {streak} {t("streak.label")} 🔥
                   </Badge>
                 </TooltipTrigger>
@@ -124,7 +124,7 @@ export const CharacterInformation = () => {
         </span>
 
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-secondary/5 p-4 rounded-xl border border-secondary/10">
-          <span className="text-sm font-medium text-secondary-foreground">
+          <span className="text-sm font-medium text-foreground">
             {t("goal.cta.description")}
           </span>
           <div className="flex-1 w-full md:w-auto">

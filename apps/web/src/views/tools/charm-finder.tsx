@@ -538,12 +538,12 @@ export default function CharmFinderView() {
                             {item.data && (
                               <div className="flex gap-2 text-xs mt-1">
                                 {item.data.weakness && (
-                                  <span className="text-green-600">
+                                  <span className="text-success">
                                     Weak: {item.data.weakness.join(", ")}
                                   </span>
                                 )}
                                 {item.data.immune && (
-                                  <span className="text-red-600">
+                                  <span className="text-destructive">
                                     Immune: {item.data.immune.join(", ")}
                                   </span>
                                 )}

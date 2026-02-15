@@ -100,7 +100,7 @@ export const MobileHeader = () => {
           </ul>
           <span className="block mt-10">
             <Link
-              className="text-secondary-foreground dark:text-primary-foreground hover:text-blue-600"
+              className="text-secondary-foreground dark:text-primary-foreground hover:text-primary"
               href="https://discord.gg/BAZDE29Eyf"
             >
               <DiscordLogo size={32} />

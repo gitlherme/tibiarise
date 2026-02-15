@@ -62,7 +62,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/`}
-                  className="hover:text-primary hover:text-glow-primary transition-all duration-300"
+                  className="hover:text-primary transition-all duration-300"
                 >
                   {t("nav.search")}
                 </Link>
@@ -70,7 +70,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/world`}
-                  className="hover:text-primary hover:text-glow-primary transition-all duration-300"
+                  className="hover:text-primary transition-all duration-300"
                 >
                   {t("nav.experienceByWorld")}
                 </Link>
@@ -78,7 +78,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/tools`}
-                  className="hover:text-primary hover:text-glow-primary transition-all duration-300 flex gap-2 items-center"
+                  className="hover:text-primary transition-all duration-300 flex gap-2 items-center"
                 >
                   {t("nav.tools")}
                 </Link>
@@ -86,7 +86,7 @@ export const Header = () => {
               <li>
                 <Link
                   href={`/support`}
-                  className="hover:text-primary hover:text-glow-primary transition-all duration-300"
+                  className="hover:text-primary transition-all duration-300"
                 >
                   {t("nav.contribute")}
                 </Link>

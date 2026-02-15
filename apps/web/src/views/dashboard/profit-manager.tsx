@@ -124,7 +124,7 @@ export const ProfitManagerView: React.FC = () => {
           <div className="h-24 w-24 rounded-full bg-primary/5 flex items-center justify-center mb-6">
             <Coins className="h-10 w-10 text-primary/40" />
           </div>
-          <h3 className="text-xl font-bold mb-2">No Profit Entries Found</h3>
+          <h3 className="text-xl font-bold mb-2">{t("noEntriesTitle")}</h3>
           <p className="text-muted-foreground text-center max-w-md mb-8">
             {t("noProfitEntries")}
           </p>
@@ -133,7 +133,7 @@ export const ProfitManagerView: React.FC = () => {
             variant="outline"
             className="rounded-xl px-8 py-6 border-primary/20 hover:bg-primary/5 hover:text-primary transition-colors"
           >
-            Add Your First Hunt
+            {t("buttons.addFirstHunt")}
           </Button>
         </div>
       ) : (

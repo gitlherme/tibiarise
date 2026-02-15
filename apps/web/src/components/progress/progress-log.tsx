@@ -104,7 +104,7 @@ export const ProgressLog = () => {
             <div className="text-sm font-medium text-muted-foreground">
               {t("bestXPMonth")}
             </div>
-            <div className="text-sm font-medium text-emerald-500">
+            <div className="text-sm font-medium font-mono text-success">
               +{formatNumberToLocale(sortedExperience[0].experience)}{" "}
               <span className="text-muted-foreground text-xs ml-1">
                 ({moment(sortedExperience[0].date).format("DD/MM")})
@@ -120,10 +120,10 @@ export const ProgressLog = () => {
               className={clsx(
                 "text-lg font-bold flex items-center gap-1",
                 Math.sign(totalLevels) === 1
-                  ? "text-emerald-500"
+                  ? "text-success"
                   : Math.sign(totalLevels) === 0
                     ? "text-muted-foreground"
-                    : "text-red-500",
+                    : "text-destructive",
               )}
             >
               {Math.sign(totalLevels) === 1 ? (

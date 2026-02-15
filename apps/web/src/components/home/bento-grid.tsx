@@ -34,7 +34,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
 
         <div className="relative z-20 p-8 h-full flex flex-col justify-between">
           <div className="transform transition-transform duration-300 group-hover:translate-x-1">
-            <h3 className="text-3xl md:text-4xl font-heading font-bold mb-2 text-foreground text-glow-primary">
+            <h3 className="text-3xl md:text-4xl font-heading font-bold mb-2 text-foreground">
               {t("risingStars.title")}
             </h3>
             <p className="text-base text-muted-foreground font-medium max-w-sm">
@@ -53,7 +53,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
                     <span
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shadow-sm ${
                         i === 0
-                          ? "bg-gradient-to-br from-amber-300 to-amber-500 text-amber-950 shadow-amber-500/20"
+                          ? "bg-gradient-to-br from-warning/80 to-warning text-warning-foreground shadow-warning/20"
                           : "bg-muted text-muted-foreground"
                       }`}
                     >
@@ -68,7 +68,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
                       </span>
                     </div>
                   </div>
-                  <div className="text-sm font-mono text-primary font-bold whitespace-nowrap bg-primary/10 px-3 py-1 rounded-full">
+                  <div className="text-sm font-mono text-success font-bold whitespace-nowrap bg-success/10 px-3 py-1 rounded-full">
                     +{char.value.toLocaleString()} XP
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
           <div className="mt-8 pt-8 border-t border-secondary/10">
             {stats.topLevel ? (
               <div className="transform transition-all duration-500 group-hover:translate-y-[-4px]">
-                <div className="text-5xl font-black text-secondary-foreground tracking-tight text-glow-secondary">
+                <div className="text-5xl font-black text-secondary-foreground tracking-tight">
                   {stats.topLevel.level}
                 </div>
                 <div className="mt-3">
@@ -138,7 +138,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
           <h4 className="text-xl font-heading font-bold text-foreground">
             {t("community.title")}
           </h4>
-          <p className="text-4xl font-black text-primary mt-2 text-glow-primary">
+          <p className="text-4xl font-black text-primary mt-2">
             {stats.totalCharacters.toLocaleString()}
           </p>
           <p className="text-xs text-muted-foreground mt-1 font-medium">
@@ -153,17 +153,17 @@ export function BentoGrid({ stats }: BentoGridProps) {
       {/* Small Feature Card 2 - Loot Splitter */}
       <Link
         href="/tools/loot-split"
-        className="col-span-1 sm:col-span-1 md:col-span-3 h-32 md:h-44 bg-card/60 backdrop-blur-sm relative overflow-hidden rounded-[2rem] border border-border/50 shadow-soft p-6 md:p-8 flex flex-row items-center justify-between group hover:border-blue-500/50 transition-all duration-500 hover:shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="col-span-1 sm:col-span-1 md:col-span-3 h-32 md:h-44 bg-card/60 backdrop-blur-sm relative overflow-hidden rounded-[2rem] border border-border/50 shadow-soft p-6 md:p-8 flex flex-row items-center justify-between group hover:border-primary/50 transition-all duration-500 hover:shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <div className="relative z-10">
-          <h4 className="text-xl font-heading font-bold text-foreground group-hover:text-blue-500 transition-colors">
+          <h4 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors">
             {t("lootSplitter.title")}
           </h4>
           <p className="text-sm text-muted-foreground mt-2 font-medium max-w-[200px]">
             {t("lootSplitter.subtitle")}
           </p>
         </div>
-        <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 text-3xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+        <div className="w-20 h-20 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary text-3xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
           <Calculator className="w-10 h-10" />
         </div>
       </Link>

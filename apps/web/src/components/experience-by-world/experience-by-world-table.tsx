@@ -107,10 +107,10 @@ export const ExperienceByWorldTable = () => {
         <span
           className={
             Math.sign(row.original.experienceGained) === 1
-              ? "text-green-500"
+              ? "text-success font-mono"
               : Math.sign(row.original.experienceGained) === -1
-                ? "text-red-500"
-                : ""
+                ? "text-destructive font-mono"
+                : "font-mono"
           }
         >
           {Math.sign(row.original.experienceGained) === 1
