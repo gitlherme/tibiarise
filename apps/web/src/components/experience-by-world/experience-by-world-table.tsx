@@ -13,7 +13,7 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Loader2, SearchX } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { DataTable } from "../general/data-table";
@@ -31,7 +31,7 @@ export const ExperienceByWorldTable = () => {
   const t = useTranslations("ExperienceByWorldPage");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const { data } = useGetExperienceByWorld();
+  const { data, isLoading } = useGetExperienceByWorld();
 
   const columns: ColumnDef<PlayerExperienceByWorld>[] = [
     {
@@ -66,7 +66,7 @@ export const ExperienceByWorldTable = () => {
         return (
           <Link
             href={`/character/${row.original.characterName}`}
-            className="hover:text-primary"
+            className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
           >
             {row.original.characterName}
           </Link>
@@ -109,15 +109,15 @@ export const ExperienceByWorldTable = () => {
             Math.sign(row.original.experienceGained) === 1
               ? "text-green-500"
               : Math.sign(row.original.experienceGained) === -1
-              ? "text-red-500"
-              : ""
+                ? "text-red-500"
+                : ""
           }
         >
           {Math.sign(row.original.experienceGained) === 1
             ? `+${formatNumberToLocale(row.original.experienceGained)}`
             : Math.sign(row.original.experienceGained) === 0
-            ? formatNumberToLocale(row.original.experienceGained)
-            : `${formatNumberToLocale(row.original.experienceGained)}`}
+              ? formatNumberToLocale(row.original.experienceGained)
+              : `${formatNumberToLocale(row.original.experienceGained)}`}
         </span>
       ),
     },
@@ -143,12 +143,42 @@ export const ExperienceByWorldTable = () => {
     },
   });
 
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-7xl mx-auto pb-20">
+        <div className="flex flex-col items-center justify-center py-20 gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-muted-foreground text-sm">Loading rankings...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data?.topGainers || data.topGainers.length === 0) {
+    return (
+      <div className="w-full max-w-7xl mx-auto pb-20">
+        <div className="flex flex-col items-center justify-center py-20 gap-4 text-center">
+          <SearchX className="w-12 h-12 text-muted-foreground/30" />
+          <div className="space-y-2">
+            <p className="font-medium text-foreground">No results found</p>
+            <p className="text-sm text-muted-foreground max-w-md">
+              Select a world and time period above, then click Search to see the
+              top experience gainers.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {data?.topGainers && (
-        <>
-          <div className="flex flex-col max-w-[200px] gap-4">
-            <Label htmlFor="vocation">Filter by Vocation</Label>
+    <div className="w-full max-w-7xl mx-auto pb-20">
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-card/40 p-4 rounded-2xl border border-border/50 backdrop-blur-sm">
+          <div className="flex flex-col gap-2 w-full md:w-64">
+            <Label htmlFor="vocation" className="text-muted-foreground ml-1">
+              Filter by Vocation
+            </Label>
             <Select
               value={
                 (table.getColumn("vocation")?.getFilterValue() as string) ||
@@ -160,22 +190,30 @@ export const ExperienceByWorldTable = () => {
                   ?.setFilterValue(value === "all" ? undefined : value)
               }
             >
-              <SelectTrigger>
+              <SelectTrigger className="bg-background/50 border-border/50 h-10 rounded-xl focus-visible:ring-2 focus-visible:ring-primary">
                 <SelectValue placeholder="Select vocation" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="all">All Vocations</SelectItem>
                 <SelectItem value="Knight">Knight</SelectItem>
                 <SelectItem value="Paladin">Paladin</SelectItem>
                 <SelectItem value="Sorcerer">Sorcerer</SelectItem>
                 <SelectItem value="Druid">Druid</SelectItem>
-                <SelectItem value="Monk">Monk</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <DataTable table={table} />
-        </>
-      )}
+
+          <div className="text-sm text-muted-foreground font-medium px-2">
+            Showing {table.getFilteredRowModel().rows.length} characters
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-border/50 bg-card/60 backdrop-blur-md shadow-soft overflow-hidden">
+          <div className="p-1">
+            <DataTable table={table} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

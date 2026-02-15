@@ -150,6 +150,7 @@
   },
   "ExperienceByWorldPage": {
     "title": "World XP Rankings",
+    "subtitle": "Track the top experience gainers across all worlds.",
     "form": {
       "world": {
         "label": "Select World"

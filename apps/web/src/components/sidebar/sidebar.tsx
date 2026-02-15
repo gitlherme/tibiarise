@@ -42,7 +42,7 @@ export function Sidebar({ className }: SidebarProps) {
       <div
         className={cn(
           "flex flex-col border-r border-border/50 transition-all duration-300 min-h-screen h-full",
-          "bg-gradient-sidebar",
+          "bg-sidebar",
           collapsed ? "w-16" : "w-64",
           className,
         )}

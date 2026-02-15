@@ -56,7 +56,7 @@ export default async function RootLayout(
               <div className="hidden md:block">
                 <Sidebar />
               </div>
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 min-w-0">{children}</main>
               <Toaster />
             </div>
           </Providers>

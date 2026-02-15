@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 1rem; /* More rounded */
+  --radius: 1.25rem; /* Increased for premium feel (20px) */
 
   /* Light Mode - "Arcane Modernity" (Light) */
   --background: oklch(0.98 0.01 260); /* Tinted White */
@@ -17,11 +17,11 @@
   --popover-foreground: oklch(0.15 0.05 260);
 
   /* Primary: Arcane Cyan/Blue */
-  --primary: oklch(0.55 0.22 250);
+  --primary: oklch(0.65 0.22 250);
   --primary-foreground: oklch(0.98 0 0);
 
   /* Secondary: Arcane Magenta */
-  --secondary: oklch(0.65 0.2 340);
+  --secondary: oklch(0.55 0.25 340);
   --secondary-foreground: oklch(0.98 0 0);
 
   --muted: oklch(0.96 0.02 260);
@@ -35,23 +35,30 @@
 
   --border: oklch(0.92 0.02 260);
   --input: oklch(0.92 0.02 260);
-  --ring: oklch(0.55 0.22 250); /* Match Primary */
+  --ring: oklch(0.65 0.22 250); /* Match Primary */
 
   /* Data Viz Colors */
-  --chart-1: oklch(0.55 0.22 250); /* Cyan/Blue */
-  --chart-2: oklch(0.65 0.2 340); /* Magenta */
+  --chart-1: oklch(0.65 0.22 250); /* Cyan/Blue */
+  --chart-2: oklch(0.55 0.25 340); /* Magenta */
   --chart-3: oklch(0.75 0.18 85); /* Orange/Gold (Shared) */
   --chart-4: oklch(0.6 0.2 20); /* Red */
   --chart-5: oklch(0.4 0.1 260); /* Dark Blue */
 
   --sidebar: oklch(0.98 0 0);
   --sidebar-foreground: oklch(0.15 0.05 260);
-  --sidebar-primary: oklch(0.55 0.25 280);
+  --sidebar-primary: oklch(0.65 0.25 250);
   --sidebar-primary-foreground: oklch(0.98 0 0);
   --sidebar-accent: oklch(0.96 0.01 260);
   --sidebar-accent-foreground: oklch(0.15 0.05 260);
   --sidebar-border: oklch(0.92 0.02 260);
-  --sidebar-ring: oklch(0.55 0.25 280);
+  --sidebar-ring: oklch(0.65 0.22 250);
+
+  /* Gradient Variables - Light Mode */
+  --card-gradient-start: var(--card);
+  --card-gradient-end: oklch(0.96 0 0);
+
+  --sidebar-gradient-start: var(--sidebar);
+  --sidebar-gradient-end: oklch(0.95 0 0);
 }
 
 /* 
@@ -118,6 +125,13 @@
   --sidebar-accent-foreground: oklch(0.98 0.01 260);
   --sidebar-border: oklch(0.25 0.05 260);
   --sidebar-ring: oklch(0.65 0.22 250);
+
+  /* Gradient Variables - Dark Mode */
+  --card-gradient-start: oklch(0.2 0.03 260);
+  --card-gradient-end: oklch(0.15 0.02 260);
+
+  --sidebar-gradient-start: oklch(0.14 0.02 260);
+  --sidebar-gradient-end: oklch(0.1 0.02 260);
 }
 
 @theme inline {
@@ -149,6 +163,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 24px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -240,16 +256,16 @@
   .bg-gradient-card {
     background: linear-gradient(
       180deg,
-      oklch(0.2 0.03 260) 0%,
-      oklch(0.15 0.02 260) 100%
+      var(--card-gradient-start) 0%,
+      var(--card-gradient-end) 100%
     );
   }
 
   .bg-gradient-sidebar {
     background: linear-gradient(
       180deg,
-      oklch(0.14 0.02 260) 0%,
-      oklch(0.1 0.02 260) 100%
+      var(--sidebar-gradient-start) 0%,
+      var(--sidebar-gradient-end) 100%
     );
   }
 
@@ -288,9 +304,10 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      oklch(1 0 0 / 0.05) 50%,
+      var(--primary) 50%,
       transparent 100%
     );
+    opacity: 0.1;
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
@@ -306,36 +323,49 @@
 
   /* Glass effect */
   .glass {
-    background: oklch(0.2 0.02 260 / 0.5);
+    background: var(
+      --card
+    ); /* Use card background with opacity via tailwind if needed, or define distinct variable */
+    background-color: color-mix(in oklch, var(--card), transparent 20%);
     backdrop-filter: blur(10px);
-    border: 1px solid oklch(1 0 0 / 0.1);
+    border: 1px solid var(--border);
   }
 
   /* Stat Card Variants */
   .stat-card-profit {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 145 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--chart-2), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 145 / 0.3);
+    border-color: color-mix(in oklch, var(--chart-2), transparent 70%);
   }
 
   .stat-card-danger {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 20 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--destructive), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 20 / 0.3);
+    border-color: color-mix(in oklch, var(--destructive), transparent 70%);
   }
 
   .stat-card-primary {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 250 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--primary), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 250 / 0.3);
+    border-color: color-mix(in oklch, var(--primary), transparent 70%);
+  }
+
+  /* Soft Shadows */
+  .shadow-soft {
+    box-shadow: 0 10px 30px -10px oklch(0 0 0 / 0.1);
+  }
+
+  .shadow-soft-primary {
+    box-shadow: 0 10px 30px -10px
+      color-mix(in oklch, var(--primary), transparent 70%);
   }
 }

@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { MobileHeader } from "@/components/header/mobile-header";
 import { Toaster } from "@/components/ui/sonner";
+import PageTransition from "@/components/utils/page-transition";
 import Providers from "@/components/utils/providers/providers";
 import { routing } from "@/i18n/routing";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -89,7 +90,9 @@ export default async function RootLayout(
               <div className="block lg:hidden">
                 <MobileHeader />
               </div>
-              <main className="min-h-[68vh] px-8 md:px-12">{children}</main>
+              <main className="min-h-[68vh] px-8 md:px-12">
+                <PageTransition>{children}</PageTransition>
+              </main>
               <Footer />
               <Toaster />
             </div>

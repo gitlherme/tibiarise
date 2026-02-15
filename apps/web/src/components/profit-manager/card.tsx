@@ -33,16 +33,13 @@ export const ProfitManagerCard = ({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border p-5 transition-all duration-300",
-        "hover:scale-[1.02] hover-glow cursor-default",
-        finalVariant === "profit" && "stat-card-profit",
-        finalVariant === "loss" && "stat-card-danger",
-        finalVariant === "neutral" && "stat-card-primary",
+        "relative overflow-hidden rounded-[2rem] border border-border/50 bg-card shadow-soft p-6 transition-all duration-300",
+        "hover:scale-[1.02] hover:shadow-lg cursor-default group",
+        finalVariant === "profit" && "border-l-4 border-l-success",
+        finalVariant === "loss" && "border-l-4 border-l-destructive",
+        finalVariant === "neutral" && "border-l-4 border-l-primary",
       )}
     >
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10 pointer-events-none" />
-
       {/* Content */}
       <div className="relative z-10">
         {/* Header */}

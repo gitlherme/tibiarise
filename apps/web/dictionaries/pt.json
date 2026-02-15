@@ -150,6 +150,7 @@
   },
   "ExperienceByWorldPage": {
     "title": "Top Players de XP por Mundo",
+    "subtitle": "Acompanhe os maiores ganhadores de XP em todos os mundos.",
     "form": {
       "world": {
         "label": "Selecionar Mundo"

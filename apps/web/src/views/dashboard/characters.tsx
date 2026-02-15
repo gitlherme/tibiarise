@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -11,16 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import {
-  Loader2,
-  CheckCircle,
-  AlertCircle,
-  ArrowLeft,
-  UserCheck,
-  PlusCircle,
-  ClipboardIcon,
-} from "lucide-react";
+import { DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -29,20 +20,29 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { HowToVerify } from "@/components/verify-characters/how-to-verify";
+import { StepIndicator } from "@/components/verify-characters/step-indicator";
+import { useGetCharacterDataByName } from "@/queries/character-data.queries";
 import { useGetUserCharacters } from "@/queries/user-data.query";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
 import {
   useCheckVerificationCode,
   useCreateVerificationCode,
   useUpdateVerificationCode,
 } from "@/queries/verify-character.queries";
-import { toast } from "sonner";
-import { StepIndicator } from "@/components/verify-characters/step-indicator";
-import { HowToVerify } from "@/components/verify-characters/how-to-verify";
-import { useGetCharacterDataByName } from "@/queries/character-data.queries";
 import { Dialog } from "@radix-ui/react-dialog";
-import { DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  AlertCircle,
+  ArrowLeft,
+  CheckCircle,
+  ClipboardIcon,
+  Loader2,
+  PlusCircle,
+  UserCheck,
+} from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
+import { toast } from "sonner";
 
 // Types for the character verification process
 interface CharacterVerificationState {
@@ -74,12 +74,11 @@ export const CharactersView: React.FC = () => {
   const [characterExistsModal, setCharacterExistsModal] = useState(false);
   const [showVerificationForm, setShowVerificationForm] = useState(false);
 
-  const { data: verifiedCharacters } = useGetUserCharacters(
-    session.data?.user?.email || ""
-  );
+  const { data: verifiedCharacters, isLoading: loadingCharacters } =
+    useGetUserCharacters(session.data?.user?.email || "");
 
   const handleCharacterNameChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setVerificationState({
       ...verificationState,
@@ -90,7 +89,7 @@ export const CharactersView: React.FC = () => {
 
   const createVerificationCode = useCreateVerificationCode();
   const characterHasOldVerificationCode = useCheckVerificationCode(
-    verificationState.characterName || ""
+    verificationState.characterName || "",
   );
 
   const { data: characterData, refetch: characterDataRefetch } =
@@ -157,7 +156,7 @@ export const CharactersView: React.FC = () => {
                 isCodeRequesting: false,
               });
             },
-          }
+          },
         );
       }
     } catch (error: any) {
@@ -213,7 +212,7 @@ export const CharactersView: React.FC = () => {
             isCodeRequesting: false,
           });
         },
-      }
+      },
     );
   };
 
@@ -263,38 +262,57 @@ export const CharactersView: React.FC = () => {
   };
 
   const renderVerificationForm = () => (
-    <>
-      <div className="flex flex-col items-center mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
-        <p className="text-muted-foreground mt-2 text-center">
-          {t("description")}
-        </p>
+    <div className="flex flex-col items-center w-full max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="flex flex-col items-center mb-8 text-center space-y-2">
+        <h1 className="text-3xl md:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">
+          {t("title")}
+        </h1>
+        <p className="text-muted-foreground text-lg">{t("description")}</p>
       </div>
 
       <HowToVerify />
-      <StepIndicator verificationState={verificationState} />
+      <div className="w-full my-8">
+        <StepIndicator verificationState={verificationState} />
+      </div>
 
       {characterExistsModal && (
         <Dialog
           open={characterExistsModal}
           onOpenChange={setCharacterExistsModal}
         >
-          <DialogContent>
+          <DialogContent className="sm:rounded-[2rem]">
             <DialogTitle>{t("confirmCharacterDialog.title")}</DialogTitle>
-            <div>
-              {t("confirmCharacterDialog.description")}
+            <div className="py-4">
+              <p className="text-muted-foreground mb-4">
+                {t("confirmCharacterDialog.description")}
+              </p>
               {characterData && (
-                <div className="flex flex-col my-4 text-foreground">
-                  <span>Name: {characterData.name}</span>
-                  <span>Vocation: {characterData.vocation}</span>
-                  <span>Level: {characterData.level}</span>
-                  <span>World: {characterData.world}</span>
+                <div className="bg-muted/50 p-4 rounded-xl border border-border/50 space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Name:</span>
+                    <span className="font-medium">{characterData.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Vocation:</span>
+                    <span className="font-medium">
+                      {characterData.vocation}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Level:</span>
+                    <span className="font-medium">{characterData.level}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">World:</span>
+                    <span className="font-medium">{characterData.world}</span>
+                  </div>
                 </div>
               )}
             </div>
             <Button
               onClick={confirmAndRequestCode}
               disabled={createVerificationCode.isPending}
+              className="w-full rounded-xl h-12"
             >
               {createVerificationCode.isPending ? (
                 <>
@@ -309,9 +327,9 @@ export const CharactersView: React.FC = () => {
         </Dialog>
       )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>
+      <Card className="w-full border-border/50 bg-card/60 backdrop-blur-md shadow-soft rounded-[2rem] overflow-hidden">
+        <CardHeader className="bg-muted/20 border-b border-border/50">
+          <CardTitle className="text-xl">
             {verificationState.currentStep === 0 && t("steps.firstStep.title")}
             {verificationState.currentStep === 1 && t("steps.secondStep.title")}
             {verificationState.currentStep === 2 && t("steps.thirdStep.title")}
@@ -326,9 +344,9 @@ export const CharactersView: React.FC = () => {
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="p-6 md:p-8">
           {verificationState.error && (
-            <Alert variant="destructive" className="mb-6">
+            <Alert variant="destructive" className="mb-6 rounded-xl">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>{verificationState.error}</AlertDescription>
             </Alert>
@@ -336,8 +354,10 @@ export const CharactersView: React.FC = () => {
 
           {verificationState.isVerified ? (
             <div className="flex flex-col items-center py-6">
-              <CheckCircle className="h-12 w-12 text-green-500 mb-4" />
-              <p className="text-center text-lg font-medium">
+              <div className="h-20 w-20 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
+                <CheckCircle className="h-10 w-10 text-green-500" />
+              </div>
+              <p className="text-center text-xl font-medium text-foreground">
                 {t("steps.thirdStep.successMessage")}
               </p>
             </div>
@@ -348,7 +368,7 @@ export const CharactersView: React.FC = () => {
                   <div className="space-y-2">
                     <label
                       htmlFor="characterName"
-                      className="text-sm font-medium"
+                      className="text-sm font-medium ml-1"
                     >
                       {t("steps.firstStep.inputLabel")}
                     </label>
@@ -358,6 +378,7 @@ export const CharactersView: React.FC = () => {
                       value={verificationState.characterName}
                       onChange={handleCharacterNameChange}
                       disabled={verificationState.isCodeRequesting}
+                      className="h-12 rounded-xl bg-background/50 border-border/50"
                     />
                   </div>
                 </div>
@@ -365,41 +386,36 @@ export const CharactersView: React.FC = () => {
 
               {verificationState.currentStep === 1 && (
                 <div className="space-y-4">
-                  <Alert
-                    variant="default"
-                    className="bg-blue-50 text-blue-800 border-blue-200 space-y-2"
-                  >
-                    <AlertTitle>
-                      {t("steps.secondStep.verificationCodeLabel")}
-                    </AlertTitle>
-                    <AlertDescription>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between gap-2">
-                          <p className="text-lg w-7/8 font-mono tracking-wider bg-blue-100 p-2 rounded text-center">
-                            {verificationState.receivedCode}
-                          </p>
-                          <Button
-                            className="w-1/8 py-6"
-                            variant="default"
-                            onClick={() => {
-                              navigator.clipboard.writeText(
-                                verificationState.receivedCode || ""
-                              );
+                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 space-y-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium text-foreground">
+                        {t("steps.secondStep.verificationCodeLabel")}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {t("steps.secondStep.verificationCodeDetails")}
+                      </p>
+                    </div>
 
-                              toast.info(
-                                t("steps.secondStep.verificationCopiedMessage")
-                              );
-                            }}
-                          >
-                            <ClipboardIcon size={24} />
-                          </Button>
-                        </div>
-                        <p className="text-sm">
-                          {t("steps.secondStep.verificationCodeDetails")}
-                        </p>
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1 bg-background border border-border rounded-xl p-4 text-center font-mono text-xl tracking-widest select-all">
+                        {verificationState.receivedCode}
                       </div>
-                    </AlertDescription>
-                  </Alert>
+                      <Button
+                        size="icon"
+                        className="h-14 w-14 rounded-xl shrink-0"
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            verificationState.receivedCode || "",
+                          );
+                          toast.info(
+                            t("steps.secondStep.verificationCopiedMessage"),
+                          );
+                        }}
+                      >
+                        <ClipboardIcon className="h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               )}
             </>
@@ -407,7 +423,7 @@ export const CharactersView: React.FC = () => {
         </CardContent>
 
         <CardFooter
-          className={`flex ${
+          className={`bg-muted/20 border-t border-border/50 p-6 flex ${
             verificationState.currentStep === 1
               ? "justify-between"
               : "justify-end"
@@ -415,11 +431,12 @@ export const CharactersView: React.FC = () => {
         >
           {verificationState.currentStep === 1 && (
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() =>
                 setVerificationState({ ...verificationState, currentStep: 0 })
               }
               disabled={verificationState.isVerifying}
+              className="text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               {t("steps.secondStep.backButton")}
@@ -427,7 +444,10 @@ export const CharactersView: React.FC = () => {
           )}
 
           {verificationState.isVerified ? (
-            <Button onClick={resetVerification}>
+            <Button
+              onClick={resetVerification}
+              className="rounded-xl h-12 px-8"
+            >
               <UserCheck className="mr-2 h-4 w-4" />
               Verify Another Character
             </Button>
@@ -435,11 +455,12 @@ export const CharactersView: React.FC = () => {
             <>
               {verificationState.currentStep === 0 && (
                 <Button
-                  onClick={requestVerificationCode} // Chama a função que gerencia a busca e o modal
+                  onClick={requestVerificationCode}
                   disabled={
                     verificationState.isCodeRequesting ||
                     !verificationState.characterName
                   }
+                  className="rounded-xl h-12 px-8 shadow-soft-primary hover:glow-primary transition-all duration-300"
                 >
                   {verificationState.isCodeRequesting ? (
                     <>
@@ -456,6 +477,7 @@ export const CharactersView: React.FC = () => {
                 <Button
                   onClick={verifyCharacter}
                   disabled={verificationState.isVerifying}
+                  className="rounded-xl h-12 px-8 shadow-soft-primary hover:glow-primary transition-all duration-300"
                 >
                   {verificationState.isVerifying ? (
                     <>
@@ -471,38 +493,65 @@ export const CharactersView: React.FC = () => {
           )}
         </CardFooter>
       </Card>
-    </>
+    </div>
   );
 
   const renderVerifiedCharactersTable = () => (
-    <div className="flex flex-col items-center mb-8 w-fullp">
-      <h1 className="text-3xl font-bold tracking-tight">{t("list.title")}</h1>
-      <p className="text-muted-foreground mt-2">{t("list.description")}</p>
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl md:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">
+          {t("list.title")}
+        </h1>
+        <p className="text-muted-foreground text-lg">{t("list.description")}</p>
+      </div>
 
-      <Card className="w-full mt-6">
-        <CardHeader className="flex flex-row justify-between items-center">
-          <CardTitle className="text-lg">{t("list.subtitle")}</CardTitle>
-          <Button onClick={resetVerification}>
+      <Card className="w-full border-border/50 bg-card/60 backdrop-blur-md shadow-soft rounded-[2rem] overflow-hidden">
+        <div className="p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-muted/20 border-b border-border/50">
+          <div>
+            <h3 className="text-xl font-bold">{t("list.subtitle")}</h3>
+            <p className="text-sm text-muted-foreground">
+              Manage your verified characters
+            </p>
+          </div>
+          <Button
+            onClick={resetVerification}
+            className="rounded-full shadow-soft-primary hover:glow-primary transition-all duration-300"
+          >
             <PlusCircle className="mr-2 h-4 w-4" />
             {t("list.buttonLabel")}
           </Button>
-        </CardHeader>
-        <CardContent>
-          {verifiedCharacters && verifiedCharacters.length > 0 ? (
+        </div>
+
+        <div className="p-1">
+          {loadingCharacters ? (
+            <div className="flex flex-col items-center justify-center py-16 space-y-4">
+              <Loader2 className="h-10 w-10 animate-spin text-primary" />
+              <p className="text-muted-foreground">
+                {t("loading") || "Loading characters..."}
+              </p>
+            </div>
+          ) : verifiedCharacters && verifiedCharacters.length > 0 ? (
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>{t("list.characterName")}</TableHead>
-                  <TableHead>{t("list.verifiedDate")}</TableHead>
+                <TableRow className="hover:bg-transparent border-b border-border/50">
+                  <TableHead className="pl-6 h-12">
+                    {t("list.characterName")}
+                  </TableHead>
+                  <TableHead className="h-12">
+                    {t("list.verifiedDate")}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {verifiedCharacters.map((character) => (
-                  <TableRow key={character.name}>
-                    <TableCell className="font-medium">
+                  <TableRow
+                    key={character.name}
+                    className="hover:bg-primary/5 border-b border-border/50 transition-colors"
+                  >
+                    <TableCell className="pl-6 font-medium py-4 text-base">
                       {character.name}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-4 text-muted-foreground">
                       {new Date().toISOString().slice(0, 10)}
                     </TableCell>
                   </TableRow>
@@ -510,17 +559,32 @@ export const CharactersView: React.FC = () => {
               </TableBody>
             </Table>
           ) : (
-            <div className="text-center text-muted-foreground py-8">
-              {t("list.noCharacters")}
+            <div className="flex flex-col items-center justify-center py-16 text-center space-y-4">
+              <div className="h-20 w-20 rounded-full bg-muted/30 flex items-center justify-center">
+                <UserCheck className="h-10 w-10 text-muted-foreground/50" />
+              </div>
+              <div>
+                <p className="text-lg font-medium">{t("list.noCharacters")}</p>
+                <p className="text-sm text-muted-foreground">
+                  Verify a character to see it here
+                </p>
+              </div>
+              <Button
+                onClick={resetVerification}
+                variant="outline"
+                className="mt-4 rounded-xl"
+              >
+                Verify First Character
+              </Button>
             </div>
           )}
-        </CardContent>
+        </div>
       </Card>
     </div>
   );
 
   return (
-    <div className="container mx-auto py-6 max-w-3xl">
+    <div className="container mx-auto py-12 px-4 min-h-[70vh]">
       {showVerificationForm ||
       (verifiedCharacters && verifiedCharacters.length === 0)
         ? renderVerificationForm()
