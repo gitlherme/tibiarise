@@ -24,13 +24,13 @@ import {
   SessionData,
 } from "@/services/loot-split/parse-players-data";
 import { formatNumberToLocaleString } from "@/utils/format-number";
+import { Label } from "@radix-ui/react-label";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import Image from "next/image";
 import { v4 as uuid } from "uuid";
-import { Label } from "@radix-ui/react-label";
 
 export default function LootSplitView() {
   const form = useForm();
@@ -42,7 +42,7 @@ export default function LootSplitView() {
 
   const copyTransferMessage = (transfer: Transfer) => {
     navigator.clipboard.writeText(
-      `transfer ${transfer.amount} to ${transfer.to}`
+      `transfer ${transfer.amount} to ${transfer.to}`,
     );
 
     toast(t("form.result.copied"));
@@ -53,8 +53,8 @@ export default function LootSplitView() {
       .map(
         (transfer) =>
           `${transfer.from} needs to pay ${formatNumberToLocaleString(
-            transfer.amount
-          )} to ${transfer.to}. (transfer ${transfer.amount} to ${transfer.to})`
+            transfer.amount,
+          )} to ${transfer.to}. (transfer ${transfer.amount} to ${transfer.to})`,
       )
       .join("\n");
 
@@ -64,7 +64,7 @@ export default function LootSplitView() {
 
   const copyAllTransfersMessage = (
     transfers: Transfer[],
-    player: PlayerData
+    player: PlayerData,
   ) => {
     const transfersString = transfers
       .filter((transfer) => transfer.from === player.name)
@@ -90,14 +90,14 @@ export default function LootSplitView() {
               ...p,
               enabled: !p.enabled,
             }
-          : p
+          : p,
       ),
     } as SessionData);
   };
 
   const handleAddExtraExpense = (player: PlayerData, value: number) => {
     const originalBalance = originalPlayersData?.find(
-      (p) => p.name === player.name
+      (p) => p.name === player.name,
     )?.balance;
 
     calculateLootSplit({
@@ -110,7 +110,7 @@ export default function LootSplitView() {
                 ? originalBalance
                 : originalBalance! - value,
             }
-          : p
+          : p,
       ),
     } as SessionData);
   };
@@ -153,7 +153,7 @@ export default function LootSplitView() {
                         {...field}
                         onPaste={(e) =>
                           handlePasteSessionData(
-                            e.clipboardData.getData("text")
+                            e.clipboardData.getData("text"),
                           )
                         }
                       />
@@ -179,12 +179,12 @@ export default function LootSplitView() {
                         className={cn(
                           "font-bold",
                           transfers.profitEach * enabledPlayers!.length > 0
-                            ? "text-green-500"
-                            : "text-red-500"
+                            ? "text-success"
+                            : "text-destructive",
                         )}
                       >
                         {formatNumberToLocaleString(
-                          transfers.profitEach * enabledPlayers!.length
+                          transfers.profitEach * enabledPlayers!.length,
                         )}
                       </span>
                     ),
@@ -205,8 +205,8 @@ export default function LootSplitView() {
                         className={cn(
                           "font-bold",
                           transfers.profitEach > 0
-                            ? "text-green-500"
-                            : "text-red-500"
+                            ? "text-success"
+                            : "text-destructive",
                         )}
                       >
                         {formatNumberToLocaleString(transfers.profitEach)}
@@ -275,7 +275,7 @@ export default function LootSplitView() {
                           onChange={(e) =>
                             handleAddExtraExpense(
                               player,
-                              parseInt(e.target.value)
+                              parseInt(e.target.value),
                             )
                           }
                           placeholder="10000000"
@@ -297,7 +297,7 @@ export default function LootSplitView() {
                         {`${
                           transfer.from
                         } needs to pay ${formatNumberToLocaleString(
-                          transfer.amount
+                          transfer.amount,
                         )} to ${transfer.to}.`}
                       </div>
                       <div className="flex items-center gap-4">
@@ -324,21 +324,21 @@ export default function LootSplitView() {
                       (player) =>
                         player.enabled &&
                         transfers.transfers.filter(
-                          (p) => p.from === player.name
+                          (p) => p.from === player.name,
                         ).length > 0 && (
                           <Button
                             key={uuid()}
                             onClick={() =>
                               copyAllTransfersMessage(
                                 transfers.transfers,
-                                player
+                                player,
                               )
                             }
                             className="w-fit cursor-pointer bg-primary hover:bg-primary/80"
                           >
                             Copy {player.name} transfers
                           </Button>
-                        )
+                        ),
                     )}
                   </div>
                 </div>

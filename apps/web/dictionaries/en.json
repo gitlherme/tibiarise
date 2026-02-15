@@ -127,6 +127,7 @@
       "customGoals": "Receive personalized suggestions for your goals based on your play history, like reaching level Y in Z days."
     },
     "experienceTable": {
+      "title": "Experience on last 30 days",
       "headers": {
         "date": "Date",
         "xpGain": "XP Gained",
@@ -150,6 +151,7 @@
   },
   "ExperienceByWorldPage": {
     "title": "World XP Rankings",
+    "subtitle": "Track the top experience gainers across all worlds.",
     "form": {
       "world": {
         "label": "Select World"
@@ -310,9 +312,13 @@
         "subtitle": "Verified Characters",
         "buttonLabel": "Verify New Character",
         "noCharacters": "You haven't verified any characters yet",
+        "noCharactersDescription": "Verify a character to see it here",
+        "verifyFirstCharacter": "Verify First Character",
+        "manageCharacters": "Manage your verified characters",
         "characterName": "Character Name",
         "verifiedDate": "Verification Date"
       },
+      "loading": "Loading characters...",
       "title": "Verify Your Character",
       "description": "Verify your character to help us keep data accurate and up-to-date. This will also help other players find your character and track their progress.",
       "stepsLabels": {
@@ -374,7 +380,9 @@
     },
     "ProfitManagerPage": {
       "title": "Profit Manager",
+      "subtitle": "Track your hunts and analyze your profit",
       "description": "Monitor your hunt profits and optimize your strategies.",
+      "noEntriesTitle": "No Profit Entries Found",
       "form": {
         "characterSelect": {
           "label": "Character",
@@ -396,6 +404,7 @@
       },
       "buttons": {
         "newProfit": "Add",
+        "addFirstHunt": "Add Your First Hunt",
         "resetFilter": "Reset",
         "lastWeek": "Last Week",
         "lastMonth": "Last Month",
@@ -403,7 +412,8 @@
       },
       "labels": {
         "startDateFilter": "From",
-        "endDateFilter": "To"
+        "endDateFilter": "To",
+        "quickFilters": "Quick Filters"
       },
       "noProfitEntries": "No data found for the selected character. Add a new profit record 🆙",
       "profitCards": {

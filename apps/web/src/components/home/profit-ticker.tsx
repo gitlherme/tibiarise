@@ -27,7 +27,7 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
       {/* Header / Stats */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-6 px-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-500">
+          <div className="p-2 bg-success/10 rounded-lg text-success">
             <Coins className="w-6 h-6" />
           </div>
           <div>
@@ -44,17 +44,17 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
           <span className="text-sm text-muted-foreground font-medium">
             Total Profit Tracked:
           </span>
-          <span className="text-lg font-black text-emerald-500 font-mono">
+          <span className="text-lg font-black text-success font-mono">
             {formatTibiaCurrency(totalProfit)} Gold
           </span>
         </div>
       </div>
 
       {/* Marquee Container */}
-      <div className="relative w-full overflow-hidden bg-card/50 border-y border-border/50 backdrop-blur-sm py-4">
+      <div className="relative w-full overflow-hidden bg-card/30 border-y border-border/50 backdrop-blur-md py-6">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         <div className="flex overflow-hidden">
           <motion.div
@@ -72,35 +72,35 @@ export function ProfitTicker({ recentHunts, totalProfit }: ProfitTickerProps) {
             {tickerItems.map((hunt, index) => (
               <div
                 key={`${hunt.id}-${index}`}
-                className="flex items-center gap-3 bg-background border border-border rounded-lg px-4 py-2 min-w-[280px] shrink-0 shadow-sm"
+                className="flex items-center gap-4 bg-background/80 border border-border/50 rounded-2xl px-5 py-3 min-w-[300px] shrink-0 shadow-sm hover:border-primary/30 transition-colors duration-300"
               >
                 <div
-                  className={`p-1.5 rounded-full ${hunt.profit >= 0 ? "bg-emerald-500/10 text-emerald-500" : "bg-red-500/10 text-red-500"}`}
+                  className={`p-2 rounded-xl ${hunt.profit >= 0 ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}
                 >
                   {hunt.profit >= 0 ? (
-                    <TrendingUp size={16} />
+                    <TrendingUp size={18} />
                   ) : (
-                    <TrendingDown size={16} />
+                    <TrendingDown size={18} />
                   )}
                 </div>
 
                 <div className="flex flex-col">
-                  <span className="font-bold text-sm text-foreground truncate max-w-[120px]">
+                  <span className="font-bold text-sm text-foreground truncate max-w-[140px]">
                     {hunt.characterName}
                   </span>
-                  <span className="text-xs text-muted-foreground truncate max-w-[120px]">
+                  <span className="text-xs text-muted-foreground truncate max-w-[140px] font-medium">
                     {hunt.huntName}
                   </span>
                 </div>
 
                 <div className="ml-auto flex flex-col items-end">
                   <span
-                    className={`font-mono font-bold text-sm ${hunt.profit >= 0 ? "text-emerald-500" : "text-red-500"}`}
+                    className={`font-mono font-bold text-sm ${hunt.profit >= 0 ? "text-success" : "text-destructive"}`}
                   >
                     {hunt.profit > 0 ? "+" : ""}
                     {formatTibiaCurrency(hunt.profit)}
                   </span>
-                  <span className="text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground font-medium">
                     {new Date(hunt.timeAgo).toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",

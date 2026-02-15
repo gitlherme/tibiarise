@@ -16,27 +16,35 @@ export const MobileHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Drawer direction="left" open={isOpen}>
-      <div className="flex items-center bg-primary p-4">
-        <DrawerTrigger onClick={() => setIsOpen(true)}>
-          <MenuIcon className="text-white" />
+      <div className="flex items-center justify-between bg-background/95 backdrop-blur-md border-b border-border/40 p-4 sticky top-0 z-50">
+        <DrawerTrigger
+          onClick={() => setIsOpen(true)}
+          aria-label="Open navigation menu"
+          className="p-2 hover:bg-accent rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        >
+          <MenuIcon className="text-foreground w-6 h-6" />
         </DrawerTrigger>
-        <Link href="/" className="block text-white mx-auto">
+        <Link
+          href="/"
+          className="block text-foreground absolute left-1/2 transform -translate-x-1/2"
+        >
           <Image
             src="/logo-dark.svg"
             alt="Tibia Rise Logo"
-            width={200}
-            height={120}
+            width={120}
+            height={80}
             className="block dark:hidden"
           />
 
           <Image
             src="/logo.svg"
             alt="Tibia Rise Logo"
-            width={200}
-            height={120}
+            width={120}
+            height={80}
             className="hidden dark:block"
           />
         </Link>
+        <div className="w-10" /> {/* Spacer for centering */}
       </div>
       <DrawerContent className="h-full rounded-none flex items-center text-center px-4 py-20">
         <XCircleIcon
@@ -92,7 +100,7 @@ export const MobileHeader = () => {
           </ul>
           <span className="block mt-10">
             <Link
-              className="text-secondary-foreground dark:text-primary-foreground hover:text-blue-600"
+              className="text-secondary-foreground dark:text-primary-foreground hover:text-primary"
               href="https://discord.gg/BAZDE29Eyf"
             >
               <DiscordLogo size={32} />

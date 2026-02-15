@@ -127,6 +127,7 @@
       "customGoals": "Receba sugestões personalizadas para suas metas com base no seu histórico de jogo, como atingir o nível Y em Z dias."
     },
     "experienceTable": {
+      "title": "Experiência dos últimos 30 dias",
       "headers": {
         "date": "Data",
         "xpGain": "XP Ganhado",
@@ -150,6 +151,7 @@
   },
   "ExperienceByWorldPage": {
     "title": "Top Players de XP por Mundo",
+    "subtitle": "Acompanhe os maiores ganhadores de XP em todos os mundos.",
     "form": {
       "world": {
         "label": "Selecionar Mundo"
@@ -310,9 +312,13 @@
         "subtitle": "Personagens Verificados",
         "buttonLabel": "Verificar Novo Personagem",
         "noCharacters": "Você ainda não verificou nenhum personagem",
+        "noCharactersDescription": "Verifique um personagem para vê-lo aqui",
+        "verifyFirstCharacter": "Verificar Primeiro Personagem",
+        "manageCharacters": "Gerencie seus personagens verificados",
         "characterName": "Nome do Personagem",
         "verifiedDate": "Data de Verificação"
       },
+      "loading": "Carregando personagens...",
       "title": "Verifique Seu Personagem",
       "description": "Verifique seu personagem para nos ajudar a manter os dados precisos e atualizados. Isso também ajudará outros jogadores a encontrar seu personagem e acompanhar seu progresso.",
       "stepsLabels": {
@@ -374,7 +380,9 @@
     },
     "ProfitManagerPage": {
       "title": "Gerenciador de Profit",
+      "subtitle": "Acompanhe suas hunts e analise seu lucro",
       "description": "Monitore seus lucros de hunt e otimize suas estratégias de.",
+      "noEntriesTitle": "Nenhum Registro de Profit Encontrado",
       "form": {
         "characterSelect": {
           "label": "Personagem",
@@ -396,6 +404,7 @@
       },
       "buttons": {
         "newProfit": "Adicionar",
+        "addFirstHunt": "Adicione Sua Primeira Hunt",
         "resetFilter": "Limpar",
         "lastWeek": "Última Semana",
         "lastMonth": "Último Mês",
@@ -403,7 +412,8 @@
       },
       "labels": {
         "startDateFilter": "De",
-        "endDateFilter": "Até"
+        "endDateFilter": "Até",
+        "quickFilters": "Filtros Rápidos"
       },
       "noProfitEntries": "Nenhum dado encontrado para o personagem selecionado. Adicione um novo registro de lucro 🆙",
       "profitCards": {

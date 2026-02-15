@@ -253,10 +253,10 @@ export const ProfitTable = ({ character }: { character: string }) => {
       cell: ({ row }) => (
         <span
           className={cn(
-            "font-bold",
+            "font-bold font-mono",
             Number(row.original.netProfit) < 0
-              ? "text-red-500"
-              : "text-green-500",
+              ? "text-destructive"
+              : "text-success",
           )}
         >
           {Number(row.original.netProfit).toLocaleString(locale)}
@@ -307,96 +307,116 @@ export const ProfitTable = ({ character }: { character: string }) => {
   };
 
   return (
-    <>
-      <div className="flex flex-col gap-4">
-        {/* Quick filter buttons */}
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              const range = getLastWeek();
-              setDateRange(range);
-            }}
-          >
-            {t("buttons.lastWeek")}
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              const range = getLastMonth();
-              setDateRange(range);
-            }}
-          >
-            {t("buttons.lastMonth")}
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              const range = getLastYear();
-              setDateRange(range);
-            }}
-          >
-            {t("buttons.lastYear")}
-          </Button>
-        </div>
-
-        {/* Date range inputs */}
-        <div className="flex items-end gap-4">
-          <div>
-            <Label>{t("labels.startDateFilter")}</Label>
-            <Input
-              className="max-w-[300px]"
-              type="date"
-              value={
-                dateRange?.from
-                  ? moment(dateRange.from).format("YYYY-MM-DD")
-                  : ""
-              }
-              onChange={(e) => {
-                const date = new Date(e.target.value);
-                setDateRange({
-                  from: date,
-                  to: dateRange?.to,
-                });
-              }}
-              max={moment().format("YYYY-MM-DD")}
-            />
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="bg-card/40 border border-border/50 backdrop-blur-sm p-4 md:p-6 rounded-2xl flex flex-col gap-6">
+        <div className="flex flex-col md:flex-row justify-between gap-4 items-end">
+          <div className="flex flex-col gap-4 w-full md:w-auto">
+            {/* Quick filter buttons */}
+            <Label className="text-muted-foreground ml-1">
+              {t("labels.quickFilters")}
+            </Label>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const range = getLastWeek();
+                  setDateRange(range);
+                }}
+                className="rounded-xl border-border/50 hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                {t("buttons.lastWeek")}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const range = getLastMonth();
+                  setDateRange(range);
+                }}
+                className="rounded-xl border-border/50 hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                {t("buttons.lastMonth")}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const range = getLastYear();
+                  setDateRange(range);
+                }}
+                className="rounded-xl border-border/50 hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                {t("buttons.lastYear")}
+              </Button>
+            </div>
           </div>
 
-          <div>
-            <Label>{t("labels.endDateFilter")}</Label>
-            <Input
-              className="max-w-[300px]"
-              type="date"
-              value={
-                dateRange?.to ? moment(dateRange.to).format("YYYY-MM-DD") : ""
-              }
-              onChange={(e) => {
-                const date = new Date(e.target.value);
-                setDateRange({
-                  from: dateRange?.from,
-                  to: date,
-                });
-              }}
-              max={moment().format("YYYY-MM-DD")}
-            />
-          </div>
+          {/* Date range inputs */}
+          <div className="flex flex-col md:flex-row items-end gap-3 w-full md:w-auto">
+            <div className="w-full md:w-auto">
+              <Label className="text-muted-foreground ml-1 mb-1.5 block">
+                {t("labels.startDateFilter")}
+              </Label>
+              <Input
+                className="w-full md:w-[160px] rounded-xl bg-background/50 border-border/50"
+                type="date"
+                value={
+                  dateRange?.from
+                    ? moment(dateRange.from).format("YYYY-MM-DD")
+                    : ""
+                }
+                onChange={(e) => {
+                  const date = new Date(e.target.value);
+                  setDateRange({
+                    from: date,
+                    to: dateRange?.to,
+                  });
+                }}
+                max={moment().format("YYYY-MM-DD")}
+              />
+            </div>
 
-          <Button
-            variant="ghost"
-            onClick={() => {
-              setDateRange(baseDate);
-            }}
-          >
-            {t("buttons.resetFilter")}
-          </Button>
+            <div className="w-full md:w-auto">
+              <Label className="text-muted-foreground ml-1 mb-1.5 block">
+                {t("labels.endDateFilter")}
+              </Label>
+              <Input
+                className="w-full md:w-[160px] rounded-xl bg-background/50 border-border/50"
+                type="date"
+                value={
+                  dateRange?.to ? moment(dateRange.to).format("YYYY-MM-DD") : ""
+                }
+                onChange={(e) => {
+                  const date = new Date(e.target.value);
+                  setDateRange({
+                    from: dateRange?.from,
+                    to: date,
+                  });
+                }}
+                max={moment().format("YYYY-MM-DD")}
+              />
+            </div>
+
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setDateRange(baseDate);
+              }}
+              className="text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl"
+            >
+              {t("buttons.resetFilter")}
+            </Button>
+          </div>
         </div>
       </div>
-      <DataTable table={table} />
+
+      <div className="rounded-[2rem] border border-border/50 bg-card/60 backdrop-blur-md shadow-soft overflow-hidden">
+        <div className="p-1">
+          <DataTable table={table} />
+        </div>
+      </div>
       <DeleteDialog />
-    </>
+    </div>
   );
 };

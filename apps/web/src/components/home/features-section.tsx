@@ -4,12 +4,12 @@ import { Link } from "@/i18n/routing";
 import {
   ArrowRight,
   Coins,
+  Eye,
   LineChart,
   Scale,
   Search,
   Timer,
   Wallet,
-  Eye,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -78,18 +78,23 @@ export function FeaturesSection() {
           <Link
             href={feature.href}
             key={idx}
-            className="group p-8 rounded-[2rem] bg-card border border-border/50 hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5 flex flex-col items-start text-left"
+            className="group p-8 rounded-[2.5rem] bg-card/60 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 flex flex-col items-start text-left relative overflow-hidden backdrop-blur-sm"
           >
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-              <feature.icon className="w-7 h-7" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            <div className="relative z-10 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 shadow-sm">
+              <feature.icon className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-heading font-bold mb-3 text-foreground flex items-center gap-2">
-              {feature.title}
-              <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
-            </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              {feature.description}
-            </p>
+
+            <div className="relative z-10">
+              <h3 className="text-xl font-heading font-bold mb-3 text-foreground flex items-center gap-2 group-hover:text-primary transition-colors">
+                {feature.title}
+                <ArrowRight className="w-5 h-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary" />
+              </h3>
+              <p className="text-muted-foreground leading-relaxed font-medium">
+                {feature.description}
+              </p>
+            </div>
           </Link>
         ))}
       </div>

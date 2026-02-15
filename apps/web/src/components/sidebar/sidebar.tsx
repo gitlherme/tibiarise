@@ -42,7 +42,7 @@ export function Sidebar({ className }: SidebarProps) {
       <div
         className={cn(
           "flex flex-col border-r border-border/50 transition-all duration-300 min-h-screen h-full",
-          "bg-gradient-sidebar",
+          "bg-sidebar",
           collapsed ? "w-16" : "w-64",
           className,
         )}
@@ -162,7 +162,7 @@ export function Sidebar({ className }: SidebarProps) {
                     )}
                   </div>
                   {/* Online indicator */}
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full ring-2 ring-background" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-success rounded-full ring-2 ring-background" />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <p className="text-sm font-medium truncate">
@@ -198,7 +198,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <Users2Icon size={16} className="text-primary" />
                       )}
                     </div>
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full ring-2 ring-background" />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-success rounded-full ring-2 ring-background" />
                   </div>
                 </div>
               </TooltipTrigger>

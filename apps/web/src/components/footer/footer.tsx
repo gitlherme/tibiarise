@@ -18,7 +18,7 @@ export const Footer = () => {
 
       <span className="block">
         <Link
-          className="text-foreground hover:text-blue-600"
+          className="text-foreground hover:text-primary"
           href="mailto:contact@tibiarise.app"
         >
           contact@tibiarise.app
@@ -27,7 +27,7 @@ export const Footer = () => {
 
       <span className="block">
         <Link
-          className="text-foreground hover:text-blue-600"
+          className="text-foreground hover:text-primary"
           href="https://discord.gg/BAZDE29Eyf"
         >
           {t("discord")}

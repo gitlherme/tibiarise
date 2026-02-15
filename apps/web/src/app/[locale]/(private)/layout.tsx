@@ -5,15 +5,15 @@ import { routing } from "@/i18n/routing";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import "../../globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const plusJakartaSans = Plus_Jakarta_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -48,7 +48,7 @@ export default async function RootLayout(
         <link rel="shortcut icon" href="/icon.svg" type="image/x-icon" />
       </head>
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} font-sans antialiased text-foreground bg-background`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased text-foreground bg-background`}
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>
@@ -56,7 +56,7 @@ export default async function RootLayout(
               <div className="hidden md:block">
                 <Sidebar />
               </div>
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 min-w-0">{children}</main>
               <Toaster />
             </div>
           </Providers>

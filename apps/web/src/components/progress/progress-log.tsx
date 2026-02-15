@@ -29,19 +29,19 @@ export const ProgressLog = () => {
 
   const totalExperienceMonth = experienceTable.reduce(
     (acc, curr) => ({ experience: acc.experience + curr.experience }),
-    { experience: 0 }
+    { experience: 0 },
   ).experience;
 
   const lastWeekXP = weeklyExperience.reduce(
     (acc, curr) => ({ experience: acc.experience + curr.experience }),
-    { experience: 0 }
+    { experience: 0 },
   ).experience;
 
   const averageXPByDay = totalExperienceMonth / experienceTable.length;
   const averageXPByWeek = totalExperienceMonth / 4;
 
   const sortedExperience = experienceTableCopy.sort(
-    (a, b) => b.experience - a.experience
+    (a, b) => b.experience - a.experience,
   );
 
   const totalLevels: number | undefined =
@@ -53,69 +53,85 @@ export const ProgressLog = () => {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex flex-col-reverse md:flex-row gap-2 justify-between">
-          <CardTitle>{t("title")}</CardTitle>
-          <Badge className="w-fit bg-primary">{t("lastMonthLabel")}</Badge>
+    <Card className="border-border/50 bg-card/60 backdrop-blur-sm shadow-soft transition-all duration-500 hover:border-primary/20 flex flex-col h-full">
+      <CardHeader className="pb-2">
+        <div className="flex flex-col-reverse md:flex-row gap-2 justify-between items-center">
+          <CardTitle className="font-heading text-xl">{t("title")}</CardTitle>
+          <Badge className="w-fit bg-primary/20 text-primary hover:bg-primary/30 border-primary/20">
+            {t("lastMonthLabel")}
+          </Badge>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 flex flex-col justify-center gap-4 pt-4">
         <div className="grid gap-4">
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("xpGained")}</div>
-            <div className="text-sm text-muted-foreground">
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("xpGained")}
+            </div>
+            <div className="text-lg font-bold text-foreground">
               {formatNumberToLocale(totalExperienceMonth)}
             </div>
           </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("lastWeekXP")}</div>
-            <div className="text-sm text-muted-foreground">
+          <Separator className="bg-border/50" />
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("lastWeekXP")}
+            </div>
+            <div className="text-lg font-bold text-foreground">
               {formatNumberToLocale(lastWeekXP)}
             </div>
           </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("averageXPByDay")}</div>
-            <div className="text-sm text-muted-foreground">
+          <Separator className="bg-border/50" />
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("averageXPByDay")}
+            </div>
+            <div className="text-base font-mono font-medium text-foreground">
               {formatNumberToLocale(averageXPByDay)}
             </div>
           </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("averageXPByWeek")}</div>
-            <div className="text-sm text-muted-foreground">
+          <Separator className="bg-border/50" />
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("averageXPByWeek")}
+            </div>
+            <div className="text-base font-mono font-medium text-foreground">
               {formatNumberToLocale(averageXPByWeek)}
             </div>
           </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("bestXPMonth")}</div>
-            <div className="text-sm text-muted-foreground">
-              {formatNumberToLocale(sortedExperience[0].experience)} (
-              {moment(sortedExperience[0].date).format("DD/MM/YYYY")})
+          <Separator className="bg-border/50" />
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("bestXPMonth")}
+            </div>
+            <div className="text-sm font-medium font-mono text-success">
+              +{formatNumberToLocale(sortedExperience[0].experience)}{" "}
+              <span className="text-muted-foreground text-xs ml-1">
+                ({moment(sortedExperience[0].date).format("DD/MM")})
+              </span>
             </div>
           </div>
-          <Separator />
-          <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">{t("levelsGained")}</div>
+          <Separator className="bg-border/50" />
+          <div className="flex items-center justify-between p-3 rounded-xl hover:bg-background/40 transition-colors">
+            <div className="text-sm font-medium text-muted-foreground">
+              {t("levelsGained")}
+            </div>
             <div
               className={clsx(
-                "text-sm flex items-center gap-1",
+                "text-lg font-bold flex items-center gap-1",
                 Math.sign(totalLevels) === 1
-                  ? "text-green-500"
+                  ? "text-success"
                   : Math.sign(totalLevels) === 0
-                  ? ""
-                  : "text-red-500"
+                    ? "text-muted-foreground"
+                    : "text-destructive",
               )}
             >
               {Math.sign(totalLevels) === 1 ? (
-                <ArrowUp width={16} />
+                <ArrowUp width={20} weight="bold" />
               ) : Math.sign(totalLevels) === 0 ? (
-                <Minus width={16} />
+                <Minus width={20} weight="bold" />
               ) : (
-                <ArrowDown width={16} />
+                <ArrowDown width={20} weight="bold" />
               )}
               {totalLevels}
             </div>

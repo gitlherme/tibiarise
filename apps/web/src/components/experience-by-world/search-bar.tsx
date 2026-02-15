@@ -34,7 +34,6 @@ const formSchema = z.object({
 
 export const SearchBarExperienceByWorld = () => {
   const locale = getCookie("NEXT_LOCALE") || "en";
-  const tg = useTranslations("General");
   const t = useTranslations("ExperienceByWorldPage");
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -48,76 +47,92 @@ export const SearchBarExperienceByWorld = () => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     router.push(
-      `/${locale}/world?world=${data.name}&filter=${ByWorldFilter[data.filter]}`
+      `/${locale}/world?world=${data.name}&filter=${ByWorldFilter[data.filter]}`,
     );
   };
 
   const { data, isLoading: worldsIsLoading } = useGetWorlds();
 
   return worldsIsLoading ? (
-    <div className="w-full flex justify-center items-center">
-      {tg("loading")}
+    <div className="w-full h-40 flex justify-center items-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
     </div>
   ) : (
-    <div className={`flex flex-col items-center`}>
-      <h2 className="text-4xl md:text-5xl font-bold my-12">{t("title")}</h2>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full xl:w-3/6 flex flex-col md:flex-row md:items-end gap-4"
-        >
-          <div className="flex flex-col md:flex-row gap-4 w-full">
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
+      <div className="text-center space-y-2">
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground">
+          {t("title")}
+        </h2>
+        <p className="text-muted-foreground text-lg">{t("subtitle")}</p>
+      </div>
+
+      <div className="w-full bg-card/60 backdrop-blur-md border border-border/50 shadow-soft p-6 md:p-8 rounded-[2rem] relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="relative z-10 flex flex-col gap-4 md:flex-row md:gap-6 md:items-end"
+          >
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="w-full md:w-3/4">
-                  <FormLabel>{t("form.world.label")}</FormLabel>
+                <FormItem className="w-full md:flex-1">
+                  <FormLabel className="text-foreground/80 font-medium ml-1">
+                    {t("form.world.label")}
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="World" />
+                      <SelectTrigger className="h-12 w-full bg-background/50 border-border/50 focus:ring-primary/20 focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+                        <SelectValue placeholder="Select World" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="max-h-[300px]">
                       {data?.worlds.map((world) => (
-                        <SelectItem key={world} value={world}>
+                        <SelectItem
+                          key={world}
+                          value={world}
+                          className="cursor-pointer"
+                        >
                           {world}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="filter"
               render={({ field }) => (
-                <FormItem className="w-full md:w-1/4">
-                  <FormLabel>{t("form.filter.label")}</FormLabel>
+                <FormItem className="w-full md:w-48">
+                  <FormLabel className="text-foreground/80 font-medium ml-1">
+                    {t("form.filter.label")}
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Yesterday" />
+                      <SelectTrigger className="h-12 w-full bg-background/50 border-border/50 focus:ring-primary/20 focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+                        <SelectValue placeholder="Period" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="DAY">
+                      <SelectItem value="DAY" className="cursor-pointer">
                         {t("form.filter.options.yesterday")}
                       </SelectItem>
-                      <SelectItem value="WEEK">
+                      <SelectItem value="WEEK" className="cursor-pointer">
                         {t("form.filter.options.week")}
                       </SelectItem>
-                      <SelectItem value="MONTH">
+                      <SelectItem value="MONTH" className="cursor-pointer">
                         {t("form.filter.options.month")}
                       </SelectItem>
                     </SelectContent>
@@ -126,12 +141,18 @@ export const SearchBarExperienceByWorld = () => {
                 </FormItem>
               )}
             />
-          </div>
-          <Button type="submit" className="md:mb-2">
-            <SearchIcon aria-label="Search" />
-          </Button>
-        </form>
-      </Form>
+
+            <Button
+              type="submit"
+              aria-label={t("form.submit.label")}
+              className="h-12 w-full md:w-auto rounded-xl bg-primary hover:bg-primary/90 hover:glow-primary shadow-soft-primary transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 gap-2"
+            >
+              <SearchIcon className="w-5 h-5" />
+              <span className="md:sr-only">{t("form.submit.label")}</span>
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

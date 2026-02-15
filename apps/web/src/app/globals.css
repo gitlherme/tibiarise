@@ -4,120 +4,130 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 1rem; /* More rounded */
+  --radius: 0.75rem; /* 12px for cards, derived for buttons (8px) */
 
-  /* Light Mode - "Arcane Modernity" (Light) */
-  --background: oklch(0.98 0.01 260); /* Tinted White */
-  --foreground: oklch(0.15 0.05 260); /* Dark Blue-Gray text */
+  /* Light Mode - TibiaRise Branding */
+  --background: oklch(0.98 0.005 260); /* ~#f8f9fc */
+  --foreground: oklch(0.18 0.04 255); /* ~#1e293b Slate dark */
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.05 260);
+  --card: oklch(1 0 0); /* White */
+  --card-foreground: oklch(0.18 0.04 255);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.05 260);
+  --popover-foreground: oklch(0.18 0.04 255);
 
-  /* Primary: Arcane Cyan/Blue */
-  --primary: oklch(0.55 0.22 250);
+  /* Primary: Royal Blue #2563eb */
+  --primary: oklch(0.55 0.22 260);
   --primary-foreground: oklch(0.98 0 0);
 
-  /* Secondary: Arcane Magenta */
-  --secondary: oklch(0.65 0.2 340);
+  /* Secondary: Violet #8b5cf6 */
+  --secondary: oklch(0.55 0.2 290);
   --secondary-foreground: oklch(0.98 0 0);
 
-  --muted: oklch(0.96 0.02 260);
-  --muted-foreground: oklch(0.55 0.05 260);
+  /* Semantic Colors */
+  --success: oklch(0.58 0.17 160); /* Emerald #10b981 */
+  --success-foreground: oklch(0.98 0 0);
 
-  --accent: oklch(0.96 0.02 260);
-  --accent-foreground: oklch(0.15 0.05 260);
+  --warning: oklch(0.77 0.15 80); /* Amber #f59e0b */
+  --warning-foreground: oklch(0.18 0.04 255);
 
-  --destructive: oklch(0.6 0.2 20);
+  --destructive: oklch(0.58 0.22 25); /* Red #ef4444 */
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.92 0.02 260);
-  --input: oklch(0.92 0.02 260);
-  --ring: oklch(0.55 0.22 250); /* Match Primary */
+  --muted: oklch(0.97 0.005 260); /* ~#f1f5f9 Slate light */
+  --muted-foreground: oklch(0.55 0.03 255);
+
+  --accent: oklch(0.97 0.005 260);
+  --accent-foreground: oklch(0.18 0.04 255);
+
+  --border: oklch(0.91 0.01 260);
+  --input: oklch(0.91 0.01 260);
+  --ring: oklch(0.55 0.22 260); /* Match Primary */
 
   /* Data Viz Colors */
-  --chart-1: oklch(0.55 0.22 250); /* Cyan/Blue */
-  --chart-2: oklch(0.65 0.2 340); /* Magenta */
-  --chart-3: oklch(0.75 0.18 85); /* Orange/Gold (Shared) */
-  --chart-4: oklch(0.6 0.2 20); /* Red */
-  --chart-5: oklch(0.4 0.1 260); /* Dark Blue */
+  --chart-1: oklch(0.55 0.22 260); /* Royal Blue */
+  --chart-2: oklch(0.55 0.2 290); /* Violet */
+  --chart-3: oklch(0.77 0.15 80); /* Amber */
+  --chart-4: oklch(0.58 0.17 160); /* Emerald */
+  --chart-5: oklch(0.58 0.22 25); /* Red */
 
   --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.15 0.05 260);
-  --sidebar-primary: oklch(0.55 0.25 280);
+  --sidebar-foreground: oklch(0.18 0.04 255);
+  --sidebar-primary: oklch(0.55 0.22 260);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0.01 260);
-  --sidebar-accent-foreground: oklch(0.15 0.05 260);
-  --sidebar-border: oklch(0.92 0.02 260);
-  --sidebar-ring: oklch(0.55 0.25 280);
+  --sidebar-accent: oklch(0.97 0.005 260);
+  --sidebar-accent-foreground: oklch(0.18 0.04 255);
+  --sidebar-border: oklch(0.91 0.01 260);
+  --sidebar-ring: oklch(0.55 0.22 260);
+
+  /* Gradient Variables - Light Mode */
+  --card-gradient-start: var(--card);
+  --card-gradient-end: oklch(0.97 0 0);
+
+  --sidebar-gradient-start: var(--sidebar);
+  --sidebar-gradient-end: oklch(0.96 0 0);
 }
 
-/* 
-   Since we are going for a dark-first aesthetic, 
-   we map the .dark class to the same variables or 
-   ensure the root variables usually serve the dark theme 
-   and light theme is the alternative (or disabled).
-   
-   For now, I will mirror the root to .dark to ensure consistency 
-   regardless of system preference, as the user requested a specific vibe.
-*/
 .dark {
-  /* Dark Mode - "Arcane Modernity" (Deep Abyssal) */
-  --background: oklch(0.12 0.02 260);
-  --foreground: oklch(0.98 0.01 260);
+  /* Dark Mode - TibiaRise Branding */
+  --background: oklch(0.16 0.02 255); /* ~#0f172a deep slate */
+  --foreground: oklch(0.97 0.005 260); /* ~#f1f5f9 */
 
-  --card: oklch(0.17 0.03 260);
-  --card-foreground: oklch(0.98 0.01 260);
+  --card: oklch(0.2 0.02 255); /* ~#1e293b */
+  --card-foreground: oklch(0.97 0.005 260);
 
-  --popover: oklch(0.12 0.02 260);
-  --popover-foreground: oklch(0.98 0.01 260);
+  --popover: oklch(0.16 0.02 255);
+  --popover-foreground: oklch(0.97 0.005 260);
 
-  /* Mantain the Electric Cyan primary for Dark mode as it fits "Arcane" better than Purple?
-     Actually, let's switch to a vibrant purple/blue to match the "V Games" vibe 
-     but in a dark context, OR keep the Cyan. 
-     User asked for "Light/Dark mode using same things - we don't have a real light mode".
-     Now we have a real light mode.
-     Let's align Dark Mode Primary to be similar but glowing.
-     Let's keep the Cyan/Blue as it looks great on dark, 
-     but maybe shift slightly towards Purple to align with Light Mode?
-     Let's stick to the previous defined Dark Mode colors as they were approved, 
-     just ensuring variables are correct.
-  */
-  --primary: oklch(0.65 0.22 250); /* Mana Cyan/Blue */
-  --primary-foreground: oklch(0.1 0.05 260);
+  /* Primary: Royal Blue (brighter on dark) */
+  --primary: oklch(0.6 0.22 260);
+  --primary-foreground: oklch(0.12 0.03 255);
 
-  --secondary: oklch(0.55 0.25 340); /* Magenta/Purple */
-  --secondary-foreground: oklch(0.98 0.01 260);
+  /* Secondary: Violet */
+  --secondary: oklch(0.6 0.2 290);
+  --secondary-foreground: oklch(0.97 0.005 260);
 
-  --muted: oklch(0.25 0.05 260);
-  --muted-foreground: oklch(0.7 0.05 260);
+  /* Semantic Colors */
+  --success: oklch(0.62 0.17 160);
+  --success-foreground: oklch(0.12 0.03 255);
 
-  --accent: oklch(0.25 0.05 260);
-  --accent-foreground: oklch(0.98 0.01 260);
+  --warning: oklch(0.77 0.15 80);
+  --warning-foreground: oklch(0.12 0.03 255);
 
-  --destructive: oklch(0.6 0.2 20);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.97 0 0);
 
-  --border: oklch(0.25 0.05 260);
-  --input: oklch(0.25 0.05 260);
-  --ring: oklch(0.65 0.22 250);
+  --muted: oklch(0.25 0.02 255);
+  --muted-foreground: oklch(0.68 0.03 255);
 
-  --chart-1: oklch(0.65 0.22 250);
-  --chart-2: oklch(0.55 0.25 340);
-  --chart-3: oklch(0.75 0.18 85);
-  --chart-4: oklch(0.7 0.18 145);
-  --chart-5: oklch(0.6 0.2 20);
+  --accent: oklch(0.25 0.02 255);
+  --accent-foreground: oklch(0.97 0.005 260);
 
-  --sidebar: oklch(0.12 0.02 260);
-  --sidebar-foreground: oklch(0.98 0.01 260);
-  --sidebar-primary: oklch(0.65 0.22 250);
-  --sidebar-primary-foreground: oklch(0.98 0.01 260);
-  --sidebar-accent: oklch(0.25 0.05 260);
-  --sidebar-accent-foreground: oklch(0.98 0.01 260);
-  --sidebar-border: oklch(0.25 0.05 260);
-  --sidebar-ring: oklch(0.65 0.22 250);
+  --border: oklch(0.28 0.02 255);
+  --input: oklch(0.28 0.02 255);
+  --ring: oklch(0.6 0.22 260);
+
+  --chart-1: oklch(0.6 0.22 260);
+  --chart-2: oklch(0.6 0.2 290);
+  --chart-3: oklch(0.77 0.15 80);
+  --chart-4: oklch(0.62 0.17 160);
+  --chart-5: oklch(0.6 0.2 25);
+
+  --sidebar: oklch(0.14 0.02 255);
+  --sidebar-foreground: oklch(0.97 0.005 260);
+  --sidebar-primary: oklch(0.6 0.22 260);
+  --sidebar-primary-foreground: oklch(0.97 0.005 260);
+  --sidebar-accent: oklch(0.25 0.02 255);
+  --sidebar-accent-foreground: oklch(0.97 0.005 260);
+  --sidebar-border: oklch(0.28 0.02 255);
+  --sidebar-ring: oklch(0.6 0.22 260);
+
+  /* Gradient Variables - Dark Mode */
+  --card-gradient-start: oklch(0.22 0.02 255);
+  --card-gradient-end: oklch(0.18 0.02 255);
+
+  --sidebar-gradient-start: oklch(0.16 0.02 255);
+  --sidebar-gradient-end: oklch(0.12 0.02 255);
 }
 
 @theme inline {
@@ -137,6 +147,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -149,6 +163,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 24px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -159,7 +175,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-outfit);
+  --font-heading: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 @layer base {
@@ -172,42 +189,39 @@
 }
 
 /* ============================================
-   CUSTOM UTILITIES - Vibrancy & Glow Effects
+   CUSTOM UTILITIES - Branding Effects
    ============================================ */
 
 @layer utilities {
-  /* Glow Effects */
+  /* Glow Effects - Royal Blue */
   .glow-primary {
     box-shadow:
-      0 0 20px oklch(0.65 0.22 250 / 0.3),
-      0 0 40px oklch(0.65 0.22 250 / 0.1);
+      0 0 20px oklch(0.55 0.22 260 / 0.3),
+      0 0 40px oklch(0.55 0.22 260 / 0.1);
   }
 
   .glow-primary-sm {
-    box-shadow: 0 0 10px oklch(0.65 0.22 250 / 0.2);
+    box-shadow: 0 0 10px oklch(0.55 0.22 260 / 0.2);
   }
 
+  /* Glow Effects - Violet */
   .glow-secondary {
     box-shadow:
-      0 0 20px oklch(0.55 0.25 340 / 0.3),
-      0 0 40px oklch(0.55 0.25 340 / 0.1);
+      0 0 20px oklch(0.55 0.2 290 / 0.3),
+      0 0 40px oklch(0.55 0.2 290 / 0.1);
   }
 
   .glow-success {
-    box-shadow: 0 0 15px oklch(0.7 0.2 145 / 0.4);
+    box-shadow: 0 0 15px oklch(0.58 0.17 160 / 0.4);
   }
 
   .glow-danger {
-    box-shadow: 0 0 15px oklch(0.6 0.2 20 / 0.4);
+    box-shadow: 0 0 15px oklch(0.58 0.22 25 / 0.4);
   }
 
   /* Text Glow */
   .text-glow-primary {
-    text-shadow: 0 0 10px oklch(0.65 0.22 250 / 0.5);
-  }
-
-  .text-glow-secondary {
-    text-shadow: 0 0 10px oklch(0.55 0.25 340 / 0.5);
+    text-shadow: 0 0 10px oklch(0.55 0.22 260 / 0.5);
   }
 
   /* Sidebar Active Indicator */
@@ -228,28 +242,32 @@
     box-shadow: 0 0 8px var(--primary);
   }
 
-  /* Gradient Backgrounds */
+  /* Gradient Backgrounds - Signature: Blue → Violet */
   .bg-gradient-primary {
     background: linear-gradient(
       135deg,
-      oklch(0.65 0.22 250 / 0.1) 0%,
-      oklch(0.55 0.25 340 / 0.05) 100%
+      oklch(0.55 0.22 260 / 0.1) 0%,
+      oklch(0.55 0.2 290 / 0.05) 100%
     );
+  }
+
+  .bg-gradient-signature {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
   }
 
   .bg-gradient-card {
     background: linear-gradient(
       180deg,
-      oklch(0.2 0.03 260) 0%,
-      oklch(0.15 0.02 260) 100%
+      var(--card-gradient-start) 0%,
+      var(--card-gradient-end) 100%
     );
   }
 
   .bg-gradient-sidebar {
     background: linear-gradient(
       180deg,
-      oklch(0.14 0.02 260) 0%,
-      oklch(0.1 0.02 260) 100%
+      var(--sidebar-gradient-start) 0%,
+      var(--sidebar-gradient-end) 100%
     );
   }
 
@@ -265,7 +283,7 @@
   }
 
   .hover-glow:hover {
-    box-shadow: 0 0 20px oklch(0.65 0.22 250 / 0.2);
+    box-shadow: 0 0 20px oklch(0.55 0.22 260 / 0.2);
   }
 
   /* Pulse Animation for live data */
@@ -276,10 +294,10 @@
   @keyframes pulse-glow {
     0%,
     100% {
-      box-shadow: 0 0 5px oklch(0.65 0.22 250 / 0.3);
+      box-shadow: 0 0 5px oklch(0.55 0.22 260 / 0.3);
     }
     50% {
-      box-shadow: 0 0 20px oklch(0.65 0.22 250 / 0.5);
+      box-shadow: 0 0 20px oklch(0.55 0.22 260 / 0.5);
     }
   }
 
@@ -288,9 +306,10 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      oklch(1 0 0 / 0.05) 50%,
+      var(--primary) 50%,
       transparent 100%
     );
+    opacity: 0.1;
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
@@ -306,36 +325,47 @@
 
   /* Glass effect */
   .glass {
-    background: oklch(0.2 0.02 260 / 0.5);
+    background: var(--card);
+    background-color: color-mix(in oklch, var(--card), transparent 20%);
     backdrop-filter: blur(10px);
-    border: 1px solid oklch(1 0 0 / 0.1);
+    border: 1px solid var(--border);
   }
 
   /* Stat Card Variants */
   .stat-card-profit {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 145 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--success), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 145 / 0.3);
+    border-color: color-mix(in oklch, var(--success), transparent 70%);
   }
 
   .stat-card-danger {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 20 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--destructive), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 20 / 0.3);
+    border-color: color-mix(in oklch, var(--destructive), transparent 70%);
   }
 
   .stat-card-primary {
     background: linear-gradient(
       135deg,
-      oklch(0.25 0.08 250 / 0.3) 0%,
-      oklch(0.2 0.03 260) 100%
+      color-mix(in oklch, var(--primary), transparent 70%) 0%,
+      var(--card) 100%
     );
-    border-color: oklch(0.5 0.15 250 / 0.3);
+    border-color: color-mix(in oklch, var(--primary), transparent 70%);
+  }
+
+  /* Soft Shadows */
+  .shadow-soft {
+    box-shadow: 0 10px 30px -10px oklch(0 0 0 / 0.1);
+  }
+
+  .shadow-soft-primary {
+    box-shadow: 0 10px 30px -10px
+      color-mix(in oklch, var(--primary), transparent 70%);
   }
 }

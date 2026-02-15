@@ -22,9 +22,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { CHARMS, Charm } from "@/data/charms";
 import { TibiaWikiCreature } from "@/models/tibia-data.model";
 import { useCharmFinderStore } from "@/stores/charm-finder.store";
-import { Loader2 } from "lucide-react";
+import { AlertCircle, Loader2, Sparkles } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 interface CharmConfiguration {
@@ -50,6 +50,37 @@ export default function CharmFinderView() {
     [],
   );
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  const handleSelectAll = useCallback(() => {
+    CHARMS.forEach((charm) => {
+      if (!selectedCharms.includes(charm.name)) {
+        toggleCharm(charm.name);
+      }
+    });
+  }, [selectedCharms, toggleCharm]);
+
+  const handleClearAll = useCallback(() => {
+    CHARMS.forEach((charm) => {
+      if (selectedCharms.includes(charm.name)) {
+        toggleCharm(charm.name);
+      }
+    });
+  }, [selectedCharms, toggleCharm]);
+
+  // Auto-scroll to results on mobile after analysis
+  useEffect(() => {
+    if (configurations.length > 0 && resultsRef.current) {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        resultsRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+  }, [configurations]);
 
   // toggleCharm removed from here as it comes from store
 
@@ -179,6 +210,7 @@ export default function CharmFinderView() {
     }
 
     setIsAnalyzing(true);
+    setAnalysisError(null);
     setCreaturesData([]);
     setConfigurations([]);
 
@@ -338,7 +370,10 @@ export default function CharmFinderView() {
 
       setConfigurations(finalConfigs);
     } catch (error) {
-      toast.error("An error occurred while analyzing.");
+      const errorMessage =
+        "An error occurred while analyzing. Please check your input and try again.";
+      toast.error(errorMessage);
+      setAnalysisError(errorMessage);
       console.error(error);
     } finally {
       setIsAnalyzing(false);
@@ -348,21 +383,47 @@ export default function CharmFinderView() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <div className="space-y-6">
-        <Card>
+        <Card className="border-border/50">
           <CardHeader>
-            <CardTitle>1. Select Your Charms</CardTitle>
-            <CardDescription>
-              Check the charms you have unlocked on your character.
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>1. Select Your Charms</CardTitle>
+                <CardDescription>
+                  Check the charms you have unlocked on your character.
+                </CardDescription>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSelectAll}
+                  className="text-xs"
+                >
+                  Select All
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleClearAll}
+                  className="text-xs"
+                >
+                  Clear All
+                </Button>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               {CHARMS.map((charm) => (
-                <div key={charm.name} className="flex items-center space-x-2">
+                <div
+                  key={charm.name}
+                  className={`flex items-center space-x-2 p-2 rounded-lg transition-colors duration-200 ${selectedCharms.includes(charm.name) ? "bg-primary/5" : "hover:bg-muted/50"}`}
+                >
                   <Checkbox
                     id={`charm-${charm.name}`}
                     checked={selectedCharms.includes(charm.name)}
                     onCheckedChange={() => toggleCharm(charm.name)}
+                    className="transition-all duration-200"
                   />
                   <Label
                     htmlFor={`charm-${charm.name}`}
@@ -373,7 +434,7 @@ export default function CharmFinderView() {
                       alt={charm.name}
                       width={24}
                       height={24}
-                      className="object-contain"
+                      className="object-contain w-6 h-6"
                     />
                     {charm.name}
                   </Label>
@@ -383,7 +444,7 @@ export default function CharmFinderView() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-border/50">
           <CardHeader>
             <CardTitle>2. Paste Hunt Analyzer</CardTitle>
             <CardDescription>
@@ -393,24 +454,45 @@ export default function CharmFinderView() {
           </CardHeader>
           <CardContent className="space-y-4">
             <Textarea
-              placeholder="Session data: From 2023-09-13... Killed Monsters: 251x darklight striker..."
-              className="min-h-[200px]"
+              placeholder={`Paste your Hunt Analyzer session data here.\n\nExample:\nSession data: From 2023-09-13, 10:35:02 to 2023-09-13, 11:40:55\nKilled Monsters:\n251x darklight striker\n120x darklight emissary\n95x darklight construct...`}
+              className="min-h-[200px] focus-visible:ring-primary/30"
               value={analyzerText}
               onChange={(e) => setAnalyzerText(e.target.value)}
+              onKeyDown={(e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+                  e.preventDefault();
+                  handleAnalyze();
+                }
+              }}
             />
-            <Button
-              onClick={handleAnalyze}
-              disabled={isAnalyzing}
-              className="w-full"
-            >
-              {isAnalyzing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Analyze & Recommend
-            </Button>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-muted-foreground">
+                Press Ctrl+Enter to analyze
+              </span>
+              <Button
+                onClick={handleAnalyze}
+                disabled={isAnalyzing}
+                className="min-w-[180px]"
+              >
+                {isAnalyzing && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Analyze & Recommend
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="space-y-6">
+      <div ref={resultsRef} className="space-y-6">
+        {analysisError && (
+          <Card className="border-destructive/50 bg-destructive/5">
+            <CardContent className="flex items-center gap-3 p-4">
+              <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
+              <p className="text-sm text-destructive">{analysisError}</p>
+            </CardContent>
+          </Card>
+        )}
         {configurations.length > 0 && creaturesData.length > 0 ? (
           <div className="space-y-6">
             <Card className="h-full border-primary border-2">
@@ -456,12 +538,12 @@ export default function CharmFinderView() {
                             {item.data && (
                               <div className="flex gap-2 text-xs mt-1">
                                 {item.data.weakness && (
-                                  <span className="text-green-600">
+                                  <span className="text-success">
                                     Weak: {item.data.weakness.join(", ")}
                                   </span>
                                 )}
                                 {item.data.immune && (
-                                  <span className="text-red-600">
+                                  <span className="text-destructive">
                                     Immune: {item.data.immune.join(", ")}
                                   </span>
                                 )}
@@ -601,8 +683,8 @@ export default function CharmFinderView() {
               </div>
             )}
           </div>
-        ) : (
-          <Card className="h-full">
+        ) : !analysisError ? (
+          <Card className="h-full border-border/50">
             <CardHeader>
               <CardTitle>Results</CardTitle>
               <CardDescription>
@@ -610,12 +692,28 @@ export default function CharmFinderView() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-center text-muted-foreground py-10">
-                Paste your hunt log and click Analyze to see recommendations.
+              <div className="flex flex-col items-center justify-center text-center text-muted-foreground py-10 space-y-4">
+                <Sparkles className="w-12 h-12 text-muted-foreground/30" />
+                <div className="space-y-2">
+                  <p className="font-medium">No analysis yet</p>
+                  <p className="text-sm max-w-xs">
+                    Select your charms, paste your Hunt Analyzer log, and click
+                    &quot;Analyze &amp; Recommend&quot; to see the best charm
+                    assignments.
+                  </p>
+                </div>
+                <div className="text-xs space-y-1 mt-4 bg-muted/30 p-3 rounded-lg">
+                  <p className="font-medium">💡 Tips:</p>
+                  <ul className="text-left list-disc list-inside space-y-1">
+                    <li>Select all charms you have unlocked</li>
+                    <li>Use a session with at least 100+ kills</li>
+                    <li>The analyzer considers element weaknesses</li>
+                  </ul>
+                </div>
               </div>
             </CardContent>
           </Card>
-        )}
+        ) : null}
       </div>
     </div>
   );
