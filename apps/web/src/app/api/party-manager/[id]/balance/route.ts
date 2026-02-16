@@ -72,8 +72,14 @@ export async function GET(
     }
 
     let totalDropsValue = BigInt(0);
+    let totalDropsValueTc = BigInt(0);
+
     for (const d of drops) {
-      totalDropsValue += d.value * BigInt(d.quantity);
+      if (d.currency === "TIBIA_COIN") {
+        totalDropsValueTc += d.value * BigInt(d.quantity);
+      } else {
+        totalDropsValue += d.value * BigInt(d.quantity);
+      }
     }
 
     return NextResponse.json(
@@ -82,6 +88,7 @@ export async function GET(
         totalSupplies,
         netBalance,
         totalDropsValue,
+        totalDropsValueTc,
         sessionCount: sessions.length,
         dropCount: drops.length,
       }),

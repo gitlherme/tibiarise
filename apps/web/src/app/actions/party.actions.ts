@@ -229,6 +229,9 @@ export async function addDrop(
     itemId?: number;
     quantity: number;
     value: number;
+    sold?: boolean;
+    source?: string;
+    currency?: "GOLD" | "TIBIA_COIN";
     droppedAt?: string;
   },
 ) {
@@ -246,6 +249,9 @@ export async function addDrop(
       itemId: data.itemId,
       quantity: data.quantity,
       value: BigInt(data.value),
+      sold: data.sold || false,
+      source: data.source,
+      currency: data.currency || "GOLD",
       droppedAt: data.droppedAt ? new Date(data.droppedAt) : new Date(),
     },
   });
@@ -290,6 +296,46 @@ export async function toggleDropSold(dropId: string) {
   const updated = await prisma.partyDrop.update({
     where: { id: dropId },
     data: { sold: !drop.sold },
+  });
+
+  revalidatePath(`/dashboard/party/${drop.partyId}`);
+  return serializeBigInt(updated);
+}
+
+export async function updateDrop(
+  dropId: string,
+  data: {
+    quantity?: number;
+    value?: number;
+    sold?: boolean;
+    source?: string;
+    currency?: "GOLD" | "TIBIA_COIN";
+    droppedAt?: string;
+  },
+) {
+  const user = await getAuthenticatedUser();
+
+  const drop = await prisma.partyDrop.findUnique({
+    where: { id: dropId },
+  });
+  if (!drop) throw new Error("Drop not found");
+
+  const membership = await prisma.partyMember.findFirst({
+    where: { partyId: drop.partyId, userId: user.id },
+  });
+  if (!membership) throw new Error("Forbidden");
+
+  const updateData: any = { ...data };
+  if (data.value !== undefined) {
+    updateData.value = BigInt(data.value);
+  }
+  if (data.droppedAt) {
+    updateData.droppedAt = new Date(data.droppedAt);
+  }
+
+  const updated = await prisma.partyDrop.update({
+    where: { id: dropId },
+    data: updateData,
   });
 
   revalidatePath(`/dashboard/party/${drop.partyId}`);

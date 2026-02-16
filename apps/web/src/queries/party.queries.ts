@@ -63,6 +63,8 @@ export interface PartyDrop {
   quantity: number;
   value: string;
   sold: boolean;
+  source: string | null;
+  currency: "GOLD" | "TIBIA_COIN";
   droppedAt: string;
   createdAt: string;
 }
@@ -72,6 +74,7 @@ export interface PartyBalance {
   totalSupplies: string;
   netBalance: string;
   totalDropsValue: string;
+  totalDropsValueTc: string;
   sessionCount: number;
   dropCount: number;
 }

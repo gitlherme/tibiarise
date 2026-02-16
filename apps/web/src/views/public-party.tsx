@@ -1,20 +1,37 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  Tooltip as UITooltip,
+} from "@/components/ui/tooltip";
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
 import {
+  BabyIcon,
   ChevronLeftIcon,
+  ClockIcon,
   GemIcon,
-  LayoutDashboardIcon,
+  GlobeIcon,
   ShieldIcon,
-  SwordsIcon,
+  SwordIcon,
   UsersIcon,
-  WalletIcon,
+  ZapIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -35,37 +52,39 @@ interface PublicPartyData {
         world: string;
         level: number;
         vocation: string;
+        dailyExperience: {
+          date: string;
+          value: string; // BigInt serialized
+          level: number;
+        }[];
       } | null;
       user: { id: string; email: string };
     }[];
   };
+  recentDrops: {
+    id: string;
+    itemName: string;
+    itemId?: number;
+    quantity: number;
+    value: number;
+    source?: string;
+    droppedAt: string;
+    currency: "GOLD" | "TIBIA_COIN";
+  }[];
   recentSessions: {
     id: string;
     huntName: string;
     huntDate: string;
     duration: number | null;
-    loot: number;
-    supplies: number;
-    balance: number;
-  }[];
-  recentDrops: {
-    id: string;
-    itemName: string;
-    quantity: number;
-    value: number;
-    droppedAt: string;
+    loot: string; // BigInt serialized -> string
+    supplies: string;
+    balance: string;
   }[];
   stats: {
-    totalLoot: number;
-    totalSupplies: number;
-    netBalance: number;
-    sessionCount: number;
     dropCount: number;
-    dropsValue: number;
+    // other stats kept for references if needed, but not displayed personally
   };
 }
-
-type Tab = "overview" | "sessions" | "drops" | "balance";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -87,13 +106,23 @@ function formatDate(date: string): string {
   });
 }
 
+const vocationIcons: Record<string, React.ReactNode> = {
+  "Elite Knight": <ShieldIcon size={14} />,
+  Knight: <ShieldIcon size={14} />,
+  "Elder Druid": <BabyIcon size={14} />,
+  Druid: <BabyIcon size={14} />,
+  "Master Sorcerer": <GemIcon size={14} />,
+  Sorcerer: <GemIcon size={14} />,
+  "Royal Paladin": <SwordIcon size={14} />,
+  Paladin: <SwordIcon size={14} />,
+};
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export const PublicPartyView = () => {
-  const t = useTranslations("Dashboard.PartyTrackerPage");
+  const t = useTranslations("PublicParty");
   const params = useParams();
   const slug = params.slug as string;
-  const [activeTab, setActiveTab] = useState<Tab>("overview");
 
   const { data, isLoading, error } = useQuery<PublicPartyData>({
     queryKey: ["publicParty", slug],
@@ -105,25 +134,6 @@ export const PublicPartyView = () => {
     enabled: !!slug,
     retry: false,
   });
-
-  const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
-    {
-      key: "overview",
-      label: t("tabs.overview"),
-      icon: <LayoutDashboardIcon size={16} />,
-    },
-    {
-      key: "sessions",
-      label: t("tabs.sessions"),
-      icon: <SwordsIcon size={16} />,
-    },
-    { key: "drops", label: t("tabs.drops"), icon: <GemIcon size={16} /> },
-    {
-      key: "balance",
-      label: t("tabs.balance"),
-      icon: <WalletIcon size={16} />,
-    },
-  ];
 
   if (isLoading) {
     return (
@@ -137,68 +147,121 @@ export const PublicPartyView = () => {
     return (
       <div className="container mx-auto py-12 px-4 min-h-[60vh] flex flex-col items-center justify-center gap-4">
         <ShieldIcon size={48} className="text-muted-foreground" />
-        <h2 className="text-2xl font-bold">{t("partyNotFound")}</h2>
+        <h2 className="text-2xl font-bold">{t("notFound.title")}</h2>
         <p className="text-muted-foreground text-sm">
-          This party does not exist or is not public.
+          {t("notFound.description")}
         </p>
         <Link href="/">
           <Button variant="outline" className="rounded-xl">
             <ChevronLeftIcon size={16} className="mr-2" />
-            Back to Home
+            {t("notFound.backButton")}
           </Button>
         </Link>
       </div>
     );
   }
 
-  const { party, recentSessions, recentDrops, stats } = data;
+  const { party, recentDrops, recentSessions } = data;
 
   return (
-    <div className="container mx-auto py-12 px-4 min-h-[60vh]">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-            <ShieldIcon size={12} />
-            {t("publicBadge")}
-          </span>
+    <div className="container mx-auto py-8 px-4 md:px-6 min-h-[80vh] flex flex-col gap-10">
+      {/* Header Profile Style */}
+      <div className="relative rounded-3xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm">
+        <div className="h-32 bg-primary/5 w-full absolute top-0 left-0 z-0"></div>
+        <div className="relative z-10 px-6 pt-16 pb-6 flex flex-col md:flex-row items-start md:items-end gap-6">
+          <div className="w-24 h-24 rounded-2xl bg-card border-4 border-background shadow-xl flex items-center justify-center text-4xl font-bold text-primary">
+            {party.name.charAt(0)}
+          </div>
+          <div className="flex-1 mb-2">
+            <div className="flex items-center gap-2 mb-1">
+              <h1 className="text-3xl font-heading font-bold">{party.name}</h1>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-primary/10 text-primary border border-primary/20 uppercase tracking-wide">
+                {t("header.publicBadge")}
+              </span>
+            </div>
+            {party.description && (
+              <p className="text-muted-foreground">{party.description}</p>
+            )}
+          </div>
+          <div className="flex gap-4 text-sm text-muted-foreground mb-3">
+            <div className="flex items-center gap-1.5">
+              <UsersIcon size={16} />
+              <span>
+                {t("header.members", { count: party.members.length })}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <GemIcon size={16} />
+              <span>{t("header.drops", { count: recentDrops.length })}</span>
+            </div>
+          </div>
         </div>
-        <h1 className="text-3xl md:text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">
-          {party.name}
-        </h1>
-        {party.description && (
-          <p className="text-muted-foreground mt-1">{party.description}</p>
-        )}
       </div>
 
-      {/* Tab Navigation */}
-      <div className="flex gap-1 bg-card/40 p-1 rounded-xl border border-border/50 backdrop-blur-sm mb-8 w-fit">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-              activeTab === tab.key
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            }`}
-          >
-            {tab.icon}
-            <span className="hidden sm:inline">{tab.label}</span>
-          </button>
-        ))}
-      </div>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Left Column: Members & Timeline */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Party Stats */}
+          <PartyStats party={party} recentSessions={recentSessions} />
 
-      {/* Tab Content */}
-      <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-        {activeTab === "overview" && (
-          <OverviewSection party={party} stats={stats} t={t} />
-        )}
-        {activeTab === "sessions" && (
-          <SessionsSection sessions={recentSessions} t={t} />
-        )}
-        {activeTab === "drops" && <DropsSection drops={recentDrops} t={t} />}
-        {activeTab === "balance" && <BalanceSection stats={stats} t={t} />}
+          {/* Members */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold flex items-center gap-2">
+                <UsersIcon size={20} className="text-primary" />
+                {t("members.title")}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {party.members.map((member) => (
+                <MemberCard key={member.id} member={member} />
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <TimelineSection
+            recentSessions={recentSessions}
+            recentDrops={recentDrops}
+          />
+        </div>
+
+        {/* Right Column: Recent Loot Gallery */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              <GemIcon size={20} className="text-primary" />
+              {t("drops.title")}
+            </h2>
+          </div>
+
+          {recentDrops.length > 0 ? (
+            <div className="grid grid-cols-3 gap-3">
+              {recentDrops.map((drop) => (
+                <DropItem key={drop.id} drop={drop} />
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 rounded-xl border border-border/50 bg-card/20 text-center text-muted-foreground text-sm">
+              {t("drops.noDrops")}
+            </div>
+          )}
+
+          <div className="p-6 rounded-xl border border-border/50 bg-gradient-to-br from-card/40 to-primary/5">
+            <h3 className="font-semibold mb-2">{t("drops.aboutTitle")}</h3>
+            <p className="text-sm text-muted-foreground">
+              {t("drops.aboutDescription")}
+            </p>
+            <div className="mt-4 pt-4 border-t border-border/30 text-xs text-muted-foreground flex justify-between">
+              <span>
+                {t("header.createdOn", {
+                  date: formatDate(party.createdAt),
+                })}
+              </span>
+              <span>{t("header.verified")}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -206,287 +269,518 @@ export const PublicPartyView = () => {
 
 // ─── Sub-components ─────────────────────────────────────────────────────────
 
-function OverviewSection({
-  party,
-  stats,
-  t,
+function MemberCard({
+  member,
 }: {
-  party: PublicPartyData["party"];
-  stats: PublicPartyData["stats"];
-  t: ReturnType<typeof useTranslations>;
+  member: PublicPartyData["party"]["members"][0];
 }) {
-  return (
-    <div className="space-y-8">
-      {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard
-          label={t("overview.members")}
-          value={String(party.members.length)}
-          icon={<UsersIcon size={18} />}
-        />
-        <StatCard
-          label={t("balance.totalSessions")}
-          value={String(stats.sessionCount)}
-          icon={<SwordsIcon size={18} />}
-        />
-        <StatCard
-          label={t("balance.totalDrops")}
-          value={String(stats.dropCount)}
-          icon={<GemIcon size={18} />}
-        />
-        <StatCard
-          label={t("balance.netBalance")}
-          value={formatGold(stats.netBalance)}
-          icon={<WalletIcon size={18} />}
-          valueColor={
-            stats.netBalance >= 0 ? "text-success" : "text-destructive"
-          }
-        />
-      </div>
+  const t = useTranslations("PublicParty");
+  const char = member.character;
 
-      {/* Members */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">
-          {t("overview.memberList")}
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {party.members.map((member) => (
-            <div
-              key={member.id}
-              className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm flex items-center gap-3"
-            >
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm shrink-0">
-                {member.character?.name?.charAt(0) ||
-                  member.user?.email?.charAt(0) ||
-                  "?"}
-              </div>
-              <div className="min-w-0">
-                <p className="font-medium truncate">
-                  {member.character?.name || member.user?.email || "Unknown"}
-                </p>
-                {member.character && (
-                  <p className="text-xs text-muted-foreground truncate">
-                    {member.character.vocation} · Lvl {member.character.level} ·{" "}
-                    {member.character.world}
-                  </p>
-                )}
-              </div>
-              {member.isLeader && (
-                <span className="ml-auto text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full shrink-0">
-                  Leader
-                </span>
-              )}
-            </div>
-          ))}
+  if (!char) {
+    return (
+      <div className="group relative p-5 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm hover:border-primary/30 transition-all duration-300">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground">
+            ?
+          </div>
+          <div>
+            <p className="font-medium">{member.user.email}</p>
+            <span className="text-xs text-muted-foreground">
+              {t("members.userNoChar")}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function SessionsSection({
-  sessions,
-  t,
-}: {
-  sessions: PublicPartyData["recentSessions"];
-  t: ReturnType<typeof useTranslations>;
-}) {
-  if (sessions.length === 0) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">
-        {t("sessions.noSessions")}
-      </div>
     );
   }
 
+  // Process data for the sparkline
+  // Ensure we sort by date ascending for the chart
+  const xpData = [...char.dailyExperience]
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .map((entry) => ({
+      ...entry,
+      value: Number(entry.value),
+    }));
+
+  const chartData = xpData.map((d, i) => {
+    return { date: d.date, xp: d.value };
+  });
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-border/50">
-            <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("sessions.table.name")}
-            </th>
-            <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("sessions.table.date")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("sessions.table.loot")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("sessions.table.supplies")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("sessions.table.balance")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {sessions.map((s) => (
-            <tr
-              key={s.id}
-              className="border-b border-border/30 hover:bg-accent/30 transition-colors"
-            >
-              <td className="py-3 px-4 text-sm font-medium">{s.huntName}</td>
-              <td className="py-3 px-4 text-sm text-muted-foreground">
-                {formatDate(s.huntDate)}
-              </td>
-              <td className="py-3 px-4 text-sm text-right text-success">
-                {formatGold(s.loot)}
-              </td>
-              <td className="py-3 px-4 text-sm text-right text-destructive">
-                {formatGold(s.supplies)}
-              </td>
-              <td
-                className={`py-3 px-4 text-sm text-right font-medium ${s.balance >= 0 ? "text-success" : "text-destructive"}`}
-              >
-                {formatGold(s.balance)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className="text-xs text-muted-foreground mt-3 text-center">
-        Showing last 10 sessions
-      </p>
+    <div className="group relative p-5 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm hover:bg-card/60 hover:border-primary/30 transition-all duration-300 overflow-hidden">
+      <div className="relative z-10 flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            {/* Vocation Icon Badge */}
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+              {vocationIcons[char.vocation] || <ShieldIcon size={20} />}
+            </div>
+          </div>
+          <div>
+            <Link href={`/character/${char.name}`} target="_blank">
+              <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">
+                {char.name}
+              </h3>
+            </Link>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
+              <span className="flex items-center gap-1">{char.vocation}</span>
+              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+              <span className="flex items-center gap-1">
+                <GlobeIcon size={10} />
+                {char.world}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-end">
+          <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
+            {t("members.level")}
+          </span>
+          <span className="text-xl font-bold font-heading">{char.level}</span>
+        </div>
+      </div>
+
+      {/* Mini Chart */}
+      <div className="h-16 w-full -mx-2 opacity-50 group-hover:opacity-100 transition-opacity">
+        {chartData.length > 1 ? (
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={chartData}>
+              <defs>
+                <linearGradient
+                  id={`gradient-${char.id}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop
+                    offset="5%"
+                    stopColor="currentColor"
+                    className="text-primary"
+                    stopOpacity={0.3}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="currentColor"
+                    className="text-primary"
+                    stopOpacity={0}
+                  />
+                </linearGradient>
+              </defs>
+              <Area
+                type="monotone"
+                dataKey="xp"
+                stroke="currentColor"
+                className="text-primary"
+                strokeWidth={2}
+                fillOpacity={1}
+                fill={`url(#gradient-${char.id})`}
+                isAnimationActive={false}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="h-full w-full flex items-center justify-center text-xs text-muted-foreground/50">
+            {t("members.notEnoughData")}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-function DropsSection({
-  drops,
-  t,
+// Helper to format item name for TibiaWiki
+function formatWikiName(name: string): string {
+  return (
+    name
+      .toLowerCase()
+      .split(" ")
+      .map((word) => {
+        // Keep small words lowercase unless it's the first word
+        if (
+          ["of", "the", "and", "in", "on", "at", "to", "for"].includes(word)
+        ) {
+          return word;
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join("_")
+      // Ensure first letter is always uppercase (e.g. "Sword of Valor")
+      .replace(/^./, (str) => str.toUpperCase())
+  );
+}
+
+function DropItem({ drop }: { drop: PublicPartyData["recentDrops"][0] }) {
+  // Use TibiaWiki URL pattern or static.tibia.com
+  // We need item ID for static.tibia.com or name for tibiawiki
+
+  // Strategy: Try to use TibiaData/Wiki convention if no ID.
+  // Note: static.tibia.com uses integer IDs.
+  const t = useTranslations("PublicParty");
+  const imageUrl = drop.itemId
+    ? `https://static.tibia.com/images/charactertrade/objects/${drop.itemId}.gif`
+    : `https://tibia.fandom.com/wiki/Special:FilePath/${formatWikiName(drop.itemName)}.gif`;
+
+  return (
+    <TooltipProvider>
+      <UITooltip delayDuration={0}>
+        <TooltipTrigger asChild>
+          <div className="group aspect-square rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm hover:bg-card hover:border-primary/50 transition-all duration-300 flex items-center justify-center relative overflow-hidden cursor-help">
+            {/* Quantity Badge */}
+            {drop.quantity > 1 && (
+              <div className="absolute top-1 right-1 bg-background/80 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-border">
+                {drop.quantity}x
+              </div>
+            )}
+
+            <div className="relative z-10 p-2">
+              <img
+                src={imageUrl}
+                alt={drop.itemName}
+                className="w-8 h-8 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  // Fallback to a secondary source or placeholder
+                  const target = e.currentTarget;
+                  if (target.src.includes("tibia.fandom.com")) {
+                    // Try tibiawiki.com.br as second attempt
+                    // Note: TibiaWiki.com.br might use different naming, but usually similar
+                    target.src = `https://www.tibiawiki.com.br/wiki/Special:FilePath/${formatWikiName(drop.itemName)}.gif`;
+                  } else {
+                    target.src =
+                      "https://static.tibia.com/images/charactertrade/objects/0.gif";
+                    target.style.opacity = "0.5";
+                  }
+                }}
+              />
+            </div>
+
+            {/* Currency Badge for Value context (Subtle) */}
+            <div className="absolute bottom-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              {drop.currency === "TIBIA_COIN" ? (
+                <div className="bg-blue-500/10 text-blue-500 text-[10px] px-1 rounded">
+                  TC
+                </div>
+              ) : (
+                <div className="bg-yellow-500/10 text-yellow-500 text-[10px] px-1 rounded">
+                  G
+                </div>
+              )}
+            </div>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="text-xs p-3 max-w-[200px]">
+          <p className="font-bold mb-1">{drop.itemName}</p>
+          <div className="space-y-1 text-muted-foreground">
+            <div className="flex items-center justify-between gap-4">
+              <span>{t("drops.tooltip.date")}</span>
+              <span className="text-foreground">
+                {formatDate(drop.droppedAt)}
+              </span>
+            </div>
+            {drop.source && (
+              <div className="flex items-center justify-between gap-4">
+                <span>{t("drops.tooltip.lootedFrom")}</span>
+                <span className="text-foreground font-medium text-primary">
+                  {drop.source}
+                </span>
+              </div>
+            )}
+          </div>
+        </TooltipContent>
+      </UITooltip>
+    </TooltipProvider>
+  );
+}
+
+function TimelineSection({
+  recentSessions,
+  recentDrops,
 }: {
-  drops: PublicPartyData["recentDrops"];
-  t: ReturnType<typeof useTranslations>;
+  recentSessions: PublicPartyData["recentSessions"];
+  recentDrops: PublicPartyData["recentDrops"];
 }) {
-  if (drops.length === 0) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">
-        {t("drops.noDrops")}
+  const t = useTranslations("PublicParty");
+  // Combine and sort events
+  const events = [
+    ...recentSessions.map((s) => ({
+      type: "session" as const,
+      date: new Date(s.huntDate),
+      data: s,
+    })),
+    ...recentDrops.map((d) => ({
+      type: "drop" as const,
+      date: new Date(d.droppedAt),
+      data: d,
+    })),
+  ]
+    .sort((a, b) => b.date.getTime() - a.date.getTime())
+    .slice(0, 10); // Show last 10 activities
+
+  if (events.length === 0) return null;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <GlobeIcon size={20} className="text-primary" />
+          {t("timeline.title")}
+        </h2>
       </div>
+
+      <div className="relative border-l-2 border-border/50 ml-3 space-y-8 pl-8 py-2">
+        {events.map((event, index) => (
+          <div key={index} className="relative">
+            <div
+              className={`absolute -left-[39px] w-5 h-5 rounded-full border-2 ${event.type === "session" ? "border-primary bg-background" : "border-yellow-500 bg-background"} flex items-center justify-center`}
+            >
+              <div
+                className={`w-2 h-2 rounded-full ${event.type === "session" ? "bg-primary" : "bg-yellow-500"}`}
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <div className="text-xs text-muted-foreground font-medium">
+                {event.date.toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                })}{" "}
+                •{" "}
+                {event.date.toLocaleTimeString(undefined, {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
+
+              {event.type === "session" ? (
+                <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-bold text-foreground">
+                      {t("timeline.hunt", {
+                        name: (event.data as any).huntName,
+                      })}
+                    </h4>
+                  </div>
+                  <div className="flex gap-4 text-xs text-muted-foreground">
+                    <span>
+                      {t("timeline.duration", {
+                        duration: (event.data as any).duration
+                          ? `${Math.floor((event.data as any).duration / 60)}h ${
+                              (event.data as any).duration % 60
+                            }m`
+                          : t("timeline.unknown"),
+                      })}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm border-l-yellow-500/50 border-l-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center shrink-0">
+                      <GemIcon size={18} className="text-yellow-500" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-foreground">
+                        {t.rich("timeline.looted", {
+                          amount: (event.data as any).quantity,
+                          item: (event.data as any).itemName,
+                          highlight: (chunks) => (
+                            <span className="text-yellow-500 font-bold">
+                              {chunks}
+                            </span>
+                          ),
+                        })}
+                      </div>
+                      {(event.data as any).source && (
+                        <div className="text-xs text-muted-foreground">
+                          {t("timeline.source", {
+                            source: (event.data as any).source,
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function formatTibiaNumber(num: number): string {
+  if (num >= 1_000_000_000) {
+    return (
+      (num / 1_000_000_000).toLocaleString("en-US", {
+        maximumFractionDigits: 2,
+      }) + "kkk"
     );
   }
-
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-border/50">
-            <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("drops.table.item")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("drops.table.quantity")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("drops.table.value")}
-            </th>
-            <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("drops.table.total")}
-            </th>
-            <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-              {t("drops.table.date")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {drops.map((d) => (
-            <tr
-              key={d.id}
-              className="border-b border-border/30 hover:bg-accent/30 transition-colors"
-            >
-              <td className="py-3 px-4 text-sm font-medium">{d.itemName}</td>
-              <td className="py-3 px-4 text-sm text-right">{d.quantity}</td>
-              <td className="py-3 px-4 text-sm text-right text-muted-foreground">
-                {formatGold(d.value)}
-              </td>
-              <td className="py-3 px-4 text-sm text-right font-medium text-success">
-                {formatGold(d.value * d.quantity)}
-              </td>
-              <td className="py-3 px-4 text-sm text-muted-foreground">
-                {formatDate(d.droppedAt)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className="text-xs text-muted-foreground mt-3 text-center">
-        Showing last 10 drops
-      </p>
-    </div>
-  );
+  if (num >= 1_000_000) {
+    return (
+      (num / 1_000_000).toLocaleString("en-US", { maximumFractionDigits: 2 }) +
+      "kk"
+    );
+  }
+  if (num >= 1_000) {
+    return (
+      (num / 1_000).toLocaleString("en-US", { maximumFractionDigits: 2 }) + "k"
+    );
+  }
+  return num.toString();
 }
 
-function BalanceSection({
-  stats,
-  t,
+function PartyStats({
+  party,
+  recentSessions,
 }: {
-  stats: PublicPartyData["stats"];
-  t: ReturnType<typeof useTranslations>;
+  party: PublicPartyData["party"];
+  recentSessions: PublicPartyData["recentSessions"];
 }) {
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <StatCard
-        label={t("balance.totalLoot")}
-        value={formatGold(stats.totalLoot)}
-        valueColor="text-success"
-        icon={<SwordsIcon size={18} />}
-      />
-      <StatCard
-        label={t("balance.totalSupplies")}
-        value={formatGold(stats.totalSupplies)}
-        valueColor="text-destructive"
-        icon={<WalletIcon size={18} />}
-      />
-      <StatCard
-        label={t("balance.netBalance")}
-        value={formatGold(stats.netBalance)}
-        valueColor={stats.netBalance >= 0 ? "text-success" : "text-destructive"}
-        icon={<WalletIcon size={18} />}
-      />
-      <StatCard
-        label={t("balance.dropsValue")}
-        value={formatGold(stats.dropsValue)}
-        valueColor="text-primary"
-        icon={<GemIcon size={18} />}
-      />
-      <StatCard
-        label={t("balance.totalSessions")}
-        value={String(stats.sessionCount)}
-        icon={<SwordsIcon size={18} />}
-      />
-      <StatCard
-        label={t("balance.totalDrops")}
-        value={String(stats.dropCount)}
-        icon={<GemIcon size={18} />}
-      />
-    </div>
-  );
-}
+  const t = useTranslations("PublicParty.stats");
 
-function StatCard({
-  label,
-  value,
-  icon,
-  valueColor,
-}: {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-  valueColor?: string;
-}) {
+  // Calculate Total XP (Sum of all members' dailyExperience)
+  // Calculate Total XP (Sum of all members' dailyExperience gains)
+  const totalXp = party.members.reduce((acc, member) => {
+    if (!member.character || member.character.dailyExperience.length < 2)
+      return acc;
+
+    const sortedHistory = [...member.character.dailyExperience].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
+
+    const first = Number(sortedHistory[0].value);
+    const last = Number(sortedHistory[sortedHistory.length - 1].value);
+
+    return acc + (last - first);
+  }, 0);
+
+  // Calculate Total Time (minutes)
+  const totalTime = recentSessions.reduce(
+    (acc, session) => acc + (session.duration || 0),
+    0,
+  );
+
+  // Find Favorite Hunt
+  const huntCounts: Record<string, number> = {};
+  recentSessions.forEach((s) => {
+    huntCounts[s.huntName] = (huntCounts[s.huntName] || 0) + 1;
+  });
+  const favoriteHunt = Object.entries(huntCounts).sort(
+    (a, b) => b[1] - a[1],
+  )[0]?.[0];
+
+  // Prepare Chart Data (Top 5 Contributors)
+  const memberContribution = party.members
+    .map((m) => {
+      if (!m.character || m.character.dailyExperience.length < 2) {
+        return {
+          name: m.character?.name || m.user.email.split("@")[0],
+          value: 0,
+        };
+      }
+
+      const sortedHistory = [...m.character.dailyExperience].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+      );
+      const first = Number(sortedHistory[0].value);
+      const last = Number(sortedHistory[sortedHistory.length - 1].value);
+
+      return {
+        name: m.character.name,
+        value: last - first,
+      };
+    })
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5); // Top 5
+
   return (
-    <div className="p-5 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm">
-      <div className="flex items-center gap-2 mb-2 text-muted-foreground">
-        {icon}
-        <span className="text-xs font-medium uppercase tracking-wider">
-          {label}
-        </span>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <ZapIcon size={20} className="text-primary" />
+          {t("title")}
+        </h2>
       </div>
-      <p className={`text-2xl font-bold font-heading ${valueColor || ""}`}>
-        {value}
-      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm flex flex-col justify-center">
+            <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-1">
+              {t("totalXP")}
+            </span>
+            <span className="text-2xl font-bold font-heading text-primary">
+              {formatTibiaNumber(totalXp)}
+            </span>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm flex flex-col justify-center">
+            <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-1">
+              {t("totalTime")}
+            </span>
+            <span className="text-xl font-bold font-heading flex items-center gap-2">
+              <ClockIcon size={18} className="text-muted-foreground" />
+              {Math.floor(totalTime / 60)}h {totalTime % 60}m
+            </span>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm flex flex-col justify-center">
+            <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-1">
+              {t("mostHunted")}
+            </span>
+            <span className="text-lg font-bold font-heading truncate">
+              {favoriteHunt || "-"}
+            </span>
+          </div>
+        </div>
+
+        {/* Chart */}
+        <div className="p-4 rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm flex flex-col">
+          <span className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-4">
+            {t("xpBreakdown")}
+          </span>
+          <div className="flex-1 min-h-[150px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={memberContribution} layout="vertical">
+                <XAxis type="number" hide />
+                <YAxis
+                  dataKey="name"
+                  type="category"
+                  width={80}
+                  tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                  interval={0}
+                />
+                <Tooltip
+                  cursor={{ fill: "hsl(var(--muted) / 0.2)" }}
+                  content={({ active, payload }: any) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="bg-card border border-border p-2 rounded shadow-lg text-xs">
+                          <p className="font-bold">{payload[0].payload.name}</p>
+                          <p className="text-muted-foreground">
+                            {formatTibiaNumber(payload[0].value as number)} XP
+                          </p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Bar
+                  dataKey="value"
+                  fill="hsl(var(--primary))"
+                  radius={[0, 4, 4, 0]}
+                  barSize={20}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

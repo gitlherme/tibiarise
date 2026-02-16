@@ -77,6 +77,15 @@ export const Footer = () => {
               {chunks}
             </Link>
           ),
+          trade: (chunks) => (
+            <Link
+              href="https://tibiatrade.gg/"
+              target="_blank"
+              className="font-bold"
+            >
+              {chunks}
+            </Link>
+          ),
         })}
       </span>
     </footer>

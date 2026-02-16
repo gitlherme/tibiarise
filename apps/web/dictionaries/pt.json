@@ -557,7 +557,8 @@
           "value": "Valor Unit.",
           "total": "Total",
           "date": "Data"
-        }
+        },
+        "dateLabel": "Data da Conquista"
       },
       "balance": {
         "totalLoot": "Loot Total",
@@ -597,7 +598,7 @@
     "madeWith": "Feito com 💙 por",
     "discord": "Junte-se ao nosso servidor Discord",
     "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
-    "thanks": "Obrigado ao <data>TibiaData</data> e <wiki>TibiaWiki</wiki> por fornecer os dados usados neste site."
+    "thanks": "Agradecimentos especiais ao <data>TibiaData</data>, <wiki>TibiaWiki</wiki> e <trade>TibiaTrade</trade> por seus dados e ferramentas inestimáveis."
   },
   "DataTable": {
     "noData": "Nenhum dado disponível",
@@ -613,6 +614,56 @@
       "page": "Página",
       "of": "de",
       "rowsPerPage": "Linhas por página"
+    }
+  },
+  "PublicParty": {
+    "notFound": {
+      "title": "Party Não Encontrada",
+      "description": "Esta party não existe ou não é pública.",
+      "backButton": "Voltar para o Início"
+    },
+    "header": {
+      "publicBadge": "Party Pública",
+      "members": "{count, plural, one {# Membro} other {# Membros}}",
+      "drops": "{count, plural, one {# Drop registrado} other {# Drops registrados}}",
+      "createdOn": "Criada em {date}",
+      "verified": "Verificado por TibiaRise"
+    },
+    "members": {
+      "title": "Membros do Esquadrão",
+      "level": "Nível",
+      "userNoChar": "Usuário (Sem Personagem)",
+      "notEnoughData": "Dados de XP insuficientes"
+    },
+    "timeline": {
+      "title": "Linha do Tempo da Party",
+      "hunt": "Hunt: {name}",
+      "duration": "Duração: {duration}",
+      "looted": "Loot de <highlight>{amount}x {item}</highlight>",
+      "source": "de {source}",
+      "unknown": "Desconhecido"
+    },
+    "drops": {
+      "title": "Drops Lendários",
+      "noDrops": "Nenhum drop registrado ainda.",
+      "aboutTitle": "Sobre esta Party",
+      "aboutDescription": "Esta party está rastreando seu progresso com o TibiaRise. Todos os dados são verificados e atualizados automaticamente.",
+      "tooltip": {
+        "date": "Data:",
+        "lootedFrom": "Loot de:"
+      },
+      "tooltip": {
+        "date": "Data:",
+        "lootedFrom": "Loot de:"
+      }
+    },
+    "stats": {
+      "title": "Estatísticas da Party",
+      "totalXP": "XP Total (30 Dias)",
+      "totalLoot": "Loot Total (Registrado)",
+      "totalTime": "Tempo Caçado",
+      "xpBreakdown": "Contribuição de XP",
+      "mostHunted": "Hunt Favorita"
     }
   }
 }

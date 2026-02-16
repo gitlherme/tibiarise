@@ -4,8 +4,11 @@ import {
   addDrop,
   deleteDrop,
   toggleDropSold,
+  updateDrop,
 } from "@/app/actions/party.actions";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -17,11 +20,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import {
   useInvalidatePartyData,
   usePartyDrops,
   useSearchItems,
 } from "@/queries/party.queries";
-import { GemIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { format } from "date-fns";
+import {
+  CalendarIcon,
+  GemIcon,
+  MapPinIcon,
+  PencilIcon,
+  PlusIcon,
+  Trash2Icon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -42,8 +59,26 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
   } | null>(null);
   const [quantity, setQuantity] = useState("1");
   const [value, setValue] = useState("");
+  const [sold, setSold] = useState(false);
+  const [source, setSource] = useState("");
+  const [currency, setCurrency] = useState<"GOLD" | "TIBIA_COIN">("GOLD");
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editingDrop, setEditingDrop] = useState<{
+    id: string;
+    itemName: string;
+    quantity: number;
+    value: string;
+    sold: boolean;
+    source: string;
+    currency: "GOLD" | "TIBIA_COIN";
+    droppedAt: Date;
+  } | null>(null);
+
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [editDate, setEditDate] = useState<Date | undefined>(new Date());
 
   const { data: searchResults } = useSearchItems(itemSearch);
 
@@ -63,6 +98,10 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
         itemName: selectedItem?.name || itemSearch,
         quantity: parseInt(quantity) || 1,
         value: parseInt(value.replace(/,/g, "")) || 0,
+        sold,
+        source,
+        currency,
+        droppedAt: date ? date.toISOString() : new Date().toISOString(),
       });
       toast.success(t("drops.addSuccess"));
       invalidateAll(partyId);
@@ -71,6 +110,10 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
       setSelectedItem(null);
       setQuantity("1");
       setValue("");
+      setSold(false);
+      setSource("");
+      setCurrency("GOLD");
+      setDate(new Date());
     } catch {
       toast.error(t("drops.addError"));
     } finally {
@@ -86,6 +129,46 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
     } catch {
       toast.error(t("drops.deleteError"));
     }
+  };
+
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingDrop) return;
+
+    setLoading(true);
+    try {
+      await updateDrop(editingDrop.id, {
+        quantity: editingDrop.quantity,
+        value: parseInt(editingDrop.value.replace(/,/g, "")) || 0,
+        sold: editingDrop.sold,
+        source: editingDrop.source,
+        currency: editingDrop.currency,
+        droppedAt: editDate ? editDate.toISOString() : undefined,
+      });
+      toast.success(t("drops.updateSuccess"));
+      invalidateAll(partyId);
+      setEditDialogOpen(false);
+      setEditingDrop(null);
+    } catch {
+      toast.error(t("drops.updateError"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEditClick = (drop: any) => {
+    setEditingDrop({
+      id: drop.id,
+      itemName: drop.itemName,
+      quantity: drop.quantity,
+      value: drop.value.toString(),
+      sold: drop.sold,
+      source: drop.source || "",
+      currency: drop.currency || "GOLD",
+      droppedAt: new Date(drop.droppedAt),
+    });
+    setEditDate(new Date(drop.droppedAt));
+    setEditDialogOpen(true);
   };
 
   const handleToggleSold = async (dropId: string) => {
@@ -184,6 +267,90 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
                   />
                 </div>
               </div>
+              <div className="space-y-2">
+                <Label>{t("drops.currencyLabel")}</Label>
+                <div className="flex space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      id="currency-gold"
+                      value="GOLD"
+                      checked={currency === "GOLD"}
+                      onChange={() => setCurrency("GOLD")}
+                      className="accent-primary"
+                    />
+                    <Label htmlFor="currency-gold" className="cursor-pointer">
+                      Gold
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      id="currency-tc"
+                      value="TIBIA_COIN"
+                      checked={currency === "TIBIA_COIN"}
+                      onChange={() => setCurrency("TIBIA_COIN")}
+                      className="accent-primary"
+                    />
+                    <Label htmlFor="currency-tc" className="cursor-pointer">
+                      Tibia Coin
+                    </Label>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>{t("drops.sourceLabel")}</Label>
+                <div className="relative">
+                  <MapPinIcon
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    size={16}
+                  />
+                  <Input
+                    value={source}
+                    onChange={(e) => setSource(e.target.value)}
+                    placeholder={t("drops.sourcePlaceholder")}
+                    className="pl-10 bg-background/50 border-border/50 rounded-lg"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="sold"
+                  checked={sold}
+                  onCheckedChange={(checked) => setSold(checked as boolean)}
+                />
+                <Label htmlFor="sold" className="cursor-pointer">
+                  {t("drops.sold")}
+                </Label>
+              </div>
+              <div className="space-y-2">
+                <Label>{t("drops.dateLabel")}</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full justify-start text-left font-normal bg-background/50 border-border/50",
+                        !date && "text-muted-foreground",
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      initialFocus
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
               <Button
                 type="submit"
                 disabled={loading || (!selectedItem && !itemSearch)}
@@ -192,6 +359,179 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
                 {loading ? t("drops.adding") : t("drops.addButton")}
               </Button>
             </form>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+          <DialogContent className="sm:max-w-[425px] bg-card text-card-foreground p-6 sm:rounded-[2rem] shadow-soft border-border/50 backdrop-blur-xl">
+            <DialogHeader className="mb-4 mt-4">
+              <DialogTitle className="text-2xl font-heading font-bold">
+                {t("drops.editTitle")}
+              </DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                {t("drops.editDescription")}
+              </DialogDescription>
+            </DialogHeader>
+            {editingDrop && (
+              <form onSubmit={handleUpdate} className="space-y-4">
+                <div className="space-y-2">
+                  <Label>{t("drops.itemLabel")}</Label>
+                  <Input
+                    value={editingDrop.itemName}
+                    disabled
+                    className="bg-muted/50 border-border/50 rounded-lg opacity-70"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>{t("drops.quantityLabel")}</Label>
+                    <Input
+                      type="number"
+                      min="1"
+                      value={editingDrop.quantity}
+                      onChange={(e) =>
+                        setEditingDrop({
+                          ...editingDrop,
+                          quantity: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="bg-background/50 border-border/50 rounded-lg"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{t("drops.valueLabel")}</Label>
+                    <Input
+                      value={editingDrop.value}
+                      onChange={(e) =>
+                        setEditingDrop({
+                          ...editingDrop,
+                          value: e.target.value,
+                        })
+                      }
+                      className="bg-background/50 border-border/50 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label>{t("drops.currencyLabel")}</Label>
+                  <div className="flex space-x-4">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="edit-currency-gold"
+                        value="GOLD"
+                        checked={editingDrop.currency === "GOLD"}
+                        onChange={() =>
+                          setEditingDrop({ ...editingDrop, currency: "GOLD" })
+                        }
+                        className="accent-primary"
+                      />
+                      <Label
+                        htmlFor="edit-currency-gold"
+                        className="cursor-pointer"
+                      >
+                        Gold
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="edit-currency-tc"
+                        value="TIBIA_COIN"
+                        checked={editingDrop.currency === "TIBIA_COIN"}
+                        onChange={() =>
+                          setEditingDrop({
+                            ...editingDrop,
+                            currency: "TIBIA_COIN",
+                          })
+                        }
+                        className="accent-primary"
+                      />
+                      <Label
+                        htmlFor="edit-currency-tc"
+                        className="cursor-pointer"
+                      >
+                        Tibia Coin
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label>{t("drops.sourceLabel")}</Label>
+                  <div className="relative">
+                    <MapPinIcon
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                      size={16}
+                    />
+                    <Input
+                      value={editingDrop.source}
+                      onChange={(e) =>
+                        setEditingDrop({
+                          ...editingDrop,
+                          source: e.target.value,
+                        })
+                      }
+                      placeholder={t("drops.sourcePlaceholder")}
+                      className="pl-10 bg-background/50 border-border/50 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="edit-sold"
+                    checked={editingDrop.sold}
+                    onCheckedChange={(checked) =>
+                      setEditingDrop({
+                        ...editingDrop,
+                        sold: checked as boolean,
+                      })
+                    }
+                  />
+                  <Label htmlFor="edit-sold" className="cursor-pointer">
+                    {t("drops.sold")}
+                  </Label>
+                </div>
+                <div className="space-y-2">
+                  <Label>{t("drops.dateLabel")}</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full justify-start text-left font-normal bg-background/50 border-border/50",
+                          !editDate && "text-muted-foreground",
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {editDate ? (
+                          format(editDate, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={editDate}
+                        onSelect={setEditDate}
+                        initialFocus
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full rounded-xl py-5 shadow-soft-primary"
+                >
+                  {loading ? t("drops.updating") : t("drops.updateButton")}
+                </Button>
+              </form>
+            )}
           </DialogContent>
         </Dialog>
       </div>
@@ -240,15 +580,23 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
                       <span className={d.sold ? "line-through" : ""}>
                         {d.itemName}
                       </span>
+                      {d.source && (
+                        <div className="flex items-center text-xs text-muted-foreground mt-1">
+                          <MapPinIcon size={10} className="mr-1" />
+                          {d.source}
+                        </div>
+                      )}
                     </td>
                     <td className="p-4 text-right text-muted-foreground">
                       {d.quantity}
                     </td>
                     <td className="p-4 text-right text-muted-foreground">
                       {formatGold(d.value)}
+                      {d.currency === "TIBIA_COIN" ? " TC" : ""}
                     </td>
                     <td className="p-4 text-right text-success font-medium">
-                      {formatGold(String(parseInt(d.value) * d.quantity))}
+                      {(BigInt(d.quantity) * BigInt(d.value)).toLocaleString()}
+                      {d.currency === "TIBIA_COIN" ? " TC" : ""}
                     </td>
                     <td className="p-4">
                       <button
@@ -265,7 +613,15 @@ export function DropsTab({ partyId, period }: DropsTabProps) {
                     <td className="p-4 text-muted-foreground">
                       {new Date(d.droppedAt).toLocaleDateString()}
                     </td>
-                    <td className="p-4 text-right">
+                    <td className="p-4 text-right flex items-center justify-end space-x-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleEditClick(d)}
+                        className="h-8 w-8 hover:text-primary"
+                      >
+                        <PencilIcon size={14} />
+                      </Button>
                       <Button
                         variant="ghost"
                         size="icon"

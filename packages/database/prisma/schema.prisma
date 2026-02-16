@@ -124,8 +124,15 @@ model PartyDrop {
     itemId    Int?
     quantity  Int      @default(1)
     value     BigInt   @default(0)
+    source    String?
     sold      Boolean  @default(false)
     droppedAt DateTime @default(now())
     createdAt DateTime @default(now())
     party     Party    @relation(fields: [partyId], references: [id], onDelete: Cascade)
+    currency  Currency @default(GOLD)
+}
+
+enum Currency {
+    GOLD
+    TIBIA_COIN
 }

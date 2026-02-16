@@ -15,7 +15,7 @@ export const MobileHeader = () => {
   const t = useTranslations("Header");
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Drawer direction="left" open={isOpen}>
+    <Drawer direction="left" open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex items-center justify-between bg-background/95 backdrop-blur-md border-b border-border/40 p-4 sticky top-0 z-50">
         <DrawerTrigger
           onClick={() => setIsOpen(true)}
@@ -46,70 +46,87 @@ export const MobileHeader = () => {
         </Link>
         <div className="w-10" /> {/* Spacer for centering */}
       </div>
-      <DrawerContent className="h-full rounded-none flex items-center text-center px-4 py-20">
-        <XCircleIcon
-          size={32}
-          className="absolute right-0 top-0 m-2"
-          onClick={() => setIsOpen(false)}
-        />
-
-        <div className="flex justify-center items-center w-full my-8">
-          <Link href="/" className="block text-primary-foreground">
-            <Image
-              src="/logo-dark.svg"
-              alt="Tibia Rise Logo"
-              width={200}
-              height={120}
-              className="block dark:hidden"
-            />
-
-            <Image
-              src="/logo.svg"
-              alt="Tibia Rise Logo"
-              width={200}
-              height={120}
-              className="hidden dark:block"
-            />
-          </Link>
-        </div>
-        <div className="flex flex-col items-center my-4 gap-4 w-full">
-          <ul className="flex flex-col my-4 md:my-0 gap-4 md:gap-8 text-secondary-foreground dark:text-primary-foreground">
-            <li>
-              <Link href={`/${locale}`} onClick={() => setIsOpen(false)}>
-                {t("nav.search")}
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${locale}/world`} onClick={() => setIsOpen(false)}>
-                {t("nav.experienceByWorld")}
-              </Link>
-            </li>
-            <li>
-              <Link href={`/${locale}/tools`} onClick={() => setIsOpen(false)}>
-                {t("nav.tools")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/support`}
-                onClick={() => setIsOpen(false)}
-              >
-                {t("nav.contribute")}
-              </Link>
-            </li>
-          </ul>
-          <span className="block mt-10">
-            <Link
-              className="text-secondary-foreground dark:text-primary-foreground hover:text-primary"
-              href="https://discord.gg/BAZDE29Eyf"
-            >
-              <DiscordLogo size={32} />
-            </Link>
+      <DrawerContent className="h-full rounded-none flex flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
+        <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
+          <span className="font-semibold text-lg tracking-tight pl-2">
+            Menu
           </span>
+          <XCircleIcon
+            size={28}
+            className="text-sidebar-foreground/70 hover:text-sidebar-foreground cursor-pointer transition-colors"
+            onClick={() => setIsOpen(false)}
+          />
+        </div>
 
-          <div className="flex gap-4 absolute right-0 bottom-0 p-4">
+        <div className="flex-1 overflow-y-auto py-6 px-4">
+          <div className="flex justify-center mb-8">
+            <Link href="/" onClick={() => setIsOpen(false)}>
+              <Image
+                src="/logo-dark.svg"
+                alt="Tibia Rise Logo"
+                width={180}
+                height={100}
+                className="block dark:hidden"
+              />
+              <Image
+                src="/logo.svg"
+                alt="Tibia Rise Logo"
+                width={180}
+                height={100}
+                className="hidden dark:block"
+              />
+            </Link>
+          </div>
+
+          <nav className="flex flex-col gap-2">
+            <Link
+              href={`/`}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 rounded-md text-lg font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+            >
+              {t("nav.search")}
+            </Link>
+            <Link
+              href={`/world`}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 rounded-md text-lg font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+            >
+              {t("nav.experienceByWorld")}
+            </Link>
+            <Link
+              href={`/tools`}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 rounded-md text-lg font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+            >
+              {t("nav.tools")}
+            </Link>
+            <Link
+              href={`/support`}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 rounded-md text-lg font-medium hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+            >
+              {t("nav.contribute")}
+            </Link>
+          </nav>
+
+          <div className="mt-8 px-4">
+            <Link
+              className="flex items-center gap-3 text-sidebar-foreground/80 hover:text-primary transition-colors font-medium"
+              href="https://discord.gg/BAZDE29Eyf"
+              target="_blank"
+            >
+              <DiscordLogo size={24} />
+              <span>Join our Discord</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="p-4 border-t border-sidebar-border bg-sidebar/50">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <SwitchTheme />
+            </div>
             <LanguageSelector />
-            <SwitchTheme />
           </div>
         </div>
       </DrawerContent>

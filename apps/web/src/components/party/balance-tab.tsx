@@ -72,6 +72,12 @@ export function BalanceTab({ partyId, period }: BalanceTabProps) {
       color: "text-success",
     },
     {
+      icon: <GemIcon size={20} className="text-primary" />,
+      label: t("balance.dropsValueTc"), // TODO: Add translation key
+      value: `${formatGold(balance.totalDropsValueTc)} TC`,
+      color: "text-success",
+    },
+    {
       icon: <SwordsIcon size={20} className="text-primary" />,
       label: t("balance.totalSessions"),
       value: String(balance.sessionCount),

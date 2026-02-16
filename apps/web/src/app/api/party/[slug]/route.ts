@@ -17,7 +17,14 @@ export async function GET(
     include: {
       members: {
         include: {
-          character: true,
+          character: {
+            include: {
+              dailyExperience: {
+                orderBy: { date: "desc" },
+                take: 30, // Last 30 entries for the chart
+              },
+            },
+          },
           user: { select: { id: true, email: true } },
         },
       },
