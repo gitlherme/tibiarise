@@ -45,7 +45,6 @@ export async function GET(
   const drops = await prisma.partyDrop.findMany({
     where: { partyId: party.id },
     orderBy: { droppedAt: "desc" },
-    take: 10,
   });
 
   // Calculate balance totals

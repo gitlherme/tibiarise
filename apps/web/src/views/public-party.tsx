@@ -237,9 +237,39 @@ export const PublicPartyView = () => {
 
           {recentDrops.length > 0 ? (
             <div className="grid grid-cols-3 gap-3">
-              {recentDrops.map((drop) => (
-                <DropItem key={drop.id} drop={drop} />
-              ))}
+              {Object.values(
+                recentDrops.reduce(
+                  (acc, drop) => {
+                    if (!acc[drop.itemName]) {
+                      acc[drop.itemName] = { ...drop, count: 0 };
+                    }
+                    acc[drop.itemName].count += drop.quantity;
+                    // Keep the most recent drop for display purposes (date, source)
+                    if (
+                      new Date(drop.droppedAt) >
+                      new Date(acc[drop.itemName].droppedAt)
+                    ) {
+                      acc[drop.itemName] = {
+                        ...drop,
+                        count: acc[drop.itemName].count,
+                      };
+                    }
+                    return acc;
+                  },
+                  {} as Record<
+                    string,
+                    (typeof recentDrops)[0] & { count: number }
+                  >,
+                ),
+              )
+                .sort(
+                  (a, b) =>
+                    new Date(b.droppedAt).getTime() -
+                    new Date(a.droppedAt).getTime(),
+                )
+                .map((drop) => (
+                  <DropItem key={drop.id} drop={drop} count={drop.count} />
+                ))}
             </div>
           ) : (
             <div className="p-8 rounded-xl border border-border/50 bg-card/20 text-center text-muted-foreground text-sm">
@@ -393,8 +423,11 @@ function MemberCard({
 
 // Helper to format item name for TibiaWiki
 function formatWikiName(name: string): string {
+  // Strip parenthetical disambiguators like "(axe)", "(club)", etc.
+  const cleanName = name.replace(/\s*\(.*?\)\s*$/, "").trim();
+
   return (
-    name
+    cleanName
       .toLowerCase()
       .split(" ")
       .map((word) => {
@@ -412,7 +445,13 @@ function formatWikiName(name: string): string {
   );
 }
 
-function DropItem({ drop }: { drop: PublicPartyData["recentDrops"][0] }) {
+function DropItem({
+  drop,
+  count,
+}: {
+  drop: PublicPartyData["recentDrops"][0];
+  count?: number;
+}) {
   // Use TibiaWiki URL pattern or static.tibia.com
   // We need item ID for static.tibia.com or name for tibiawiki
 
@@ -429,9 +468,9 @@ function DropItem({ drop }: { drop: PublicPartyData["recentDrops"][0] }) {
         <TooltipTrigger asChild>
           <div className="group aspect-square rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm hover:bg-card hover:border-primary/50 transition-all duration-300 flex items-center justify-center relative overflow-hidden cursor-help">
             {/* Quantity Badge */}
-            {drop.quantity > 1 && (
+            {(count || drop.quantity) > 1 && (
               <div className="absolute top-1 right-1 bg-background/80 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-border">
-                {drop.quantity}x
+                {count || drop.quantity}x
               </div>
             )}
 
@@ -516,9 +555,7 @@ function TimelineSection({
       date: new Date(d.droppedAt),
       data: d,
     })),
-  ]
-    .sort((a, b) => b.date.getTime() - a.date.getTime())
-    .slice(0, 10); // Show last 10 activities
+  ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
   if (events.length === 0) return null;
 
