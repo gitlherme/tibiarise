@@ -574,6 +574,7 @@
         "totalSupplies": "Supplies Total",
         "netBalance": "Balanço Líquido",
         "dropsValue": "Valor dos Drops",
+        "dropsValueTc": "Valor dos Drops (TC)",
         "totalSessions": "Total de Sessões",
         "totalDrops": "Total de Drops",
         "noData": "Nenhum dado de balanço disponível."

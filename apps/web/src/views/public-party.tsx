@@ -10,13 +10,14 @@ import {
 import { Link } from "@/i18n/routing";
 import { useQuery } from "@tanstack/react-query";
 import {
-  BabyIcon,
   ChevronLeftIcon,
   ClockIcon,
   GemIcon,
   GlobeIcon,
+  HandIcon,
+  LeafIcon,
   ShieldIcon,
-  SwordIcon,
+  TargetIcon,
   UsersIcon,
   ZapIcon,
 } from "lucide-react";
@@ -109,12 +110,13 @@ function formatDate(date: string): string {
 const vocationIcons: Record<string, React.ReactNode> = {
   "Elite Knight": <ShieldIcon size={14} />,
   Knight: <ShieldIcon size={14} />,
-  "Elder Druid": <BabyIcon size={14} />,
-  Druid: <BabyIcon size={14} />,
-  "Master Sorcerer": <GemIcon size={14} />,
-  Sorcerer: <GemIcon size={14} />,
-  "Royal Paladin": <SwordIcon size={14} />,
-  Paladin: <SwordIcon size={14} />,
+  "Elder Druid": <LeafIcon size={14} />,
+  Druid: <LeafIcon size={14} />,
+  "Master Sorcerer": <ZapIcon size={14} />,
+  Sorcerer: <ZapIcon size={14} />,
+  "Royal Paladin": <TargetIcon size={14} />,
+  Paladin: <TargetIcon size={14} />,
+  "Exalted Monk": <HandIcon size={14} />,
 };
 
 // ─── Component ──────────────────────────────────────────────────────────────
