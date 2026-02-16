@@ -4,6 +4,8 @@ interface UserCharacter {
   id: string;
   name: string;
   world: string;
+  level: number;
+  vocation: string | null;
 }
 
 export const getUserCharacters = async (email: string) => {

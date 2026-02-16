@@ -301,6 +301,7 @@
     "links": {
       "characters": "Meus Personagens",
       "profitManager": "Gerenciador de Profit",
+      "partyTracker": "Party Tracker",
       "settings": "Configurações"
     }
   },
@@ -457,13 +458,147 @@
         "label": "Mostrar Profit na Homepage",
         "description": "Permitir que seus lucros de caça recentes apareçam no ticker ao vivo na página inicial."
       }
+    },
+    "PartyTrackerPage": {
+      "title": "Party Tracker",
+      "subtitle": "Gerencie suas hunts em equipe e acompanhe o progresso compartilhado",
+      "noPartiesTitle": "Nenhuma Party Ainda",
+      "noPartiesDescription": "Crie sua primeira party para começar a rastrear hunts em equipe, drops e lucros juntos.",
+      "createSuccess": "Party criada com sucesso!",
+      "createError": "Falha ao criar party. Tente novamente.",
+      "partyNotFound": "Party não encontrada",
+      "publicBadge": "Pública",
+      "memberCount": "{count, plural, one {# membro} other {# membros}}",
+      "buttons": {
+        "createParty": "Criar Party",
+        "viewParty": "Ver Dashboard",
+        "backToParties": "Voltar para Parties",
+        "invite": "Convidar",
+        "viewPublicPage": "Ver Página Pública"
+      },
+      "form": {
+        "create": {
+          "title": "Criar Nova Party",
+          "description": "Configure uma party para rastrear suas hunts e lucros em equipe.",
+          "nameLabel": "Nome da Party",
+          "namePlaceholder": "Ex: Elite Hunters",
+          "descriptionLabel": "Descrição (opcional)",
+          "descriptionPlaceholder": "Ex: Hunts diárias em Roshamuul",
+          "characterLabel": "Seu Personagem",
+          "characterPlaceholder": "Selecione um personagem",
+          "loading": "Criando..."
+        }
+      },
+      "tabs": {
+        "overview": "Visão Geral",
+        "sessions": "Sessões",
+        "drops": "Drops",
+        "balance": "Balanço"
+      },
+      "periods": {
+        "all": "Todo Período",
+        "week": "Última Semana",
+        "month": "Último Mês",
+        "year": "Último Ano"
+      },
+      "overview": {
+        "members": "Membros",
+        "status": "Visibilidade",
+        "public": "Pública",
+        "private": "Privada",
+        "createdAt": "Criada em",
+        "memberList": "Membros da Party"
+      },
+      "sessions": {
+        "addButton": "Adicionar Sessão",
+        "addTitle": "Adicionar Sessão de Hunt",
+        "addDescription": "Cole os dados do session analyzer ou insira manualmente.",
+        "huntNameLabel": "Nome da Hunt",
+        "huntNamePlaceholder": "Ex: Roshamuul, Ingol, Cobra Bastion",
+        "sessionDataLabel": "Dados do Session Analyzer",
+        "sessionDataPlaceholder": "Cole o resultado do session analyzer aqui...",
+        "adding": "Adicionando...",
+        "addSuccess": "Sessão de hunt adicionada!",
+        "addError": "Falha ao adicionar sessão.",
+        "deleteSuccess": "Sessão removida.",
+        "deleteError": "Falha ao remover sessão.",
+        "noSessions": "Nenhuma sessão de hunt registrada.",
+        "table": {
+          "name": "Hunt",
+          "date": "Data",
+          "loot": "Loot",
+          "supplies": "Supplies",
+          "balance": "Balanço",
+          "duration": "Duração"
+        }
+      },
+      "drops": {
+        "sold": "Vendido",
+        "unsold": "Não Vendido",
+        "statusUpdated": "Status atualizado!",
+        "statusUpdateError": "Falha ao atualizar status.",
+        "addButton": "Adicionar Drop",
+        "addTitle": "Registrar Drop",
+        "addDescription": "Busque um item e registre como drop da party.",
+        "itemLabel": "Nome do Item",
+        "itemPlaceholder": "Buscar item...",
+        "quantityLabel": "Quantidade",
+        "valueLabel": "Valor (gold)",
+        "adding": "Adicionando...",
+        "addSuccess": "Drop registrado!",
+        "addError": "Falha ao adicionar drop.",
+        "deleteSuccess": "Drop removido.",
+        "deleteError": "Falha ao remover drop.",
+        "noDrops": "Nenhum drop registrado.",
+        "table": {
+          "status": "Status",
+          "item": "Item",
+          "quantity": "Qtd",
+          "value": "Valor Unit.",
+          "total": "Total",
+          "date": "Data"
+        },
+        "dateLabel": "Data da Conquista"
+      },
+      "balance": {
+        "totalLoot": "Loot Total",
+        "totalSupplies": "Supplies Total",
+        "netBalance": "Balanço Líquido",
+        "dropsValue": "Valor dos Drops",
+        "totalSessions": "Total de Sessões",
+        "totalDrops": "Total de Drops",
+        "noData": "Nenhum dado de balanço disponível."
+      },
+      "visibility": {
+        "public": "Pública",
+        "private": "Privada",
+        "madePublic": "Party agora é pública!",
+        "madePrivate": "Party agora é privada.",
+        "error": "Falha ao atualizar visibilidade."
+      },
+      "invite": {
+        "title": "Convidar para Party",
+        "description": "Compartilhe este link com amigos para que possam entrar em {name}.",
+        "instructions": "Qualquer pessoa com este link pode entrar. O link não expira.",
+        "inviteCopied": "Link de convite copiado!",
+        "joinTitle": "Entrar em {partyName}",
+        "selectCharacter": "Selecionar Personagem",
+        "selectCharacterPlaceholder": "Selecione um personagem para entrar",
+        "joinButton": "Entrar na Party",
+        "alreadyMember": "Você já é membro desta party.",
+        "noCharacters": "Nenhum personagem verificado encontrado. Verifique um personagem primeiro.",
+        "success": "Bem-vindo à party!",
+        "error": "Não foi possível entrar na party. Tente novamente."
+      },
+      "inviteError": "Falha ao gerar link de convite.",
+      "inviteCopied": "Link copiado!"
     }
   },
   "Footer": {
     "madeWith": "Feito com 💙 por",
     "discord": "Junte-se ao nosso servidor Discord",
     "tibia": "<tibia>Tibia</tibia> é uma marca registrada da <cip>CipSoft GmbH</cip>. Tibia e todo o conteúdo relacionado são marcas registradas.",
-    "thanks": "Obrigado ao <data>TibiaData</data> e <wiki>TibiaWiki</wiki> por fornecer os dados usados neste site."
+    "thanks": "Agradecimentos especiais ao <data>TibiaData</data>, <wiki>TibiaWiki</wiki> e <trade>TibiaTrade</trade> por seus dados e ferramentas inestimáveis."
   },
   "DataTable": {
     "noData": "Nenhum dado disponível",
@@ -479,6 +614,56 @@
       "page": "Página",
       "of": "de",
       "rowsPerPage": "Linhas por página"
+    }
+  },
+  "PublicParty": {
+    "notFound": {
+      "title": "Party Não Encontrada",
+      "description": "Esta party não existe ou não é pública.",
+      "backButton": "Voltar para o Início"
+    },
+    "header": {
+      "publicBadge": "Party Pública",
+      "members": "{count, plural, one {# Membro} other {# Membros}}",
+      "drops": "{count, plural, one {# Drop registrado} other {# Drops registrados}}",
+      "createdOn": "Criada em {date}",
+      "verified": "Verificado por TibiaRise"
+    },
+    "members": {
+      "title": "Membros do Esquadrão",
+      "level": "Nível",
+      "userNoChar": "Usuário (Sem Personagem)",
+      "notEnoughData": "Dados de XP insuficientes"
+    },
+    "timeline": {
+      "title": "Linha do Tempo da Party",
+      "hunt": "Hunt: {name}",
+      "duration": "Duração: {duration}",
+      "looted": "Loot de <highlight>{amount}x {item}</highlight>",
+      "source": "de {source}",
+      "unknown": "Desconhecido"
+    },
+    "drops": {
+      "title": "Drops Lendários",
+      "noDrops": "Nenhum drop registrado ainda.",
+      "aboutTitle": "Sobre esta Party",
+      "aboutDescription": "Esta party está rastreando seu progresso com o TibiaRise. Todos os dados são verificados e atualizados automaticamente.",
+      "tooltip": {
+        "date": "Data:",
+        "lootedFrom": "Loot de:"
+      },
+      "tooltip": {
+        "date": "Data:",
+        "lootedFrom": "Loot de:"
+      }
+    },
+    "stats": {
+      "title": "Estatísticas da Party",
+      "totalXP": "XP Total (30 Dias)",
+      "totalLoot": "Loot Total (Registrado)",
+      "totalTime": "Tempo Caçado",
+      "xpBreakdown": "Contribuição de XP",
+      "mostHunted": "Hunt Favorita"
     }
   }
 }
