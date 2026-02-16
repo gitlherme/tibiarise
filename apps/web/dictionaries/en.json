@@ -301,6 +301,7 @@
     "links": {
       "characters": "My Characters",
       "profitManager": "Profit Manager",
+      "partyTracker": "Party Tracker",
       "settings": "Settings"
     }
   },
@@ -457,6 +458,139 @@
         "label": "Show Profits on Homepage",
         "description": "Allow your recent hunt profits to appear in the live ticker on the homepage."
       }
+    },
+    "PartyTrackerPage": {
+      "title": "Party Tracker",
+      "subtitle": "Manage your team hunts and track shared progress",
+      "noPartiesTitle": "No Parties Yet",
+      "noPartiesDescription": "Create your first party to start tracking team hunts, drops, and profits together.",
+      "createSuccess": "Party created successfully!",
+      "createError": "Failed to create party. Try again.",
+      "partyNotFound": "Party not found",
+      "publicBadge": "Public",
+      "memberCount": "{count, plural, one {# member} other {# members}}",
+      "buttons": {
+        "createParty": "Create Party",
+        "viewParty": "View Dashboard",
+        "backToParties": "Back to Parties",
+        "invite": "Invite",
+        "viewPublicPage": "View Public Page"
+      },
+      "form": {
+        "create": {
+          "title": "Create a New Party",
+          "description": "Set up a party to track your team hunts and profits.",
+          "nameLabel": "Party Name",
+          "namePlaceholder": "e.g. Elite Hunters",
+          "descriptionLabel": "Description (optional)",
+          "descriptionPlaceholder": "e.g. Daily team hunts in Roshamuul",
+          "characterLabel": "Your Character",
+          "characterPlaceholder": "Select a character",
+          "loading": "Creating..."
+        }
+      },
+      "tabs": {
+        "overview": "Overview",
+        "sessions": "Sessions",
+        "drops": "Drops",
+        "balance": "Balance"
+      },
+      "periods": {
+        "all": "All Time",
+        "week": "Last Week",
+        "month": "Last Month",
+        "year": "Last Year"
+      },
+      "overview": {
+        "members": "Members",
+        "status": "Visibility",
+        "public": "Public",
+        "private": "Private",
+        "createdAt": "Created",
+        "memberList": "Party Members"
+      },
+      "sessions": {
+        "addButton": "Add Session",
+        "addTitle": "Add Hunt Session",
+        "addDescription": "Paste your session analyzer data or enter manually.",
+        "huntNameLabel": "Hunt Name",
+        "huntNamePlaceholder": "e.g. Roshamuul, Ingol, Cobra Bastion",
+        "sessionDataLabel": "Session Analyzer Data",
+        "sessionDataPlaceholder": "Paste your session analyzer output here...",
+        "adding": "Adding...",
+        "addSuccess": "Hunt session added!",
+        "addError": "Failed to add session.",
+        "deleteSuccess": "Session deleted.",
+        "deleteError": "Failed to delete session.",
+        "noSessions": "No hunt sessions recorded yet.",
+        "table": {
+          "name": "Hunt",
+          "date": "Date",
+          "loot": "Loot",
+          "supplies": "Supplies",
+          "balance": "Balance",
+          "duration": "Duration"
+        }
+      },
+      "drops": {
+        "sold": "Sold",
+        "unsold": "Unsold",
+        "statusUpdated": "Status updated!",
+        "statusUpdateError": "Failed to update status.",
+        "addButton": "Add Drop",
+        "addTitle": "Log a Drop",
+        "addDescription": "Search for an item and log it as a party drop.",
+        "itemLabel": "Item Name",
+        "itemPlaceholder": "Search for an item...",
+        "quantityLabel": "Quantity",
+        "valueLabel": "Value (gold)",
+        "adding": "Adding...",
+        "addSuccess": "Drop logged!",
+        "addError": "Failed to add drop.",
+        "deleteSuccess": "Drop removed.",
+        "deleteError": "Failed to remove drop.",
+        "noDrops": "No drops recorded yet.",
+        "table": {
+          "status": "Status",
+          "item": "Item",
+          "quantity": "Qty",
+          "value": "Unit Value",
+          "total": "Total",
+          "date": "Date"
+        }
+      },
+      "balance": {
+        "totalLoot": "Total Loot",
+        "totalSupplies": "Total Supplies",
+        "netBalance": "Net Balance",
+        "dropsValue": "Drops Value",
+        "totalSessions": "Total Sessions",
+        "totalDrops": "Total Drops",
+        "noData": "No balance data available."
+      },
+      "visibility": {
+        "public": "Public",
+        "private": "Private",
+        "madePublic": "Party is now public!",
+        "madePrivate": "Party is now private.",
+        "error": "Failed to update visibility."
+      },
+      "invite": {
+        "title": "Invite to Party",
+        "description": "Share this link with friends so they can join {name}.",
+        "instructions": "Anyone with this link can join. The link does not expire.",
+        "inviteCopied": "Invite link copied!",
+        "joinTitle": "Join {partyName}",
+        "selectCharacter": "Select Character",
+        "selectCharacterPlaceholder": "Select a character to join with",
+        "joinButton": "Join Party",
+        "alreadyMember": "You are already a member of this party.",
+        "noCharacters": "No verified characters found. Please verify a character first.",
+        "success": "Welcome to the party!",
+        "error": "Could not join the party. Please try again."
+      },
+      "inviteError": "Failed to generate invite link.",
+      "inviteCopied": "Link copied to clipboard!"
     }
   },
   "Footer": {

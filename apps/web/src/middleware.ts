@@ -1,7 +1,7 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
-import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
+import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
+import { routing } from "./i18n/routing";
 
 const PROTECTED_ROUTES = ["/dashboard", "/settings"];
 
@@ -32,5 +32,5 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ["/", "/(pt|en)/:path*"],
+  matcher: ["/", "/(pt|en)/:path*", "/dashboard/:path*"],
 };

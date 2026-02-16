@@ -1,19 +1,30 @@
+import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { serializeBigInt } from "@/lib/serialize";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+import { NextResponse } from "next/server";
 
-const createPartySchema = z.object({
-  name: z.string().min(1),
-  description: z.string().optional(),
-  createdBy: z.string(),
-  maxMembers: z.number().min(2).max(10).optional().default(5),
-});
-
-// GET - List all parties
+// GET - List current user's parties
 export async function GET() {
   try {
+    const session = await auth();
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
     const parties = await prisma.party.findMany({
+      where: {
+        isActive: true,
+        members: {
+          some: { userId: user.id },
+        },
+      },
       include: {
         members: {
           include: {
@@ -33,41 +44,6 @@ export async function GET() {
     console.error("Error fetching parties:", error);
     return NextResponse.json(
       { error: "Failed to fetch parties" },
-      { status: 500 },
-    );
-  }
-}
-
-// POST - Create a new party
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { name, description, createdBy, maxMembers } =
-      createPartySchema.parse(body);
-
-    const party = await prisma.party.create({
-      data: {
-        name,
-        description,
-        createdBy,
-        maxMembers,
-      },
-      include: {
-        creator: true,
-      },
-    });
-
-    return NextResponse.json(serializeBigInt(party), { status: 201 });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: "Invalid request body", details: error.errors },
-        { status: 400 },
-      );
-    }
-    console.error("Error creating party:", error);
-    return NextResponse.json(
-      { error: "Failed to create party" },
       { status: 500 },
     );
   }

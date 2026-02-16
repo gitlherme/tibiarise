@@ -16,6 +16,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   Settings,
+  ShieldIcon,
   SwordIcon,
   Users2Icon,
 } from "lucide-react";
@@ -124,6 +125,13 @@ export function Sidebar({ className }: SidebarProps) {
                 title={t("links.profitManager")}
                 href="/dashboard/profit-manager"
                 active={pathname.includes("/profit-manager")}
+                collapsed={collapsed}
+              />
+              <NavItem
+                icon={ShieldIcon}
+                title={t("links.partyTracker")}
+                href="/dashboard/party"
+                active={pathname.includes("/party")}
                 collapsed={collapsed}
               />
               <NavItem
