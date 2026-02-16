@@ -135,6 +135,13 @@ const searchItems = async (query: string): Promise<TibiaItem[]> => {
   return res.json();
 };
 
+const searchHuntingPlaces = async (query: string): Promise<TibiaItem[]> => {
+  if (!query || query.length < 2) return [];
+  const res = await fetch(`/api/hunting-places?q=${encodeURIComponent(query)}`);
+  if (!res.ok) throw new Error("Failed to search hunting places");
+  return res.json();
+};
+
 // ─── Hooks ──────────────────────────────────────────────────────────────────
 
 export const useUserParties = () => {
@@ -193,6 +200,16 @@ export const useSearchItems = (query: string) => {
     enabled: query.length >= 2,
     retry: false,
     staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const useSearchHuntingPlaces = (query: string) => {
+  return useQuery<TibiaItem[]>({
+    queryKey: ["searchHuntingPlaces", query],
+    queryFn: () => searchHuntingPlaces(query),
+    enabled: query.length >= 2,
+    retry: false,
+    staleTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 };
 

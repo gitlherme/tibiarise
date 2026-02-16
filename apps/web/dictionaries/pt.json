@@ -544,6 +544,15 @@
         "itemPlaceholder": "Buscar item...",
         "quantityLabel": "Quantidade",
         "valueLabel": "Valor (gold)",
+        "editTitle": "Editar Drop",
+        "editDescription": "Atualize os detalhes do drop.",
+        "currencyLabel": "Moeda",
+        "sourceLabel": "Fonte",
+        "sourcePlaceholder": "Ex: Grand Master Oberon",
+        "updating": "Atualizando...",
+        "updateButton": "Atualizar Drop",
+        "updateSuccess": "Drop atualizado!",
+        "updateError": "Falha ao atualizar drop.",
         "adding": "Adicionando...",
         "addSuccess": "Drop registrado!",
         "addError": "Falha ao adicionar drop.",
@@ -648,10 +657,6 @@
       "noDrops": "Nenhum drop registrado ainda.",
       "aboutTitle": "Sobre esta Party",
       "aboutDescription": "Esta party está rastreando seu progresso com o TibiaRise. Todos os dados são verificados e atualizados automaticamente.",
-      "tooltip": {
-        "date": "Data:",
-        "lootedFrom": "Loot de:"
-      },
       "tooltip": {
         "date": "Data:",
         "lootedFrom": "Loot de:"

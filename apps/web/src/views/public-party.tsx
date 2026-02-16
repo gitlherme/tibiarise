@@ -423,26 +423,27 @@ function MemberCard({
 
 // Helper to format item name for TibiaWiki
 function formatWikiName(name: string): string {
-  // Strip parenthetical disambiguators like "(axe)", "(club)", etc.
-  const cleanName = name.replace(/\s*\(.*?\)\s*$/, "").trim();
+  return name
+    .split(" ")
+    .map((word, index) => {
+      // Handle words starting with parentheses (e.g., "(Axe)")
+      if (word.startsWith("(")) {
+        return "(" + word.charAt(1).toUpperCase() + word.slice(2);
+      }
 
-  return (
-    cleanName
-      .toLowerCase()
-      .split(" ")
-      .map((word) => {
-        // Keep small words lowercase unless it's the first word
-        if (
-          ["of", "the", "and", "in", "on", "at", "to", "for"].includes(word)
-        ) {
-          return word;
-        }
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      })
-      .join("_")
-      // Ensure first letter is always uppercase (e.g. "Sword of Valor")
-      .replace(/^./, (str) => str.toUpperCase())
-  );
+      const lowerWord = word.toLowerCase();
+      // Keep small words lowercase unless it's the first word
+      if (
+        index !== 0 &&
+        ["of", "the", "and", "in", "on", "at", "to", "for"].includes(lowerWord)
+      ) {
+        return lowerWord;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join("_")
+    .replace(/\(/g, "%28")
+    .replace(/\)/g, "%29");
 }
 
 function DropItem({

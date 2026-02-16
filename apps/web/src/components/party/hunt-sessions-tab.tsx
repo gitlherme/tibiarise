@@ -15,8 +15,9 @@ import { Label } from "@/components/ui/label";
 import {
   useInvalidatePartyData,
   usePartyHuntSessions,
+  useSearchHuntingPlaces,
 } from "@/queries/party.queries";
-import { PlusIcon, SwordsIcon, Trash2Icon } from "lucide-react";
+import { MapPinIcon, PlusIcon, SwordsIcon, Trash2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -63,6 +64,17 @@ export function HuntSessionsTab({ partyId, period }: HuntSessionsTabProps) {
   const [rawData, setRawData] = useState("");
   const [huntName, setHuntName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedHunt, setSelectedHunt] = useState(false);
+
+  // Search logic
+  const { data: searchResults } = useSearchHuntingPlaces(huntName);
+
+  const handleSelectHunt = (name: string) => {
+    setHuntName(name);
+    setSelectedHunt(true);
+    setShowSuggestions(false);
+  };
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,20 +158,56 @@ export function HuntSessionsTab({ partyId, period }: HuntSessionsTabProps) {
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleAdd} className="space-y-4">
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <Label>{t("sessions.huntNameLabel")}</Label>
                 <Input
                   value={huntName}
-                  onChange={(e) => setHuntName(e.target.value)}
+                  onChange={(e) => {
+                    setHuntName(e.target.value);
+                    setSelectedHunt(false);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  // onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                   placeholder={t("sessions.huntNamePlaceholder")}
                   className="bg-background/50 border-border/50 rounded-lg"
                 />
+                {showSuggestions &&
+                  searchResults &&
+                  searchResults.length > 0 &&
+                  !selectedHunt && (
+                    <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-card border border-border/50 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                      {searchResults.map((place) => (
+                        <button
+                          key={place.name}
+                          type="button"
+                          onClick={() => handleSelectHunt(place.name)}
+                          className="w-full text-left px-3 py-2 hover:bg-accent/50 text-sm transition-colors flex items-center gap-2"
+                        >
+                          <MapPinIcon
+                            size={14}
+                            className="text-muted-foreground"
+                          />
+                          {place.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
               </div>
               <div className="space-y-2">
                 <Label>{t("sessions.sessionDataLabel")}</Label>
                 <textarea
                   value={rawData}
-                  onChange={(e) => setRawData(e.target.value)}
+                  onChange={(e) => {
+                    setRawData(e.target.value);
+                    const parsed = parseSessionAnalyzer(e.target.value);
+                    if (parsed.huntName && !huntName) {
+                      setHuntName(parsed.huntName);
+                      // Trigger search to see if it matches a valid place
+                      // We rely on the hook to fetch, and if user sees it they can select it
+                      // Or we can just set it as text, which is what we do here.
+                    }
+                  }}
                   placeholder={t("sessions.sessionDataPlaceholder")}
                   className="w-full h-40 bg-background/50 border border-border/50 rounded-lg p-3 text-sm font-mono resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
