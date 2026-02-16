@@ -28,23 +28,21 @@ interface HuntSessionsTabProps {
 }
 
 function parseSessionAnalyzer(raw: string) {
-  const lines = raw.split("\n").map((l) => l.trim());
+  const lines = raw
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l !== "");
   let loot = 0;
   let supplies = 0;
-  let balance = 0;
+  let totalBalance = 0;
   let huntName = "";
   let duration: number | undefined;
 
-  for (const line of lines) {
-    const lootMatch = line.match(/Loot:\s*([\d,]+)/i);
-    const supplyMatch = line.match(/Supplies:\s*([\d,]+)/i);
-    const balanceMatch = line.match(/Balance:\s*(-?[\d,]+)/i);
+  // Header parsing
+  for (let i = 0; i < Math.min(lines.length, 10); i++) {
+    const line = lines[i];
     const sessionMatch = line.match(/Session data:.*?Hunt Session:\s*(.+)/i);
     const durationMatch = line.match(/Session:\s*(\d+):(\d+)(?::(\d+))?/i);
-
-    if (lootMatch) loot = parseInt(lootMatch[1].replace(/,/g, ""));
-    if (supplyMatch) supplies = parseInt(supplyMatch[1].replace(/,/g, ""));
-    if (balanceMatch) balance = parseInt(balanceMatch[1].replace(/,/g, ""));
     if (sessionMatch) huntName = sessionMatch[1].trim();
     if (durationMatch) {
       const hours = parseInt(durationMatch[1]);
@@ -53,7 +51,45 @@ function parseSessionAnalyzer(raw: string) {
     }
   }
 
-  return { loot, supplies, balance, huntName, duration };
+  // Individual player parsing - logic from parse-players-data.ts
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    // Check if line is a player name (not starting with known header keywords)
+    if (
+      i >= 6 &&
+      !line.startsWith("Session data") &&
+      !line.startsWith("Session:") &&
+      !line.startsWith("Loot Type:") &&
+      !line.startsWith("Loot:") &&
+      !line.startsWith("Supplies:") &&
+      !line.startsWith("Balance:")
+    ) {
+      const nameMatch = line.match(/^(.*?)(?: \(Leader\))?$/);
+      if (nameMatch && nameMatch[1]) {
+        // Skip current line (name) and move to values
+        try {
+          const pLoot = parseInt(
+            (lines[++i].split(": ")[1] || "0").replace(/,/g, ""),
+          );
+          loot += pLoot;
+          const pSupplies = parseInt(
+            (lines[++i].split(": ")[1] || "0").replace(/,/g, ""),
+          );
+          supplies += pSupplies;
+          const pBalance = parseInt(
+            (lines[++i].split(": ")[1] || "0").replace(/,/g, ""),
+          );
+          totalBalance += pBalance;
+          // Skip damage and healing
+          i += 2;
+        } catch (e) {
+          // If parsing fails for one player, we might be at the end of the list
+        }
+      }
+    }
+  }
+
+  return { loot, supplies, balance: totalBalance, huntName, duration };
 }
 
 export function HuntSessionsTab({ partyId, period }: HuntSessionsTabProps) {

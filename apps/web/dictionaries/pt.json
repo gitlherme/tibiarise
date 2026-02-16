@@ -577,7 +577,11 @@
         "dropsValueTc": "Valor dos Drops (TC)",
         "totalSessions": "Total de Sessões",
         "totalDrops": "Total de Drops",
-        "noData": "Nenhum dado de balanço disponível."
+        "noData": "Nenhum dado de balanço disponível.",
+        "settlementTitle": "Transferências de Liquidação",
+        "transferFrom": "Pagar De",
+        "transferTo": "Pagar Para",
+        "copied": "Detalhes da transferência copiados!"
       },
       "visibility": {
         "public": "Pública",
