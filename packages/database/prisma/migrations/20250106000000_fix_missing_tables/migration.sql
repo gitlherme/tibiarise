@@ -60,7 +60,12 @@ CREATE UNIQUE INDEX IF NOT EXISTS "User_email_key" ON "User"("email");
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Character_userId_fkey') THEN
-        ALTER TABLE "Character" ADD CONSTRAINT "Character_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+        BEGIN
+            ALTER TABLE "Character" ADD CONSTRAINT "Character_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+        EXCEPTION
+            WHEN OTHERS THEN
+                RAISE NOTICE 'Could not add constraint Character_userId_fkey: %', SQLERRM;
+        END;
     END IF;
 END $$;
 
@@ -68,6 +73,12 @@ END $$;
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'ProfitEntry_characterId_fkey') THEN
-        ALTER TABLE "ProfitEntry" ADD CONSTRAINT "ProfitEntry_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+        BEGIN
+            ALTER TABLE "ProfitEntry" ADD CONSTRAINT "ProfitEntry_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+        EXCEPTION
+             WHEN OTHERS THEN
+                RAISE NOTICE 'Could not add constraint ProfitEntry_characterId_fkey: %', SQLERRM;
+        END;
     END IF;
 END $$;
+
