@@ -791,11 +791,11 @@ function PartyStats({
                   dataKey="name"
                   type="category"
                   width={80}
-                  tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                  tick={{ fontSize: 10, fill: "var(--muted-foreground)" }}
                   interval={0}
                 />
                 <Tooltip
-                  cursor={{ fill: "hsl(var(--muted) / 0.2)" }}
+                  cursor={{ fill: "var(--muted)", opacity: 0.2 }}
                   content={({ active, payload }: any) => {
                     if (active && payload && payload.length) {
                       return (
@@ -812,7 +812,7 @@ function PartyStats({
                 />
                 <Bar
                   dataKey="value"
-                  fill="hsl(var(--primary))"
+                  fill="var(--primary)"
                   radius={[0, 4, 4, 0]}
                   barSize={20}
                 />
