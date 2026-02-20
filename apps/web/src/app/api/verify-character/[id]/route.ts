@@ -8,7 +8,7 @@ const TIBIA_DATA_API_URL =
 // GET - Find verification by code or character name
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
 
@@ -35,7 +35,7 @@ export async function GET(
     if (!verification) {
       return NextResponse.json(
         { error: "Verification not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -44,7 +44,7 @@ export async function GET(
     console.error("Error fetching verification:", error);
     return NextResponse.json(
       { error: "Failed to fetch verification" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -52,7 +52,7 @@ export async function GET(
 // PUT - Validate verification code (check character comment)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
 
@@ -66,15 +66,15 @@ export async function PUT(
     if (!verification) {
       return NextResponse.json(
         { error: "Verification not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     // Fetch character data from TibiaData API
     const response = await fetch(
       `${TIBIA_DATA_API_URL}/character/${encodeURIComponent(
-        verification.characterName
-      )}`
+        verification.characterName,
+      )}`,
     );
 
     if (!response.ok) {
@@ -86,7 +86,7 @@ export async function PUT(
     if (!data.character || !data.character.character) {
       return NextResponse.json(
         { error: "Character not found on TibiaData" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -102,7 +102,7 @@ export async function PUT(
       `);
       return NextResponse.json(
         { error: "Comment does not contain verification code" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -141,6 +141,9 @@ export async function PUT(
           verified: true,
           verifiedAt: new Date(),
           userId: user.id,
+          vocation: characterData.vocation,
+          level: characterData.level,
+          world: characterData.world,
         },
       });
     } else {
@@ -173,7 +176,7 @@ export async function PUT(
     console.error("Error validating verification:", error);
     return NextResponse.json(
       { error: "Failed to validate verification" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -181,7 +184,7 @@ export async function PUT(
 // DELETE - Remove verification
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
 
@@ -197,7 +200,7 @@ export async function DELETE(
     console.error("Error deleting verification:", error);
     return NextResponse.json(
       { error: "Failed to delete verification" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
