@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import { TibiaDataCharacterEndpoint } from "@/models/tibia-data.model";
+import { levelExperience } from "@/utils/level-formulae";
 import { NextRequest, NextResponse } from "next/server";
 
 const TIBIA_DATA_API_URL =
@@ -143,6 +144,7 @@ export async function PUT(
           userId: user.id,
           vocation: characterData.vocation,
           level: characterData.level,
+          experience: BigInt(levelExperience(characterData.level)),
           world: characterData.world,
         },
       });
@@ -154,7 +156,7 @@ export async function PUT(
           world: characterData.world,
           level: characterData.level,
           vocation: characterData.vocation,
-          experience: BigInt(0),
+          experience: BigInt(levelExperience(characterData.level)),
           verified: true,
           verifiedAt: new Date(),
           userId: user.id,
