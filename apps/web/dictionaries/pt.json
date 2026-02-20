@@ -87,6 +87,7 @@
   },
   "CharacterPage": {
     "notFound": "Personagem não encontrado. O TibiaRise rastreia apenas jogadores no top 1000 de seus mundos. Se você estiver abaixo disso, continue upando e volte mais tarde!",
+    "notTracked": "Este personagem ainda não possui registros de experiência no TibiaRise. Estamos tentando rastrear o seu progresso diário, volte amanhã e verifique novamente!",
     "description": "{vocation} de {world}",
     "verifiedAt": "Verificado em {date} por um usuário do TibiaRise.",
     "vocationRankLabel": "Top {rank} {vocation} do mundo {world}",

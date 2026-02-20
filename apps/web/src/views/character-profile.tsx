@@ -22,11 +22,20 @@ export default function CharacterProfileView() {
             <div className="text-center">{t("CharacterPage.notFound")}</div>
           ) : (
             <>
+              {data?.experienceTable && data.experienceTable.length === 0 && (
+                <div className="bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 p-4 mb-4 rounded-xl flex items-center justify-center font-medium text-sm text-center">
+                  {t("CharacterPage.notTracked")}
+                </div>
+              )}
               <div className="grid md:grid-cols-2 gap-4">
                 <CharacterInformation />
-                <ProgressLog />
+                {data?.experienceTable && data.experienceTable.length > 0 && (
+                  <ProgressLog />
+                )}
               </div>
-              <ExperienceTable />
+              {data?.experienceTable && data.experienceTable.length > 0 && (
+                <ExperienceTable />
+              )}
             </>
           )}
         </div>
