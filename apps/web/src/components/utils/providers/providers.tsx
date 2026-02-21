@@ -7,6 +7,7 @@ import {
 import { PostHogProvider } from "../posthog";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "./theme-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 function makeQueryClient() {
   return new QueryClient({
@@ -45,7 +46,7 @@ export default function Providers({ children }: Readonly<ProvidersProps>) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <TooltipProvider>{children}</TooltipProvider>
           </ThemeProvider>
         </PostHogProvider>
       </SessionProvider>

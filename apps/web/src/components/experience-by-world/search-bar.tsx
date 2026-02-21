@@ -145,7 +145,7 @@ export const SearchBarExperienceByWorld = () => {
             <Button
               type="submit"
               aria-label={t("form.submit.label")}
-              className="h-12 w-full md:w-auto rounded-xl bg-primary hover:bg-primary/90 hover:glow-primary shadow-soft-primary transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 gap-2"
+              className="h-12 mb-2.5 w-full md:w-auto rounded-xl bg-primary hover:bg-primary/90 hover:glow-primary shadow-soft-primary transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 gap-2"
             >
               <SearchIcon className="w-5 h-5" />
               <span className="md:sr-only">{t("form.submit.label")}</span>

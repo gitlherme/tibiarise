@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import {
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
   Tooltip as UITooltip,
 } from "@/components/ui/tooltip";
@@ -466,75 +465,73 @@ function DropItem({
     : `https://tibia.fandom.com/wiki/Special:FilePath/${formatWikiName(drop.itemName)}.gif`;
 
   return (
-    <TooltipProvider>
-      <UITooltip delayDuration={0}>
-        <TooltipTrigger asChild>
-          <div className="group aspect-square rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm hover:bg-card hover:border-primary/50 transition-all duration-300 flex items-center justify-center relative overflow-hidden cursor-help">
-            {/* Quantity Badge */}
-            {(count || drop.quantity) > 1 && (
-              <div className="absolute top-1 right-1 bg-background/80 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-border">
-                {count || drop.quantity}x
+    <UITooltip delayDuration={0}>
+      <TooltipTrigger asChild>
+        <div className="group aspect-square rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm hover:bg-card hover:border-primary/50 transition-all duration-300 flex items-center justify-center relative overflow-hidden cursor-help">
+          {/* Quantity Badge */}
+          {(count || drop.quantity) > 1 && (
+            <div className="absolute top-1 right-1 bg-background/80 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-border">
+              {count || drop.quantity}x
+            </div>
+          )}
+
+          <div className="relative z-10 p-2">
+            <img
+              src={imageUrl}
+              alt={drop.itemName}
+              className="w-8 h-8 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                // Fallback to a secondary source or placeholder
+                const target = e.currentTarget;
+                if (target.src.includes("tibia.fandom.com")) {
+                  // Try tibiawiki.com.br as second attempt
+                  // Note: TibiaWiki.com.br might use different naming, but usually similar
+                  target.src = `https://www.tibiawiki.com.br/wiki/Special:FilePath/${formatWikiName(drop.itemName)}.gif`;
+                } else {
+                  target.src =
+                    "https://static.tibia.com/images/charactertrade/objects/0.gif";
+                  target.style.opacity = "0.5";
+                }
+              }}
+            />
+          </div>
+
+          {/* Currency Badge for Value context (Subtle) */}
+          <div className="absolute bottom-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            {drop.currency === "TIBIA_COIN" ? (
+              <div className="bg-blue-500/10 text-blue-500 text-[10px] px-1 rounded">
+                TC
+              </div>
+            ) : (
+              <div className="bg-yellow-500/10 text-yellow-500 text-[10px] px-1 rounded">
+                G
               </div>
             )}
-
-            <div className="relative z-10 p-2">
-              <img
-                src={imageUrl}
-                alt={drop.itemName}
-                className="w-8 h-8 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  // Fallback to a secondary source or placeholder
-                  const target = e.currentTarget;
-                  if (target.src.includes("tibia.fandom.com")) {
-                    // Try tibiawiki.com.br as second attempt
-                    // Note: TibiaWiki.com.br might use different naming, but usually similar
-                    target.src = `https://www.tibiawiki.com.br/wiki/Special:FilePath/${formatWikiName(drop.itemName)}.gif`;
-                  } else {
-                    target.src =
-                      "https://static.tibia.com/images/charactertrade/objects/0.gif";
-                    target.style.opacity = "0.5";
-                  }
-                }}
-              />
-            </div>
-
-            {/* Currency Badge for Value context (Subtle) */}
-            <div className="absolute bottom-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              {drop.currency === "TIBIA_COIN" ? (
-                <div className="bg-blue-500/10 text-blue-500 text-[10px] px-1 rounded">
-                  TC
-                </div>
-              ) : (
-                <div className="bg-yellow-500/10 text-yellow-500 text-[10px] px-1 rounded">
-                  G
-                </div>
-              )}
-            </div>
           </div>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" className="text-xs p-3 max-w-[200px]">
-          <p className="font-bold mb-1">{drop.itemName}</p>
-          <div className="space-y-1 text-muted-foreground">
+        </div>
+      </TooltipTrigger>
+      <TooltipContent side="bottom" className="text-xs p-3 max-w-[200px]">
+        <p className="font-bold mb-1">{drop.itemName}</p>
+        <div className="space-y-1 text-muted-foreground">
+          <div className="flex items-center justify-between gap-4">
+            <span>{t("drops.tooltip.date")}</span>
+            <span className="text-foreground">
+              {formatDate(drop.droppedAt)}
+            </span>
+          </div>
+          {drop.source && (
             <div className="flex items-center justify-between gap-4">
-              <span>{t("drops.tooltip.date")}</span>
-              <span className="text-foreground">
-                {formatDate(drop.droppedAt)}
+              <span>{t("drops.tooltip.lootedFrom")}</span>
+              <span className="text-foreground font-medium text-primary">
+                {drop.source}
               </span>
             </div>
-            {drop.source && (
-              <div className="flex items-center justify-between gap-4">
-                <span>{t("drops.tooltip.lootedFrom")}</span>
-                <span className="text-foreground font-medium text-primary">
-                  {drop.source}
-                </span>
-              </div>
-            )}
-          </div>
-        </TooltipContent>
-      </UITooltip>
-    </TooltipProvider>
+          )}
+        </div>
+      </TooltipContent>
+    </UITooltip>
   );
 }
 

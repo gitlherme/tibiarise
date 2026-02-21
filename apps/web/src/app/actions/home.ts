@@ -1,8 +1,9 @@
 "use server";
 
 import { prisma } from "@/lib/db";
+import { unstable_cache } from "next/cache";
 
-export async function getHomeStats() {
+async function _getHomeStats() {
   try {
     // 1. Get Top 3 Gainers from Yesterday
     // Fetch distinct days (Left 10 chars = YYYY-MM-DD) to compare
@@ -122,3 +123,13 @@ export async function getHomeStats() {
     };
   }
 }
+
+export const getHomeStats = unstable_cache(
+  async () => {
+    return _getHomeStats();
+  },
+  ["home-stats-daily"],
+  {
+    revalidate: 600, // Keep cached for 10 minutes
+  },
+);
