@@ -1,4 +1,5 @@
 "use client";
+import { SharedBreadcrumb } from "@/components/shared/shared-breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,15 +10,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
+import { formatNumberToLocale } from "@/utils/format-number";
+import { levelExperience } from "@/utils/level-formulae";
 import { zodResolver } from "@hookform/resolvers/zod";
+import moment from "moment";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useEffect, useState } from "react";
-import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
-import { useTranslations } from "next-intl";
-import { levelExperience } from "@/utils/level-formulae";
-import moment from "moment";
-import { formatNumberToLocale } from "@/utils/format-number";
 
 export default function ExperienceSimulatorView() {
   const [currentLevel, setCurrentLevel] = useState("");
@@ -51,7 +52,7 @@ export default function ExperienceSimulatorView() {
     const currentLevelExperience = levelExperience(parseInt(currentLevel));
     const remainingExperience = goalLevelExperience - currentLevelExperience;
     const remainingDays = Math.ceil(
-      remainingExperience / parseInt(dailyExperience)
+      remainingExperience / parseInt(dailyExperience),
     );
 
     setRemainingDays(remainingDays);
@@ -60,6 +61,12 @@ export default function ExperienceSimulatorView() {
   return (
     <HydrationBoundaryCustom>
       <div className="mx-auto w-full min-h-[60vh] flex flex-col justify-center items-center gap-12 container py-12">
+        <div className="w-full">
+          <SharedBreadcrumb
+            items={[{ label: "Tools", href: "/tools" }, { label: t("title") }]}
+            className="mb-2"
+          />
+        </div>
         <h2 className="text-3xl md:text-5xl font-black text-center">
           {t("title")}
         </h2>
@@ -137,7 +144,7 @@ export default function ExperienceSimulatorView() {
                   goalLevel,
                   remainingExperience: remainingDays,
                   dailyExperience: formatNumberToLocale(
-                    parseInt(dailyExperience)
+                    parseInt(dailyExperience),
                   ),
                   days: remainingDays,
                 })}

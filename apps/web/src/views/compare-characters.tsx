@@ -1,4 +1,6 @@
 "use client";
+import { CharacterCard } from "@/components/compare-characters/character-card";
+import { SharedBreadcrumb } from "@/components/shared/shared-breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,15 +11,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
+import { useCompareCharacters } from "@/queries/compare-characters.queries";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useCompareCharacters } from "@/queries/compare-characters.queries";
-import { useState } from "react";
-import { CharacterCard } from "@/components/compare-characters/character-card";
-import { XIcon } from "lucide-react";
-import { HydrationBoundaryCustom } from "@/components/utils/hydration-boundary";
-import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   firstCharacter: z.string(),
@@ -54,6 +55,12 @@ export default function CompareCharactersView() {
   return (
     <HydrationBoundaryCustom>
       <div className="mx-auto w-full min-h-[60vh] flex flex-col justify-center items-center gap-12 container py-12">
+        <div className="w-full">
+          <SharedBreadcrumb
+            items={[{ label: "Tools", href: "/tools" }, { label: t("title") }]}
+            className="mb-2"
+          />
+        </div>
         <h2 className="text-3xl md:text-5xl font-black text-center">
           {t("title")}
         </h2>

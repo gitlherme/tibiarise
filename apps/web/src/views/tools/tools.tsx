@@ -1,10 +1,10 @@
 "use client";
 
+import { SharedBreadcrumb } from "@/components/shared/shared-breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { getCookie } from "cookies-next/client";
-import { ChevronRight, Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -14,20 +14,7 @@ export default function ToolsView() {
   return (
     <div className="container mx-auto py-12 px-4 min-h-screen">
       {/* Breadcrumb */}
-      <nav
-        aria-label="Breadcrumb"
-        className="flex items-center gap-2 text-sm text-muted-foreground mb-8 animate-in fade-in duration-300"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-1 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-        >
-          <Home className="w-4 h-4" />
-          Home
-        </Link>
-        <ChevronRight className="w-3 h-3" />
-        <span className="text-foreground font-medium">{t("title")}</span>
-      </nav>
+      <SharedBreadcrumb items={[{ label: t("title") }]} className="mb-8" />
 
       <div className="text-center mb-16 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <h1 className="text-4xl md:text-5xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/70">

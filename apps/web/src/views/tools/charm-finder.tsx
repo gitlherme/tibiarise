@@ -1,6 +1,7 @@
 "use client";
 
 import { getCreatureDetails } from "@/app/actions/charm-finder";
+import { SharedBreadcrumb } from "@/components/shared/shared-breadcrumb";
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +18,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CHARMS, Charm } from "@/data/charms";
@@ -43,7 +45,14 @@ interface AnalyzedCreature {
 }
 
 export default function CharmFinderView() {
-  const { selectedCharms, toggleCharm } = useCharmFinderStore();
+  const {
+    selectedCharms,
+    toggleCharm,
+    characterHealth,
+    characterMana,
+    setCharacterHealth,
+    setCharacterMana,
+  } = useCharmFinderStore();
   const [analyzerText, setAnalyzerText] = useState("");
   const [creaturesData, setCreaturesData] = useState<AnalyzedCreature[]>([]);
   const [configurations, setConfigurations] = useState<CharmConfiguration[]>(
@@ -146,7 +155,17 @@ export default function CharmFinderView() {
         : 0;
     const baseDamage = 0.05 * hp; // 5% of max HP
 
-    if (charm.type === "Damage" && charm.element) {
+    if (charm.name === "Overpower") {
+      const charHealthDamage = characterHealth * 0.05;
+      const monsterMaxDamage = hp * 0.08;
+      damage = Math.min(charHealthDamage, monsterMaxDamage);
+      score = count * damage;
+    } else if (charm.name === "Overflux") {
+      const charManaDamage = characterMana * 0.025;
+      const monsterMaxDamage = hp * 0.08;
+      damage = Math.min(charManaDamage, monsterMaxDamage);
+      score = count * damage;
+    } else if (charm.type === "Damage" && charm.element) {
       // Check effectiveness using *DmgMod fields
       // Format is "100%", "110%", "0%" (immune)
       // "100%?" means uncertain but usually 100%.
@@ -381,7 +400,16 @@ export default function CharmFinderView() {
   };
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid gap-6 md:grid-cols-2 py-12">
+      <div className="col-span-full">
+        <SharedBreadcrumb
+          items={[
+            { label: "Tools", href: "/tools" },
+            { label: "Charm Finder" },
+          ]}
+          className="mb-2"
+        />
+      </div>
       <div className="space-y-6">
         <Card className="border-border/50">
           <CardHeader>
@@ -441,6 +469,41 @@ export default function CharmFinderView() {
                 </div>
               ))}
             </div>
+            {(selectedCharms.includes("Overpower") ||
+              selectedCharms.includes("Overflux")) && (
+              <div className="mt-6 flex flex-col gap-4 border-t border-border/50 pt-4 md:flex-row md:items-center">
+                {selectedCharms.includes("Overpower") && (
+                  <div className="flex-1 space-y-2">
+                    <Label htmlFor="character-health">Character Health</Label>
+                    <Input
+                      id="character-health"
+                      type="number"
+                      placeholder="e.g. 5000"
+                      value={characterHealth || ""}
+                      onChange={(e) =>
+                        setCharacterHealth(parseInt(e.target.value) || 0)
+                      }
+                      min="0"
+                    />
+                  </div>
+                )}
+                {selectedCharms.includes("Overflux") && (
+                  <div className="flex-1 space-y-2">
+                    <Label htmlFor="character-mana">Character Mana</Label>
+                    <Input
+                      id="character-mana"
+                      type="number"
+                      placeholder="e.g. 15000"
+                      value={characterMana || ""}
+                      onChange={(e) =>
+                        setCharacterMana(parseInt(e.target.value) || 0)
+                      }
+                      min="0"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
 

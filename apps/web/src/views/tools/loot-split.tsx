@@ -1,5 +1,7 @@
 "use client";
 
+import { SharedBreadcrumb } from "@/components/shared/shared-breadcrumb";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -129,7 +131,13 @@ export default function LootSplitView() {
 
   const enabledPlayers = sessionData?.players.filter((p) => p.enabled);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-12">
+      <div className="col-span-full">
+        <SharedBreadcrumb
+          items={[{ label: "Tools", href: "/tools" }, { label: t("title") }]}
+          className="mb-8"
+        />
+      </div>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold ">{t("title")}</h1>
         <p>{t("description")}</p>
