@@ -9,6 +9,7 @@ import {
   Scale,
   Search,
   Timer,
+  Users,
   Wallet,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -58,6 +59,12 @@ export function FeaturesSection() {
       title: t("experienceSimulator.title"),
       description: t("experienceSimulator.description"),
       href: "/tools/experience-simulator",
+    },
+    {
+      icon: Users,
+      title: t("partyTracker.title"),
+      description: t("partyTracker.description"),
+      href: "/dashboard/party",
     },
   ];
 

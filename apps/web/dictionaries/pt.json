@@ -82,6 +82,10 @@
       "experienceSimulator": {
         "title": "Simulador de Experiência",
         "description": "Calcule quanto tempo falta para atingir seu objetivo de nível com base no ganho atual de XP."
+      },
+      "partyTracker": {
+        "title": "Rastreador de Party",
+        "description": "Rastreie o progresso da sua party e compartilhe com os outros."
       }
     }
   },

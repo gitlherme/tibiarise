@@ -82,6 +82,10 @@
       "experienceSimulator": {
         "title": "Experience Simulator",
         "description": "Calculate how long it takes to reach your next level goal based on your current XP gain."
+      },
+      "partyTracker": {
+        "title": "Party Tracker",
+        "description": "Track your party's progress and share it with others."
       }
     }
   },
