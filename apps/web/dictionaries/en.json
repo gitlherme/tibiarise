@@ -91,6 +91,7 @@
   },
   "CharacterPage": {
     "notFound": "Character not found. TibiaRise only tracks players in the top 1000 of their world's highscores. If you are below this rank, keep leveling up and check back later!",
+    "notTracked": "This character doesn't have any experience records yet. We are trying to track your daily progress, come back tomorrow and check again!",
     "description": "{vocation} from {world}",
     "verifiedAt": "Verified at {date} by a TibiaRise user.",
     "vocationRankLabel": "Top {rank} {vocation} on {world}",
@@ -665,10 +666,6 @@
       "noDrops": "No drops recorded yet.",
       "aboutTitle": "About this Party",
       "aboutDescription": "This party is tracking their progress with TibiaRise. All data is verified and updated automatically.",
-      "tooltip": {
-        "date": "Date:",
-        "lootedFrom": "Dropped from:"
-      },
       "tooltip": {
         "date": "Date:",
         "lootedFrom": "Dropped from:"

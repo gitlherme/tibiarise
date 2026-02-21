@@ -14,15 +14,18 @@ export const ProgressLog = () => {
   const t = useTranslations("CharacterPage.progressLog");
   const { data, isLoading } = useGetCharacterData();
 
-  const experienceTable = data?.experienceTable ?? [
-    {
-      date: new Date(),
-      experience: 0,
-      level: 0,
-      totalExperience: 0,
-      vocationRank: "",
-    },
-  ];
+  const experienceTable =
+    data?.experienceTable && data.experienceTable.length > 0
+      ? data.experienceTable
+      : [
+          {
+            date: new Date(),
+            experience: 0,
+            level: Number(data?.character?.level) || 0,
+            totalExperience: 0,
+            vocationRank: "",
+          },
+        ];
 
   const experienceTableCopy = [...experienceTable];
   const weeklyExperience = experienceTable.slice(0, 7);

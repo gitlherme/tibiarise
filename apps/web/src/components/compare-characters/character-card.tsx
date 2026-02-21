@@ -1,7 +1,7 @@
 import { CharacterData } from "@/models/character-data.model";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { formatNumberToLocale } from "@/utils/format-number";
 import { useTranslations } from "next-intl";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface CharacterCardProps {
   character: CharacterData;
@@ -14,20 +14,23 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
     level: 0,
     deaths: [],
   };
-  const experienceTable = character?.experienceTable ?? [
-    {
-      date: new Date(),
-      experience: 0,
-      level: 0,
-      totalExperience: 0,
-      vocationRank: "",
-      deaths: [],
-    },
-  ];
+  const experienceTable =
+    character?.experienceTable && character.experienceTable.length > 0
+      ? character.experienceTable
+      : [
+          {
+            date: new Date(),
+            experience: 0,
+            level: Number(characterInfo.level) || 0,
+            totalExperience: 0,
+            vocationRank: "",
+            deaths: [],
+          },
+        ];
 
   const totalExperienceMonth = experienceTable.reduce(
     (acc, curr) => ({ experience: acc.experience + curr.experience }),
-    { experience: 0 }
+    { experience: 0 },
   ).experience;
 
   const totalLevels: number | undefined =
@@ -45,9 +48,7 @@ export const CharacterCard = ({ character }: CharacterCardProps) => {
         <div className="grid">
           <div className="text-sm font-medium">{t("card.experience")}</div>
           <div className="text-2xl font-bold">
-            {formatNumberToLocale(
-              character.experienceTable[0].totalExperience
-            )}
+            {formatNumberToLocale(experienceTable[0].totalExperience)}
           </div>
         </div>
       </CardHeader>

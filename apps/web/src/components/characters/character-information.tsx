@@ -24,7 +24,7 @@ import { Goal } from "./goal";
 export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
-  const totalExperience = data?.experienceTable[0].totalExperience ?? 0;
+  const totalExperience = data?.experienceTable?.[0]?.totalExperience ?? 0;
   const streak = data?.character.streak || 0;
 
   if (isLoading) {
@@ -63,20 +63,22 @@ export const CharacterInformation = () => {
                 </TooltipProvider>
               )}
             </CardTitle>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Badge className="w-fit text-sm font-bold text-warning-foreground bg-gradient-to-r from-warning/60 to-warning cursor-default hover:from-warning/70 hover:to-warning border-0 shadow-warning/20 shadow-lg transition-all duration-300">
-                    {streak} {t("streak.label")} 🔥
-                  </Badge>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {t.rich("streak.description", {
-                    days: streak,
-                  })}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            {data?.experienceTable && data.experienceTable.length > 0 && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Badge className="w-fit text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 cursor-default shadow-none transition-colors">
+                      {streak} {t("streak.label")}
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {t.rich("streak.description", {
+                      days: streak,
+                    })}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
           </div>
           <CardDescription className="text-base font-medium text-muted-foreground mt-1">
             {t.rich("description", {
@@ -123,14 +125,16 @@ export const CharacterInformation = () => {
           })}
         </span>
 
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-secondary/5 p-4 rounded-xl border border-secondary/10">
-          <span className="text-sm font-medium text-foreground">
-            {t("goal.cta.description")}
-          </span>
-          <div className="flex-1 w-full md:w-auto">
-            <Goal experienceTable={data!.experienceTable} />
+        {data?.experienceTable && data.experienceTable.length > 0 && (
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-secondary/5 p-4 rounded-xl border border-secondary/10">
+            <span className="text-sm font-medium text-foreground">
+              {t("goal.cta.description")}
+            </span>
+            <div className="flex-1 w-full md:w-auto">
+              <Goal experienceTable={data!.experienceTable} />
+            </div>
           </div>
-        </div>
+        )}
       </CardContent>
     </Card>
   );
