@@ -80,7 +80,7 @@ export function BentoGrid({ stats }: BentoGridProps) {
             )}
 
             <Link
-              href="/experience-by-world"
+              href="/world"
               className="inline-flex items-center text-sm font-bold text-primary hover:text-primary/80 mt-2 group/link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
             >
               {t("risingStars.cta")}{" "}

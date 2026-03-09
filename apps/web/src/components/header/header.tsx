@@ -26,7 +26,7 @@ export const Header = () => {
           highlight: (chunks) => <b>{chunks}</b>,
           compare: (chunks) => (
             <Link
-              href={`/experience-simulator`}
+              href={`/tools/experience-simulator`}
               className="underline decoration-primary underline-offset-4 hover:text-primary transition-colors"
             >
               {chunks}
