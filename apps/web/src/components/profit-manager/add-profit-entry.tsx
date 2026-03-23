@@ -68,7 +68,6 @@ export const AddProfitEntry = ({
         profit: extractedSessionData?.grossProfit || "0",
         world: characters?.find((char) => char.id === character)?.world || "",
         characterId: character,
-        userId: session.data?.user?.id || "",
       },
       {
         onSuccess: () => {

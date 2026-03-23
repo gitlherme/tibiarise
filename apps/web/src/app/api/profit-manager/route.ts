@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -24,7 +25,6 @@ const createProfitSchema = z.object({
   boostsValue: z.number(),
   world: z.string(),
   characterId: z.string(),
-  userId: z.string(),
 });
 
 async function getTibiaCoinValue(world: string): Promise<number | null> {
@@ -45,6 +45,11 @@ async function getTibiaCoinValue(world: string): Promise<number | null> {
 
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const {
       huntName,
@@ -55,21 +60,19 @@ export async function POST(request: NextRequest) {
       boostsValue,
       world,
       characterId,
-      userId,
     } = createProfitSchema.parse(body);
 
     const tibiaCoinValue = await getTibiaCoinValue(world);
 
     const character = await prisma.character.findUnique({
-      where: { id: characterId, userId },
+      where: { id: characterId },
+      include: { user: true },
     });
 
-    if (!character) {
+    if (!character || character.user?.email !== session.user.email) {
       return NextResponse.json(
-        {
-          error: `Character with ID ${characterId} for user ${userId} not found`,
-        },
-        { status: 404 },
+        { error: "Character not found or unauthorized" },
+        { status: 403 },
       );
     }
 

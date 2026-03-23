@@ -35,7 +35,6 @@ interface AddProfitEntryParams {
   boostsValue: string;
   world: string;
   characterId: string;
-  userId: string;
 }
 
 const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
