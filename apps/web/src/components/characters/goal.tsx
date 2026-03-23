@@ -150,7 +150,7 @@ export const Goal = ({ experienceTable }: GoalProps) => {
                 {t.rich("goal.disclaimer.message", {
                   simulator: (chunks) => (
                     <Link
-                      href={`/${locale}/experience-simulator`}
+                      href={`/tools/experience-simulator`}
                       className="font-bold underline"
                     >
                       {chunks}
