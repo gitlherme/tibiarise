@@ -62,7 +62,6 @@ export const Goal = ({ experienceTable }: GoalProps) => {
     { experience: 0 },
   ).experience;
 
-  console.log(experienceTable.length);
   const dailyExperience = monthlyExperience / experienceTable.length;
 
   const onSubmit = (data: any) => {

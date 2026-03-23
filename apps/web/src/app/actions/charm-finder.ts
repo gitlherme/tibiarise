@@ -29,8 +29,6 @@ export async function getCreatureDetails(
       },
     );
 
-    console.log(response);
-
     if (!response.ok) {
       console.error(
         `TibiaWiki API Error: ${response.status} for ${titleCaseName}`,

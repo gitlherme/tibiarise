@@ -7,7 +7,6 @@ export function extractSessionData(sessionData: string): {
     const dateMatch = sessionData.match(/From (\d{4}-\d{2}-\d{2})/);
     const balanceMatch = sessionData.match(/Balance: ([-\d,]+)/);
     const durationMatch = sessionData.match(/Session: (\d{1,2}:\d{2})/);
-    console.log(durationMatch, "aaa");
 
     if (dateMatch && balanceMatch && durationMatch) {
       const dateString = dateMatch[1];
@@ -17,12 +16,11 @@ export function extractSessionData(sessionData: string): {
       const date = new Date(dateString);
       let grossProfit = parseFloat(balanceString);
       const [hours, minutes] = durationString.split(":").map(Number);
-      console.log("Parsed Duration:", hours, "hours", minutes, "minutes");
       const huntDuration = hours * 60 + minutes;
 
       if (isNaN(date.getTime()) || isNaN(grossProfit) || isNaN(huntDuration)) {
         console.error(
-          "Falha ao analisar a data, o grossProfit ou a duração da hunt."
+          "Falha ao analisar a data, o grossProfit ou a duração da hunt.",
         );
         return null;
       }
@@ -45,7 +43,7 @@ export function extractSessionData(sessionData: string): {
       };
     } else {
       console.error(
-        "Não foi possível encontrar a data ou o balanço nos dados da sessão fornecidos."
+        "Não foi possível encontrar a data ou o balanço nos dados da sessão fornecidos.",
       );
       return null;
     }

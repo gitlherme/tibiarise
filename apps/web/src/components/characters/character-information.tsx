@@ -25,7 +25,6 @@ export const CharacterInformation = () => {
   const t = useTranslations("CharacterPage");
   const { data, isLoading } = useGetCharacterData();
   const totalExperience = data?.experienceTable?.[0]?.totalExperience ?? 0;
-  console.log(data?.experienceTable);
   const streak = data?.character.streak || 0;
 
   if (isLoading) {
