@@ -35,6 +35,7 @@ interface AddProfitEntryParams {
   boostsValue: string;
   world: string;
   characterId: string;
+  userId: string;
 }
 
 const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
@@ -45,7 +46,9 @@ const addNewProfitEntry = async (profitEntry: AddProfitEntryParams) => {
     },
     body: JSON.stringify({
       ...profitEntry,
-      profit: parseInt(profitEntry.profit),
+      profit: parseInt(profitEntry.profit) || 0,
+      preyCardsUsed: parseInt(profitEntry.preyCardsUsed) || 0,
+      boostsValue: parseInt(profitEntry.boostsValue) || 0,
     }),
   });
 

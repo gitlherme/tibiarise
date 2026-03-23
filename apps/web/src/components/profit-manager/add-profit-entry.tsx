@@ -5,11 +5,11 @@ import {
 import { useGetUserCharacters } from "@/queries/user-data.query";
 import { extractSessionData } from "@/utils/profit-manager/hunt-analyser";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useTranslations } from "next-intl";
 import { Textarea } from "../ui/textarea";
 
 interface HuntEntry {
@@ -32,7 +32,7 @@ export const AddProfitEntry = ({
   const session = useSession();
   const { refetch: refetchHistory } = useProfitHistory(character || "");
   const { data: characters } = useGetUserCharacters(
-    session.data?.user?.email || ""
+    session.data?.user?.email || "",
   );
   const [form, setForm] = useState<HuntEntry>({
     huntName: "",
@@ -42,7 +42,7 @@ export const AddProfitEntry = ({
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -57,7 +57,6 @@ export const AddProfitEntry = ({
     }
 
     const extractedSessionData = extractSessionData(form.huntSession);
-    console.log("Extracted Session Data:", extractedSessionData);
 
     await addProfitEntryMutation.mutate(
       {
@@ -69,6 +68,7 @@ export const AddProfitEntry = ({
         profit: extractedSessionData?.grossProfit || "0",
         world: characters?.find((char) => char.id === character)?.world || "",
         characterId: character,
+        userId: session.data?.user?.id || "",
       },
       {
         onSuccess: () => {
@@ -85,7 +85,7 @@ export const AddProfitEntry = ({
           console.error("Error adding profit entry:", error);
           alert("Failed to add profit entry. Please try again.");
         },
-      }
+      },
     );
   };
 
